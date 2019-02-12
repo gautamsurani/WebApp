@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,6 +115,8 @@ public class AddEditOutItemActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Toast.makeText(context, "hellow", Toast.LENGTH_SHORT).show();
 
         spnLocation.setOnClickListener(new View.OnClickListener() {
             @Override
