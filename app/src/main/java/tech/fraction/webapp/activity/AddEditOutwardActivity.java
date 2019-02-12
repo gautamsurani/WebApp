@@ -9,12 +9,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Retrofit;
 import tech.fraction.webapp.R;
 import tech.fraction.webapp.adapter.InwardItemAdapter;
 import tech.fraction.webapp.adapter.OutwardDetailListAdapter;
@@ -22,8 +24,10 @@ import tech.fraction.webapp.model.Account;
 import tech.fraction.webapp.model.InwardItems;
 import tech.fraction.webapp.model.OutwardDetailModel;
 import tech.fraction.webapp.model.OutwardItems;
+import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
 import tech.fraction.webapp.rest.ApiResponseModel.AccountResponseModel;
 import tech.fraction.webapp.rest.CommonApiCall.AccountApiCall;
+import tech.fraction.webapp.rest.RetrofitInstance;
 import tech.fraction.webapp.util.Utils;
 import tech.fraction.webapp.util.ValidationUtil;
 
@@ -34,6 +38,9 @@ public class AddEditOutwardActivity extends AppCompatActivity {
     List<OutwardDetailModel> outwardDetailList;
     ImageView ivBack;
     Context context;
+    Retrofit retrofit;
+    ProgressBar  pbParty;
+    ApiInterface apiInterface;
     EditText edt_vehicleNo, edt_transporter, edt_driverName, edt_driverNo, edt_remark;
     TextView txtSave, txtAddItem,tvTitle;
     String vehicleNo, transporterName, driverName, driverNo, remark;
@@ -42,7 +49,7 @@ public class AddEditOutwardActivity extends AppCompatActivity {
 
     ArrayList<Account> lstAccount = new ArrayList<>();
     private static Account selectedAccount;
-    private static String inwardNumber = "", inwardDate = "";
+    private static String outwardNumber = "", outwardDate = "";
 
     @Override
     protected void onResume() {
@@ -56,32 +63,41 @@ public class AddEditOutwardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_outward_detail);
+
+
         initComp();
+
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(tb);
+
         getData();
+
         context=this;
+
+        retrofit = RetrofitInstance.getClient();
+        apiInterface = retrofit.create(ApiInterface.class);
+
         String mode = getIntent().getStringExtra("mode");
         if (mode.equals("add")) {
-            tvTitle.setText("Add Inward");
+            tvTitle.setText("Add Outward");
         } else {
-            tvTitle.setText("Edit Inward");
+            tvTitle.setText("Edit Outward");
         }
 
-//        if(lstAccount.size()==0)
-//        {
-//            pbParty.setVisibility(View.VISIBLE);
-//
-//            AccountApiCall sampleClass = new AccountApiCall();
-//            sampleClass.setOnDataListener(new AccountApiCall.DataInterface() {
-//                @Override
-//                public void responseData(AccountResponseModel accountResponseModel) {
-//                    lstAccount=accountResponseModel.getAccount();
-//                    pbParty.setVisibility(View.INVISIBLE);
-//                }
-//            });
-//            sampleClass.CallAccountApi();
-//        }
+        if(lstAccount.size()==0)
+        {
+            pbParty.setVisibility(View.VISIBLE);
+
+            AccountApiCall sampleClass = new AccountApiCall();
+            sampleClass.setOnDataListener(new AccountApiCall.DataInterface() {
+                @Override
+                public void responseData(AccountResponseModel accountResponseModel) {
+                    lstAccount=accountResponseModel.getAccount();
+                    pbParty.setVisibility(View.INVISIBLE);
+                }
+            });
+            sampleClass.CallAccountApi();
+        }
 
 //
 //        outwardDetailList = new ArrayList<OutwardDetailModel>();
@@ -195,6 +211,7 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         scrollView = findViewById(R.id.edt_out_det_act);
         txtAddItem = findViewById(R.id.txt_additem);
         tvTitle = findViewById(R.id.tvTitle);
+        pbParty = findViewById(R.id.pbParty);
 
     }
 }

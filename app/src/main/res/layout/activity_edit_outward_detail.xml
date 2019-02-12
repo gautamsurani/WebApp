@@ -70,21 +70,38 @@
                 android:text="Party Name"
                 android:textColor="@android:color/black" />
 
-            <EditText
-                android:id="@+id/edt_party"
+            <RelativeLayout
+                android:id="@+id/rl_p"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_below="@+id/txt_party"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:background="@drawable/border_edittext" />
+                android:layout_below="@+id/txt_party">
 
+                <TextView
+                    android:id="@+id/tvParty"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="10dp"
+                    android:gravity="center_vertical"
+                    android:hint="Enter Party Name "
+                    android:background="@drawable/border_edittext" />
+
+                <ProgressBar
+                    android:id="@+id/pbParty"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:visibility="gone"/>
+            </RelativeLayout>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rec_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/edt_party"
+                android:layout_below="@+id/rl_p"
                 android:nestedScrollingEnabled="false">
 
             </android.support.v7.widget.RecyclerView>
