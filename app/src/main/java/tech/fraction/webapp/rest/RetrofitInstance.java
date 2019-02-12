@@ -13,7 +13,7 @@ import tech.fraction.webapp.util.Utils;
 
 public class RetrofitInstance {
 
-    private static String BASE_URL = "http://192.168.0.201/staging.wh/api/v2/";
+    private static String BASE_URL = "http://192.168.0.201/staging.wh/api/v1/";
 
 
     private static Retrofit retrofit = null;

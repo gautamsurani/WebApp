@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -130,7 +131,7 @@ public class AddEditInwardActivity extends AppCompatActivity {
         tvSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(inwardItems.size()==0)
+                /*if(inwardItems.size()==0)
                 {
                     Utils.ShowSnakBar("Add atleast one item",rl_editInward,context);
                     return;
@@ -142,7 +143,7 @@ public class AddEditInwardActivity extends AppCompatActivity {
                 addEditInwardModel = new AddEditInwardModel(null, false, inwardItems,
                         selectedAccount.getId(), "", tvDate.getText().toString(), null, inwardVehicleDetail, null,
                         false, null, null, null, null, null,
-                        0, null, Utils.getPersonalInfo(context).getPersonId());
+                        0, null, Utils.getPersonalInfo(context).getPersonId());*/
 
                 CallAddInwardApi();
             }
@@ -183,7 +184,20 @@ public class AddEditInwardActivity extends AppCompatActivity {
 
     private void CallAddInwardApi() {
 
-        Call<SaveInwardResponseModel> call = apiInterface.saveInward(addEditInwardModel);
+        String s = "{\"Invoices\":null,\"InwardVehicleDetail\":{\"InwardDetail\":null,\"Id\":2223,\"InwardDetailId\":3334,\"VehicleNo\":\"34535\",\"TransporterDetail\":\"Arbuda\",\"DriverName\":\"Mahes \",\n" +
+                "\"DriverContactNumber\":\"6589415256\",\"Remarks\":\"test\"},\"Id\":3334,\"Number\":\"704275\",\"AccountId\":14,\"InwardedOn\":\"\\/Date(1549630862000)\\/\",\"AddedBy\":1,\"LastInvoiceGeneratedOn\":null,\n" +
+                "\"LastInvoiceFromDate\":null,\"LastInvoiceToDate\":null,\"PaidStatus\":null,\"LastPaidAmount\":null,\"TotalPaidAmount\":null,\"LastInvoicePaidOn\":null,\"Broker\":\"Pritambhai Vasantmal\",\n" +
+                "\"CanGenerateInvoice\":false,\"IsModified\":false,\"InwardItemDetailPoco\":[{\"ItemName\":\"Val\",\"UnitId\":2,\"RentPerUnit\":10.0000,\"UnloadingCharges\":50.0000,\"Label\":\"krishna\",\n" +
+                "\"OutwardDetailId\":0,\"OutwardId\":0,\"LoadingCharges\":0,\"OtherCharges\":0,\"RawId\":1,\"AccountId\":0,\"InwardDetailId\":3334,\"InwardItemDetailId\":5218,\"InwardNo\":null,\"ItemId\":5,\n" +
+                "\"UnitName\":\"50kg bag\",\"Quantity\":50,\"Stock\":0,\"Weight\":50,\"OutwardWeight\":0,\"OutwardQuantity\":0,\"TotalOutwardQuantity\":0,\"Location\":null,\"IsModified\":false,\n" +
+                "\"InwardedOn\":\"\\/Date(-62135596800000)\\/\",\"InwardDetail\":null,\"OutwardDetails\":null,\"InwardItemLocationPoco\":[{\"RawId\":1,\"Id\":13879,\"InwardItemDetailId\":5218,\"RackId\":6,\n" +
+                "\"FloorId\":1,\"ChamberId\":1,\"RackName\":\"A103\",\"InwardItemDetail\":null,\"Rack\":null},{\"RawId\":1,\"Id\":13880,\"InwardItemDetailId\":5218,\"RackId\":39,\"FloorId\":2,\"ChamberId\":1,\n" +
+                "\"RackName\":\"A202\",\"InwardItemDetail\":null,\"Rack\":null},{\"RawId\":1,\"Id\":13881,\"InwardItemDetailId\":5218,\"RackId\":452,\"FloorId\":1,\"ChamberId\":1,\"RackName\":\"A101\",\n" +
+                "\"InwardItemDetail\":null,\"Rack\":null}]}]}";
+        JsonParser parser = new JsonParser();
+        JsonObject jsonObject = parser.parse(s).getAsJsonObject();
+
+        Call<SaveInwardResponseModel> call = apiInterface.saveInwardJson(jsonObject);
 
         call.enqueue(new Callback<SaveInwardResponseModel>() {
             @Override

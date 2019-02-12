@@ -1,8 +1,8 @@
 package tech.fraction.webapp.rest.ApiResponseModel;
 
 public class SaveInwardResponseModel {
-    boolean IsValid;
-    String Message;
+    boolean isValid;
+    String message;
     int recordId;
 
     public int getRecordId() {
@@ -14,18 +14,18 @@ public class SaveInwardResponseModel {
     }
 
     public boolean isValid() {
-        return IsValid;
+        return isValid;
     }
 
     public void setValid(boolean valid) {
-        IsValid = valid;
+        isValid = valid;
     }
 
     public String getMessage() {
-        return Message;
+        return message;
     }
 
     public void setMessage(String message) {
-        Message = message;
+        this.message = message;
     }
 }

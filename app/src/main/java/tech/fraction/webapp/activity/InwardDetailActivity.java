@@ -103,11 +103,25 @@ public class InwardDetailActivity extends AppCompatActivity {
         rec_view.setAdapter(inwardItemAdapter);
 
         Transporter transporter = inventoryDetails.getTransporter();
-        etVehicleNo.setText(transporter.getVehicleNo());
-        etTransporter.setText(transporter.getTransporterDetail());
-        etDriverName.setText(transporter.getDriverName());
-        etDriverNo.setText(transporter.getDriverContactNumber());
-        etRemark.setText(transporter.getRemarks());
+
+        if(transporter==null)
+        {
+            etVehicleNo.setText("");
+            etTransporter.setText("");
+            etDriverName.setText("");
+            etDriverNo.setText("");
+            etRemark.setText("");
+        }
+        else
+        {
+            etVehicleNo.setText(transporter.getVehicleNo());
+            etTransporter.setText(transporter.getTransporterDetail());
+            etDriverName.setText(transporter.getDriverName());
+            etDriverNo.setText(transporter.getDriverContactNumber());
+            etRemark.setText(transporter.getRemarks());
+
+        }
+
     }
 
     @Override

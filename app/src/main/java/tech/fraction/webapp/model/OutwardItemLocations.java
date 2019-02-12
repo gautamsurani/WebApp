@@ -3,93 +3,93 @@ package tech.fraction.webapp.model;
 import java.io.Serializable;
 
 public class OutwardItemLocations implements Serializable {
-    private int floorId;
+    private int FloorId;
 
-    private String rack;
+    private String Rack;
 
-    private int rawId;
+    private int RawId;
 
-    private String rackName;
+    private String RackName;
 
-    private int id;
+    private int Id;
 
-    private int chamberId;
+    private int ChamberId;
 
-    private int inwardItemDetailId;
+    private int InwardItemDetailId;
 
-    private String inwardItemDetail;
+    private String InwardItemDetail;
 
-    private int rackId;
+    private int RackId;
 
     public int getFloorId() {
-        return floorId;
+        return FloorId;
     }
 
     public void setFloorId(int floorId) {
-        this.floorId = floorId;
+        FloorId = floorId;
     }
 
     public String getRack() {
-        return rack;
+        return Rack;
     }
 
     public void setRack(String rack) {
-        this.rack = rack;
+        Rack = rack;
     }
 
     public int getRawId() {
-        return rawId;
+        return RawId;
     }
 
     public void setRawId(int rawId) {
-        this.rawId = rawId;
+        RawId = rawId;
     }
 
     public String getRackName() {
-        return rackName;
+        return RackName;
     }
 
     public void setRackName(String rackName) {
-        this.rackName = rackName;
+        RackName = rackName;
     }
 
     public int getId() {
-        return id;
+        return Id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        Id = id;
     }
 
     public int getChamberId() {
-        return chamberId;
+        return ChamberId;
     }
 
     public void setChamberId(int chamberId) {
-        this.chamberId = chamberId;
+        ChamberId = chamberId;
     }
 
     public int getInwardItemDetailId() {
-        return inwardItemDetailId;
+        return InwardItemDetailId;
     }
 
     public void setInwardItemDetailId(int inwardItemDetailId) {
-        this.inwardItemDetailId = inwardItemDetailId;
+        InwardItemDetailId = inwardItemDetailId;
     }
 
     public String getInwardItemDetail() {
-        return inwardItemDetail;
+        return InwardItemDetail;
     }
 
     public void setInwardItemDetail(String inwardItemDetail) {
-        this.inwardItemDetail = inwardItemDetail;
+        InwardItemDetail = inwardItemDetail;
     }
 
     public int getRackId() {
-        return rackId;
+        return RackId;
     }
 
     public void setRackId(int rackId) {
-        this.rackId = rackId;
+        RackId = rackId;
     }
 }

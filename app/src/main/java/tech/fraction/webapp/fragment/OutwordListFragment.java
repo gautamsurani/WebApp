@@ -249,5 +249,6 @@ public class OutwordListFragment extends BaseFragment {
         tvTitle = context.findViewById(R.id.tvTitle);
         tvAddOutward = view.findViewById(R.id.tvAddOutward);
         progress_circular = view.findViewById(R.id.progress_circular);
+        linearShowToastMsg=view.findViewById(R.id.linearShowToastMsg);
     }
 }

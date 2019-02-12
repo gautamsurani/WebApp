@@ -67,4 +67,7 @@ public interface ApiInterface {
     @POST("master/SaveInwardDetail")
     Call<SaveInwardResponseModel> saveInward(@Body AddEditInwardModel addEditInwardModel);
 
+    @POST("master/SaveInwardDetail")
+    Call<SaveInwardResponseModel> saveInwardJson(@Body JsonObject addEditInwardModel);
+
 }

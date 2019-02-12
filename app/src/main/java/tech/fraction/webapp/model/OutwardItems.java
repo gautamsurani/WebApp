@@ -4,241 +4,241 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class OutwardItems implements Serializable {
-    private int outwardId;
+    private int OutwardId;
 
-    private int inwardDetailId;
+    private int InwardDetailId;
 
-    private int totalRecords;
+    private int TotalRecords;
 
-    private int quantity;
+    private int Quantity;
 
-    private String unitName;
+    private String UnitName;
 
-    private int otherCharges;
+    private int OtherCharges;
 
-    private String inwardNo;
+    private String InwardNo;
 
-    private int weight;
-    private String markoName;
+    private int Weight;
+    private String MarkoName;
 
-    private String label;
+    private String Label;
 
-    private ArrayList<OutwardItemLocations> outwardItemLocations;
+    private ArrayList<OutwardItemLocations> OutwardItemLocations;
 
-    private String outwardOn;
+    private String OutwardOn;
 
-    private String outwardNo;
+    private String OutwardNo;
 
-    private int loadingCharges;
+    private int LoadingCharges;
 
-    private int accountId;
+    private int AccountId;
 
-    private int itemId;
-    int rawId;
+    private int ItemId;
+    int RawId;
 
-    private String itemName;
+    private String ItemName;
 
-    private Double rentPerUnit;
+    private Double RentPerUnit;
 
-    private int outwardQuantity;
+    private int OutwardQuantity;
 
-    private int unitId;
+    private int UnitId;
 
-    private int outwardDetailId;
+    private int OutwardDetailId;
 
-    private int inwardItemDetailId;
+    private int InwardItemDetailId;
 
-    private int stock;
-
-    public String getMarkoName() {
-        return markoName;
-    }
-
-    public void setMarkoName(String markoName) {
-        this.markoName = markoName;
-    }
-
-    public int getRawId() {
-        return rawId;
-    }
-
-    public void setRawId(int rawId) {
-        this.rawId = rawId;
-    }
+    private int Stock;
 
     public int getOutwardId() {
-        return outwardId;
+        return OutwardId;
     }
 
     public void setOutwardId(int outwardId) {
-        this.outwardId = outwardId;
+        OutwardId = outwardId;
     }
 
     public int getInwardDetailId() {
-        return inwardDetailId;
+        return InwardDetailId;
     }
 
     public void setInwardDetailId(int inwardDetailId) {
-        this.inwardDetailId = inwardDetailId;
+        InwardDetailId = inwardDetailId;
     }
 
     public int getTotalRecords() {
-        return totalRecords;
+        return TotalRecords;
     }
 
     public void setTotalRecords(int totalRecords) {
-        this.totalRecords = totalRecords;
+        TotalRecords = totalRecords;
     }
 
     public int getQuantity() {
-        return quantity;
+        return Quantity;
     }
 
     public void setQuantity(int quantity) {
-        this.quantity = quantity;
+        Quantity = quantity;
     }
 
     public String getUnitName() {
-        return unitName;
+        return UnitName;
     }
 
     public void setUnitName(String unitName) {
-        this.unitName = unitName;
+        UnitName = unitName;
     }
 
     public int getOtherCharges() {
-        return otherCharges;
+        return OtherCharges;
     }
 
     public void setOtherCharges(int otherCharges) {
-        this.otherCharges = otherCharges;
+        OtherCharges = otherCharges;
     }
 
     public String getInwardNo() {
-        return inwardNo;
+        return InwardNo;
     }
 
     public void setInwardNo(String inwardNo) {
-        this.inwardNo = inwardNo;
+        InwardNo = inwardNo;
     }
 
     public int getWeight() {
-        return weight;
+        return Weight;
     }
 
     public void setWeight(int weight) {
-        this.weight = weight;
+        Weight = weight;
+    }
+
+    public String getMarkoName() {
+        return MarkoName;
+    }
+
+    public void setMarkoName(String markoName) {
+        MarkoName = markoName;
     }
 
     public String getLabel() {
-        return label;
+        return Label;
     }
 
     public void setLabel(String label) {
-        this.label = label;
+        Label = label;
     }
 
-    public ArrayList<OutwardItemLocations> getOutwardItemLocations() {
-        return outwardItemLocations;
+    public ArrayList<tech.fraction.webapp.model.OutwardItemLocations> getOutwardItemLocations() {
+        return OutwardItemLocations;
     }
 
-    public void setOutwardItemLocations(ArrayList<OutwardItemLocations> outwardItemLocations) {
-        this.outwardItemLocations = outwardItemLocations;
+    public void setOutwardItemLocations(ArrayList<tech.fraction.webapp.model.OutwardItemLocations> outwardItemLocations) {
+        OutwardItemLocations = outwardItemLocations;
     }
 
     public String getOutwardOn() {
-        return outwardOn;
+        return OutwardOn;
     }
 
     public void setOutwardOn(String outwardOn) {
-        this.outwardOn = outwardOn;
+        OutwardOn = outwardOn;
     }
 
     public String getOutwardNo() {
-        return outwardNo;
+        return OutwardNo;
     }
 
     public void setOutwardNo(String outwardNo) {
-        this.outwardNo = outwardNo;
+        OutwardNo = outwardNo;
     }
 
     public int getLoadingCharges() {
-        return loadingCharges;
+        return LoadingCharges;
     }
 
     public void setLoadingCharges(int loadingCharges) {
-        this.loadingCharges = loadingCharges;
+        LoadingCharges = loadingCharges;
     }
 
     public int getAccountId() {
-        return accountId;
+        return AccountId;
     }
 
     public void setAccountId(int accountId) {
-        this.accountId = accountId;
+        AccountId = accountId;
     }
 
     public int getItemId() {
-        return itemId;
+        return ItemId;
     }
 
     public void setItemId(int itemId) {
-        this.itemId = itemId;
+        ItemId = itemId;
+    }
+
+    public int getRawId() {
+        return RawId;
+    }
+
+    public void setRawId(int rawId) {
+        RawId = rawId;
     }
 
     public String getItemName() {
-        return itemName;
+        return ItemName;
     }
 
     public void setItemName(String itemName) {
-        this.itemName = itemName;
+        ItemName = itemName;
     }
 
     public Double getRentPerUnit() {
-        return rentPerUnit;
+        return RentPerUnit;
     }
 
     public void setRentPerUnit(Double rentPerUnit) {
-        this.rentPerUnit = rentPerUnit;
+        RentPerUnit = rentPerUnit;
     }
 
     public int getOutwardQuantity() {
-        return outwardQuantity;
+        return OutwardQuantity;
     }
 
     public void setOutwardQuantity(int outwardQuantity) {
-        this.outwardQuantity = outwardQuantity;
+        OutwardQuantity = outwardQuantity;
     }
 
     public int getUnitId() {
-        return unitId;
+        return UnitId;
     }
 
     public void setUnitId(int unitId) {
-        this.unitId = unitId;
+        UnitId = unitId;
     }
 
     public int getOutwardDetailId() {
-        return outwardDetailId;
+        return OutwardDetailId;
     }
 
     public void setOutwardDetailId(int outwardDetailId) {
-        this.outwardDetailId = outwardDetailId;
+        OutwardDetailId = outwardDetailId;
     }
 
     public int getInwardItemDetailId() {
-        return inwardItemDetailId;
+        return InwardItemDetailId;
     }
 
     public void setInwardItemDetailId(int inwardItemDetailId) {
-        this.inwardItemDetailId = inwardItemDetailId;
+        InwardItemDetailId = inwardItemDetailId;
     }
 
     public int getStock() {
-        return stock;
+        return Stock;
     }
 
     public void setStock(int stock) {
-        this.stock = stock;
+        Stock = stock;
     }
 }

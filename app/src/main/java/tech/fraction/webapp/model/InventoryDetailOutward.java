@@ -4,263 +4,263 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class InventoryDetailOutward implements Serializable {
-    private int outwardId;
+    private int OutwardId;
 
-    private String lastName;
+    private String LastName;
 
-    private int totalRecords;
+    private int TotalRecords;
 
-    private String accountName;
+    private String AccountName;
 
-    private String mobile1;
+    private String Mobile1;
 
-    private String outwardOn;
+    private String OutwardOn;
 
-    private ArrayList<OutwardItems> outwardItems;
+    private ArrayList<OutwardItems> OutwardItems;
 
-    private OutwardPaidDetail outwardPaidDetail;
+    private OutwardPaidDetail OutwardPaidDetail;
 
-    private String invoiceGeneratedOn;
+    private String InvoiceGeneratedOn;
 
-    private String paidStatus;
+    private String PaidStatus;
 
-    private boolean isModified;
+    private boolean IsModified;
 
-    private String mobile2;
+    private String Mobile2;
 
-    private boolean canDeleteOutWarDetail;
+    private boolean CanDeleteOutWarDetail;
 
-    private String address;
+    private String Address;
 
-    private String receiptType;
+    private String ReceiptType;
 
-    private int uniqRecordId;
+    private int UniqRecordId;
 
-    private String paidOn;
+    private String PaidOn;
 
-    private String outwardNo;
+    private String OutwardNo;
 
-    private int accountId;
+    private int AccountId;
 
-    private String firstName;
+    private String FirstName;
 
-    private int totalLoadingCharges;
+    private int TotalLoadingCharges;
 
-    private Transporter transporter;
+    private Transporter Transporter;
 
-    private String middleName;
+    private String MiddleName;
 
-    private int invoiceId;
+    private int InvoiceId;
 
-    private int totalOtherCharges;
+    private int TotalOtherCharges;
 
-    private int paidAmount;
+    private int PaidAmount;
 
     public int getOutwardId() {
-        return outwardId;
+        return OutwardId;
     }
 
     public void setOutwardId(int outwardId) {
-        this.outwardId = outwardId;
+        OutwardId = outwardId;
     }
 
     public String getLastName() {
-        return lastName;
+        return LastName;
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        LastName = lastName;
     }
 
     public int getTotalRecords() {
-        return totalRecords;
+        return TotalRecords;
     }
 
     public void setTotalRecords(int totalRecords) {
-        this.totalRecords = totalRecords;
+        TotalRecords = totalRecords;
     }
 
     public String getAccountName() {
-        return accountName;
+        return AccountName;
     }
 
     public void setAccountName(String accountName) {
-        this.accountName = accountName;
+        AccountName = accountName;
     }
 
     public String getMobile1() {
-        return mobile1;
+        return Mobile1;
     }
 
     public void setMobile1(String mobile1) {
-        this.mobile1 = mobile1;
+        Mobile1 = mobile1;
     }
 
     public String getOutwardOn() {
-        return outwardOn;
+        return OutwardOn;
     }
 
     public void setOutwardOn(String outwardOn) {
-        this.outwardOn = outwardOn;
+        OutwardOn = outwardOn;
     }
 
-    public ArrayList<OutwardItems> getOutwardItems() {
-        return outwardItems;
+    public ArrayList<tech.fraction.webapp.model.OutwardItems> getOutwardItems() {
+        return OutwardItems;
     }
 
-    public void setOutwardItems(ArrayList<OutwardItems> outwardItems) {
-        this.outwardItems = outwardItems;
+    public void setOutwardItems(ArrayList<tech.fraction.webapp.model.OutwardItems> outwardItems) {
+        OutwardItems = outwardItems;
     }
 
-    public OutwardPaidDetail getOutwardPaidDetail() {
-        return outwardPaidDetail;
+    public tech.fraction.webapp.model.OutwardPaidDetail getOutwardPaidDetail() {
+        return OutwardPaidDetail;
     }
 
-    public void setOutwardPaidDetail(OutwardPaidDetail outwardPaidDetail) {
-        this.outwardPaidDetail = outwardPaidDetail;
+    public void setOutwardPaidDetail(tech.fraction.webapp.model.OutwardPaidDetail outwardPaidDetail) {
+        OutwardPaidDetail = outwardPaidDetail;
     }
 
     public String getInvoiceGeneratedOn() {
-        return invoiceGeneratedOn;
+        return InvoiceGeneratedOn;
     }
 
     public void setInvoiceGeneratedOn(String invoiceGeneratedOn) {
-        this.invoiceGeneratedOn = invoiceGeneratedOn;
+        InvoiceGeneratedOn = invoiceGeneratedOn;
     }
 
     public String getPaidStatus() {
-        return paidStatus;
+        return PaidStatus;
     }
 
     public void setPaidStatus(String paidStatus) {
-        this.paidStatus = paidStatus;
+        PaidStatus = paidStatus;
     }
 
     public boolean isModified() {
-        return isModified;
+        return IsModified;
     }
 
     public void setModified(boolean modified) {
-        isModified = modified;
+        IsModified = modified;
     }
 
     public String getMobile2() {
-        return mobile2;
+        return Mobile2;
     }
 
     public void setMobile2(String mobile2) {
-        this.mobile2 = mobile2;
+        Mobile2 = mobile2;
     }
 
-    public boolean getCanDeleteOutWarDetail() {
-        return canDeleteOutWarDetail;
+    public boolean isCanDeleteOutWarDetail() {
+        return CanDeleteOutWarDetail;
     }
 
     public void setCanDeleteOutWarDetail(boolean canDeleteOutWarDetail) {
-        this.canDeleteOutWarDetail = canDeleteOutWarDetail;
+        CanDeleteOutWarDetail = canDeleteOutWarDetail;
     }
 
     public String getAddress() {
-        return address;
+        return Address;
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        Address = address;
     }
 
     public String getReceiptType() {
-        return receiptType;
+        return ReceiptType;
     }
 
     public void setReceiptType(String receiptType) {
-        this.receiptType = receiptType;
+        ReceiptType = receiptType;
     }
 
     public int getUniqRecordId() {
-        return uniqRecordId;
+        return UniqRecordId;
     }
 
     public void setUniqRecordId(int uniqRecordId) {
-        this.uniqRecordId = uniqRecordId;
+        UniqRecordId = uniqRecordId;
     }
 
     public String getPaidOn() {
-        return paidOn;
+        return PaidOn;
     }
 
     public void setPaidOn(String paidOn) {
-        this.paidOn = paidOn;
+        PaidOn = paidOn;
     }
 
     public String getOutwardNo() {
-        return outwardNo;
+        return OutwardNo;
     }
 
     public void setOutwardNo(String outwardNo) {
-        this.outwardNo = outwardNo;
+        OutwardNo = outwardNo;
     }
 
     public int getAccountId() {
-        return accountId;
+        return AccountId;
     }
 
     public void setAccountId(int accountId) {
-        this.accountId = accountId;
+        AccountId = accountId;
     }
 
     public String getFirstName() {
-        return firstName;
+        return FirstName;
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        FirstName = firstName;
     }
 
     public int getTotalLoadingCharges() {
-        return totalLoadingCharges;
+        return TotalLoadingCharges;
     }
 
     public void setTotalLoadingCharges(int totalLoadingCharges) {
-        this.totalLoadingCharges = totalLoadingCharges;
+        TotalLoadingCharges = totalLoadingCharges;
     }
 
-    public Transporter getTransporter() {
-        return transporter;
+    public tech.fraction.webapp.model.Transporter getTransporter() {
+        return Transporter;
     }
 
-    public void setTransporter(Transporter transporter) {
-        this.transporter = transporter;
+    public void setTransporter(tech.fraction.webapp.model.Transporter transporter) {
+        Transporter = transporter;
     }
 
     public String getMiddleName() {
-        return middleName;
+        return MiddleName;
     }
 
     public void setMiddleName(String middleName) {
-        this.middleName = middleName;
+        MiddleName = middleName;
     }
 
     public int getInvoiceId() {
-        return invoiceId;
+        return InvoiceId;
     }
 
     public void setInvoiceId(int invoiceId) {
-        this.invoiceId = invoiceId;
+        InvoiceId = invoiceId;
     }
 
     public int getTotalOtherCharges() {
-        return totalOtherCharges;
+        return TotalOtherCharges;
     }
 
     public void setTotalOtherCharges(int totalOtherCharges) {
-        this.totalOtherCharges = totalOtherCharges;
+        TotalOtherCharges = totalOtherCharges;
     }
 
     public int getPaidAmount() {
-        return paidAmount;
+        return PaidAmount;
     }
 
     public void setPaidAmount(int paidAmount) {
-        this.paidAmount = paidAmount;
+        PaidAmount = paidAmount;
     }
 }

@@ -29,6 +29,10 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".activity.OutwardDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".activity.AddCustomerActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />

@@ -95,11 +95,22 @@ public class OutwardDetailActivity extends AppCompatActivity implements View.OnC
         outwardDetailListAdapter.setList(lstItems);
         rec_view.setAdapter(outwardDetailListAdapter);
         Transporter transporter=outWardList.getTransporter();
+        if(transporter==null)
+        {
+            edt_vehicleNo.setText("");
+            edt_transporter.setText("");
+            edt_driverName.setText("");
+            edt_driverNo.setText("");
+            edt_remark.setText("");
+        }
+        else
+        {
         edt_vehicleNo.setText(transporter.getVehicleNo());
         edt_transporter.setText(transporter.getTransporterDetail());
         edt_driverName.setText(transporter.getDriverName());
         edt_driverNo.setText(transporter.getDriverContactNumber());
         edt_remark.setText(transporter.getRemarks());
+        }
 
     }
 

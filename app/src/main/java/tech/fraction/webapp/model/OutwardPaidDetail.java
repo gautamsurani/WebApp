@@ -3,28 +3,23 @@ package tech.fraction.webapp.model;
 import java.io.Serializable;
 
 public class OutwardPaidDetail implements Serializable {
-    private int toatalAmount;
+    private int ToatalAmount;
 
-    private int totalPaidAmount;
-
-    public OutwardPaidDetail(int toatalAmount, int totalPaidAmount) {
-        this.toatalAmount = toatalAmount;
-        this.totalPaidAmount = totalPaidAmount;
-    }
+    private int TotalPaidAmount;
 
     public int getToatalAmount() {
-        return toatalAmount;
+        return ToatalAmount;
     }
 
     public void setToatalAmount(int toatalAmount) {
-        this.toatalAmount = toatalAmount;
+        ToatalAmount = toatalAmount;
     }
 
     public int getTotalPaidAmount() {
-        return totalPaidAmount;
+        return TotalPaidAmount;
     }
 
     public void setTotalPaidAmount(int totalPaidAmount) {
-        this.totalPaidAmount = totalPaidAmount;
+        TotalPaidAmount = totalPaidAmount;
     }
 }
