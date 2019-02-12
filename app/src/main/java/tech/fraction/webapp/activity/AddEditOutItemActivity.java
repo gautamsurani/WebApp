@@ -118,6 +118,8 @@ public class AddEditOutItemActivity extends AppCompatActivity {
 
         Toast.makeText(context, "hellow", Toast.LENGTH_SHORT).show();
 
+        Utils.showToast(context,"dffdfd");
+
         spnLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
