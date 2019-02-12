@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="0dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    app:cardElevation="2dp"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rl_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:background="@android:color/white"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/ll_one"
+
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <tech.fraction.webapp.ui.MyBoldTextView
+                android:id="@+id/txt_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Dhani Akhi[Locale Bardhan]"
+                android:textColor="@color/light_black" />
+
+            <tech.fraction.webapp.ui.MyTextView
+                android:id="@+id/detail_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100/200"
+                android:textColor="@color/colorPrimary" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_two"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@id/ll_one"
+            android:gravity="center_vertical"
+
+            android:orientation="horizontal">
+
+            <tech.fraction.webapp.ui.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location :" />
+
+            <tech.fraction.webapp.ui.MyBoldTextView
+                android:id="@+id/txt_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A304,A304,A304"
+                android:textColor="@color/light_black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/ll_two"
+            android:gravity="center_vertical"
+
+            android:orientation="horizontal">
+
+            <tech.fraction.webapp.ui.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Unloading Charges :" />
+
+            <tech.fraction.webapp.ui.MyBoldTextView
+                android:id="@+id/txt_unloading_charges"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1500"
+                android:textColor="@color/light_black" />
+        </LinearLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

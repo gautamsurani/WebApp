@@ -1,0 +1,49 @@
+package tech.fraction.webapp.SqliteDatabase.model;
+
+import java.io.Serializable;
+
+public class Racks implements Serializable {
+
+    int id,floorId,chamberId;
+    String name,status;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getFloorId() {
+        return floorId;
+    }
+
+    public void setFloorId(int floorId) {
+        this.floorId = floorId;
+    }
+
+    public int getChamberId() {
+        return chamberId;
+    }
+
+    public void setChamberId(int chamberId) {
+        this.chamberId = chamberId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+}

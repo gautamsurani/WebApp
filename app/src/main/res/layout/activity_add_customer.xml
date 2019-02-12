@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.AddCustomerActivity">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar_custom"/>
+
+    <ScrollView
+        android:layout_below="@+id/toolbar_custom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+        <tech.fraction.webapp.ui.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="2dp"
+            android:text="Account Name"
+            android:textColor="@android:color/black" />
+
+        <tech.fraction.webapp.ui.MyEditText
+            android:id="@+id/etVehicleNo"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/border_edittext"
+            android:paddingLeft="10dp"
+            android:text="Aashita" />
+
+        <tech.fraction.webapp.ui.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="2dp"
+            android:text="Address"
+            android:textColor="@android:color/black" />
+
+        <tech.fraction.webapp.ui.MyEditText
+            android:id="@+id/etTransporter"
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:gravity="top"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/border_edittext"
+            android:paddingLeft="10dp"
+            android:text="Address" />
+
+        <tech.fraction.webapp.ui.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="2dp"
+            android:text="City"
+            android:textColor="@android:color/black" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:padding="1dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:background="@drawable/border_edittext"
+                android:layout_weight="8">
+                <Spinner
+                    android:id="@+id/spn_item"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:layout_gravity="center_vertical"
+                    android:text="454556"
+
+                    />
+                <tech.fraction.webapp.ui.MyTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:background="#ECECEC"
+                    android:layout_marginLeft="5dp"
+                   android:text="Gujrat,India"/>
+            </LinearLayout>
+
+        <tech.fraction.webapp.ui.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="2dp"
+            android:text="Driver Contact No."
+            android:textColor="@android:color/black" />
+
+        <tech.fraction.webapp.ui.MyEditText
+            android:id="@+id/etDriverNo"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/border_edittext"
+            android:paddingLeft="10dp"
+            android:text="942124" />
+
+        <tech.fraction.webapp.ui.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="2dp"
+            android:text="First Name"
+            android:textColor="@android:color/black" />
+
+        <tech.fraction.webapp.ui.MyEditText
+
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/border_edittext"
+
+            android:paddingLeft="10dp"
+            android:hint="First Name" />
+            <tech.fraction.webapp.ui.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="2dp"
+                android:text="Middle Name"
+                android:textColor="@android:color/black" />
+
+            <tech.fraction.webapp.ui.MyEditText
+
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/border_edittext"
+
+                android:paddingLeft="10dp"
+                android:hint="Middle Name" />
+            <tech.fraction.webapp.ui.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="2dp"
+                android:text="Last Name"
+                android:textColor="@android:color/black" />
+
+            <tech.fraction.webapp.ui.MyEditText
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/border_edittext"
+
+                android:paddingLeft="10dp"
+                android:hint="Last Name" />
+            <tech.fraction.webapp.ui.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="2dp"
+                android:text="Phone"
+                android:textColor="@android:color/black" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:padding="1dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:background="@drawable/border_edittext"
+                android:layout_weight="8">
+                <tech.fraction.webapp.ui.MyEditText
+
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:layout_weight="2"
+                    android:hint="Code"
+                    android:background="#00F8F7F7"
+                    android:layout_gravity="center_vertical"
+
+                    />
+                <View
+                    android:layout_width="1dp"
+                    android:background="#BFC0C0"
+                    android:layout_marginLeft="5dp"
+                    android:layout_height="match_parent"/>
+                <tech.fraction.webapp.ui.MyEditText
+                    android:layout_width="0dp"
+                    android:layout_weight="6"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:gravity="left"
+                    android:background="#00F8F7F7"
+                    android:hint="Number"
+
+                    android:layout_marginLeft="5dp" />
+            </LinearLayout>
+            <tech.fraction.webapp.ui.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="2dp"
+                android:text="SMS Mobile No. 1"
+                android:textColor="@android:color/black" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:padding="1dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:background="@drawable/border_edittext"
+                android:layout_weight="8">
+                <tech.fraction.webapp.ui.MyTextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:layout_weight="2"
+                    android:text="+91"
+                    android:textColor="@color/light_black"
+                    android:background="#00F8F7F7"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+
+                    />
+                <View
+                    android:layout_width="1dp"
+                    android:background="#BFC0C0"
+                    android:layout_marginLeft="5dp"
+                    android:layout_height="match_parent"/>
+                <tech.fraction.webapp.ui.MyEditText
+                    android:layout_width="0dp"
+                    android:layout_weight="6"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:gravity="left"
+                    android:background="#00F8F7F7"
+                    android:hint="Number"
+
+                    android:layout_marginLeft="5dp" />
+            </LinearLayout>
+            <tech.fraction.webapp.ui.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="2dp"
+                android:text="SMS Mobile No. 2"
+                android:textColor="@android:color/black" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:padding="1dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:background="@drawable/border_edittext"
+                android:layout_weight="8">
+                <tech.fraction.webapp.ui.MyTextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:layout_weight="2"
+                    android:text="+91"
+                    android:textColor="@color/light_black"
+                    android:background="#00F8F7F7"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+
+                    />
+                <View
+                    android:layout_width="1dp"
+                    android:background="#BFC0C0"
+                    android:layout_marginLeft="5dp"
+                    android:layout_height="match_parent"/>
+                <tech.fraction.webapp.ui.MyEditText
+                    android:layout_width="0dp"
+                    android:layout_weight="6"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:gravity="left"
+                    android:background="#00F8F7F7"
+                    android:hint="Number"
+
+                    android:layout_marginLeft="5dp" />
+            </LinearLayout>
+
+
+
+            <tech.fraction.webapp.ui.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="2dp"
+                android:text="Fax "
+                android:textColor="@android:color/black" />
+
+            <tech.fraction.webapp.ui.MyEditText
+
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/border_edittext"
+                android:paddingLeft="10dp"
+                android:hint="Fax" />
+            <tech.fraction.webapp.ui.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="2dp"
+                android:text="Email"
+                android:textColor="@android:color/black" />
+
+            <tech.fraction.webapp.ui.MyEditText
+
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/border_edittext"
+                android:paddingLeft="10dp"
+                android:hint="Email" />
+            <tech.fraction.webapp.ui.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="2dp"
+                android:text="Password"
+                android:textColor="@android:color/black" />
+
+            <tech.fraction.webapp.ui.MyEditText
+
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/border_edittext"
+                android:paddingLeft="10dp"
+                android:hint="Password" />
+            <tech.fraction.webapp.ui.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="2dp"
+                android:text="Tin Number"
+                android:textColor="@android:color/black" />
+
+            <tech.fraction.webapp.ui.MyEditText
+
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/border_edittext"
+                android:paddingLeft="10dp"
+                android:hint="Tin Number" />
+            <tech.fraction.webapp.ui.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="2dp"
+                android:text="GST Number"
+                android:textColor="@android:color/black" />
+
+            <tech.fraction.webapp.ui.MyEditText
+
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/border_edittext"
+                android:paddingLeft="10dp"
+                android:hint="GST Number" />
+            <tech.fraction.webapp.ui.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="2dp"
+                android:text="PAN Number"
+                android:textColor="@android:color/black" />
+
+            <tech.fraction.webapp.ui.MyEditText
+
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/border_edittext"
+                android:paddingLeft="10dp"
+                android:hint="PAN Number" />
+
+            <tech.fraction.webapp.ui.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="2dp"
+                android:text="Roles"
+                android:textColor="@android:color/black" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:padding="1dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:background="@drawable/border_edittext"
+                android:layout_weight="8">
+                <Spinner
+
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:layout_gravity="center_vertical"
+                    android:text="454556"
+
+                    />
+
+            </LinearLayout>
+
+
+            <tech.fraction.webapp.ui.MyTextView
+                android:id="@+id/txt_save"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:text="Save"
+                android:textColor="@android:color/white" />
+
+            <tech.fraction.webapp.ui.MyTextView
+                android:id="@+id/txt_print"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/mybutton"
+                android:gravity="center"
+                android:text="Close"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
