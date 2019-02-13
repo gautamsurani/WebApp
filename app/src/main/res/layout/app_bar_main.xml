@@ -55,4 +55,10 @@
 
     <include layout="@layout/bottom_sheet_customer" />
 
+    <include layout="@layout/bottom_sheet_outward" />
+
+    <include layout="@layout/bottom_sheet_invoice" />
+
+
+
 </android.support.design.widget.CoordinatorLayout>

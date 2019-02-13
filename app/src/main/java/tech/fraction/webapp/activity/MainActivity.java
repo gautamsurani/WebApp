@@ -50,6 +50,7 @@ import tech.fraction.webapp.SqliteDatabase.Sqlitehelper.SqLiteHelperFunctions;
 import tech.fraction.webapp.SqliteDatabase.model.Items;
 import tech.fraction.webapp.adapter.MenuAdapter;
 import tech.fraction.webapp.fragment.CustomerListFragment;
+import tech.fraction.webapp.fragment.InvoiceFragment;
 import tech.fraction.webapp.fragment.InwardsListFragment;
 import tech.fraction.webapp.R;
 import tech.fraction.webapp.fragment.OutwordListFragment;
@@ -82,15 +83,28 @@ public class MainActivity extends AppCompatActivity {
 
     LinearLayout layoutBottomSheetCustomer;
 
+    RelativeLayout layoutBottomSheetOutward, layoutBottomSheetInvoice;
+
     BottomSheetBehavior sheetBehavior;
 
     BottomSheetBehavior sheetBehaviorCustomer;
 
-    ImageView ivFilter, ivClose, ivCloseCustomer;
+    BottomSheetBehavior sheetBehaviorOutward;
+
+    BottomSheetBehavior sheetBehaviorInvoice;
+
+
+    ImageView ivFilter, ivClose, ivCloseCustomer, ivCloseOutward, ivCloseInvoice;
 
     Spinner spInwardOn, spInvoiceGenerationDue, spInvoiceGeneratedPeriod, spPaidStatus, spPaidOn;
 
+    Spinner spnOutwardedOn, spInvoiceStatus, spPaidStatusOut, spPaidOnOut;
+
     TextView tvInwardFilterReset, tvResetCustomer, tvTitle, tvFromDate, tvToDate, tvParty, tvItem, tvInwardFilterApply;
+
+    TextView tvBroker, tvItemOut, tvOutwardFilterReset, tvOutwardFilterApply;
+
+    EditText etOutwardNo, etInwardNoOut, etUnitOut, etLocationOut;
 
     MenuAdapter menuAdapter;
 
@@ -100,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<Account> accounts = new ArrayList<>();
 
-    ProgressBar pbParty;
+    ProgressBar pbParty, pbBroker, pbItemOut;
 
     private static Account selectedAccount;
 
@@ -114,6 +128,13 @@ public class MainActivity extends AppCompatActivity {
     RadioGroup rgShortBy, rgSortByExpression;
 
     RadioButton rbDefaultShortBy, rbDefaultSortByExpression;
+
+    TextView tvBrokerInvoice, tvInvoiceFilterReset, tvInvoiceFilterApply;
+    Spinner spnMon, spYear, spInvReceiptType, spInvoiceGeneratedPeriodInv, spPaidStatusInv, spPaidOnInv;
+
+    ProgressBar pbBrokerInvoice;
+
+    EditText etInvoiceNo, etInwardNoInv, etOutwardNoInv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,16 +159,22 @@ public class MainActivity extends AppCompatActivity {
                         sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     }
                 } else if (tvTitle.getText().equals(getResources().getString(R.string.outword_list_title))) {
-                    if (sheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
-                        sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    if (sheetBehaviorOutward.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                        sheetBehaviorOutward.setState(BottomSheetBehavior.STATE_EXPANDED);
                     } else {
-                        sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        sheetBehaviorOutward.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     }
                 } else if (tvTitle.getText().equals(getResources().getString(R.string.customer_list_title))) {
                     if (sheetBehaviorCustomer.getState() != BottomSheetBehavior.STATE_EXPANDED) {
                         sheetBehaviorCustomer.setState(BottomSheetBehavior.STATE_EXPANDED);
                     } else {
                         sheetBehaviorCustomer.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    }
+                } else if (tvTitle.getText().equals(getResources().getString(R.string.invoice_list_title))) {
+                    if (sheetBehaviorInvoice.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                        sheetBehaviorInvoice.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    } else {
+                        sheetBehaviorInvoice.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     }
                 }
             }
@@ -164,6 +191,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sheetBehaviorCustomer.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+        });
+
+        ivCloseOutward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sheetBehaviorOutward.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+        });
+        ivCloseInvoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sheetBehaviorInvoice.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
         });
 
@@ -190,11 +230,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        setInwardedOn();
         setInvoiceGenerationDue();
-        setInvoiceGeneratedPeriod();
-        setPaidStatus();
-        setPaidOn();
+        setPaidStatusCommon(spPaidStatus);
+        setPaidStatusCommon(spPaidStatusOut);
+        setPaidStatusCommon(spPaidStatusInv);
+        setPaidOnCommonn(spPaidOn);
+        setPaidOnCommonn(spPaidOnOut);
+        setPaidOnCommonn(spPaidOnInv);
+        setPaidOnCommonn(spInvoiceGeneratedPeriodInv);
+        setPaidOnCommonn(spInvoiceGeneratedPeriod);
+        setInwardedOutwardedOn(spInwardOn);
+        setInwardedOutwardedOn(spnOutwardedOn);
+
+        setSpMonth();
+        setSpYear();
+        setSpReceiptType();
+
+
+        setspInvoiceStatus();
+
 
         tvFromDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -235,8 +289,48 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
             }
         });
+        tvBroker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<SearchTextViewModel> itemsList = new ArrayList<>();
+                for (int i = 0; i < accounts.size(); i++) {
+                    itemsList.add(new SearchTextViewModel(accounts.get(i).getId(), accounts.get(i).getName()));
+                }
+                Intent i = new Intent(context, SearchTextViewActivity.class);
+                i.putExtra("itemsList", itemsList);
+                i.putExtra("type", "party");
+                startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
+            }
+        });
+        tvBrokerInvoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<SearchTextViewModel> itemsList = new ArrayList<>();
+                for (int i = 0; i < accounts.size(); i++) {
+                    itemsList.add(new SearchTextViewModel(accounts.get(i).getId(), accounts.get(i).getName()));
+                }
+                Intent i = new Intent(context, SearchTextViewActivity.class);
+                i.putExtra("itemsList", itemsList);
+                i.putExtra("type", "party");
+                startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
+            }
+        });
 
         tvItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<SearchTextViewModel> searchTextViewModels = new ArrayList<>();
+                items = sqLiteHelperFunctions.getAllItems();
+                for (int i = 0; i < items.size(); i++) {
+                    searchTextViewModels.add(new SearchTextViewModel(items.get(i).getId(), items.get(i).getName()));
+                }
+                Intent i = new Intent(context, SearchTextViewActivity.class);
+                i.putExtra("itemsList", searchTextViewModels);
+                i.putExtra("type", "item");
+                startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
+            }
+        });
+        tvItemOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ArrayList<SearchTextViewModel> searchTextViewModels = new ArrayList<>();
@@ -265,7 +359,386 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        tvOutwardFilterReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetOutwardFilter();
+            }
+        });
+
+        tvOutwardFilterApply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setOutwardFilter();
+            }
+        });
+        tvInvoiceFilterReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetInvoiceFilter();
+            }
+        });
+
+        tvInvoiceFilterApply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setInvoiceFilter();
+            }
+        });
+
         new ItemAsync().execute();
+    }
+
+    private void setSpReceiptType() {
+        List<String> categories = new ArrayList<>();
+        categories.add("All");
+        categories.add("Inward");
+        categories.add("Outward");
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
+
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spInvReceiptType.setAdapter(dataAdapter);
+
+    }
+
+    private void setSpMonth() {
+        List<String> categories = new ArrayList<>();
+        categories.add("All");
+        categories.add("January");
+        categories.add("February");
+        categories.add("March");
+        categories.add("April");
+        categories.add("May");
+        categories.add("June");
+        categories.add("July");
+        categories.add("August");
+        categories.add("September");
+        categories.add("October");
+        categories.add("November");
+        categories.add("December");
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
+
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spnMon.setAdapter(dataAdapter);
+
+    }
+
+    private void setSpYear() {
+        List<String> categories = new ArrayList<>();
+        categories.add("All");
+        categories.add("2016");
+        categories.add("2017");
+        categories.add("2018");
+        categories.add("2019");
+
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
+
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spYear.setAdapter(dataAdapter);
+
+    }
+
+    private void setInvoiceFilter() {
+        Utils.hideKeyboard(context);
+
+        if (onClickListenerInvoice != null) {
+            sheetBehaviorInvoice.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            String broker = "", invoiceNo = "", inwardNo = "", outwardNo = "",
+                   receiptType = "", paidStatus = "";
+            int paidOn = -1, month = -1, year = -1,invoiceGeneratedPeriod = -1;
+            if (selectedAccount != null) {
+                if (selectedAccount.getName() != null) {
+                    broker = selectedAccount.getName();
+                }
+            }
+            invoiceNo = etInvoiceNo.getText().toString();
+            inwardNo = etInwardNoInv.getText().toString();
+            outwardNo = etOutwardNoInv.getText().toString();
+
+            switch (spnMon.getSelectedItem().toString()) {
+                case "All":
+                    month = 0;
+                    break;
+                case "January":
+                    month = 1;
+                    break;
+                case "Fabruary":
+                    month = 2;
+                    break;
+                case "March":
+                    month = 3;
+                    break;
+                case "April":
+                    month = 4;
+                    break;
+                case "May":
+                    month = 5;
+                    break;
+                case "June":
+                    month = 6;
+                    break;
+                case "July":
+                    month = 7;
+                    break;
+                case "August":
+                    month = 8;
+                    break;
+                case "September":
+                    month = 9;
+                    break;
+                case "October":
+                    month = 10;
+                    break;
+                case "November":
+                    month = 11;
+                    break;
+                case "December":
+                    month = 12;
+                    break;
+            }
+
+            switch (spYear.getSelectedItem().toString()) {
+                case "All":
+                    year = 0;
+                    break;
+                case "2016":
+                    year = 2016;
+                    break;
+                case "2017":
+                    year = 2017;
+                    break;
+                case "2018":
+                    year = 2018;
+                    break;
+                case "2019":
+                    year = 2019;
+                    break;
+            }
+            switch (spInvReceiptType.getSelectedItem().toString()) {
+                case "All":
+                    receiptType = "0";
+                    break;
+                case "Inward":
+                    receiptType = "I";
+                    break;
+                case "Outward":
+                    receiptType = "O";
+                    break;
+
+            }
+            switch (spInvoiceGeneratedPeriodInv.getSelectedItem().toString()) {
+                case "All":
+                    invoiceGeneratedPeriod = -1;
+                    break;
+                case "Within 2 Days":
+                    invoiceGeneratedPeriod = 2;
+                    break;
+                case "Today":
+                    invoiceGeneratedPeriod = 0;
+                    break;
+                case "Within 1 Week":
+                    invoiceGeneratedPeriod = 8;
+                    break;
+                case "Within 15 Days":
+                    invoiceGeneratedPeriod = 15;
+                    break;
+                case "Within 30 Days":
+                    invoiceGeneratedPeriod = 30;
+                    break;
+            }
+
+            switch (spPaidStatusInv.getSelectedItem().toString()) {
+                case "All":
+                    paidStatus = "";
+                    break;
+                case "Fully Paid":
+                    paidStatus = "F";
+                    break;
+                case "Partially Paid":
+                    paidStatus = "P";
+                    break;
+                case "Not Paid":
+                    paidStatus = "N";
+                    break;
+                case "Zero Amount":
+                    paidStatus = "Z";
+                    break;
+            }
+            switch (spPaidOnInv.getSelectedItem().toString()) {
+                case "All":
+                    paidOn = -1;
+                    break;
+                case "Within 2 Days":
+                    paidOn= 2;
+                    break;
+                case "Today":
+                    paidOn = 0;
+                    break;
+                case "Within 1 Week":
+                    paidOn= 8;
+                    break;
+                case "Within 15 Days":
+                    paidOn = 15;
+                    break;
+                case "Within 30 Days":
+                    paidOn = 30;
+                    break;
+            }
+
+
+            onClickListenerInvoice.onFilterInvoiceApplyClick(broker,invoiceNo,inwardNo,outwardNo,month,year,receiptType,invoiceGeneratedPeriod,paidStatus,paidOn);
+        }
+
+    }
+    private void resetInvoiceFilter()
+    {
+        selectedAccount = null;
+        tvBrokerInvoice.setText("");
+        etInvoiceNo.setText("");
+        etInwardNoInv.setText("");
+        etOutwardNoInv.setText("");
+        spnMon.setSelection(0);
+        spYear.setSelection(0);
+        spInvReceiptType.setSelection(0);
+        spInvoiceGeneratedPeriodInv.setSelection(0);
+        spPaidStatusInv.setSelection(0);
+        spPaidOnInv.setSelection(0);
+        sheetBehaviorInvoice.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        setInvoiceFilter();
+
+
+
+    }
+
+    private void setOutwardFilter() {
+
+        Utils.hideKeyboard(context);
+        if (onClickListenerOutward != null) {
+            sheetBehaviorOutward.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            String broker = "", outwardNo = "", inwardNo = "", item = "", unit = "", location = "", outwardedOn = "", invoiceStatus = "", paidStatus = "";
+            int paidOnOut = -1;
+            if (selectedAccount != null) {
+                if (selectedAccount.getName() != null) {
+                    broker = selectedAccount.getName();
+                }
+            }
+            if (selectedItems != null) {
+                if (selectedItems.getName() != null) {
+                    item = selectedItems.getName();
+                }
+            }
+            outwardNo = etOutwardNo.getText().toString();
+            inwardNo = etInwardNoOut.getText().toString();
+            unit = etUnitOut.getText().toString();
+            location = etLocationOut.getText().toString();
+            switch (spnOutwardedOn.getSelectedItem().toString()) {
+                case "All":
+                    outwardedOn = "";
+                    break;
+                case "Yesterday":
+                    outwardedOn = "Y";
+                    break;
+                case "Today":
+                    outwardedOn = "T";
+                    break;
+                case "This Week":
+                    outwardedOn = "TW";
+                    break;
+                case "Last Week":
+                    outwardedOn = "LW";
+                    break;
+                case "This Month":
+                    outwardedOn = "TM";
+                    break;
+                case "Last Month":
+                    outwardedOn = "LM";
+                    break;
+            }
+            switch (spInvoiceStatus.getSelectedItem().toString()) {
+                case "All":
+                    invoiceStatus = "";
+                    break;
+                case "Invoice Generated":
+                    invoiceStatus = "Y";
+                    break;
+                case "Invoice Not Generated":
+                    invoiceStatus = "N";
+                    break;
+
+            }
+            switch (spPaidStatusOut.getSelectedItem().toString()) {
+                case "All":
+                    paidStatus = "";
+                    break;
+                case "Fully Paid":
+                    paidStatus = "F";
+                    break;
+                case "Partially Paid":
+                    paidStatus = "P";
+                    break;
+                case "Not Paid":
+                    paidStatus = "N";
+                    break;
+                case "Zero Amount":
+                    paidStatus = "Z";
+                    break;
+            }
+            switch (spPaidOnOut.getSelectedItem().toString()) {
+                case "All":
+                    paidOnOut = -1;
+                    break;
+                case "Within 2 Days":
+                    paidOnOut = 2;
+                    break;
+                case "Today":
+                    paidOnOut = 0;
+                    break;
+                case "Within 1 Week":
+                    paidOnOut = 8;
+                    break;
+                case "Within 15 Days":
+                    paidOnOut = 15;
+                    break;
+                case "Within 30 Days":
+                    paidOnOut = 30;
+                    break;
+            }
+
+            onClickListenerOutward.onFilterApplyClickOutward(broker, outwardNo, inwardNo, item, unit, location, outwardedOn
+                    , invoiceStatus, paidStatus, paidOnOut);
+        }
+    }
+
+    private void resetOutwardFilter() {
+        selectedAccount = null;
+        selectedItems = null;
+        tvBroker.setText("");
+        tvItemOut.setText("");
+        etInwardNoOut.setText("");
+        etOutwardNo.setText("");
+        etUnitOut.setText("");
+        etLocationOut.setText("");
+        spnOutwardedOn.setSelection(0);
+        spInvoiceStatus.setSelection(0);
+        spPaidStatusOut.setSelection(0);
+        spPaidOnOut.setSelection(0);
+        sheetBehaviorOutward.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        setOutwardFilter();
     }
 
     private void setInwardFilter() {
@@ -439,6 +912,8 @@ public class MainActivity extends AppCompatActivity {
         setInwardFilter();
     }
 
+
+
     public static OnFilterListener onClickListener;
 
     public static void setOnFilterApplyClickListener(OnFilterListener onClick) {
@@ -449,6 +924,31 @@ public class MainActivity extends AppCompatActivity {
         void onFilterApplyClick(String broker, String inwardNo, String item, String unit, String marko
                 , String location, String inwardedOn, String sortBy, String sortByExpression, int invoiceGenerationDue
                 , int invoiceGeneratedPeriod, String paidStatus, int paidOn);
+    }
+
+    public static OnFilterInvoiceListener onClickListenerInvoice;
+
+    public static void setOnFilterInvoiceApplyClickListener(OnFilterInvoiceListener onClick) {
+        onClickListenerInvoice = onClick;
+    }
+
+    public interface OnFilterInvoiceListener {
+        void onFilterInvoiceApplyClick(String broker, String invoiceNo, String inwardNo, String outwardNo, int month
+                , int year, String receiptType, int invoiceGeneratedPeriod
+                , String paidStatus, int paidOn);
+    }
+
+
+    public static OnFilterOutwardListener onClickListenerOutward;
+
+    public static void setOnFilterOutwardApplyClickListener(OnFilterOutwardListener onClick) {
+        onClickListenerOutward = onClick;
+    }
+
+    public interface OnFilterOutwardListener {
+        void onFilterApplyClickOutward(String broker, String outwardNo, String inwardNo, String item, String unit
+                , String location, String outwardedOn, String invoiceStatus, String paidStatus,
+                                       int paidOn);
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -533,7 +1033,11 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < items.size(); i++) {
             if (searchTextViewModel.getId() == items.get(i).getId()) {
                 selectedItems = items.get(i);
-                tvItem.setText(selectedItems.getName());
+                if ((tvTitle.getText().equals(getResources().getString(R.string.outword_list_title)))) {
+                    tvItemOut.setText(selectedItems.getName());
+                } else {
+                    tvItem.setText(selectedItems.getName());
+                }
                 return;
             }
         }
@@ -543,11 +1047,19 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < accounts.size(); i++) {
             if (searchTextViewModel.getId() == accounts.get(i).getId()) {
                 selectedAccount = accounts.get(i);
-                tvParty.setText(selectedAccount.getName());
+                if ((tvTitle.getText().equals(getResources().getString(R.string.outword_list_title)))) {
+                    tvBroker.setText(selectedAccount.getName());
+                } else if (tvTitle.getText().equals(getResources().getString(R.string.inword_list_title))) {
+                    tvParty.setText(selectedAccount.getName());
+                } else if (tvTitle.getText().equals(getResources().getString(R.string.invoice_list_title))) {
+                    tvBrokerInvoice.setText(selectedAccount.getName());
+                }
+
                 return;
             }
         }
     }
+
 
     private class AccountAsync extends AsyncTask<String, String, String> {
 
@@ -556,6 +1068,12 @@ public class MainActivity extends AppCompatActivity {
             super.onPreExecute();
             pbParty.setVisibility(View.VISIBLE);
             tvParty.setEnabled(false);
+            pbBroker.setVisibility(View.VISIBLE);
+            tvBroker.setEnabled(false);
+            pbBrokerInvoice.setVisibility(View.VISIBLE);
+            tvBrokerInvoice.setEnabled(false);
+
+
         }
 
         @Override
@@ -571,6 +1089,10 @@ public class MainActivity extends AppCompatActivity {
                     accounts = accountResponseModel.getAccount();
                     pbParty.setVisibility(View.INVISIBLE);
                     tvParty.setEnabled(true);
+                    pbBroker.setVisibility(View.INVISIBLE);
+                    tvBroker.setEnabled(true);
+                    pbBrokerInvoice.setVisibility(View.INVISIBLE);
+                    tvBrokerInvoice.setEnabled(true);
                 }
 
                 @SuppressLint("SetTextI18n")
@@ -578,6 +1100,10 @@ public class MainActivity extends AppCompatActivity {
                 public void onFailure(@NonNull Call<AccountResponseModel> call, @NonNull Throwable t) {
                     pbParty.setVisibility(View.INVISIBLE);
                     tvParty.setText("Fail to load party name");
+                    pbBroker.setVisibility(View.INVISIBLE);
+                    tvBroker.setText("Fail to load party name");
+                    pbBrokerInvoice.setVisibility(View.INVISIBLE);
+                    tvBrokerInvoice.setText("Fail to load party name");
                     Log.d("fsd", "fail");
                 }
             });
@@ -663,7 +1189,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    private void setInwardedOn() {
+
+    private void setInwardedOutwardedOn(Spinner spnInOut) {
         List<String> categories = new ArrayList<>();
         categories.add("All");
         categories.add("Yesterday");
@@ -680,7 +1207,24 @@ public class MainActivity extends AppCompatActivity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // attaching data adapter to spinner
-        spInwardOn.setAdapter(dataAdapter);
+        spnInOut.setAdapter(dataAdapter);
+    }
+
+    private void setspInvoiceStatus() {
+        List<String> categories = new ArrayList<>();
+        categories.add("All");
+        categories.add("Invoice Generated");
+        categories.add("Invoice Not Generated");
+
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
+
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spInvoiceStatus.setAdapter(dataAdapter);
     }
 
     private void setInvoiceGenerationDue() {
@@ -703,26 +1247,8 @@ public class MainActivity extends AppCompatActivity {
         spInvoiceGenerationDue.setAdapter(dataAdapter);
     }
 
-    private void setInvoiceGeneratedPeriod() {
-        List<String> categories = new ArrayList<>();
-        categories.add("All");
-        categories.add("Today");
-        categories.add("Within 2 Days");
-        categories.add("Within 1 Week");
-        categories.add("Within 15 Days");
-        categories.add("Within 30 Days");
 
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
-
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // attaching data adapter to spinner
-        spInvoiceGeneratedPeriod.setAdapter(dataAdapter);
-    }
-
-    private void setPaidStatus() {
+    private void setPaidStatusCommon(Spinner spnPaidStatus) {
         List<String> categories = new ArrayList<>();
         categories.add("All");
         categories.add("Fully Paid");
@@ -737,10 +1263,11 @@ public class MainActivity extends AppCompatActivity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // attaching data adapter to spinner
-        spPaidStatus.setAdapter(dataAdapter);
+        spnPaidStatus.setAdapter(dataAdapter);
     }
 
-    private void setPaidOn() {
+
+    private void setPaidOnCommonn(Spinner spPaid) {
         List<String> categories = new ArrayList<>();
         categories.add("All");
         categories.add("Today");
@@ -756,18 +1283,25 @@ public class MainActivity extends AppCompatActivity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // attaching data adapter to spinner
-        spPaidOn.setAdapter(dataAdapter);
+        spPaid.setAdapter(dataAdapter);
     }
+
 
     private void initComp() {
         mainView = findViewById(R.id.mainView);
         ivFilter = findViewById(R.id.ivFilter);
         layoutBottomSheet = findViewById(R.id.bottom_sheet);
         layoutBottomSheetCustomer = findViewById(R.id.bottom_sheet_customer);
+        layoutBottomSheetOutward = findViewById(R.id.layoutBottomSheetOutward);
+        layoutBottomSheetInvoice = findViewById(R.id.layoutBottomSheetInvoice);
         sheetBehavior = BottomSheetBehavior.from(layoutBottomSheet);
         sheetBehaviorCustomer = BottomSheetBehavior.from(layoutBottomSheetCustomer);
+        sheetBehaviorOutward = BottomSheetBehavior.from(layoutBottomSheetOutward);
+        sheetBehaviorInvoice = BottomSheetBehavior.from(layoutBottomSheetInvoice);
         ivClose = findViewById(R.id.ivClose);
         ivCloseCustomer = findViewById(R.id.ivCloseCustomer);
+        ivCloseOutward = findViewById(R.id.ivCloseOutward);
+        ivCloseInvoice = findViewById(R.id.ivCloseInvoice);
         spInwardOn = findViewById(R.id.spInwardOn);
         spInvoiceGenerationDue = findViewById(R.id.spInvoiceGenerationDue);
         spInvoiceGeneratedPeriod = findViewById(R.id.spInvoiceGeneratedPeriod);
@@ -778,10 +1312,16 @@ public class MainActivity extends AppCompatActivity {
         tvTitle = findViewById(R.id.tvTitle);
         tvFromDate = findViewById(R.id.tvFromDate);
         tvToDate = findViewById(R.id.tvToDate);
-        tvToDate = findViewById(R.id.tvToDate);
+        etLocationOut = findViewById(R.id.etLocationOut);
+        pbItemOut = findViewById(R.id.pbItemOut);
         tvParty = findViewById(R.id.tvParty);
+        tvItemOut = findViewById(R.id.tvItemOut);
         tvItem = findViewById(R.id.tvItem);
+        etInwardNoOut = findViewById(R.id.etInwardNoOut);
+        etUnitOut = findViewById(R.id.etUnitOut);
         pbParty = findViewById(R.id.pbParty);
+        etOutwardNo = findViewById(R.id.etOutwardNo);
+        pbBroker = findViewById(R.id.pbBroker);
         tvInwardFilterApply = findViewById(R.id.tvInwardFilterApply);
         etInwardNo = findViewById(R.id.etInwardNo);
         etUnit = findViewById(R.id.etUnit);
@@ -791,9 +1331,39 @@ public class MainActivity extends AppCompatActivity {
         rgSortByExpression = findViewById(R.id.rgSortByExpression);
         rbDefaultShortBy = findViewById(R.id.rbDefaultShortBy);
         rbDefaultSortByExpression = findViewById(R.id.rbDefaultSortByExpression);
+        tvBroker = findViewById(R.id.tvBroker);
+
+
+        spnOutwardedOn = findViewById(R.id.spnOutwardedOn);
+        spInvoiceStatus = findViewById(R.id.spInvoiceStatus);
+        spPaidStatusOut = findViewById(R.id.spPaidStatusOut);
+        spPaidOnOut = findViewById(R.id.spPaidOnOut);
+
+
+        tvOutwardFilterReset = findViewById(R.id.tvOutwardFilterReset);
+        tvOutwardFilterApply = findViewById(R.id.tvOutwardFilterApply);
+
+        tvBrokerInvoice = findViewById(R.id.tvBrokerInvoice);
+        spnMon = findViewById(R.id.spnMon);
+        spYear = findViewById(R.id.spYear);
+        spInvReceiptType = findViewById(R.id.spInvReceiptType);
+        spInvoiceGeneratedPeriodInv = findViewById(R.id.spInvoiceGeneratedPeriodInv);
+        etInvoiceNo = findViewById(R.id.etInvoiceNo);
+        etInwardNoInv = findViewById(R.id.etInwardNoInv);
+        etOutwardNoInv = findViewById(R.id.etOutwardNoInv);
+        spPaidStatusInv = findViewById(R.id.spPaidStatusInv);
+        spPaidOnInv = findViewById(R.id.spPaidOnInv);
+        pbBrokerInvoice = findViewById(R.id.pbBrokerInvoice);
+
+
+        tvInvoiceFilterReset = findViewById(R.id.tvInvoiceFilterReset);
+        tvInvoiceFilterApply = findViewById(R.id.tvInvoiceFilterApply);
+
+
     }
 
     List<Menu> menus;
+
 
     @SuppressLint("SetTextI18n")
     private void setNavBar() {
@@ -868,6 +1438,11 @@ public class MainActivity extends AppCompatActivity {
                     mDrawerLayout.closeDrawers();
                     if (!tvTitle.getText().equals(getResources().getString(R.string.customer_list_title))) {
                         openFragment(new CustomerListFragment());
+                    }
+                } else if (menuName.equals("Invoices")) {
+                    mDrawerLayout.closeDrawers();
+                    if (!tvTitle.getText().equals(getResources().getString(R.string.invoice_list_title))) {
+                        openFragment(new InvoiceFragment());
                     }
                 } else {
                     Toast.makeText(context, getMenuName(menuPosition, subMenuPosition, subSubMenuPosition) + " - Under Construction...", Toast.LENGTH_SHORT).show();

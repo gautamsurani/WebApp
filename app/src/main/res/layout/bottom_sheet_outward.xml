@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layoutBottomSheetOutward"
+    android:background="#FFFFFF"
+    android:clickable="true"
+    android:elevation="@dimen/design_appbar_elevation"
+    android:orientation="vertical"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="0dp"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    <LinearLayout
+        android:id="@+id/llTop"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <tech.fraction.webapp.ui.MyTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Refine Result"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+        <ImageView
+            android:id="@+id/ivCloseOutward"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ic_close" />
+    </LinearLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/v1"
+        android:layout_below="@+id/llTop">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+    <tech.fraction.webapp.ui.MyTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:text="Broker"
+        android:textColor="@color/light_black"
+        android:textSize="16sp" />
+
+    <RelativeLayout
+        android:id="@+id/rl_p"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/search_bg">
+
+        <TextView
+            android:id="@+id/tvBroker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical"
+            android:hint="Select Broker Name "
+            android:textColor="@color/light_black"
+            android:textSize="16sp" />
+
+        <ProgressBar
+            android:id="@+id/pbBroker"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+        <tech.fraction.webapp.ui.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="Outward No"
+            android:textColor="@color/light_black"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/etOutwardNo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/search_bg"
+            android:gravity="center_vertical"
+            android:hint="Enter Outward Number"
+            android:paddingLeft="10dp"
+            android:textColor="@color/light_black"
+            android:textSize="16sp" />
+        <tech.fraction.webapp.ui.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="Inward Number"
+            android:textColor="@color/light_black"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/etInwardNoOut"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/search_bg"
+            android:gravity="center_vertical"
+            android:hint="Enter Inward Number"
+            android:paddingLeft="10dp"
+            android:textColor="@color/light_black"
+            android:textSize="16sp" />
+
+        <tech.fraction.webapp.ui.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="Item"
+            android:textColor="@color/light_black"
+            android:textSize="16sp" />
+
+        <RelativeLayout
+            android:id="@+id/rl_I"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/search_bg">
+
+            <TextView
+                android:id="@+id/tvItemOut"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_vertical"
+                android:hint="Select Item "
+                android:textColor="@color/light_black"
+                android:textSize="16sp" />
+
+            <ProgressBar
+                android:id="@+id/pbItemOut"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:visibility="gone" />
+        </RelativeLayout>
+        <tech.fraction.webapp.ui.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="Unit"
+            android:textColor="@color/light_black"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/etUnitOut"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/search_bg"
+            android:gravity="center_vertical"
+            android:hint="Enter Unit"
+            android:paddingLeft="10dp"
+            android:textColor="@color/light_black"
+            android:textSize="16sp" />
+
+        <tech.fraction.webapp.ui.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="Location"
+            android:textColor="@color/light_black"
+            android:textSize="16sp" />
+
+
+        <EditText
+            android:id="@+id/etLocationOut"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/search_bg"
+            android:gravity="center_vertical"
+            android:hint="Enter Location"
+            android:paddingLeft="10dp"
+            android:textColor="@color/light_black"
+            android:textSize="16sp" />
+        <tech.fraction.webapp.ui.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="Outwarded On"
+            android:textColor="@color/light_black"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/spinner_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spnOutwardedOn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#00ffffff"
+                android:hint="Eg. TCS"
+                android:paddingRight="10dp"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:padding="19dp"
+                android:src="@drawable/drop_white"
+                android:tint="@color/black" />
+
+        </LinearLayout>
+        <tech.fraction.webapp.ui.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="Invoice Status"
+            android:textColor="@color/light_black"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/spinner_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spInvoiceStatus"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#00ffffff"
+                android:hint="Eg. TCS"
+                android:paddingRight="10dp"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:padding="19dp"
+                android:src="@drawable/drop_white"
+                android:tint="@color/black" />
+
+        </LinearLayout>
+        <tech.fraction.webapp.ui.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="Paid Status"
+            android:textColor="@color/light_black"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/spinner_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spPaidStatusOut"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#00ffffff"
+                android:hint="Eg. TCS"
+                android:paddingRight="10dp"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:padding="19dp"
+                android:src="@drawable/drop_white"
+                android:tint="@color/black" />
+
+        </LinearLayout>
+        <tech.fraction.webapp.ui.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="PaidOn"
+            android:textColor="@color/light_black"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/spinner_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spPaidOnOut"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#00ffffff"
+                android:hint="Eg. TCS"
+                android:paddingRight="10dp"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:padding="19dp"
+                android:src="@drawable/drop_white"
+                android:tint="@color/black" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <View
+        android:id="@+id/v1"
+        android:layout_width="match_parent"
+        android:layout_height=".7dp"
+        android:layout_above="@+id/llBottom"
+        android:background="#B3B3B3" />
+
+    <LinearLayout
+        android:id="@+id/llBottom"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <tech.fraction.webapp.ui.MyTextView
+            android:id="@+id/tvOutwardFilterReset"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Reset Filters"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvOutwardFilterApply"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/txt_forgot_pwd"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="Apply Filter"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -394,4 +394,14 @@ public class Utils {
         return format.format(new BigDecimal(value));
     }
 
+    public static String FormatDate(String s)
+    {
+        String date;
+        if (s.contains("T")) {
+            date = s.substring(0, s.indexOf("T"));
+        } else {
+            date = s;
+        }
+        return date;
+    }
 }

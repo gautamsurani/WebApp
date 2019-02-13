@@ -1,20 +1,28 @@
 package tech.fraction.webapp.activity;
 
+import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 
 import retrofit2.Retrofit;
 import tech.fraction.webapp.R;
@@ -24,10 +32,12 @@ import tech.fraction.webapp.model.Account;
 import tech.fraction.webapp.model.InwardItems;
 import tech.fraction.webapp.model.OutwardDetailModel;
 import tech.fraction.webapp.model.OutwardItems;
+import tech.fraction.webapp.model.SearchTextViewModel;
 import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
 import tech.fraction.webapp.rest.ApiResponseModel.AccountResponseModel;
 import tech.fraction.webapp.rest.CommonApiCall.AccountApiCall;
 import tech.fraction.webapp.rest.RetrofitInstance;
+import tech.fraction.webapp.util.AppConstant;
 import tech.fraction.webapp.util.Utils;
 import tech.fraction.webapp.util.ValidationUtil;
 
@@ -37,14 +47,14 @@ public class AddEditOutwardActivity extends AppCompatActivity {
     OutwardDetailListAdapter outwardDetailListAdapter;
     List<OutwardDetailModel> outwardDetailList;
     ImageView ivBack;
-    Context context;
+    Activity context;
     Retrofit retrofit;
     ProgressBar  pbParty;
     ApiInterface apiInterface;
     EditText edt_vehicleNo, edt_transporter, edt_driverName, edt_driverNo, edt_remark;
-    TextView txtSave, txtAddItem,tvTitle;
+    TextView txtSave, txtAddItem,tvTitle,tvOutwardNo,tvDate,tvParty;
     String vehicleNo, transporterName, driverName, driverNo, remark;
-    RelativeLayout scrollView;
+    RelativeLayout scrollView,rlAddEditOutward;
     public static List<OutwardItems> outwardItemsList = new ArrayList<>();
 
     ArrayList<Account> lstAccount = new ArrayList<>();
@@ -67,6 +77,11 @@ public class AddEditOutwardActivity extends AppCompatActivity {
 
         initComp();
 
+        initCache();
+
+        initItemRecyclerView();
+
+
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(tb);
 
@@ -76,6 +91,8 @@ public class AddEditOutwardActivity extends AppCompatActivity {
 
         retrofit = RetrofitInstance.getClient();
         apiInterface = retrofit.create(ApiInterface.class);
+
+        outwardDetailListAdapter = new OutwardDetailListAdapter(AddEditOutwardActivity.this, true);
 
         String mode = getIntent().getStringExtra("mode");
         if (mode.equals("add")) {
@@ -98,17 +115,19 @@ public class AddEditOutwardActivity extends AppCompatActivity {
             });
             sampleClass.CallAccountApi();
         }
-
-//
-//        outwardDetailList = new ArrayList<OutwardDetailModel>();
-//        outwardDetailList.add(new OutwardDetailModel("DhaniAkhi[Locale Bardhan]", "A304,A304,A304", "1500", "100/200"));
-//        outwardDetailList.add(new OutwardDetailModel("DhaniAkhi[Locale Bardhan]", "A304,A304,A304", "1500", "100/200"));
-//        outwardDetailListAdapter = new OutwardDetailListAdapter(AddEditOutwardActivity.this, true);
-//        rec_view.setLayoutManager(new LinearLayoutManager(this));
-//        rec_view.setHasFixedSize(true);
-//        outwardDetailListAdapter.setList(outwardDetailList);
-//        rec_view.setAdapter(outwardDetailListAdapter);
-
+tvParty.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        ArrayList<SearchTextViewModel> itemsList = new ArrayList<>();
+        for (int i = 0; i < lstAccount.size(); i++) {
+            itemsList.add(new SearchTextViewModel(lstAccount.get(i).getId(), lstAccount.get(i).getName()));
+        }
+        Intent i = new Intent(AddEditOutwardActivity.this, SearchTextViewActivity.class);
+        i.putExtra("itemsList", itemsList);
+        i.putExtra("type", "party");
+        startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
+    }
+});
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,10 +146,17 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         txtAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddEditOutwardActivity.this, AddEditOutItemActivity.class);
-                intent.putExtra("mode", "add");
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+                if(selectedAccount==null)
+                {
+                    Utils.ShowSnakBar("Select Party",rlAddEditOutward,context);
+
+                }else {
+                    Intent intent = new Intent(AddEditOutwardActivity.this, AddEditOutItemActivity.class);
+                    intent.putExtra("mode", "add");
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
             }
         });
         outwardDetailListAdapter.setOnItemClickListener(new OutwardDetailListAdapter.OnClickListener() {
@@ -152,6 +178,81 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void initItemRecyclerView() {
+        rec_view.setLayoutManager(new LinearLayoutManager(this));
+        rec_view.setHasFixedSize(true);
+        rec_view.setAdapter(outwardDetailListAdapter);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == AppConstant.SEARCH_ACTIVITY_REQUEST_CODE)
+            if (resultCode == Activity.RESULT_OK) {
+                String type = data.getStringExtra("type");
+                if (type.equals("party")) {
+                    SearchTextViewModel searchTextViewModel = (SearchTextViewModel) data.getSerializableExtra("search");
+                    setParty(searchTextViewModel);
+                }
+            }
+    }
+
+    private void setParty(SearchTextViewModel searchTextViewModel) {
+        for (int i = 0; i < lstAccount.size(); i++) {
+            if (searchTextViewModel.getId() == lstAccount.get(i).getId()) {
+                selectedAccount = lstAccount.get(i);
+                tvParty.setText(selectedAccount.getName());
+                return;
+            }
+        }
+    }
+    public void setDate(final TextView textView) {
+        Utils.hideKeyboard(context);
+        final Calendar myCalendar = Calendar.getInstance();
+
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+            private void updateLabel() {
+                String myFormat = "dd-MM-yyyy"; // In which you need put
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                textView.setText(sdf.format(myCalendar.getTime()));
+                outwardDate = textView.getText().toString();
+            }
+        };
+
+        DatePickerDialog d = new DatePickerDialog(context,
+                date,
+                myCalendar.get(Calendar.YEAR),
+                myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH));
+        d.setCancelable(false);
+        d.show();
+    }
+
+    private void initCache() {
+        GenerateInwardNumber();
+        if (outwardDate.isEmpty()) {
+            outwardDate = Utils.getTodayDate();
+        }
+        tvDate.setText(outwardDate);
+        if (selectedAccount != null) {
+            tvParty.setText(selectedAccount.getName());
+        }
+    }
+    public void GenerateInwardNumber() {
+        if (outwardNumber.isEmpty()) {
+            Random r = new Random();
+            outwardNumber = String.format("%06d", (Object) Integer.valueOf(r.nextInt(100000)));
+        }
+        tvOutwardNo.setText(outwardNumber);
     }
 
     private void getData() {
@@ -208,10 +309,15 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         edt_driverNo = findViewById(R.id.edt_driverNo);
         edt_remark = findViewById(R.id.edt_remark);
         txtSave = findViewById(R.id.txt_save);
-        scrollView = findViewById(R.id.edt_out_det_act);
+
         txtAddItem = findViewById(R.id.txt_additem);
+        rlAddEditOutward = findViewById(R.id.rlAddEditOutward);
         tvTitle = findViewById(R.id.tvTitle);
         pbParty = findViewById(R.id.pbParty);
+        tvOutwardNo = findViewById(R.id.tvOutwardNo);
+        tvDate = findViewById(R.id.tvDate);
+        tvParty = findViewById(R.id.tvParty);
+
 
     }
 }

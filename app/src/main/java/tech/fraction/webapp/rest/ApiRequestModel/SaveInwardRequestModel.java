@@ -1,9 +1,11 @@
-package tech.fraction.webapp.model;
+package tech.fraction.webapp.rest.ApiRequestModel;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class AddEditInwardModel implements Serializable {
+import tech.fraction.webapp.model.InwardItems;
+import tech.fraction.webapp.model.InwardVehicleDetail;
+
+public class SaveInwardRequestModel {
     private String PaidStatus;
 
     private boolean CanGenerateInvoice;
@@ -40,11 +42,10 @@ public class AddEditInwardModel implements Serializable {
 
     private int AddedBy;
 
-    public AddEditInwardModel(String paidStatus, boolean canGenerateInvoice, List<InwardItems> inwardItemDetailPoco,
-                              int accountId, String broker, String inwardedOn, String lastInvoiceToDate,
-                              InwardVehicleDetail inwardVehicleDetail, String invoices, boolean isModified,
-                              String lastInvoiceFromDate, String lastPaidAmount, String number, String lastInvoiceGeneratedOn,
-                              String totalPaidAmount, int id, String lastInvoicePaidOn, int addedBy) {
+    public SaveInwardRequestModel(String paidStatus, boolean canGenerateInvoice, List<InwardItems> inwardItemDetailPoco, int accountId, String broker,
+                                  String inwardedOn, String lastInvoiceToDate, tech.fraction.webapp.model.InwardVehicleDetail inwardVehicleDetail,
+                                  String invoices, boolean isModified, String lastInvoiceFromDate, String lastPaidAmount, String number,
+                                  String lastInvoiceGeneratedOn, String totalPaidAmount, int id, String lastInvoicePaidOn, int addedBy) {
         PaidStatus = paidStatus;
         CanGenerateInvoice = canGenerateInvoice;
         InwardItemDetailPoco = inwardItemDetailPoco;
@@ -65,14 +66,6 @@ public class AddEditInwardModel implements Serializable {
         AddedBy = addedBy;
     }
 
-    public List<InwardItems> getInwardItemDetailPoco() {
-        return InwardItemDetailPoco;
-    }
-
-    public void setInwardItemDetailPoco(List<InwardItems> inwardItemDetailPoco) {
-        InwardItemDetailPoco = inwardItemDetailPoco;
-    }
-
     public String getPaidStatus() {
         return PaidStatus;
     }
@@ -89,6 +82,13 @@ public class AddEditInwardModel implements Serializable {
         CanGenerateInvoice = canGenerateInvoice;
     }
 
+    public List<InwardItems> getInwardItemDetailPoco() {
+        return InwardItemDetailPoco;
+    }
+
+    public void setInwardItemDetailPoco(List<InwardItems> inwardItemDetailPoco) {
+        InwardItemDetailPoco = inwardItemDetailPoco;
+    }
 
     public int getAccountId() {
         return AccountId;
@@ -122,11 +122,11 @@ public class AddEditInwardModel implements Serializable {
         LastInvoiceToDate = lastInvoiceToDate;
     }
 
-    public tech.fraction.webapp.model.InwardVehicleDetail getInwardVehicleDetail() {
+    public InwardVehicleDetail getInwardVehicleDetail() {
         return InwardVehicleDetail;
     }
 
-    public void setInwardVehicleDetail(tech.fraction.webapp.model.InwardVehicleDetail inwardVehicleDetail) {
+    public void setInwardVehicleDetail(InwardVehicleDetail inwardVehicleDetail) {
         InwardVehicleDetail = inwardVehicleDetail;
     }
 

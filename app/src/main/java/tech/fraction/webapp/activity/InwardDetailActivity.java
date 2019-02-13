@@ -137,6 +137,7 @@ public class InwardDetailActivity extends AppCompatActivity {
             case R.id.edit:
                 Intent intent = new Intent(context, AddEditInwardActivity.class);
                 intent.putExtra("mode", "edit");
+                intent.putExtra("inventoryDetails",inventoryDetails);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 return true;
