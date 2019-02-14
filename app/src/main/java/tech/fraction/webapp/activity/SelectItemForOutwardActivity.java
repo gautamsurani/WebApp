@@ -129,7 +129,7 @@ public class SelectItemForOutwardActivity extends BaseActivity {
         progress_circular.setVisibility(View.VISIBLE);
 
 
-        Call<OutwardItemRespondModel> call = apiInterface.getOutwardItem(accountId);
+        Call<OutwardItemRespondModel> call = apiInterface.getOutwardItem(154);
 
         call.enqueue(new Callback<OutwardItemRespondModel>() {
             @Override
