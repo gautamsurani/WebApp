@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,26 +19,21 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import tech.fraction.webapp.R;
-import tech.fraction.webapp.activity.AddEditInwardActivity;
 import tech.fraction.webapp.activity.AddEditOutwardActivity;
 import tech.fraction.webapp.activity.MainActivity;
-import tech.fraction.webapp.activity.OutwardDetailActivity;
 import tech.fraction.webapp.adapter.InwordsAdapter;
 import tech.fraction.webapp.adapter.OutwardListAdapter;
 import tech.fraction.webapp.base.BaseFragment;
 import tech.fraction.webapp.base.NoNetworkActivity;
 import tech.fraction.webapp.model.InventoryDetailOutward;
-import tech.fraction.webapp.model.OutWardListModel;
 import tech.fraction.webapp.model.PersonInformation;
 import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
-import tech.fraction.webapp.rest.ApiRequestModel.InwardRequestModel;
 import tech.fraction.webapp.rest.ApiRequestModel.OutwardRequestModel;
 import tech.fraction.webapp.rest.ApiResponseModel.OutwardResoinseModel;
 import tech.fraction.webapp.rest.RetrofitInstance;
@@ -106,7 +100,7 @@ public class OutwordListFragment extends BaseFragment {
         outwardListAdapter.setOnItemClickListener(new OutwardListAdapter.OnClickListener() {
             @Override
             public void onClick(int position, int witch) {
-                Intent i = new Intent(context, OutwardDetailActivity.class);
+                Intent i = new Intent(context, AddEditOutwardActivity.class);
                 i.putExtra("outWardList", outWardList.get(position));
                 startActivity(i);
                 context.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

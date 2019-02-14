@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -71,8 +72,13 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
         viewHolder.tvLocation.setText("Location: "+location);
         viewHolder.tv0utDate.setText(Utils.FormatDate(outwardDetails.get(position).getInwardDetail().getInwardedOn()));
         viewHolder. tvOutNo.setText(outwardDetails.get(position).getInwardDetail().getNumber());
+
+
+        viewHolder. etLC.setText(String.valueOf(outwardDetails.get(position).getLoadingCharges()));
+        viewHolder. etOC.setText(String.valueOf(outwardDetails.get(position).getOtherCharges()));
         viewHolder.tvStock.setText("Stock : " + outwardDetails.get(position).getStock() + " / " + outwardDetails.get(position).getQuantity());
         viewHolder.tvItemUnit.setText(outwardDetails.get(position).getItemName()+"-"+outwardDetails.get(position).getUnitName());
+
 
 
         viewHolder.imgDelete.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +98,7 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvItemName, tvItemUnit, tvStock, tvOutNo, tv0utDate, tvLocation;
 
+        EditText etLC,etOC,etQty;
         ImageView imgDelete;
 
         public ViewHolder(@NonNull View item) {
@@ -103,6 +110,9 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
             tvOutNo = item.findViewById(R.id.tvOutNo);
             tv0utDate = item.findViewById(R.id.tv0utDate);
             tvLocation = item.findViewById(R.id.tvLocation);
+            etLC = item.findViewById(R.id.etLC);
+            etOC = item.findViewById(R.id.etOC);
+            etQty = item.findViewById(R.id.etQty);
 
         }
     }

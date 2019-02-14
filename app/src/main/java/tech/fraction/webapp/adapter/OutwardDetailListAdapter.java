@@ -17,13 +17,14 @@ import java.util.List;
 import tech.fraction.webapp.R;
 import tech.fraction.webapp.model.InwardItems;
 import tech.fraction.webapp.model.OutwardDetailModel;
+import tech.fraction.webapp.model.OutwardDetails;
 import tech.fraction.webapp.model.OutwardItems;
 
 
 public class OutwardDetailListAdapter extends RecyclerView.Adapter<OutwardDetailListAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
-    private List<OutwardItems> outwardItems = new ArrayList<>();
+    private List<OutwardDetails> outwardItems = new ArrayList<>();
     private Context context;
     private boolean isEditable;
     private OnClickListener onClickListener;
@@ -42,7 +43,7 @@ public class OutwardDetailListAdapter extends RecyclerView.Adapter<OutwardDetail
         this.isEditable = isEditable;
     }
 
-    public void setList(List<OutwardItems> outwardItems) {
+    public void setList(List<OutwardDetails> outwardItems) {
         this.outwardItems = outwardItems;
     }
 
@@ -60,16 +61,16 @@ public class OutwardDetailListAdapter extends RecyclerView.Adapter<OutwardDetail
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-        OutwardItems items = outwardItems.get(position);
+        OutwardDetails items = outwardItems.get(position);
 
         holder.tvName.setText(items.getItemName());
 
         String location = "";
-        for (int i = 0; i < items.getOutwardItemLocations().size(); i++) {
+        for (int i = 0; i < items.getInwardItemLocationPoco().size(); i++) {
             if (location.isEmpty()) {
-                location = items.getOutwardItemLocations().get(i).getRackName();
+                location = items.getInwardItemLocationPoco().get(i).getRackName();
             } else {
-                location = location + ", " + items.getOutwardItemLocations().get(i).getRackName();
+                location = location + ", " + items.getInwardItemLocationPoco().get(i).getRackName();;
             }
         }
 
