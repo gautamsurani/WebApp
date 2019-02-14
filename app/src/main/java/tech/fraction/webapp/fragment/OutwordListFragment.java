@@ -29,6 +29,7 @@ import retrofit2.Retrofit;
 import tech.fraction.webapp.R;
 import tech.fraction.webapp.activity.AddEditInwardActivity;
 import tech.fraction.webapp.activity.AddEditOutwardActivity;
+import tech.fraction.webapp.activity.MainActivity;
 import tech.fraction.webapp.activity.OutwardDetailActivity;
 import tech.fraction.webapp.adapter.InwordsAdapter;
 import tech.fraction.webapp.adapter.OutwardListAdapter;
@@ -98,7 +99,7 @@ public class OutwordListFragment extends BaseFragment {
 
 
         outwardListAdapter = new OutwardListAdapter(context);
-        rvOutwords.setLayoutManager(new LinearLayoutManager(context));
+        rvOutwords.setLayoutManager(linearLayoutManager);
         rvOutwords.setHasFixedSize(true);
         outwardListAdapter.setOnItemClickListener(new OutwardListAdapter.OnClickListener() {
             @Override
@@ -181,7 +182,29 @@ public class OutwordListFragment extends BaseFragment {
         }
 
 
-        // Inflate the layout for this fragment
+       MainActivity.setOnFilterOutwardApplyClickListener(new MainActivity.OnFilterOutwardListener() {
+           @Override
+           public void onFilterApplyClickOutward(String broker, String outwardNo, String inwardNo, String item, String unit, String location,
+                                                 String outwardedOn, String invoiceStatus, String paidStatus, int paidOn) {
+               outWardList.clear();
+               outwardRequestModel.setBroker(broker);
+               outwardRequestModel.setOutwardNo(outwardNo);
+               outwardRequestModel.setInwardNo(inwardNo);
+               outwardRequestModel.setItem(item);
+               outwardRequestModel.setUnit(unit);
+               outwardRequestModel.setLocation(location);
+               outwardRequestModel.setOutwardedOnFilter(outwardedOn);
+               outwardRequestModel.setIsInvoiceGenerated(invoiceStatus);
+               outwardRequestModel.setPaidStatus(paidStatus);
+               outwardRequestModel.setPaidOn(paidOn);
+               if (!global.isNetworkAvailable()) {
+                   retryInternet("getOutward");
+               } else {
+                   callGetOutwardAPI();
+               }
+
+           }
+       });
         return view;
     }
 

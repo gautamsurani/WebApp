@@ -14,6 +14,7 @@
     <string name="inword_list_title">Your Inwords</string>
     <string name="outword_list_title">Your Outwords</string>
     <string name="customer_list_title">Customer List</string>
+    <string name="invoice_list_title">Invoices</string>
 
     <string name="press_again_exit_app">Press again to exit from the app</string>
 

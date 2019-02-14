@@ -5,16 +5,16 @@ import java.util.ArrayList;
 
 public class DataOutward implements Serializable {
 
-    private ArrayList<InventoryDetailOutward> Response;
+    private ArrayList<InventoryDetailOutward> Outwards;
 
     private Paging Paging;
 
     public ArrayList<InventoryDetailOutward> getResponse() {
-        return Response;
+        return Outwards;
     }
 
-    public void setResponse(ArrayList<InventoryDetailOutward> response) {
-        Response = response;
+    public void setResponse(ArrayList<InventoryDetailOutward> outwards) {
+        Outwards = outwards;
     }
 
     public tech.fraction.webapp.model.Paging getPaging() {

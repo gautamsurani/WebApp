@@ -66,6 +66,7 @@ public class AddEditInItemActivity extends AppCompatActivity {
     List<InwardItemLocationPoco> itemRacks = new ArrayList<>();
 
     InwardItems inwardItem;
+    String mode;
 
     String quantity = "", marko = "", unloadingCharge = "";
     int selectedPosition = -1;
@@ -88,7 +89,7 @@ public class AddEditInItemActivity extends AppCompatActivity {
 
         initRecyclerView();
 
-        String mode = getIntent().getStringExtra("mode");
+        mode = getIntent().getStringExtra("mode");
         if (mode.equals("add")) {
             tvHeading.setText("Add Item");
         } else if (mode.equals("edit")) {
@@ -129,7 +130,7 @@ public class AddEditInItemActivity extends AppCompatActivity {
                 ArrayList<SearchTextViewModel> searchTextViewModels = new ArrayList<>();
                 items = sqLiteHelperFunctions.getAllItems();
                 for (int i = 0; i < items.size(); i++) {
-                    searchTextViewModels.add(new SearchTextViewModel(items.get(i).getId(),items.get(i).getName()));
+                    searchTextViewModels.add(new SearchTextViewModel(items.get(i).getId(), items.get(i).getName()));
                 }
                 Intent i = new Intent(AddEditInItemActivity.this, SearchTextViewActivity.class);
                 i.putExtra("itemsList", searchTextViewModels);
@@ -191,31 +192,55 @@ public class AddEditInItemActivity extends AppCompatActivity {
                 marko = etMarko.getText().toString();
                 unloadingCharge = etUnloadingCharge.getText().toString();
                 inwardItem = new InwardItems();
-                inwardItem.setItemId(selectedItems.getId());
-                if(AddEditInwardActivity.inwardItems.size()==0)
-                {
-                    inwardItem.setRawId(1);
-                }else
-                {
-                    int rawId=AddEditInwardActivity.inwardItems.get(AddEditInwardActivity.inwardItems.size()-1).getRawId();
-                    rawId=rawId+1;
-                    inwardItem.setRawId(rawId);
-                }
-                inwardItem.setItemName(selectedItems.getName());
-                inwardItem.setUnitId(selectedItemRent.getUnitId());
-                inwardItem.setUnitName(selectedItemRent.getUnit());
-                inwardItem.setRentPerUnit(selectedItemRent.getRent());
-                inwardItem.setQuantity(Integer.parseInt(quantity));
-                inwardItem.setMarkoName(marko);
-                inwardItem.setAccountId(Utils.getPersonalInfo(context).getAccountId());
-                inwardItem.setUnloadingCharges(Integer.parseInt(unloadingCharge));
-                inwardItem.setInwardItemLocationPoco(selectedRacksList);
+                if (mode.equals("add")) {
 
-                if (selectedPosition != -1) {
-                    AddEditInwardActivity.inwardItems.remove(selectedPosition);
-                    AddEditInwardActivity.inwardItems.add(selectedPosition, inwardItem);
-                } else {
+
+                    inwardItem.setItemId(selectedItems.getId());
+                    if (AddEditInwardActivity.inwardItems.size() == 0) {
+                        inwardItem.setRawId(1);
+                    } else {
+                        int rawId = AddEditInwardActivity.inwardItems.get(AddEditInwardActivity.inwardItems.size() - 1).getRawId();
+                        rawId = rawId + 1;
+                        inwardItem.setRawId(rawId);
+                    }
+                    inwardItem.setItemId(selectedItems.getId());
+                    inwardItem.setItemName(selectedItems.getName());
+                    inwardItem.setUnitId(selectedItemRent.getUnitId());
+                    inwardItem.setUnitName(selectedItemRent.getUnit());
+                    inwardItem.setRentPerUnit(selectedItemRent.getRent());
+                    inwardItem.setQuantity(Integer.parseInt(quantity));
+                    inwardItem.setMarkoName(marko);
+                    inwardItem.setAccountId(0);
+                    inwardItem.setUnloadingCharges(Integer.parseInt(unloadingCharge));
+                    inwardItem.setInwardItemLocationPoco(selectedRacksList);
+                    inwardItem.setOutwardId(0);
+                    inwardItem.setOutwardDetailId(0);
+                    inwardItem.setInwardDetailId(0);
+                    inwardItem.setOtherCharges(0);
+                    inwardItem.setTotalOutwardQuantity(0);
+                    inwardItem.setLoadingCharges(0);
+                    inwardItem.setModified(false);
+                    inwardItem.setInwardedOn("12-02-2019");
+                    inwardItem.setStock(0);
+                    inwardItem.setInwardDetail("Inwarded By Aashita");
+                    inwardItem.setInwardDetail(AddEditInwardActivity.inwardNumber);
+                    inwardItem.setWeight(12);
+                    inwardItem.setLabel("aashu");
+                    inwardItem.setOutwardQuantity(0);
                     AddEditInwardActivity.inwardItems.add(inwardItem);
+                } else {
+                    AddEditInwardActivity.inwardItems.get(selectedPosition).setItemId(selectedItems.getId());
+                    AddEditInwardActivity.inwardItems.get(selectedPosition).setItemName(selectedItems.getName());
+                    AddEditInwardActivity.inwardItems.get(selectedPosition).setUnitId(selectedItemRent.getUnitId());
+                    AddEditInwardActivity.inwardItems.get(selectedPosition).setUnitName(selectedItemRent.getUnit());
+                    AddEditInwardActivity.inwardItems.get(selectedPosition).setRentPerUnit(selectedItemRent.getRent());
+                    AddEditInwardActivity.inwardItems.get(selectedPosition).setQuantity(Integer.parseInt(quantity));
+                    AddEditInwardActivity.inwardItems.get(selectedPosition).setMarkoName(marko);
+                    if (AddEditInwardActivity.inwardItems.get(selectedPosition).getRawId() == 0) {
+                        AddEditInwardActivity.inwardItems.get(selectedPosition).setModified(true);
+                    }
+                    AddEditInwardActivity.inwardItems.get(selectedPosition).setUnloadingCharges(Integer.parseInt(unloadingCharge));
+                    AddEditInwardActivity.inwardItems.get(selectedPosition).setInwardItemLocationPoco(selectedRacksList);
                 }
                 onBackPressed();
             }
@@ -225,7 +250,6 @@ public class AddEditInItemActivity extends AppCompatActivity {
     }
 
     private void getData() {
-
 
 
     }
@@ -315,8 +339,8 @@ public class AddEditInItemActivity extends AppCompatActivity {
                 }
             }
             if (!isIn) {
-                int selectedRawId=selectedRacksList.get(selectedRacksList.size()-1).getRawId();
-                selectedRawId=selectedRawId+1;
+                int selectedRawId = selectedRacksList.get(selectedRacksList.size() - 1).getRawId();
+                selectedRawId = selectedRawId + 1;
                 selectedRacks.setRawId(selectedRawId);
                 selectedRacksList.add(selectedRacks);
                 racksAdapter.notifyDataSetChanged();

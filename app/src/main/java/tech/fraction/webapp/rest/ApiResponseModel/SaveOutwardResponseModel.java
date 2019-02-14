@@ -1,11 +1,12 @@
 package tech.fraction.webapp.rest.ApiResponseModel;
 
 import tech.fraction.webapp.model.DataSaveInward;
+import tech.fraction.webapp.model.DataSaveOutward;
 
-public class SaveInwardResponseModel {
+public class SaveOutwardResponseModel {
     private String Message;
 
-    private DataSaveInward Data;
+    private DataSaveOutward Data;
 
     private boolean IsValid;
 
@@ -17,19 +18,19 @@ public class SaveInwardResponseModel {
         Message = message;
     }
 
-    public DataSaveInward getData() {
+    public DataSaveOutward getData() {
         return Data;
     }
 
-    public void setData(DataSaveInward data) {
+    public void setData(DataSaveOutward data) {
         Data = data;
     }
 
-    public boolean getIsValid() {
+    public boolean isValid() {
         return IsValid;
     }
 
-    public void setIsValid(boolean isValid) {
-        IsValid = isValid;
+    public void setValid(boolean valid) {
+        IsValid = valid;
     }
 }

@@ -62,11 +62,11 @@ public class InwardItems implements Serializable {
 
     private int OutwardWeight;
 
-    public List<tech.fraction.webapp.model.InwardItemLocationPoco> getInwardItemLocationPoco() {
+    public List<InwardItemLocationPoco> getInwardItemLocationPoco() {
         return InwardItemLocationPoco;
     }
 
-    public void setInwardItemLocationPoco(List<tech.fraction.webapp.model.InwardItemLocationPoco> inwardItemLocationPoco) {
+    public void setInwardItemLocationPoco(List<InwardItemLocationPoco> inwardItemLocationPoco) {
         InwardItemLocationPoco = inwardItemLocationPoco;
     }
 

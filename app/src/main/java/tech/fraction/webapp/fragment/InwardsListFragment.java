@@ -96,10 +96,17 @@ public class InwardsListFragment extends BaseFragment {
         inwordsAdapter.setOnItemClickListener(new InwordsAdapter.OnClickListener() {
             @Override
             public void onClick(int position, int witch) {
-                Intent intent = new Intent(context, InwardDetailActivity.class);
-                intent.putExtra("inward", inventoryDetails.get(position));
+
+                Intent intent = new Intent(context, AddEditInwardActivity.class);
+                intent.putExtra("mode", "edit");
+                intent.putExtra("inventoryDetails", inventoryDetails.get(position));
                 startActivity(intent);
                 context.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+                /*Intent intent = new Intent(context, InwardDetailActivity.class);
+                intent.putExtra("inward", inventoryDetails.get(position));
+                startActivity(intent);
+                context.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);*/
             }
         });
 
