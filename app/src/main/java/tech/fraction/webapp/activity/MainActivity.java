@@ -459,8 +459,8 @@ public class MainActivity extends AppCompatActivity {
         if (onClickListenerInvoice != null) {
             sheetBehaviorInvoice.setState(BottomSheetBehavior.STATE_COLLAPSED);
             String broker = "", invoiceNo = "", inwardNo = "", outwardNo = "",
-                   receiptType = "", paidStatus = "";
-            int paidOn = -1, month = -1, year = -1,invoiceGeneratedPeriod = -1;
+                   receiptType = "", paidStatus = "",month = "", year = "";
+            int paidOn = -1,invoiceGeneratedPeriod = -1;
             if (selectedAccount != null) {
                 if (selectedAccount.getName() != null) {
                     broker = selectedAccount.getName();
@@ -472,61 +472,61 @@ public class MainActivity extends AppCompatActivity {
 
             switch (spnMon.getSelectedItem().toString()) {
                 case "All":
-                    month = 0;
+                    month = "0";
                     break;
                 case "January":
-                    month = 1;
+                    month = "1";
                     break;
                 case "Fabruary":
-                    month = 2;
+                    month = "2";
                     break;
                 case "March":
-                    month = 3;
+                    month = "3";
                     break;
                 case "April":
-                    month = 4;
+                    month = "4";
                     break;
                 case "May":
-                    month = 5;
+                    month = "5";
                     break;
                 case "June":
-                    month = 6;
+                    month = "6";
                     break;
                 case "July":
-                    month = 7;
+                    month = "7";
                     break;
                 case "August":
-                    month = 8;
+                    month = "8";
                     break;
                 case "September":
-                    month = 9;
+                    month = "9";
                     break;
                 case "October":
-                    month = 10;
+                    month = "10";
                     break;
                 case "November":
-                    month = 11;
+                    month = "11";
                     break;
                 case "December":
-                    month = 12;
+                    month = "12";
                     break;
             }
 
             switch (spYear.getSelectedItem().toString()) {
                 case "All":
-                    year = 0;
+                    year = "0";
                     break;
                 case "2016":
-                    year = 2016;
+                    year = "2016";
                     break;
                 case "2017":
-                    year = 2017;
+                    year = "2017";
                     break;
                 case "2018":
-                    year = 2018;
+                    year = "2018";
                     break;
                 case "2019":
-                    year = 2019;
+                    year = "2019";
                     break;
             }
             switch (spInvReceiptType.getSelectedItem().toString()) {
@@ -933,8 +933,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public interface OnFilterInvoiceListener {
-        void onFilterInvoiceApplyClick(String broker, String invoiceNo, String inwardNo, String outwardNo, int month
-                , int year, String receiptType, int invoiceGeneratedPeriod
+        void onFilterInvoiceApplyClick(String broker, String invoiceNo, String inwardNo, String outwardNo, String month
+                , String year, String receiptType, int invoiceGeneratedPeriod
                 , String paidStatus, int paidOn);
     }
 
