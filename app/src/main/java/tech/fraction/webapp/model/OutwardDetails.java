@@ -1,8 +1,9 @@
 package tech.fraction.webapp.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class OutwardDetails {
+public class OutwardDetails implements Serializable {
     private List<InwardItemLocationPoco> InwardItemLocationPoco;
 
     private int AccountId;

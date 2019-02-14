@@ -27,6 +27,7 @@ import tech.fraction.webapp.adapter.SelectItemForOutwardAdapter;
 import tech.fraction.webapp.base.BaseActivity;
 import tech.fraction.webapp.base.NoNetworkActivity;
 import tech.fraction.webapp.model.OutwardDetails;
+import tech.fraction.webapp.model.SearchTextViewModel;
 import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
 import tech.fraction.webapp.rest.ApiRequestModel.InwardRequestModel;
 import tech.fraction.webapp.rest.ApiResponseModel.InwardResponseModel;
@@ -47,7 +48,7 @@ public class SelectItemForOutwardActivity extends BaseActivity {
     ProgressBar progress_circular;
     RelativeLayout rlMain;
 
-    TextView tvTitle;
+    TextView tvTitle, tvDone;
 
     LinearLayoutManager linearLayoutManager;
 
@@ -85,6 +86,17 @@ public class SelectItemForOutwardActivity extends BaseActivity {
             callGetOutwardItemAPI();
         }
 
+        tvDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<OutwardDetails> selectedItem = new ArrayList<>();
+
+                Intent intent = new Intent();
+                intent.putExtra("outwardDetails", selectedItem);
+                setResult(Activity.RESULT_OK, intent);
+                finish();
+            }
+        });
     }
 
     @Override
@@ -136,6 +148,7 @@ public class SelectItemForOutwardActivity extends BaseActivity {
         rvItems = findViewById(R.id.rvItems);
         progress_circular = findViewById(R.id.progress_circular);
         rlMain = findViewById(R.id.rlMain);
+        tvDone = findViewById(R.id.tvDone);
         linearShowToastMsg = findViewById(R.id.linearShowToastMsg);
         txtToastCountMsg = findViewById(R.id.txtToastCountMsg);
         tvAddInward = findViewById(R.id.tvAddInward);

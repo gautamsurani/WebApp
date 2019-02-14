@@ -1,6 +1,8 @@
 package tech.fraction.webapp.activity;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,43 +12,47 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import tech.fraction.webapp.R;
+import tech.fraction.webapp.adapter.SelectItemForOutwardAdapter;
 import tech.fraction.webapp.adapter.SelectedOutwardAdapter;
+import tech.fraction.webapp.model.OutwardDetails;
+import tech.fraction.webapp.model.SearchTextViewModel;
+import tech.fraction.webapp.util.AppConstant;
 
 public class SelectedOutwardActivity extends AppCompatActivity {
 
     RecyclerView rvSelectedOutward;
     FloatingActionButton btnFloatAddItem;
-    TextView tvSave, tvClose, tvTitle,tvLstEmpty;
-    ArrayList<String> lstSelectedItem = new ArrayList<>();
+    TextView tvSave, tvClose, tvTitle, tvLstEmpty;
+    List<OutwardDetails> outwardDetails = new ArrayList<>();
     SelectedOutwardAdapter selectedOutwardAdapter;
     Context context;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (outwardDetails.size() == 0) {
+            tvLstEmpty.setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_outward);
         context = this;
-        lstSelectedItem.add("One");
-        lstSelectedItem.add("two");
-        lstSelectedItem.add("three");
-        lstSelectedItem.add("One");
-        lstSelectedItem.add("two");
-        lstSelectedItem.add("three");
         selectedOutwardAdapter = new SelectedOutwardAdapter(context);
         initComp();
-        if (lstSelectedItem.size() == 0) {
-            tvLstEmpty.setVisibility(View.VISIBLE);
-        } else {
-            initRecyclerView();
-        }
+
+        initRecyclerView();
 
         btnFloatAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                Intent i = new Intent(context, SelectItemForOutwardActivity.class);
+                startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
             }
         });
 
@@ -66,10 +72,20 @@ public class SelectedOutwardActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == AppConstant.SEARCH_ACTIVITY_REQUEST_CODE)
+            if (resultCode == Activity.RESULT_OK) {
+                ArrayList<OutwardDetails> outwardDetails = (ArrayList<OutwardDetails>) data.getSerializableExtra("outwardDetails");
+                selectedOutwardAdapter.setList(outwardDetails);
+                selectedOutwardAdapter.notifyDataSetChanged();
+            }
+    }
+
     private void initRecyclerView() {
         rvSelectedOutward.setLayoutManager(new LinearLayoutManager(this));
         rvSelectedOutward.setHasFixedSize(true);
-        selectedOutwardAdapter.setList(lstSelectedItem);
+        selectedOutwardAdapter.setList(outwardDetails);
         rvSelectedOutward.setAdapter(selectedOutwardAdapter);
 
 
