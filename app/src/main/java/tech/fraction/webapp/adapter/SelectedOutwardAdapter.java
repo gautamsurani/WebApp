@@ -59,6 +59,12 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
     @Override
     public void onBindViewHolder(@NonNull SelectedOutwardAdapter.ViewHolder holder, final int position) {
         holder.tvItemName.setText(outwardDetails.get(position).getItemName());
+        holder.imgDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickListener.onClick(position, 2);
+            }
+        });
     }
 
 

@@ -49,12 +49,12 @@ public class AddEditOutwardActivity extends AppCompatActivity {
     ImageView ivBack;
     Activity context;
     Retrofit retrofit;
-    ProgressBar  pbParty;
+    ProgressBar pbParty;
     ApiInterface apiInterface;
     EditText edt_vehicleNo, edt_transporter, edt_driverName, edt_driverNo, edt_remark;
-    TextView txtSave, txtAddItem,tvTitle,tvOutwardNo,tvDate,tvParty;
+    TextView txtSave, txtAddItem, tvTitle, tvOutwardNo, tvDate, tvParty;
     String vehicleNo, transporterName, driverName, driverNo, remark;
-    RelativeLayout scrollView,rlAddEditOutward;
+    RelativeLayout scrollView, rlAddEditOutward;
     public static List<OutwardItems> outwardItemsList = new ArrayList<>();
 
     ArrayList<Account> lstAccount = new ArrayList<>();
@@ -87,7 +87,7 @@ public class AddEditOutwardActivity extends AppCompatActivity {
 
         getData();
 
-        context=this;
+        context = this;
 
         retrofit = RetrofitInstance.getClient();
         apiInterface = retrofit.create(ApiInterface.class);
@@ -101,33 +101,32 @@ public class AddEditOutwardActivity extends AppCompatActivity {
             tvTitle.setText("Edit Outward");
         }
 
-        if(lstAccount.size()==0)
-        {
+        if (lstAccount.size() == 0) {
             pbParty.setVisibility(View.VISIBLE);
 
             AccountApiCall sampleClass = new AccountApiCall();
             sampleClass.setOnDataListener(new AccountApiCall.DataInterface() {
                 @Override
                 public void responseData(AccountResponseModel accountResponseModel) {
-                    lstAccount=accountResponseModel.getAccount();
+                    lstAccount = accountResponseModel.getAccount();
                     pbParty.setVisibility(View.INVISIBLE);
                 }
             });
             sampleClass.CallAccountApi();
         }
-tvParty.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        ArrayList<SearchTextViewModel> itemsList = new ArrayList<>();
-        for (int i = 0; i < lstAccount.size(); i++) {
-            itemsList.add(new SearchTextViewModel(lstAccount.get(i).getId(), lstAccount.get(i).getName()));
-        }
-        Intent i = new Intent(AddEditOutwardActivity.this, SearchTextViewActivity.class);
-        i.putExtra("itemsList", itemsList);
-        i.putExtra("type", "party");
-        startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
-    }
-});
+        tvParty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<SearchTextViewModel> itemsList = new ArrayList<>();
+                for (int i = 0; i < lstAccount.size(); i++) {
+                    itemsList.add(new SearchTextViewModel(lstAccount.get(i).getId(), lstAccount.get(i).getName()));
+                }
+                Intent i = new Intent(AddEditOutwardActivity.this, SearchTextViewActivity.class);
+                i.putExtra("itemsList", itemsList);
+                i.putExtra("type", "party");
+                startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
+            }
+        });
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,14 +145,12 @@ tvParty.setOnClickListener(new View.OnClickListener() {
         txtAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(selectedAccount==null)
-                {
-                    Utils.ShowSnakBar("Select Party",rlAddEditOutward,context);
-
-                }else {
+                if (selectedAccount == null) {
+                    Utils.ShowSnakBar("Select Party", rlAddEditOutward, context);
+                } else {
                     Intent intent = new Intent(AddEditOutwardActivity.this, SelectedOutwardActivity.class);
                     intent.putExtra("mode", "add");
+                    intent.putExtra("accountId", selectedAccount.getId());
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
@@ -208,6 +205,7 @@ tvParty.setOnClickListener(new View.OnClickListener() {
             }
         }
     }
+
     public void setDate(final TextView textView) {
         Utils.hideKeyboard(context);
         final Calendar myCalendar = Calendar.getInstance();
@@ -247,6 +245,7 @@ tvParty.setOnClickListener(new View.OnClickListener() {
             tvParty.setText(selectedAccount.getName());
         }
     }
+
     public void GenerateInwardNumber() {
         if (outwardNumber.isEmpty()) {
             Random r = new Random();

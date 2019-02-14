@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#F5F4F4"
+    android:background="#F0F0F0"
     tools:context=".activity.SelectedOutwardActivity">
 
     <include
@@ -23,12 +23,11 @@
         android:id="@+id/rvSelectedOutward"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
+        android:layout_above="@+id/ll_bottom"
         android:layout_below="@id/toolCustom"
-        android:layout_marginBottom="3dp">
-
-    </android.support.v7.widget.RecyclerView>
+        android:layout_marginBottom="3dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" />
 
     <LinearLayout
         android:id="@+id/ll_bottom"

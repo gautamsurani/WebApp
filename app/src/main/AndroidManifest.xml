@@ -16,13 +16,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".activity.SelectItemForOutwardActivity" />
-        <activity android:name=".activity.SelectedOutwardActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".activity.SelectedOutwardActivity" />
         <activity android:name=".activity.PartyWiseInvoiceActivity" />
         <activity android:name=".activity.AddOutwardItem" />
         <activity android:name=".activity.AddEditOutItemActivity" />
@@ -70,7 +64,11 @@
             android:name=".activity.SplashActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

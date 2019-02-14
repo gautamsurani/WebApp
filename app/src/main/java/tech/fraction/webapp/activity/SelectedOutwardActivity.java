@@ -12,13 +12,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import tech.fraction.webapp.R;
-import tech.fraction.webapp.adapter.SelectItemForOutwardAdapter;
 import tech.fraction.webapp.adapter.SelectedOutwardAdapter;
 import tech.fraction.webapp.model.OutwardDetails;
-import tech.fraction.webapp.model.SearchTextViewModel;
 import tech.fraction.webapp.util.AppConstant;
 
 public class SelectedOutwardActivity extends AppCompatActivity {
@@ -26,9 +23,10 @@ public class SelectedOutwardActivity extends AppCompatActivity {
     RecyclerView rvSelectedOutward;
     FloatingActionButton btnFloatAddItem;
     TextView tvSave, tvClose, tvTitle, tvLstEmpty;
-    List<OutwardDetails> outwardDetails = new ArrayList<>();
+    ArrayList<OutwardDetails> outwardDetails = new ArrayList<>();
     SelectedOutwardAdapter selectedOutwardAdapter;
     Context context;
+    int accountId = -1;
 
     @Override
     protected void onResume() {
@@ -48,10 +46,17 @@ public class SelectedOutwardActivity extends AppCompatActivity {
 
         initRecyclerView();
 
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            accountId = bundle.getInt("accountId", -1);
+        }
+
         btnFloatAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, SelectItemForOutwardActivity.class);
+                i.putExtra("outwardDetails", outwardDetails);
+                i.putExtra("accountId", accountId);
                 startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
             }
         });
@@ -69,14 +74,13 @@ public class SelectedOutwardActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == AppConstant.SEARCH_ACTIVITY_REQUEST_CODE)
             if (resultCode == Activity.RESULT_OK) {
-                ArrayList<OutwardDetails> outwardDetails = (ArrayList<OutwardDetails>) data.getSerializableExtra("outwardDetails");
+                outwardDetails = (ArrayList<OutwardDetails>) data.getSerializableExtra("outwardDetails");
                 selectedOutwardAdapter.setList(outwardDetails);
                 selectedOutwardAdapter.notifyDataSetChanged();
             }
@@ -87,12 +91,19 @@ public class SelectedOutwardActivity extends AppCompatActivity {
         rvSelectedOutward.setHasFixedSize(true);
         selectedOutwardAdapter.setList(outwardDetails);
         rvSelectedOutward.setAdapter(selectedOutwardAdapter);
-
-
+        selectedOutwardAdapter.setOnItemClickListener(new SelectedOutwardAdapter.OnClickListener() {
+            @Override
+            public void onClick(int position, int witch) {
+                if (witch == 2) {
+                    outwardDetails.remove(position);
+                    selectedOutwardAdapter.setList(outwardDetails);
+                    selectedOutwardAdapter.notifyDataSetChanged();
+                }
+            }
+        });
     }
 
     private void initComp() {
-
         rvSelectedOutward = findViewById(R.id.rvSelectedOutward);
         btnFloatAddItem = findViewById(R.id.btnFloatAddItem);
         tvSave = findViewById(R.id.tvSave);
@@ -100,5 +111,11 @@ public class SelectedOutwardActivity extends AppCompatActivity {
         tvTitle = findViewById(R.id.tvTitle);
         tvLstEmpty = findViewById(R.id.tvLstEmpty);
         tvTitle.setText("Selected Item");
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }

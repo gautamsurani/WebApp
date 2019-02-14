@@ -59,8 +59,11 @@ public class SelectItemForOutwardActivity extends BaseActivity {
     TextView txtToastCountMsg, tvAddInward;
 
     List<OutwardDetails> outwardDetails = new ArrayList<>();
+    List<OutwardDetails> selectedOutwardDetails = new ArrayList<>();
 
     SelectItemForOutwardAdapter selectItemForOutwardAdapter;
+
+    int accountId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,12 @@ public class SelectItemForOutwardActivity extends BaseActivity {
         context = this;
 
         initComp();
+
+        selectedOutwardDetails = (ArrayList<OutwardDetails>) getIntent().getSerializableExtra("outwardDetails");
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            accountId = bundle.getInt("accountId", -1);
+        }
 
         retrofit = RetrofitInstance.getClient();
 
@@ -90,7 +99,11 @@ public class SelectItemForOutwardActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 ArrayList<OutwardDetails> selectedItem = new ArrayList<>();
-
+                for (int i = 0; i < outwardDetails.size(); i++) {
+                    if (outwardDetails.get(i).isSelected()) {
+                        selectedItem.add(outwardDetails.get(i));
+                    }
+                }
                 Intent intent = new Intent();
                 intent.putExtra("outwardDetails", selectedItem);
                 setResult(Activity.RESULT_OK, intent);
@@ -116,7 +129,7 @@ public class SelectItemForOutwardActivity extends BaseActivity {
         progress_circular.setVisibility(View.VISIBLE);
 
 
-        Call<OutwardItemRespondModel> call = apiInterface.getOutwardItem(1);
+        Call<OutwardItemRespondModel> call = apiInterface.getOutwardItem(accountId);
 
         call.enqueue(new Callback<OutwardItemRespondModel>() {
             @Override
@@ -126,6 +139,15 @@ public class SelectItemForOutwardActivity extends BaseActivity {
                 OutwardItemRespondModel outwardItemRespondModel = response.body();
                 assert outwardItemRespondModel != null;
                 outwardDetails.addAll(outwardItemRespondModel.getData().getOutwardDetails());
+
+                for (int i = 0; i < outwardDetails.size(); i++) {
+                    for (int j = 0; j < selectedOutwardDetails.size(); j++) {
+                        if (outwardDetails.get(i).getInwardDetailId() == selectedOutwardDetails.get(j).getInwardDetailId()) {
+                            outwardDetails.get(i).setSelected(true);
+                        }
+                    }
+                }
+
                 selectItemForOutwardAdapter.setList(outwardDetails);
                 selectItemForOutwardAdapter.notifyDataSetChanged();
             }

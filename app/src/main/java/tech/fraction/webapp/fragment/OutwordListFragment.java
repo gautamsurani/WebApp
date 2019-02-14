@@ -55,7 +55,7 @@ public class OutwordListFragment extends BaseFragment {
     RecyclerView rvOutwords;
     Activity context;
     InwordsAdapter inwordsAdapter;
-    TextView tvTitle,tvAddOutward;
+    TextView tvTitle, tvAddOutward;
     Retrofit retrofit;
     ApiInterface apiInterface;
     ProgressBar progress_circular;
@@ -76,6 +76,7 @@ public class OutwordListFragment extends BaseFragment {
 
     TextView txtToastCountMsg, tvAddInward;
     ArrayList<InventoryDetailOutward> outWardList;
+
     public OutwordListFragment() {
         // Required empty public constructor
     }
@@ -90,10 +91,11 @@ public class OutwordListFragment extends BaseFragment {
         retrofit = RetrofitInstance.getClient();
 
         context = getActivity();
+
         initComp(view);
 
         apiInterface = retrofit.create(ApiInterface.class);
-        outWardList= new ArrayList<InventoryDetailOutward>();
+        outWardList = new ArrayList<InventoryDetailOutward>();
 
         linearLayoutManager = new LinearLayoutManager(context);
 
@@ -105,7 +107,7 @@ public class OutwordListFragment extends BaseFragment {
             @Override
             public void onClick(int position, int witch) {
                 Intent i = new Intent(context, OutwardDetailActivity.class);
-                i.putExtra("outWardList",outWardList.get(position));
+                i.putExtra("outWardList", outWardList.get(position));
                 startActivity(i);
                 context.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
@@ -170,10 +172,10 @@ public class OutwordListFragment extends BaseFragment {
         });
 
         PersonInformation personInformation = Utils.getPersonalInfo(context);
-        outwardRequestModel= new OutwardRequestModel(0,"","",50,"","",-1,"",
-                "","","GetOutwradsWithPaging(CurrentPage)",personInformation.getAccountId(),"desc","","",1,
-                "",personInformation.getPersonId(),"",
-                "",personInformation.getPersonType(),"");
+        outwardRequestModel = new OutwardRequestModel(0, "", "", 50, "", "", -1, "",
+                "", "", "GetOutwradsWithPaging(CurrentPage)", personInformation.getAccountId(), "desc", "", "", 1,
+                "", personInformation.getPersonId(), "",
+                "", personInformation.getPersonType(), "");
 
         if (!global.isNetworkAvailable()) {
             retryInternet("getOutward");
@@ -182,29 +184,29 @@ public class OutwordListFragment extends BaseFragment {
         }
 
 
-       MainActivity.setOnFilterOutwardApplyClickListener(new MainActivity.OnFilterOutwardListener() {
-           @Override
-           public void onFilterApplyClickOutward(String broker, String outwardNo, String inwardNo, String item, String unit, String location,
-                                                 String outwardedOn, String invoiceStatus, String paidStatus, int paidOn) {
-               outWardList.clear();
-               outwardRequestModel.setBroker(broker);
-               outwardRequestModel.setOutwardNo(outwardNo);
-               outwardRequestModel.setInwardNo(inwardNo);
-               outwardRequestModel.setItem(item);
-               outwardRequestModel.setUnit(unit);
-               outwardRequestModel.setLocation(location);
-               outwardRequestModel.setOutwardedOnFilter(outwardedOn);
-               outwardRequestModel.setIsInvoiceGenerated(invoiceStatus);
-               outwardRequestModel.setPaidStatus(paidStatus);
-               outwardRequestModel.setPaidOn(paidOn);
-               if (!global.isNetworkAvailable()) {
-                   retryInternet("getOutward");
-               } else {
-                   callGetOutwardAPI();
-               }
+        MainActivity.setOnFilterOutwardApplyClickListener(new MainActivity.OnFilterOutwardListener() {
+            @Override
+            public void onFilterApplyClickOutward(String broker, String outwardNo, String inwardNo, String item, String unit, String location,
+                                                  String outwardedOn, String invoiceStatus, String paidStatus, int paidOn) {
+                outWardList.clear();
+                outwardRequestModel.setBroker(broker);
+                outwardRequestModel.setOutwardNo(outwardNo);
+                outwardRequestModel.setInwardNo(inwardNo);
+                outwardRequestModel.setItem(item);
+                outwardRequestModel.setUnit(unit);
+                outwardRequestModel.setLocation(location);
+                outwardRequestModel.setOutwardedOnFilter(outwardedOn);
+                outwardRequestModel.setIsInvoiceGenerated(invoiceStatus);
+                outwardRequestModel.setPaidStatus(paidStatus);
+                outwardRequestModel.setPaidOn(paidOn);
+                if (!global.isNetworkAvailable()) {
+                    retryInternet("getOutward");
+                } else {
+                    callGetOutwardAPI();
+                }
 
-           }
-       });
+            }
+        });
         return view;
     }
 
@@ -217,7 +219,7 @@ public class OutwordListFragment extends BaseFragment {
                 progress_circular.setVisibility(View.GONE);
                 OutwardResoinseModel outwardResoinseModel = new OutwardResoinseModel();
                 assert outwardResoinseModel != null;
-                outwardResoinseModel=response.body();
+                outwardResoinseModel = response.body();
                 outWardList.addAll(outwardResoinseModel.getData().getResponse());
 
                 outwardListAdapter.setList(outWardList);
@@ -225,8 +227,6 @@ public class OutwordListFragment extends BaseFragment {
 
 
             }
-
-
 
 
             @Override
@@ -261,6 +261,7 @@ public class OutwordListFragment extends BaseFragment {
         super.onResume();
         tvTitle.setText(getResources().getString(R.string.outword_list_title));
     }
+
     public void retryInternet(String extraValue) {
         Intent i = new Intent(context, NoNetworkActivity.class);
         i.putExtra("extraValue", extraValue);
@@ -272,6 +273,7 @@ public class OutwordListFragment extends BaseFragment {
         tvTitle = context.findViewById(R.id.tvTitle);
         tvAddOutward = view.findViewById(R.id.tvAddOutward);
         progress_circular = view.findViewById(R.id.progress_circular);
-        linearShowToastMsg=view.findViewById(R.id.linearShowToastMsg);
+        linearShowToastMsg = view.findViewById(R.id.linearShowToastMsg);
+        txtToastCountMsg = view.findViewById(R.id.txtToastCountMsg);
     }
 }
