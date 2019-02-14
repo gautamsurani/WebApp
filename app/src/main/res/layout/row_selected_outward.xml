@@ -8,17 +8,18 @@
     android:layout_marginTop="2dp"
     app:cardCornerRadius="5dp"
     app:cardUseCompatPadding="true">
+
     <LinearLayout
         android:id="@+id/mainll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-      >
+        android:orientation="horizontal">
+
         <LinearLayout
 
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <tech.fraction.webapp.ui.MyBoldTextView
@@ -100,17 +101,19 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="end"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:orientation="vertical">
+
             <ImageView
                 android:id="@+id/imgDelete"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:padding="3dp"
                 android:layout_alignParentRight="true"
+                android:padding="3dp"
                 android:src="@drawable/delete"
                 android:tint="#F36B6B" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -133,6 +136,7 @@
                     android:layout_marginLeft="5dp"
                     android:background="@drawable/border_edittext" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
