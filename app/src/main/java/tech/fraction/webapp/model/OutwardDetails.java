@@ -1,10 +1,11 @@
 package tech.fraction.webapp.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OutwardDetails implements Serializable {
-    private List<InwardItemLocationPoco> InwardItemLocationPoco;
+    private ArrayList<InwardItemLocationPoco> InwardItemLocationPoco;
 
     private int AccountId;
 
@@ -70,11 +71,11 @@ public class OutwardDetails implements Serializable {
         isSelected = selected;
     }
 
-    public List<tech.fraction.webapp.model.InwardItemLocationPoco> getInwardItemLocationPoco() {
+    public ArrayList<InwardItemLocationPoco> getInwardItemLocationPoco() {
         return InwardItemLocationPoco;
     }
 
-    public void setInwardItemLocationPoco(List<tech.fraction.webapp.model.InwardItemLocationPoco> inwardItemLocationPoco) {
+    public void setInwardItemLocationPoco(ArrayList<InwardItemLocationPoco> inwardItemLocationPoco) {
         InwardItemLocationPoco = inwardItemLocationPoco;
     }
 

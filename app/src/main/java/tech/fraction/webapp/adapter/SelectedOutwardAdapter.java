@@ -57,9 +57,25 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SelectedOutwardAdapter.ViewHolder holder, final int position) {
-        holder.tvItemName.setText(outwardDetails.get(position).getItemName());
-        holder.imgDelete.setOnClickListener(new View.OnClickListener() {
+    public void onBindViewHolder(@NonNull SelectedOutwardAdapter.ViewHolder viewHolder, final int position) {
+        viewHolder.tvItemName.setText(outwardDetails.get(position).getItemName());
+
+        String location = "";
+        for (int i = 0; i < outwardDetails.get(position).getInwardItemLocationPoco().size(); i++) {
+            if (location.isEmpty()) {
+                location = outwardDetails.get(position).getInwardItemLocationPoco().get(i).getRackName();
+            } else {
+                location = location + ", " + outwardDetails.get(position).getInwardItemLocationPoco().get(i).getRackName();
+            }
+        }
+        viewHolder.tvLocation.setText("Location: "+location);
+        viewHolder.tv0utDate.setText(Utils.FormatDate(outwardDetails.get(position).getInwardDetail().getInwardedOn()));
+        viewHolder. tvOutNo.setText(outwardDetails.get(position).getInwardDetail().getNumber());
+        viewHolder.tvStock.setText("Stock : " + outwardDetails.get(position).getStock() + " / " + outwardDetails.get(position).getQuantity());
+        viewHolder.tvItemUnit.setText(outwardDetails.get(position).getItemName()+"-"+outwardDetails.get(position).getUnitName());
+
+
+        viewHolder.imgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onClickListener.onClick(position, 2);
@@ -82,6 +98,11 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
             super(item);
             tvItemName = item.findViewById(R.id.tvItemName);
             imgDelete = item.findViewById(R.id.imgDelete);
+            tvItemUnit = item.findViewById(R.id.tvItemUnit);
+            tvStock = item.findViewById(R.id.tvStock);
+            tvOutNo = item.findViewById(R.id.tvOutNo);
+            tv0utDate = item.findViewById(R.id.tv0utDate);
+            tvLocation = item.findViewById(R.id.tvLocation);
 
         }
     }
