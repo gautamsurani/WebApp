@@ -55,7 +55,7 @@ public class OutwordListFragment extends BaseFragment {
     RecyclerView rvOutwords;
     Activity context;
     InwordsAdapter inwordsAdapter;
-    TextView tvTitle, tvAddOutward;
+    TextView tvTitle,tvAddOutward;
     Retrofit retrofit;
     ApiInterface apiInterface;
     ProgressBar progress_circular;
@@ -229,6 +229,8 @@ public class OutwordListFragment extends BaseFragment {
             }
 
 
+
+
             @Override
             public void onFailure(Call<OutwardResoinseModel> call, Throwable t) {
 
@@ -261,7 +263,6 @@ public class OutwordListFragment extends BaseFragment {
         super.onResume();
         tvTitle.setText(getResources().getString(R.string.outword_list_title));
     }
-
     public void retryInternet(String extraValue) {
         Intent i = new Intent(context, NoNetworkActivity.class);
         i.putExtra("extraValue", extraValue);
