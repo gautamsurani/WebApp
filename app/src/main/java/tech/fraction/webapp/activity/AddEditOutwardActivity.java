@@ -180,7 +180,7 @@ public class AddEditOutwardActivity extends AppCompatActivity {
     }
 
     private void AddDataInRequestModel() {
-      
+
 
     }
 
