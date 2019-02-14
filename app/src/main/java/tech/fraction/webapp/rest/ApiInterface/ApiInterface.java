@@ -19,6 +19,7 @@ import tech.fraction.webapp.rest.ApiResponseModel.InvoiceResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.InwardResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.ItemResoponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.LoginResponseModel;
+import tech.fraction.webapp.rest.ApiResponseModel.OutwardItemRespondModel;
 import tech.fraction.webapp.rest.ApiResponseModel.OutwardResoinseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.RackResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.RentResponseModel;
@@ -67,9 +68,10 @@ public interface ApiInterface {
     @POST("master/SaveInwardDetail")
     Call<SaveInwardResponseModel> saveInward(@Body SaveInwardRequestModel saveInwardRequestModel);
 
-
-
     @POST("master/invoiceswithpaging")
     Call<InvoiceResponseModel> getAllInvoice(@Body InvoiceRequestModel invoiceRequestModel);
+
+    @POST("master/loadoutwarditemdetails")
+    Call<OutwardItemRespondModel> getOutwardItem(@Query("accountId") int accountId);
 
 }

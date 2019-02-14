@@ -116,8 +116,6 @@ public class AddEditOutItemActivity extends AppCompatActivity {
             }
         });
 
-        Utils.showToast(context,"dffdfd");
-
         spnLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

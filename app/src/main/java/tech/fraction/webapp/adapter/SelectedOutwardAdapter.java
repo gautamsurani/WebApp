@@ -15,6 +15,7 @@ import java.util.List;
 
 import tech.fraction.webapp.R;
 import tech.fraction.webapp.model.InvoiceDetails;
+import tech.fraction.webapp.model.OutwardDetails;
 import tech.fraction.webapp.util.Utils;
 
 
@@ -22,9 +23,8 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
 
 
     private LayoutInflater inflater;
-    private List<String> invoiceProductList = new ArrayList<>();
+    private List<OutwardDetails> outwardDetails = new ArrayList<>();
     private Context context;
-
 
     public SelectedOutwardAdapter(Context context) {
         inflater = LayoutInflater.from(context);
@@ -42,8 +42,8 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
         void onClick(int position, int witch);
     }
 
-    public void setList(List<String> invoiceProductList) {
-        this.invoiceProductList = invoiceProductList;
+    public void setList(List<OutwardDetails> outwardDetails) {
+        this.outwardDetails = outwardDetails;
     }
 
     @NonNull
@@ -57,21 +57,18 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SelectedOutwardAdapter.ViewHolder viewHolder, final int position) {
-
-
-
-
+    public void onBindViewHolder(@NonNull SelectedOutwardAdapter.ViewHolder holder, final int position) {
+        holder.tvItemName.setText(outwardDetails.get(position).getItemName());
     }
 
 
     @Override
     public int getItemCount() {
-        return invoiceProductList.size();
+        return outwardDetails.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvItemName,tvItemUnit,tvStock, tvOutNo,tv0utDate,tvLocation;
+        TextView tvItemName, tvItemUnit, tvStock, tvOutNo, tv0utDate, tvLocation;
 
         ImageView imgDelete;
 
