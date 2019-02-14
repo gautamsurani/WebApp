@@ -33,8 +33,10 @@ import tech.fraction.webapp.model.InwardItems;
 import tech.fraction.webapp.model.OutwardDetailModel;
 import tech.fraction.webapp.model.OutwardDetails;
 import tech.fraction.webapp.model.OutwardItems;
+import tech.fraction.webapp.model.OutwardsInwardItems;
 import tech.fraction.webapp.model.SearchTextViewModel;
 import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
+import tech.fraction.webapp.rest.ApiRequestModel.SaveOutwardRequestModel;
 import tech.fraction.webapp.rest.ApiResponseModel.AccountResponseModel;
 import tech.fraction.webapp.rest.CommonApiCall.AccountApiCall;
 import tech.fraction.webapp.rest.RetrofitInstance;
@@ -46,7 +48,6 @@ public class AddEditOutwardActivity extends AppCompatActivity {
 
     RecyclerView rec_view;
     OutwardDetailListAdapter outwardDetailListAdapter;
-    List<OutwardDetailModel> outwardDetailList;
     ImageView ivBack;
     Activity context;
     Retrofit retrofit;
@@ -56,6 +57,7 @@ public class AddEditOutwardActivity extends AppCompatActivity {
     TextView txtSave, txtAddItem, tvTitle, tvOutwardNo, tvDate, tvParty;
     String vehicleNo, transporterName, driverName, driverNo, remark;
     RelativeLayout scrollView, rlAddEditOutward;
+    SaveOutwardRequestModel saveOutwardRequestModel;
     public static List<OutwardDetails> outwardItemsList = new ArrayList<>();
 
     ArrayList<Account> lstAccount = new ArrayList<>();
@@ -136,7 +138,8 @@ public class AddEditOutwardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getData();
-                validateField(vehicleNo, transporterName, driverName, driverNo, remark);
+                AddDataInRequestModel();
+               // validateField(vehicleNo, transporterName, driverName, driverNo, remark);
                 Utils.hideKeyboard(AddEditOutwardActivity.this);
 
             }
@@ -173,6 +176,11 @@ public class AddEditOutwardActivity extends AppCompatActivity {
 //            }
 //        });
 
+
+    }
+
+    private void AddDataInRequestModel() {
+      
 
     }
 
