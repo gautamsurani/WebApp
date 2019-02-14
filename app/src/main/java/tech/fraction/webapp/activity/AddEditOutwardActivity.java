@@ -152,7 +152,7 @@ tvParty.setOnClickListener(new View.OnClickListener() {
                     Utils.ShowSnakBar("Select Party",rlAddEditOutward,context);
 
                 }else {
-                    Intent intent = new Intent(AddEditOutwardActivity.this, AddEditOutItemActivity.class);
+                    Intent intent = new Intent(AddEditOutwardActivity.this, SelectedOutwardActivity.class);
                     intent.putExtra("mode", "add");
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

@@ -48,7 +48,7 @@ public class InvoiceDetails {
 
     private int Weight;
 
-    private int LoadingCharges;
+    private Double LoadingCharges;
 
     private int TotalWeight;
 
@@ -72,7 +72,7 @@ public class InvoiceDetails {
 
     private int TotalInwardRent;
 
-    private int UnloadingCharges;
+    private Double UnloadingCharges;
 
     private String ItemLabel;
 
@@ -260,11 +260,11 @@ public class InvoiceDetails {
         Weight = weight;
     }
 
-    public int getLoadingCharges() {
+    public Double getLoadingCharges() {
         return LoadingCharges;
     }
 
-    public void setLoadingCharges(int loadingCharges) {
+    public void setLoadingCharges(Double loadingCharges) {
         LoadingCharges = loadingCharges;
     }
 
@@ -356,11 +356,11 @@ public class InvoiceDetails {
         TotalInwardRent = totalInwardRent;
     }
 
-    public int getUnloadingCharges() {
+    public Double getUnloadingCharges() {
         return UnloadingCharges;
     }
 
-    public void setUnloadingCharges(int unloadingCharges) {
+    public void setUnloadingCharges(Double unloadingCharges) {
         UnloadingCharges = unloadingCharges;
     }
 
