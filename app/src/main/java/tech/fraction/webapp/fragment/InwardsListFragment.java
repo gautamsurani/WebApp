@@ -70,6 +70,8 @@ public class InwardsListFragment extends BaseFragment {
 
     TextView txtToastCountMsg, tvAddInward;
 
+    int totalRecord;
+
     public InwardsListFragment() {
         // Required empty public constructor
     }
@@ -122,7 +124,7 @@ public class InwardsListFragment extends BaseFragment {
                 this_visible_item_count = linearLayoutManager.findFirstCompletelyVisibleItemPosition();
 
                 if (this_visible_item_count != -1) {
-                    txtToastCountMsg.setText("Showing " + String.valueOf(this_visible_item_count + "/" + 5000 + " items"));
+                    txtToastCountMsg.setText("Showing " + String.valueOf(this_visible_item_count + "/" + totalRecord + " items"));
                 }
 
                 if (timer != null) {
@@ -235,6 +237,7 @@ public class InwardsListFragment extends BaseFragment {
                 progress_circular.setVisibility(View.GONE);
                 InwardResponseModel inwardResponseModels = response.body();
                 assert inwardResponseModels != null;
+                totalRecord = inwardResponseModels.getData().getPaging().getTotalRecords();
                 inventoryDetails.addAll(inwardResponseModels.getData().getInventoryDetail());
                 inwordsAdapter.setList(inventoryDetails);
                 inwordsAdapter.notifyDataSetChanged();

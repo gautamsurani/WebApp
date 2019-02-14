@@ -50,9 +50,7 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
     @Override
     public SelectedOutwardAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         View view;
-
         view = inflater.inflate(R.layout.row_selected_outward, parent, false);
-
         return new SelectedOutwardAdapter.ViewHolder(view);
     }
 
@@ -68,11 +66,11 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
                 location = location + ", " + outwardDetails.get(position).getInwardItemLocationPoco().get(i).getRackName();
             }
         }
-        viewHolder.tvLocation.setText("Location: "+location);
+        viewHolder.tvLocation.setText("Location: " + location);
         viewHolder.tv0utDate.setText(Utils.FormatDate(outwardDetails.get(position).getInwardDetail().getInwardedOn()));
-        viewHolder. tvOutNo.setText(outwardDetails.get(position).getInwardDetail().getNumber());
+        viewHolder.tvOutNo.setText(outwardDetails.get(position).getInwardDetail().getNumber());
         viewHolder.tvStock.setText("Stock : " + outwardDetails.get(position).getStock() + " / " + outwardDetails.get(position).getQuantity());
-        viewHolder.tvItemUnit.setText(outwardDetails.get(position).getItemName()+"-"+outwardDetails.get(position).getUnitName());
+        viewHolder.tvItemUnit.setText(outwardDetails.get(position).getItemName() + "-" + outwardDetails.get(position).getUnitName());
 
 
         viewHolder.imgDelete.setOnClickListener(new View.OnClickListener() {
