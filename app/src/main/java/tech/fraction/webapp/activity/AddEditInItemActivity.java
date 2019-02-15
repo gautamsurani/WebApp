@@ -16,10 +16,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,30 +43,44 @@ import tech.fraction.webapp.util.Utils;
 public class AddEditInItemActivity extends AppCompatActivity {
 
     RecyclerView rec_view;
+
     RacksAdapter racksAdapter;
+
     TextView tvHeading, spnItem, spnUnit, spnLocation, tvUpdate;
     ImageView ivBack;
+
     ApiInterface apiInterface;
+
     Retrofit retrofit;
+
     RelativeLayout rlProgress, rlMain;
+
     Activity context;
+
     SqLiteHelperFunctions sqLiteHelperFunctions;
+
     EditText etRent, etQuantity, etMarko, etUnloadingCharge;
 
     Items selectedItems = new Items();
+
     List<Items> items;
 
     ItemRent selectedItemRent = new ItemRent();
+
     List<ItemRent> itemRents;
 
     InwardItemLocationPoco selectedRacks = new InwardItemLocationPoco();
+
     List<InwardItemLocationPoco> selectedRacksList = new ArrayList<>();
+
     List<InwardItemLocationPoco> itemRacks = new ArrayList<>();
 
     InwardItems inwardItem;
+
     String mode;
 
     String quantity = "", marko = "", unloadingCharge = "";
+
     int selectedPosition = -1;
 
     @Override

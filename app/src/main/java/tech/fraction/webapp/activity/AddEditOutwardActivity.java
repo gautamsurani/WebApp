@@ -1,9 +1,7 @@
 package tech.fraction.webapp.activity;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,10 +14,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.Random;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -67,7 +63,7 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         outwardDetailListAdapter.notifyDataSetChanged();
     }
 
-    @SuppressLint("SetTextI18n")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -178,24 +174,28 @@ public class AddEditOutwardActivity extends AppCompatActivity {
 //                }
 //            }
 //        });
+
+
     }
 
     private void CallSaveOutwardApi() {
 
-        Call<SaveOutwardResponseModel> call = apiInterface.saveOutwardItems(saveOutwardRequestModel);
+        Call<SaveOutwardResponseModel> call=apiInterface.saveOutwardItems(saveOutwardRequestModel);
         call.enqueue(new Callback<SaveOutwardResponseModel>() {
             @Override
-            public void onResponse(@NonNull Call<SaveOutwardResponseModel> call, @NonNull Response<SaveOutwardResponseModel> response) {
+            public void onResponse(Call<SaveOutwardResponseModel> call, Response<SaveOutwardResponseModel> response) {
                 SaveOutwardResponseModel saveOutwardResponseModel = new SaveOutwardResponseModel();
                 saveOutwardResponseModel = response.body();
             }
 
             @Override
-            public void onFailure(@NonNull Call<SaveOutwardResponseModel> call, @NonNull Throwable t) {
+            public void onFailure(Call<SaveOutwardResponseModel> call, Throwable t) {
                 Log.d("Failure", "======>");
 
             }
         });
+
+
     }
 
     private void AddDataInRequestModel() {
@@ -207,7 +207,7 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         transporter.setVehicleNo(edt_vehicleNo.getText().toString());
         saveOutwardRequestModel = new SaveOutwardRequestModel(outwardItemsList, selectedAccount.getId(), selectedAccount.getName(),
                 null, false, 0, tvOutwardNo.getText().toString(), 0.0, transporter,
-                tvDate.getText().toString(), 0.0);
+                "02-15-2019", 0.0);
 
 
     }

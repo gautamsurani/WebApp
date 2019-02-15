@@ -71,6 +71,14 @@ public class LoginActivity extends BaseActivity {
                 callDoLoginAPI();
             }
         });
+
+        txtForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(context,ForgotPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void callDoLoginAPI() {
@@ -144,6 +152,7 @@ public class LoginActivity extends BaseActivity {
         edtPassword = findViewById(R.id.edt_pwd);
         rlLogin = findViewById(R.id.rl_login);
     }
+
 
     private void getData() {
         emailId = edtEmail.getText().toString();

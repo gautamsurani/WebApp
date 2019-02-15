@@ -15,6 +15,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activity.ForgotPasswordActivity"></activity>
         <activity android:name=".activity.SelectItemForOutwardActivity" />
         <activity android:name=".activity.SelectedOutwardActivity" />
         <activity android:name=".activity.PartyWiseInvoiceActivity" />
@@ -64,7 +65,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 

@@ -53,22 +53,38 @@ import tech.fraction.webapp.util.Utils;
 public class AddEditInwardActivity extends AppCompatActivity {
 
     RecyclerView rec_view;
+
     RelativeLayout rl_editInward;
+
     InwardItemAdapter inwardItemAdapter;
+
     ImageView ivBack;
-    TextView tvAddItem, tvInwardNo, tvDate;
+
+    TextView tvAddItem, tvInwardNo, tvDate,tvParty, tvTitle, tvSave;
+
     Activity context;
+
     ProgressBar pbParty;
-    TextView tvParty, tvTitle, tvSave;
-    ApiInterface apiInterface, apiInterfaceONE;
-    Retrofit retrofit, retrofitONE;
+
+
+    ApiInterface apiInterface;
+
+    Retrofit retrofit;
+
     EditText etVehicleNo, etTransporter, etDriverName, etDriverNo, etRemark;
+
     public static List<InwardItems> inwardItems = new ArrayList<>();
+
     SaveInwardRequestModel saveInwardRequestModel;
+
     ArrayList<Account> accounts = new ArrayList<>();
+
     private static Account selectedAccount = new Account();
+
     public static String inwardNumber = "", inwardDate = "";
+
     InventoryDetail inventoryDetail;
+
     String mode = "";
 
     @Override
