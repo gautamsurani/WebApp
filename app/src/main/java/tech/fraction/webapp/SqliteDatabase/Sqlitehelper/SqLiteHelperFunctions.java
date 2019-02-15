@@ -102,11 +102,7 @@ public class SqLiteHelperFunctions extends SQLiteOpenHelper {
         int count = cursor.getCount();
         cursor.close();
         db.close();
-        if (count > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return count > 0;
     }
 
     public void deleteAllRecord(Context context, String TABLE_NAME) {

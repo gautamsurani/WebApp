@@ -128,7 +128,7 @@ public class InvoiceFragment extends BaseFragment {
                                 "pageIndex": 0,
                                 "pageSize": 0
                         }
-  ]
+                    ]
                     }*/
 
                     invoiceRequestModel = new InvoiceRequestModel(0, "0", lstpartyWiseInvoicePagings, 50, 0,
@@ -211,6 +211,7 @@ public class InvoiceFragment extends BaseFragment {
                 if (timer != null) {
                     timer.cancel();
                 }
+
                 timer = new CountDownTimer(3000, 1000) {
                     public void onTick(long millisUntilFinished) {
                     }
@@ -221,7 +222,6 @@ public class InvoiceFragment extends BaseFragment {
                 }.start();
 
                 if (dy > 0) {
-
                     visibleItemCount = linearLayoutManager.getChildCount();
                     totalItemCount = linearLayoutManager.getItemCount();
                     pastVisibleItems = linearLayoutManager.findFirstVisibleItemPosition();
@@ -238,7 +238,6 @@ public class InvoiceFragment extends BaseFragment {
                 }
             }
         });
-
         return view;
     }
 
@@ -255,8 +254,6 @@ public class InvoiceFragment extends BaseFragment {
                 lstInvoice = invoiceResponseModel.getData().getPersonInformation().get(0).getInvoices();
                 invoiceAdapter.setList(lstInvoice);
                 invoiceAdapter.notifyDataSetChanged();
-
-
             }
 
             @Override

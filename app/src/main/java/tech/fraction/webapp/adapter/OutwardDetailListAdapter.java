@@ -70,7 +70,7 @@ public class OutwardDetailListAdapter extends RecyclerView.Adapter<OutwardDetail
             if (location.isEmpty()) {
                 location = items.getInwardItemLocationPoco().get(i).getRackName();
             } else {
-                location = location + ", " + items.getInwardItemLocationPoco().get(i).getRackName();;
+                location = location + ", " + items.getInwardItemLocationPoco().get(i).getRackName();
             }
         }
 

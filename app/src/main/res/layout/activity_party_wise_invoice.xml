@@ -26,7 +26,6 @@
         android:layout_below="@+id/tvPartyInvoice">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvPartyInvoice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -46,7 +45,6 @@
             android:visibility="gone">
 
             <ImageView
-                android:id="@+id/imgToastTopIcon"
                 android:layout_width="13dp"
                 android:layout_height="13dp"
                 android:src="@drawable/top_arrow" />

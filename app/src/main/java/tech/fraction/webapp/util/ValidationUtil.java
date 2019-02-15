@@ -25,11 +25,7 @@ public class ValidationUtil {
         boolean b;
         if (strPwd.isEmpty()) {
             b = false;
-        } else if (strPwd.length() < 4) {
-            b = false;
-        } else {
-            b = true;
-        }
+        } else b = strPwd.length() >= 4;
 
         return b;
     }
@@ -44,30 +40,16 @@ public class ValidationUtil {
     }
 
     public static final boolean isValidRemark(String remark) {
-        if (remark.length() < 10) {
-            return false;
-        } else {
-            return true;
-        }
+        return remark.length() >= 10;
 
     }
 
     public static final boolean isValidName(String name) {
-        if (!(Pattern.matches("^[\\p{L} .'-]+$", name))) {
-            return false;
-
-        } else {
-            return true;
-        }
+        return Pattern.matches("^[\\p{L} .'-]+$", name);
     }
 
     public static final boolean isValidVehicleNumber(String vehicleNo) {
-        if (!(Pattern.matches("^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$", vehicleNo))) {
-            return false;
-
-        } else {
-            return true;
-        }
+        return Pattern.matches("^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$", vehicleNo);
     }
 
     public static String compareDates(Date date1, Date date2)

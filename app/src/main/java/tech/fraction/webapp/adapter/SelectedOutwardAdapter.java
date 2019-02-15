@@ -107,8 +107,8 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
                         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
                         openDialog.setTitle("Custom Dialog Box");
-                        TextView tvOkay = (TextView) openDialog.findViewById(R.id.tvOkay);
-                        TextView tvMessage = (TextView) openDialog.findViewById(R.id.tvMessage);
+                        TextView tvOkay = openDialog.findViewById(R.id.tvOkay);
+                        TextView tvMessage = openDialog.findViewById(R.id.tvMessage);
                         tvMessage.setText(outwardDetails.get(position).getItemName() + " - " + outwardDetails.get(position).getUnitName() + " available stock is " +
                                 outwardDetails.get(position).getStock()+"\n"+"Please Enter Proper Quantity");
                         tvOkay.setOnClickListener(new View.OnClickListener() {

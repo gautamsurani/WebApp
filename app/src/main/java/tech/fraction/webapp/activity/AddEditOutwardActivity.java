@@ -1,9 +1,9 @@
 package tech.fraction.webapp.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,18 +11,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 
 import retrofit2.Call;
@@ -30,11 +25,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import tech.fraction.webapp.R;
-import tech.fraction.webapp.adapter.InwardItemAdapter;
 import tech.fraction.webapp.adapter.OutwardDetailListAdapter;
 import tech.fraction.webapp.model.Account;
-import tech.fraction.webapp.model.InwardItems;
-import tech.fraction.webapp.model.OutwardDetailModel;
 import tech.fraction.webapp.model.OutwardDetails;
 import tech.fraction.webapp.model.SearchTextViewModel;
 import tech.fraction.webapp.model.Transporter;
@@ -75,7 +67,7 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         outwardDetailListAdapter.notifyDataSetChanged();
     }
 
-
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,12 +133,13 @@ public class AddEditOutwardActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
         txtSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getData();
                 AddDataInRequestModel();
-               // validateField(vehicleNo, transporterName, driverName, driverNo, remark);
+                // validateField(vehicleNo, transporterName, driverName, driverNo, remark);
                 CallSaveOutwardApi();
                 Utils.hideKeyboard(AddEditOutwardActivity.this);
             }
@@ -161,7 +154,7 @@ public class AddEditOutwardActivity extends AppCompatActivity {
                     Intent intent = new Intent(AddEditOutwardActivity.this, SelectedOutwardActivity.class);
                     intent.putExtra("mode", "add");
                     intent.putExtra("accountId", selectedAccount.getId());
-                    intent.putExtra("outwardItemsList",outwardItemsList);
+                    intent.putExtra("outwardItemsList", outwardItemsList);
 
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -185,40 +178,36 @@ public class AddEditOutwardActivity extends AppCompatActivity {
 //                }
 //            }
 //        });
-
-
     }
 
     private void CallSaveOutwardApi() {
 
-        Call<SaveOutwardResponseModel> call=apiInterface.saveOutwardItems(saveOutwardRequestModel);
+        Call<SaveOutwardResponseModel> call = apiInterface.saveOutwardItems(saveOutwardRequestModel);
         call.enqueue(new Callback<SaveOutwardResponseModel>() {
             @Override
-            public void onResponse(Call<SaveOutwardResponseModel> call, Response<SaveOutwardResponseModel> response) {
-                SaveOutwardResponseModel saveOutwardResponseModel=new SaveOutwardResponseModel();
-                saveOutwardResponseModel=response.body();
+            public void onResponse(@NonNull Call<SaveOutwardResponseModel> call, @NonNull Response<SaveOutwardResponseModel> response) {
+                SaveOutwardResponseModel saveOutwardResponseModel = new SaveOutwardResponseModel();
+                saveOutwardResponseModel = response.body();
             }
 
             @Override
-            public void onFailure(Call<SaveOutwardResponseModel> call, Throwable t) {
-                Log.d("Failure","======>");
+            public void onFailure(@NonNull Call<SaveOutwardResponseModel> call, @NonNull Throwable t) {
+                Log.d("Failure", "======>");
 
             }
         });
-
-
     }
 
     private void AddDataInRequestModel() {
-        Transporter transporter=new Transporter();
+        Transporter transporter = new Transporter();
         transporter.setDriverContactNumber(edt_driverNo.getText().toString());
         transporter.setTransporterDetail(edt_transporter.getText().toString());
         transporter.setDriverName(edt_driverName.getText().toString());
         transporter.setRemarks(edt_remark.getText().toString());
         transporter.setVehicleNo(edt_vehicleNo.getText().toString());
-        saveOutwardRequestModel=new SaveOutwardRequestModel(outwardItemsList,selectedAccount.getId(),selectedAccount.getName(),
-                null,false,0,tvOutwardNo.getText().toString(),0.0,transporter,
-                tvDate.getText().toString(),0.0);
+        saveOutwardRequestModel = new SaveOutwardRequestModel(outwardItemsList, selectedAccount.getId(), selectedAccount.getName(),
+                null, false, 0, tvOutwardNo.getText().toString(), 0.0, transporter,
+                tvDate.getText().toString(), 0.0);
 
 
     }
@@ -252,7 +241,6 @@ public class AddEditOutwardActivity extends AppCompatActivity {
             }
         }
     }
-
 
 
     private void initCache() {

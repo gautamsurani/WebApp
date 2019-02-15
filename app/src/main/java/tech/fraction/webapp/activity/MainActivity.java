@@ -1060,7 +1060,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     private class AccountAsync extends AsyncTask<String, String, String> {
 
         @Override
@@ -1072,8 +1071,6 @@ public class MainActivity extends AppCompatActivity {
             tvBroker.setEnabled(false);
             pbBrokerInvoice.setVisibility(View.VISIBLE);
             tvBrokerInvoice.setEnabled(false);
-
-
         }
 
         @Override
@@ -1083,8 +1080,7 @@ public class MainActivity extends AppCompatActivity {
             call.enqueue(new Callback<AccountResponseModel>() {
                 @Override
                 public void onResponse(@NonNull Call<AccountResponseModel> call, @NonNull Response<AccountResponseModel> response) {
-                    AccountResponseModel accountResponseModel = new AccountResponseModel();
-                    accountResponseModel = response.body();
+                    AccountResponseModel accountResponseModel = response.body();
                     assert accountResponseModel != null;
                     accounts = accountResponseModel.getAccount();
                     pbParty.setVisibility(View.INVISIBLE);
@@ -1246,7 +1242,6 @@ public class MainActivity extends AppCompatActivity {
         // attaching data adapter to spinner
         spInvoiceGenerationDue.setAdapter(dataAdapter);
     }
-
 
     private void setPaidStatusCommon(Spinner spnPaidStatus) {
         List<String> categories = new ArrayList<>();

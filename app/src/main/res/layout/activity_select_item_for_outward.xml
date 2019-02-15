@@ -85,7 +85,6 @@
             android:visibility="gone">
 
             <ImageView
-                android:id="@+id/imgToastTopIcon"
                 android:layout_width="13dp"
                 android:layout_height="13dp"
                 android:src="@drawable/top_arrow" />

@@ -93,7 +93,6 @@
             android:layout_below="@+id/ll2" />
 
         <LinearLayout
-            android:id="@+id/layout_view_three"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_below="@+id/rvProduct"
