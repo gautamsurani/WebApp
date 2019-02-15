@@ -100,7 +100,7 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
                 qty = s.toString();
                 if(!qty.isEmpty()) {
 
-                    if (Integer.parseInt(qty) > outwardDetails.get(position).getQuantity()) {
+                    if (Integer.parseInt(qty) > outwardDetails.get(position).getStock()) {
                         final Dialog openDialog = new Dialog(context);
                         openDialog.setContentView(R.layout.customdialog_layout);
                         Window window = openDialog.getWindow();
