@@ -95,7 +95,11 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         retrofit = RetrofitInstance.getClient();
         apiInterface = retrofit.create(ApiInterface.class);
 
-        String mode = getIntent().getStringExtra("mode");
+        String mode = "";
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            mode = bundle.getString("mode", "");
+        }
         if (mode.equals("add")) {
             tvTitle.setText("Add Outward");
         } else {
@@ -139,7 +143,7 @@ public class AddEditOutwardActivity extends AppCompatActivity {
             public void onClick(View v) {
                 getData();
                 AddDataInRequestModel();
-               // validateField(vehicleNo, transporterName, driverName, driverNo, remark);
+                // validateField(vehicleNo, transporterName, driverName, driverNo, remark);
                 Utils.hideKeyboard(AddEditOutwardActivity.this);
 
             }
@@ -213,7 +217,6 @@ public class AddEditOutwardActivity extends AppCompatActivity {
             }
         }
     }
-
 
 
     private void initCache() {

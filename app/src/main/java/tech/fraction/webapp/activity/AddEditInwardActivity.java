@@ -69,7 +69,7 @@ public class AddEditInwardActivity extends AppCompatActivity {
     private static Account selectedAccount = new Account();
     public static String inwardNumber = "", inwardDate = "";
     InventoryDetail inventoryDetail;
-    String mode;
+    String mode = "";
 
     @Override
     protected void onResume() {
@@ -85,7 +85,6 @@ public class AddEditInwardActivity extends AppCompatActivity {
 
         context = this;
 
-
         retrofit = RetrofitInstance.getClient();
         apiInterface = retrofit.create(ApiInterface.class);
 
@@ -94,7 +93,10 @@ public class AddEditInwardActivity extends AppCompatActivity {
 
         initItemRecyclerView();
 
-        mode = getIntent().getStringExtra("mode");
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            mode = bundle.getString("mode", "");
+        }
         inventoryDetail = (InventoryDetail) getIntent().getSerializableExtra("inventoryDetails");
         if (mode.equals("add")) {
             tvTitle.setText("Add Inward");

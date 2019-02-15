@@ -1,6 +1,7 @@
 package tech.fraction.webapp.fragment;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +28,6 @@ import retrofit2.Retrofit;
 import tech.fraction.webapp.R;
 import tech.fraction.webapp.activity.AddEditOutwardActivity;
 import tech.fraction.webapp.activity.MainActivity;
-import tech.fraction.webapp.adapter.InwordsAdapter;
 import tech.fraction.webapp.adapter.OutwardListAdapter;
 import tech.fraction.webapp.base.BaseFragment;
 import tech.fraction.webapp.base.NoNetworkActivity;
@@ -48,7 +48,6 @@ public class OutwordListFragment extends BaseFragment {
 
     RecyclerView rvOutwords;
     Activity context;
-    InwordsAdapter inwordsAdapter;
     TextView tvTitle, tvAddOutward;
     Retrofit retrofit;
     ApiInterface apiInterface;
@@ -68,7 +67,7 @@ public class OutwordListFragment extends BaseFragment {
 
     LinearLayout linearShowToastMsg;
 
-    TextView txtToastCountMsg, tvAddInward;
+    TextView txtToastCountMsg;
     ArrayList<InventoryDetailOutward> outWardList;
 
     int totalRecord;
@@ -105,11 +104,13 @@ public class OutwordListFragment extends BaseFragment {
                 context.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
+
         rvOutwords.setAdapter(outwardListAdapter);
         rvOutwords.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             CountDownTimer timer = null;
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
 
@@ -124,6 +125,7 @@ public class OutwordListFragment extends BaseFragment {
                 if (timer != null) {
                     timer.cancel();
                 }
+
                 timer = new CountDownTimer(3000, 1000) {
                     public void onTick(long millisUntilFinished) {
                     }
@@ -204,7 +206,7 @@ public class OutwordListFragment extends BaseFragment {
         Call<OutwardResoinseModel> call = apiInterface.getAllOurward(outwardRequestModel);
         call.enqueue(new Callback<OutwardResoinseModel>() {
             @Override
-            public void onResponse(Call<OutwardResoinseModel> call, Response<OutwardResoinseModel> response) {
+            public void onResponse(@NonNull Call<OutwardResoinseModel> call, @NonNull Response<OutwardResoinseModel> response) {
                 IsLAstLoading = true;
                 progress_circular.setVisibility(View.GONE);
                 OutwardResoinseModel outwardResoinseModel = response.body();

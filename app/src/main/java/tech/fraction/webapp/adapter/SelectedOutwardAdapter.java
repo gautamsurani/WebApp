@@ -74,8 +74,8 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
         viewHolder. tvOutNo.setText(outwardDetails.get(position).getInwardDetail().getNumber());
 
 
-        viewHolder. etLC.setText(String.valueOf(outwardDetails.get(position).getLoadingCharges()));
-        viewHolder. etOC.setText(String.valueOf(outwardDetails.get(position).getOtherCharges()));
+        viewHolder.etLC.setText(String.valueOf(outwardDetails.get(position).getLoadingCharges()));
+        viewHolder.etOC.setText(String.valueOf(outwardDetails.get(position).getOtherCharges()));
         viewHolder.tvStock.setText("Stock : " + outwardDetails.get(position).getStock() + " / " + outwardDetails.get(position).getQuantity());
         viewHolder.tvItemUnit.setText(outwardDetails.get(position).getItemName()+"-"+outwardDetails.get(position).getUnitName());
 
@@ -110,7 +110,9 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
             tvOutNo = item.findViewById(R.id.tvOutNo);
             tv0utDate = item.findViewById(R.id.tv0utDate);
             tvLocation = item.findViewById(R.id.tvLocation);
-
+            etLC = item.findViewById(R.id.etLC);
+            etOC = item.findViewById(R.id.etOC);
+            etQty = item.findViewById(R.id.etQty);
         }
     }
 }
