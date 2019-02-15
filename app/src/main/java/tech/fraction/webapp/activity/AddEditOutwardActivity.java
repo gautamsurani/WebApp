@@ -1,8 +1,7 @@
 package tech.fraction.webapp.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,33 +9,23 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 
 import retrofit2.Retrofit;
 import tech.fraction.webapp.R;
-import tech.fraction.webapp.adapter.InwardItemAdapter;
 import tech.fraction.webapp.adapter.OutwardDetailListAdapter;
 import tech.fraction.webapp.model.Account;
-import tech.fraction.webapp.model.InwardItems;
-import tech.fraction.webapp.model.OutwardDetailModel;
 import tech.fraction.webapp.model.OutwardDetails;
-import tech.fraction.webapp.model.OutwardItems;
-import tech.fraction.webapp.model.OutwardsInwardItems;
 import tech.fraction.webapp.model.SearchTextViewModel;
 import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
-import tech.fraction.webapp.rest.ApiRequestModel.SaveOutwardRequestModel;
 import tech.fraction.webapp.rest.ApiResponseModel.AccountResponseModel;
 import tech.fraction.webapp.rest.CommonApiCall.AccountApiCall;
 import tech.fraction.webapp.rest.RetrofitInstance;
@@ -57,7 +46,6 @@ public class AddEditOutwardActivity extends AppCompatActivity {
     TextView txtSave, txtAddItem, tvTitle, tvOutwardNo, tvDate, tvParty;
     String vehicleNo, transporterName, driverName, driverNo, remark;
     RelativeLayout scrollView, rlAddEditOutward;
-    SaveOutwardRequestModel saveOutwardRequestModel;
     public static List<OutwardDetails> outwardItemsList = new ArrayList<>();
 
     ArrayList<Account> lstAccount = new ArrayList<>();
@@ -72,11 +60,11 @@ public class AddEditOutwardActivity extends AppCompatActivity {
     }
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_outward_detail);
-
 
         initComp();
 
@@ -84,8 +72,7 @@ public class AddEditOutwardActivity extends AppCompatActivity {
 
         initItemRecyclerView();
 
-
-        Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar tb = findViewById(R.id.toolbar);
         setSupportActionBar(tb);
 
         getData();
@@ -108,7 +95,6 @@ public class AddEditOutwardActivity extends AppCompatActivity {
 
         if (lstAccount.size() == 0) {
             pbParty.setVisibility(View.VISIBLE);
-
             AccountApiCall sampleClass = new AccountApiCall();
             sampleClass.setOnDataListener(new AccountApiCall.DataInterface() {
                 @Override
@@ -119,6 +105,7 @@ public class AddEditOutwardActivity extends AppCompatActivity {
             });
             sampleClass.CallAccountApi();
         }
+
         tvParty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,6 +119,7 @@ public class AddEditOutwardActivity extends AppCompatActivity {
                 startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
             }
         });
+
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,12 +130,10 @@ public class AddEditOutwardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getData();
-                AddDataInRequestModel();
-                // validateField(vehicleNo, transporterName, driverName, driverNo, remark);
                 Utils.hideKeyboard(AddEditOutwardActivity.this);
-
             }
         });
+
         txtAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -162,30 +148,6 @@ public class AddEditOutwardActivity extends AppCompatActivity {
                 }
             }
         });
-//        outwardDetailListAdapter.setOnItemClickListener(new OutwardDetailListAdapter.OnClickListener() {
-//            @Override
-//            public void onClick(int position, int witch) {
-//                if (witch == 1) {
-//                    Intent intent = new Intent(context, AddEditOutItemActivity.class);
-//                    intent.putExtra("mode", "edit");
-//                    intent.putExtra("item", outwardItemsList.get(position));
-//                    intent.putExtra("position", String.valueOf(position));
-//                    startActivity(intent);
-//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//                } else if (witch == 2) {
-//                    outwardItemsList.remove(position);
-//                    outwardDetailListAdapter.setList(outwardItemsList);
-//                    outwardDetailListAdapter.notifyDataSetChanged();
-//                }
-//            }
-//        });
-
-
-    }
-
-    private void AddDataInRequestModel() {
-
-
     }
 
     private void initItemRecyclerView() {
@@ -244,8 +206,6 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         driverName = edt_driverName.getText().toString();
         driverNo = edt_driverNo.getText().toString();
         remark = edt_remark.getText().toString();
-
-
     }
 
     private boolean validateField(String vehicleNo, String transporterName, String driverName, String driverNo, String remark) {
@@ -273,7 +233,6 @@ public class AddEditOutwardActivity extends AppCompatActivity {
             return false;
         }
 
-
         return true;
     }
 
@@ -292,7 +251,6 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         edt_driverNo = findViewById(R.id.edt_driverNo);
         edt_remark = findViewById(R.id.edt_remark);
         txtSave = findViewById(R.id.txt_save);
-
         txtAddItem = findViewById(R.id.txt_additem);
         rlAddEditOutward = findViewById(R.id.rlAddEditOutward);
         tvTitle = findViewById(R.id.tvTitle);
@@ -300,7 +258,5 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         tvOutwardNo = findViewById(R.id.tvOutwardNo);
         tvDate = findViewById(R.id.tvDate);
         tvParty = findViewById(R.id.tvParty);
-
-
     }
 }
