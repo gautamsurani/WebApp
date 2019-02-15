@@ -19,7 +19,6 @@ import tech.fraction.webapp.base.NoNetworkActivity;
 import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
 import tech.fraction.webapp.rest.ApiResponseModel.LoginResponseModel;
 import tech.fraction.webapp.rest.RetrofitInstance;
-import tech.fraction.webapp.rest.RetrofitInstance0ne;
 import tech.fraction.webapp.util.Utils;
 import tech.fraction.webapp.util.ValidationUtil;
 

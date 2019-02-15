@@ -205,7 +205,7 @@ public class InvoiceFragment extends BaseFragment {
                 this_visible_item_count = linearLayoutManager.findFirstCompletelyVisibleItemPosition();
 
                 if (this_visible_item_count != -1) {
-                    txtToastCountMsg.setText("Showing " + String.valueOf(this_visible_item_count + "/" + 5000 + " items"));
+                    txtToastCountMsg.setText("Showing " + String.valueOf(this_visible_item_count + "/" + invoiceResponseModel.getData().getPaging().getPageSize() + " items"));
                 }
 
                 if (timer != null) {
@@ -242,6 +242,8 @@ public class InvoiceFragment extends BaseFragment {
         return view;
     }
 
+    InvoiceResponseModel invoiceResponseModel;
+
     private void CallInvoiceApi() {
         progress_circular.setVisibility(View.VISIBLE);
         Call<InvoiceResponseModel> call = apiInterface.getAllInvoice(invoiceRequestModel);
@@ -249,7 +251,7 @@ public class InvoiceFragment extends BaseFragment {
             @Override
             public void onResponse(Call<InvoiceResponseModel> call, Response<InvoiceResponseModel> response) {
                 progress_circular.setVisibility(View.INVISIBLE);
-                InvoiceResponseModel invoiceResponseModel = response.body();
+                invoiceResponseModel = response.body();
                 lstInvoice = invoiceResponseModel.getData().getPersonInformation().get(0).getInvoices();
                 invoiceAdapter.setList(lstInvoice);
                 invoiceAdapter.notifyDataSetChanged();

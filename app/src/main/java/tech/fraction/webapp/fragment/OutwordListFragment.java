@@ -1,6 +1,7 @@
 package tech.fraction.webapp.fragment;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +28,6 @@ import retrofit2.Retrofit;
 import tech.fraction.webapp.R;
 import tech.fraction.webapp.activity.AddEditOutwardActivity;
 import tech.fraction.webapp.activity.MainActivity;
-import tech.fraction.webapp.adapter.InwordsAdapter;
 import tech.fraction.webapp.adapter.OutwardListAdapter;
 import tech.fraction.webapp.base.BaseFragment;
 import tech.fraction.webapp.base.NoNetworkActivity;
@@ -48,8 +48,7 @@ public class OutwordListFragment extends BaseFragment {
 
     RecyclerView rvOutwords;
     Activity context;
-    InwordsAdapter inwordsAdapter;
-    TextView tvTitle,tvAddOutward;
+    TextView tvTitle, tvAddOutward;
     Retrofit retrofit;
     ApiInterface apiInterface;
     ProgressBar progress_circular;
@@ -68,17 +67,17 @@ public class OutwordListFragment extends BaseFragment {
 
     LinearLayout linearShowToastMsg;
 
-    TextView txtToastCountMsg, tvAddInward;
+    TextView txtToastCountMsg;
     ArrayList<InventoryDetailOutward> outWardList;
+
+    int totalRecord;
 
     public OutwordListFragment() {
         // Required empty public constructor
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_outword_list, container, false);
 
@@ -89,10 +88,9 @@ public class OutwordListFragment extends BaseFragment {
         initComp(view);
 
         apiInterface = retrofit.create(ApiInterface.class);
-        outWardList = new ArrayList<InventoryDetailOutward>();
+        outWardList = new ArrayList<>();
 
         linearLayoutManager = new LinearLayoutManager(context);
-
 
         outwardListAdapter = new OutwardListAdapter(context);
         rvOutwords.setLayoutManager(linearLayoutManager);
@@ -106,11 +104,13 @@ public class OutwordListFragment extends BaseFragment {
                 context.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
+
         rvOutwords.setAdapter(outwardListAdapter);
         rvOutwords.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             CountDownTimer timer = null;
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
 
@@ -119,12 +119,13 @@ public class OutwordListFragment extends BaseFragment {
                 this_visible_item_count = linearLayoutManager.findFirstCompletelyVisibleItemPosition();
 
                 if (this_visible_item_count != -1) {
-                    txtToastCountMsg.setText("Showing " + String.valueOf(this_visible_item_count + "/" + 5000 + " items"));
+                    txtToastCountMsg.setText("Showing " + String.valueOf(this_visible_item_count + "/" + totalRecord + " items"));
                 }
 
                 if (timer != null) {
                     timer.cancel();
                 }
+
                 timer = new CountDownTimer(3000, 1000) {
                     public void onTick(long millisUntilFinished) {
                     }
@@ -135,7 +136,6 @@ public class OutwordListFragment extends BaseFragment {
                 }.start();
 
                 if (dy > 0) {
-
                     visibleItemCount = linearLayoutManager.getChildCount();
                     totalItemCount = linearLayoutManager.getItemCount();
                     pastVisibleItems = linearLayoutManager.findFirstVisibleItemPosition();
@@ -151,8 +151,6 @@ public class OutwordListFragment extends BaseFragment {
                     }
                 }
             }
-
-
         });
 
         tvAddOutward.setOnClickListener(new View.OnClickListener() {
@@ -208,26 +206,20 @@ public class OutwordListFragment extends BaseFragment {
         Call<OutwardResoinseModel> call = apiInterface.getAllOurward(outwardRequestModel);
         call.enqueue(new Callback<OutwardResoinseModel>() {
             @Override
-            public void onResponse(Call<OutwardResoinseModel> call, Response<OutwardResoinseModel> response) {
+            public void onResponse(@NonNull Call<OutwardResoinseModel> call, @NonNull Response<OutwardResoinseModel> response) {
                 IsLAstLoading = true;
                 progress_circular.setVisibility(View.GONE);
-                OutwardResoinseModel outwardResoinseModel = new OutwardResoinseModel();
+                OutwardResoinseModel outwardResoinseModel = response.body();
                 assert outwardResoinseModel != null;
-                outwardResoinseModel = response.body();
+                totalRecord = outwardResoinseModel.getData().getPaging().getTotalRecords();
                 outWardList.addAll(outwardResoinseModel.getData().getResponse());
-
                 outwardListAdapter.setList(outWardList);
                 outwardListAdapter.notifyDataSetChanged();
-
-
             }
 
 
-
-
             @Override
-            public void onFailure(Call<OutwardResoinseModel> call, Throwable t) {
-
+            public void onFailure(@NonNull Call<OutwardResoinseModel> call, @NonNull Throwable t) {
                 progress_circular.setVisibility(View.GONE);
                 Utils.ShowSnakBar("Failure", rlMain, context);
 
@@ -257,6 +249,7 @@ public class OutwordListFragment extends BaseFragment {
         super.onResume();
         tvTitle.setText(getResources().getString(R.string.outword_list_title));
     }
+
     public void retryInternet(String extraValue) {
         Intent i = new Intent(context, NoNetworkActivity.class);
         i.putExtra("extraValue", extraValue);

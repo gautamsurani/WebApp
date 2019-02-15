@@ -1,7 +1,5 @@
 package tech.fraction.webapp.rest;
 
-import android.content.Context;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -9,12 +7,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import tech.fraction.webapp.util.Utils;
 
 public class RetrofitInstance {
 
-    private static String BASE_URL = "http://192.168.0.201/staging.wh/api/v1/";
+    /*private static String BASE_URL = "http://wh.fraction.tech/api/v1/";*/
 
+    private static String BASE_URL = "http://192.168.0.201/staging.wh/api/v1/";
 
     private static Retrofit retrofit = null;
 
@@ -36,6 +34,4 @@ public class RetrofitInstance {
 
         return retrofit;
     }
-
-
 }
