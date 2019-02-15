@@ -48,6 +48,7 @@ public class SelectedOutwardActivity extends AppCompatActivity {
         selectedOutwardAdapter = new SelectedOutwardAdapter(context);
         initComp();
 
+        outwardDetails=(ArrayList<OutwardDetails>) getIntent().getSerializableExtra("outwardItemsList");
         initRecyclerView();
 
         Bundle bundle = getIntent().getExtras();

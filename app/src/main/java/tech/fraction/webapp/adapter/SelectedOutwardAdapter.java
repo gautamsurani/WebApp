@@ -1,11 +1,15 @@
 package tech.fraction.webapp.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -58,7 +62,7 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SelectedOutwardAdapter.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(@NonNull final SelectedOutwardAdapter.ViewHolder viewHolder, final int position) {
         viewHolder.tvItemName.setText(outwardDetails.get(position).getItemName());
 
         String location = "";
@@ -69,17 +73,59 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
                 location = location + ", " + outwardDetails.get(position).getInwardItemLocationPoco().get(i).getRackName();
             }
         }
-        viewHolder.tvLocation.setText("Location: "+location);
+        viewHolder.tvLocation.setText("Location: " + location);
         viewHolder.tv0utDate.setText(Utils.FormatDate(outwardDetails.get(position).getInwardDetail().getInwardedOn()));
-        viewHolder. tvOutNo.setText(outwardDetails.get(position).getInwardDetail().getNumber());
+        viewHolder.tvOutNo.setText(outwardDetails.get(position).getInwardDetail().getNumber());
 
-
-        viewHolder. etLC.setText(String.valueOf(outwardDetails.get(position).getLoadingCharges()));
-        viewHolder. etOC.setText(String.valueOf(outwardDetails.get(position).getOtherCharges()));
+        viewHolder.etQty.setText(String.valueOf(outwardDetails.get(position).getOutwardQuantity()));
+        viewHolder.etLC.setText(String.valueOf(outwardDetails.get(position).getLoadingCharges()));
+        viewHolder.etOC.setText(String.valueOf(outwardDetails.get(position).getOtherCharges()));
         viewHolder.tvStock.setText("Stock : " + outwardDetails.get(position).getStock() + " / " + outwardDetails.get(position).getQuantity());
-        viewHolder.tvItemUnit.setText(outwardDetails.get(position).getItemName()+"-"+outwardDetails.get(position).getUnitName());
+        viewHolder.tvItemUnit.setText(outwardDetails.get(position).getItemName() + "-" + outwardDetails.get(position).getUnitName());
 
+        viewHolder.etQty.addTextChangedListener(new TextWatcher() {
+            String qty;
 
+            public void afterTextChanged(Editable s) {
+                if(!qty.isEmpty()) {
+                    outwardDetails.get(position).setOutwardQuantity(Integer.parseInt(qty));
+                }
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                qty = s.toString();
+                if(!qty.isEmpty()) {
+
+                    if (Integer.parseInt(qty) > outwardDetails.get(position).getQuantity()) {
+                        final Dialog openDialog = new Dialog(context);
+                        openDialog.setContentView(R.layout.customdialog_layout);
+                        Window window = openDialog.getWindow();
+                        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                        openDialog.setTitle("Custom Dialog Box");
+                        TextView tvOkay = (TextView) openDialog.findViewById(R.id.tvOkay);
+                        TextView tvMessage = (TextView) openDialog.findViewById(R.id.tvMessage);
+                        tvMessage.setText(outwardDetails.get(position).getItemName() + " - " + outwardDetails.get(position).getUnitName() + " available stock is " +
+                                outwardDetails.get(position).getStock()+"\n"+"Please Enter Proper Quantity");
+                        tvOkay.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                openDialog.dismiss();
+                                viewHolder.etQty.setText("");
+
+                            }
+                        });
+                        openDialog.show();
+                    }
+                }
+
+                }
+
+        });
 
         viewHolder.imgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +144,7 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvItemName, tvItemUnit, tvStock, tvOutNo, tv0utDate, tvLocation;
 
-        EditText etLC,etOC,etQty;
+        EditText etLC, etOC, etQty;
         ImageView imgDelete;
 
         public ViewHolder(@NonNull View item) {
