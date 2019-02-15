@@ -26,7 +26,7 @@ public class AddCustomerActivity extends AppCompatActivity {
 
     }
 
-    private void initToolbar(){
+    private void initToolbar() {
         TextView tvTitle = findViewById(R.id.tvTitle);
         tvTitle.setText("Add Customer");
         ImageView ivBack = findViewById(R.id.ivBack);
@@ -44,7 +44,7 @@ public class AddCustomerActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
-    private void initComp(){
+    private void initComp() {
 
     }
 }
