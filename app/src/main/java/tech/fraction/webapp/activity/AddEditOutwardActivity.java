@@ -31,9 +31,12 @@ import tech.fraction.webapp.adapter.OutwardDetailListAdapter;
 import tech.fraction.webapp.model.Account;
 import tech.fraction.webapp.model.InwardItems;
 import tech.fraction.webapp.model.OutwardDetailModel;
+import tech.fraction.webapp.model.OutwardDetails;
 import tech.fraction.webapp.model.OutwardItems;
+import tech.fraction.webapp.model.OutwardsInwardItems;
 import tech.fraction.webapp.model.SearchTextViewModel;
 import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
+import tech.fraction.webapp.rest.ApiRequestModel.SaveOutwardRequestModel;
 import tech.fraction.webapp.rest.ApiResponseModel.AccountResponseModel;
 import tech.fraction.webapp.rest.CommonApiCall.AccountApiCall;
 import tech.fraction.webapp.rest.RetrofitInstance;
@@ -45,7 +48,6 @@ public class AddEditOutwardActivity extends AppCompatActivity {
 
     RecyclerView rec_view;
     OutwardDetailListAdapter outwardDetailListAdapter;
-    List<OutwardDetailModel> outwardDetailList;
     ImageView ivBack;
     Activity context;
     Retrofit retrofit;
@@ -55,7 +57,8 @@ public class AddEditOutwardActivity extends AppCompatActivity {
     TextView txtSave, txtAddItem, tvTitle, tvOutwardNo, tvDate, tvParty;
     String vehicleNo, transporterName, driverName, driverNo, remark;
     RelativeLayout scrollView, rlAddEditOutward;
-    public static List<OutwardItems> outwardItemsList = new ArrayList<>();
+    SaveOutwardRequestModel saveOutwardRequestModel;
+    public static List<OutwardDetails> outwardItemsList = new ArrayList<>();
 
     ArrayList<Account> lstAccount = new ArrayList<>();
     private static Account selectedAccount;
@@ -91,8 +94,6 @@ public class AddEditOutwardActivity extends AppCompatActivity {
 
         retrofit = RetrofitInstance.getClient();
         apiInterface = retrofit.create(ApiInterface.class);
-
-        outwardDetailListAdapter = new OutwardDetailListAdapter(AddEditOutwardActivity.this, true);
 
         String mode = getIntent().getStringExtra("mode");
         if (mode.equals("add")) {
@@ -137,7 +138,8 @@ public class AddEditOutwardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getData();
-                validateField(vehicleNo, transporterName, driverName, driverNo, remark);
+                AddDataInRequestModel();
+               // validateField(vehicleNo, transporterName, driverName, driverNo, remark);
                 Utils.hideKeyboard(AddEditOutwardActivity.this);
 
             }
@@ -156,23 +158,28 @@ public class AddEditOutwardActivity extends AppCompatActivity {
                 }
             }
         });
-        outwardDetailListAdapter.setOnItemClickListener(new OutwardDetailListAdapter.OnClickListener() {
-            @Override
-            public void onClick(int position, int witch) {
-                if (witch == 1) {
-                    Intent intent = new Intent(context, AddEditOutItemActivity.class);
-                    intent.putExtra("mode", "edit");
-                    intent.putExtra("item", outwardItemsList.get(position));
-                    intent.putExtra("position", String.valueOf(position));
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                } else if (witch == 2) {
-                    outwardItemsList.remove(position);
-                    outwardDetailListAdapter.setList(outwardItemsList);
-                    outwardDetailListAdapter.notifyDataSetChanged();
-                }
-            }
-        });
+//        outwardDetailListAdapter.setOnItemClickListener(new OutwardDetailListAdapter.OnClickListener() {
+//            @Override
+//            public void onClick(int position, int witch) {
+//                if (witch == 1) {
+//                    Intent intent = new Intent(context, AddEditOutItemActivity.class);
+//                    intent.putExtra("mode", "edit");
+//                    intent.putExtra("item", outwardItemsList.get(position));
+//                    intent.putExtra("position", String.valueOf(position));
+//                    startActivity(intent);
+//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                } else if (witch == 2) {
+//                    outwardItemsList.remove(position);
+//                    outwardDetailListAdapter.setList(outwardItemsList);
+//                    outwardDetailListAdapter.notifyDataSetChanged();
+//                }
+//            }
+//        });
+
+
+    }
+
+    private void AddDataInRequestModel() {
 
 
     }
@@ -180,6 +187,7 @@ public class AddEditOutwardActivity extends AppCompatActivity {
     private void initItemRecyclerView() {
         rec_view.setLayoutManager(new LinearLayoutManager(this));
         rec_view.setHasFixedSize(true);
+        outwardDetailListAdapter = new OutwardDetailListAdapter(AddEditOutwardActivity.this, true);
         rec_view.setAdapter(outwardDetailListAdapter);
 
     }
@@ -206,34 +214,7 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         }
     }
 
-    public void setDate(final TextView textView) {
-        Utils.hideKeyboard(context);
-        final Calendar myCalendar = Calendar.getInstance();
 
-        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel();
-            }
-
-            private void updateLabel() {
-                String myFormat = "dd-MM-yyyy"; // In which you need put
-                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                textView.setText(sdf.format(myCalendar.getTime()));
-                outwardDate = textView.getText().toString();
-            }
-        };
-
-        DatePickerDialog d = new DatePickerDialog(context,
-                date,
-                myCalendar.get(Calendar.YEAR),
-                myCalendar.get(Calendar.MONTH),
-                myCalendar.get(Calendar.DAY_OF_MONTH));
-        d.setCancelable(false);
-        d.show();
-    }
 
     private void initCache() {
         GenerateInwardNumber();

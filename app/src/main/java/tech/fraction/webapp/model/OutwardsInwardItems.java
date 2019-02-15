@@ -57,6 +57,40 @@ public class OutwardsInwardItems {
 
     private String Location;
 
+    public OutwardsInwardItems(InwardItemLocationPoco inwardItemLocationPoco, int accountId, String label, Double rentPerUnit, int itemId, String outwardDetails,
+                               int outwardId, int unitId, String itemName, int inwardItemDetailId, String inwardNo, String inwardedOn, int quantity, int outwardDetailId,
+                               String unitName, int totalOutwardQuantity, boolean isModified, int weight, String loadingCharges, String inwardDetail,
+                               int rawId, int outwardQuantity, int otherCharges, int inwardDetailId, int unloadingCharges, int stock, int outwardWeight, String location) {
+        this.inwardItemLocationPoco = inwardItemLocationPoco;
+        AccountId = accountId;
+        Label = label;
+        RentPerUnit = rentPerUnit;
+        ItemId = itemId;
+        OutwardDetails = outwardDetails;
+        OutwardId = outwardId;
+        UnitId = unitId;
+        ItemName = itemName;
+        InwardItemDetailId = inwardItemDetailId;
+        InwardNo = inwardNo;
+        InwardedOn = inwardedOn;
+        Quantity = quantity;
+        OutwardDetailId = outwardDetailId;
+        UnitName = unitName;
+        TotalOutwardQuantity = totalOutwardQuantity;
+        IsModified = isModified;
+        Weight = weight;
+        LoadingCharges = loadingCharges;
+        InwardDetail = inwardDetail;
+        RawId = rawId;
+        OutwardQuantity = outwardQuantity;
+        OtherCharges = otherCharges;
+        InwardDetailId = inwardDetailId;
+        UnloadingCharges = unloadingCharges;
+        Stock = stock;
+        OutwardWeight = outwardWeight;
+        Location = location;
+    }
+
     public int getAccountId() {
         return AccountId;
     }

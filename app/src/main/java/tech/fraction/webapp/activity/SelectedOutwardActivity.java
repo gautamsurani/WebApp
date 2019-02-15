@@ -34,6 +34,10 @@ public class SelectedOutwardActivity extends AppCompatActivity {
         if (outwardDetails.size() == 0) {
             tvLstEmpty.setVisibility(View.VISIBLE);
         }
+        else
+        {
+            tvLstEmpty.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -64,6 +68,9 @@ public class SelectedOutwardActivity extends AppCompatActivity {
         tvSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                AddEditOutwardActivity.outwardItemsList.addAll(outwardDetails);
+                finish();
 
             }
         });

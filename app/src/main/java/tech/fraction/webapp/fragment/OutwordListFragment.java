@@ -27,7 +27,6 @@ import retrofit2.Retrofit;
 import tech.fraction.webapp.R;
 import tech.fraction.webapp.activity.AddEditOutwardActivity;
 import tech.fraction.webapp.activity.MainActivity;
-import tech.fraction.webapp.activity.OutwardDetailActivity;
 import tech.fraction.webapp.adapter.InwordsAdapter;
 import tech.fraction.webapp.adapter.OutwardListAdapter;
 import tech.fraction.webapp.base.BaseFragment;
@@ -100,7 +99,7 @@ public class OutwordListFragment extends BaseFragment {
         outwardListAdapter.setOnItemClickListener(new OutwardListAdapter.OnClickListener() {
             @Override
             public void onClick(int position, int witch) {
-                Intent i = new Intent(context, OutwardDetailActivity.class);
+                Intent i = new Intent(context, AddEditOutwardActivity.class);
                 i.putExtra("outWardList", outWardList.get(position));
                 startActivity(i);
                 context.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

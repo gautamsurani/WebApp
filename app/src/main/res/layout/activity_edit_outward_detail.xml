@@ -44,20 +44,26 @@
                 android:orientation="horizontal"
                 android:weightSum="2">
 
-                <TextView
+                <tech.fraction.webapp.ui.MyTextView
                     android:id="@+id/tvOutwardNo"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="1dp"
                     android:layout_weight="1"
-                    android:background="#E6E7E7" />
+                    android:background="#E6E7E7"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp" />
 
-                <TextView
+                <tech.fraction.webapp.ui.MyTextView
                     android:id="@+id/tvDate"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="#00FCFCFC" />
+                    android:background="#00FCFCFC"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="02-10-2019"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 

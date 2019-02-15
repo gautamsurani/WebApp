@@ -2,12 +2,13 @@ package tech.fraction.webapp.rest.ApiRequestModel;
 
 import java.util.List;
 
+import tech.fraction.webapp.model.OutwardDetails;
 import tech.fraction.webapp.model.OutwardsInwardItems;
 import tech.fraction.webapp.model.Transporter;
 
 public class SaveOutwardRequestModel {
 
-    private List<OutwardsInwardItems> OutwardsInwardItems;
+    private List<OutwardDetails> OutwardsInwardItems;
 
     private int AccountId;
 
@@ -29,11 +30,28 @@ public class SaveOutwardRequestModel {
 
     private Double TotalOtherCharges;
 
-    public List<tech.fraction.webapp.model.OutwardsInwardItems> getOutwardsInwardItems() {
+
+    public SaveOutwardRequestModel(List<OutwardDetails> outwardsInwardItems, int accountId, String broker, String currentInvoices, boolean isModified, int id,
+                                   String outwardNo, Double totalLoadingCharges, tech.fraction.webapp.model.Transporter transporter, String outwardOn,
+                                   Double totalOtherCharges) {
+        OutwardsInwardItems = outwardsInwardItems;
+        AccountId = accountId;
+        Broker = broker;
+        CurrentInvoices = currentInvoices;
+        IsModified = isModified;
+        Id = id;
+        OutwardNo = outwardNo;
+        TotalLoadingCharges = totalLoadingCharges;
+        Transporter = transporter;
+        OutwardOn = outwardOn;
+        TotalOtherCharges = totalOtherCharges;
+    }
+
+    public List<OutwardDetails> getOutwardsInwardItems() {
         return OutwardsInwardItems;
     }
 
-    public void setOutwardsInwardItems(List<tech.fraction.webapp.model.OutwardsInwardItems> outwardsInwardItems) {
+    public void setOutwardsInwardItems(List<OutwardDetails> outwardsInwardItems) {
         OutwardsInwardItems = outwardsInwardItems;
     }
 
