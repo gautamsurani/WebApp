@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rlAddEditOutward"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <include
         android:id="@+id/toolbar_custom"
@@ -25,9 +24,10 @@
                 android:id="@+id/txt_inwardNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="15dp"
+
                 android:layout_marginBottom="2dp"
                 android:text="Outward No."
                 android:textColor="@android:color/black" />
@@ -37,8 +37,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_below="@+id/txt_inwardNo"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginBottom="15dp"
                 android:background="@drawable/border_edittext"
                 android:orientation="horizontal"
@@ -72,8 +72,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ll"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginBottom="2dp"
                 android:text="Party Name"
                 android:textColor="@android:color/black" />
@@ -82,19 +82,20 @@
                 android:id="@+id/rl_p"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:layout_below="@+id/txt_party">
+                android:layout_below="@+id/txt_party"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp">
 
                 <TextView
                     android:id="@+id/tvParty"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:padding="10dp"
+
+                    android:background="@drawable/border_edittext"
                     android:gravity="center_vertical"
                     android:hint="Enter Party Name "
-                    android:background="@drawable/border_edittext" />
+                    android:padding="10dp" />
 
                 <ProgressBar
                     android:id="@+id/pbParty"
@@ -103,13 +104,16 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20dp"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
             </RelativeLayout>
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rec_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rl_p"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:nestedScrollingEnabled="false">
 
             </android.support.v7.widget.RecyclerView>
@@ -119,8 +123,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_below="@id/rec_view"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:background="@drawable/mybutton"
                 android:gravity="center"
                 android:text="Select Item "
@@ -130,14 +134,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txt_additem"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="15dp"
-                    android:layout_marginRight="10dp"
+
                     android:layout_marginBottom="2dp"
                     android:text="Vehicle No."
                     android:textColor="@android:color/black" />
@@ -147,8 +152,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+
                     android:background="@drawable/border_edittext"
                     android:paddingLeft="10dp"
                     android:text="454556" />
@@ -156,9 +160,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+
                     android:layout_marginTop="15dp"
-                    android:layout_marginRight="10dp"
+
                     android:layout_marginBottom="2dp"
                     android:text="Tranporter"
                     android:textColor="@android:color/black" />
@@ -168,8 +172,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+
                     android:background="@drawable/border_edittext"
                     android:paddingLeft="10dp"
                     android:text="Milap Panchal" />
@@ -177,9 +180,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+
                     android:layout_marginTop="15dp"
-                    android:layout_marginRight="10dp"
+
                     android:layout_marginBottom="2dp"
                     android:text="Driver Name"
                     android:textColor="@android:color/black" />
@@ -189,8 +192,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+
                     android:background="@drawable/border_edittext"
                     android:paddingLeft="10dp"
 
@@ -199,9 +201,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+
                     android:layout_marginTop="15dp"
-                    android:layout_marginRight="10dp"
 
                     android:layout_marginBottom="2dp"
                     android:text="Driver Contact No."
@@ -212,8 +213,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+
                     android:background="@drawable/border_edittext"
                     android:paddingLeft="10dp"
                     android:text="942124" />
@@ -221,9 +221,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+
                     android:layout_marginTop="15dp"
-                    android:layout_marginRight="10dp"
+
                     android:layout_marginBottom="2dp"
                     android:text="Remark"
                     android:textColor="@android:color/black" />
@@ -232,8 +232,6 @@
                     android:id="@+id/edt_remark"
                     android:layout_width="match_parent"
                     android:layout_height="87dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
 
                     android:background="@drawable/border_edittext"
                     android:gravity="top"
@@ -245,9 +243,9 @@
                     android:id="@+id/txt_save"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
+
                     android:layout_marginTop="15dp"
-                    android:layout_marginRight="10dp"
+
                     android:layout_marginBottom="15dp"
                     android:background="@color/colorPrimary"
                     android:gravity="center"

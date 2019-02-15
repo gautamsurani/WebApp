@@ -119,7 +119,7 @@ public class OutwordListFragment extends BaseFragment {
                 this_visible_item_count = linearLayoutManager.findFirstCompletelyVisibleItemPosition();
 
                 if (this_visible_item_count != -1) {
-                    txtToastCountMsg.setText("Showing " + String.valueOf(this_visible_item_count + "/" + totalRecord + " items"));
+                    txtToastCountMsg.setText("Showing " + String.valueOf(this_visible_item_count + 1 + "/" + totalRecord + " items"));
                 }
 
                 if (timer != null) {
