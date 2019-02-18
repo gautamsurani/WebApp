@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,17 +19,14 @@ import tech.fraction.webapp.model.InventoryDetailOutward;
 
 public class OutwardListAdapter extends RecyclerView.Adapter<OutwardListAdapter.ViewHolder> {
 
-
     private LayoutInflater inflater;
     private List<InventoryDetailOutward> outWardList = new ArrayList<>();
     private Context context;
-    OutwardProductAdapter outwardProductAdapter;
-
+    private OutwardProductAdapter outwardProductAdapter;
 
     public OutwardListAdapter(Context context) {
         inflater = LayoutInflater.from(context);
         this.context = context;
-
     }
 
     private OnClickListener onClickListener;

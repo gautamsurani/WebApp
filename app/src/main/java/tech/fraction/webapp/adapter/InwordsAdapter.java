@@ -61,7 +61,7 @@ public class InwordsAdapter extends RecyclerView.Adapter<InwordsAdapter.ViewHold
         holder.rvProduct.setLayoutManager(new LinearLayoutManager(context));
         holder.rvProduct.setAdapter(productAdapter);
 
-        holder.tvName.setText(inventoryDetail.getFirstName());
+        holder.tvName.setText(inventoryDetail.getAccountName());
         holder.tvInwardNo.setText(inventoryDetail.getInwardNo());
 
         NumberFormat nf = new DecimalFormat("#.##");

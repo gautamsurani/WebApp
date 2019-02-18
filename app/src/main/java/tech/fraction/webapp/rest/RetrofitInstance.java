@@ -10,9 +10,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitInstance {
 
-    private static String BASE_URL = "http://wh.fraction.tech/api/v1/";
+    /*private static String BASE_URL = "http://wh.fraction.tech/api/v1/";*/
 
-    /*private static String BASE_URL = "http://192.168.0.201/staging.wh/api/v1/";*/
+    private static String BASE_URL = "http://192.168.0.201/staging.wh/api/v1/";
 
     private static Retrofit retrofit = null;
 

@@ -203,6 +203,7 @@ public class OutwordListFragment extends BaseFragment {
     }
 
     private void callGetOutwardAPI() {
+        progress_circular.setVisibility(View.VISIBLE);
         Call<OutwardResoinseModel> call = apiInterface.getAllOurward(outwardRequestModel);
         call.enqueue(new Callback<OutwardResoinseModel>() {
             @Override

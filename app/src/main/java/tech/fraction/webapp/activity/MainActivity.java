@@ -459,8 +459,8 @@ public class MainActivity extends AppCompatActivity {
         if (onClickListenerInvoice != null) {
             sheetBehaviorInvoice.setState(BottomSheetBehavior.STATE_COLLAPSED);
             String broker = "", invoiceNo = "", inwardNo = "", outwardNo = "",
-                   receiptType = "", paidStatus = "",month = "", year = "";
-            int paidOn = -1,invoiceGeneratedPeriod = -1;
+                    receiptType = "", paidStatus = "", month = "", year = "";
+            int paidOn = -1, invoiceGeneratedPeriod = -1;
             if (selectedAccount != null) {
                 if (selectedAccount.getName() != null) {
                     broker = selectedAccount.getName();
@@ -584,13 +584,13 @@ public class MainActivity extends AppCompatActivity {
                     paidOn = -1;
                     break;
                 case "Within 2 Days":
-                    paidOn= 2;
+                    paidOn = 2;
                     break;
                 case "Today":
                     paidOn = 0;
                     break;
                 case "Within 1 Week":
-                    paidOn= 8;
+                    paidOn = 8;
                     break;
                 case "Within 15 Days":
                     paidOn = 15;
@@ -601,12 +601,12 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-            onClickListenerInvoice.onFilterInvoiceApplyClick(broker,invoiceNo,inwardNo,outwardNo,month,year,receiptType,invoiceGeneratedPeriod,paidStatus,paidOn);
+            onClickListenerInvoice.onFilterInvoiceApplyClick(broker, invoiceNo, inwardNo, outwardNo, month, year, receiptType, invoiceGeneratedPeriod, paidStatus, paidOn);
         }
 
     }
-    private void resetInvoiceFilter()
-    {
+
+    private void resetInvoiceFilter() {
         selectedAccount = null;
         tvBrokerInvoice.setText("");
         etInvoiceNo.setText("");
@@ -620,7 +620,6 @@ public class MainActivity extends AppCompatActivity {
         spPaidOnInv.setSelection(0);
         sheetBehaviorInvoice.setState(BottomSheetBehavior.STATE_COLLAPSED);
         setInvoiceFilter();
-
 
 
     }
@@ -912,8 +911,6 @@ public class MainActivity extends AppCompatActivity {
         setInwardFilter();
     }
 
-
-
     public static OnFilterListener onClickListener;
 
     public static void setOnFilterApplyClickListener(OnFilterListener onClick) {
@@ -937,7 +934,6 @@ public class MainActivity extends AppCompatActivity {
                 , String year, String receiptType, int invoiceGeneratedPeriod
                 , String paidStatus, int paidOn);
     }
-
 
     public static OnFilterOutwardListener onClickListenerOutward;
 
@@ -969,7 +965,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-
             if (!sqLiteHelperFunctions.getTableRecordCount(DbConstants.TABLE_ITEMS_NAME)) {
                 isItemFinished = false;
                 Call<ItemResoponseModel> call = apiInterface.getAllItems();
@@ -993,7 +988,6 @@ public class MainActivity extends AppCompatActivity {
                             boolean insert = sqLiteHelperFunctions.insertItems(items);
                             Log.d("fsd", "insert Item ====>" + insert + items.getId());
                         }
-
                     }
 
                     @Override
@@ -1003,7 +997,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             }
-
             return null;
         }
 
@@ -1054,7 +1047,6 @@ public class MainActivity extends AppCompatActivity {
                 } else if (tvTitle.getText().equals(getResources().getString(R.string.invoice_list_title))) {
                     tvBrokerInvoice.setText(selectedAccount.getName());
                 }
-
                 return;
             }
         }
