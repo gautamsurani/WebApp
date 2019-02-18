@@ -74,8 +74,12 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
             }
         }
         viewHolder.tvLocation.setText("Location: " + location);
-        viewHolder.tv0utDate.setText(Utils.FormatDate(outwardDetails.get(position).getInwardDetail().getInwardedOn()));
-        viewHolder.tvOutNo.setText(outwardDetails.get(position).getInwardDetail().getNumber());
+        if (!outwardDetails.get(position).getInwardedOn().isEmpty()) {
+            viewHolder.tv0utDate.setText(Utils.FormatDate(outwardDetails.get(position).getInwardedOn()));
+        } else {
+            viewHolder.tv0utDate.setText("");
+        }
+        viewHolder.tvOutNo.setText(Utils.ifIsStringNull(outwardDetails.get(position).getInwardNo()));
 
         viewHolder.etQty.setText(String.valueOf(outwardDetails.get(position).getOutwardQuantity()));
         viewHolder.etLC.setText(String.valueOf(outwardDetails.get(position).getLoadingCharges()));

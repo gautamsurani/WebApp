@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -30,7 +31,9 @@ public class SelectedOutwardActivity extends AppCompatActivity {
     ArrayList<OutwardDetails> outwardDetails = new ArrayList<>();
     SelectedOutwardAdapter selectedOutwardAdapter;
     Context context;
+    String mode = "";
     int accountId = -1;
+    ImageView ivBack;
 
     @Override
     protected void onResume() {
@@ -50,13 +53,20 @@ public class SelectedOutwardActivity extends AppCompatActivity {
         selectedOutwardAdapter = new SelectedOutwardAdapter(context);
         initComp();
 
-        outwardDetails = (ArrayList<OutwardDetails>) getIntent().getSerializableExtra("outwardItemsList");
-        initRecyclerView();
-
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             accountId = bundle.getInt("accountId", -1);
+            outwardDetails = (ArrayList<OutwardDetails>) getIntent().getSerializableExtra("outwardItemsList");
+            mode = getIntent().getStringExtra("mode");
         }
+
+        if (mode.equals("add")) {
+            tvTitle.setText("Add Item");
+        } else {
+            tvTitle.setText("Edit Item");
+        }
+
+        initRecyclerView();
 
         btnFloatAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +121,12 @@ public class SelectedOutwardActivity extends AppCompatActivity {
 
             }
         });
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         tvClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,6 +170,7 @@ public class SelectedOutwardActivity extends AppCompatActivity {
         tvClose = findViewById(R.id.tvClose);
         tvTitle = findViewById(R.id.tvTitle);
         tvLstEmpty = findViewById(R.id.tvLstEmpty);
+        ivBack = findViewById(R.id.ivBack);
         tvTitle.setText("Selected Item");
     }
 

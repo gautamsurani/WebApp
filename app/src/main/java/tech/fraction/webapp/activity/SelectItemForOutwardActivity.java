@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -48,6 +49,7 @@ public class SelectItemForOutwardActivity extends BaseActivity {
     ProgressBar progress_circular;
     RelativeLayout rlMain;
 
+    ImageView ivBack;
     TextView tvTitle, tvDone;
 
     LinearLayoutManager linearLayoutManager;
@@ -94,7 +96,12 @@ public class SelectItemForOutwardActivity extends BaseActivity {
         } else {
             callGetOutwardItemAPI();
         }
-
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         tvDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -175,6 +182,7 @@ public class SelectItemForOutwardActivity extends BaseActivity {
         txtToastCountMsg = findViewById(R.id.txtToastCountMsg);
         tvAddInward = findViewById(R.id.tvAddInward);
         tvTitle = findViewById(R.id.tvTitle);
+        ivBack = findViewById(R.id.ivBack);
         tvTitle.setText("Select Items");
     }
 }

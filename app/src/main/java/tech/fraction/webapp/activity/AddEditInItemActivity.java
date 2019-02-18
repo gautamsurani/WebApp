@@ -403,6 +403,7 @@ public class AddEditInItemActivity extends AppCompatActivity {
         etQuantity = findViewById(R.id.etQuantity);
         etMarko = findViewById(R.id.etMarko);
         etUnloadingCharge = findViewById(R.id.etUnloadingCharge);
+        ImageView ivBack = findViewById(R.id.ivBack);
     }
 
     @SuppressLint("StaticFieldLeak")
