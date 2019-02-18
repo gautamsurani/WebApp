@@ -77,7 +77,7 @@ public class InwordsAdapter extends RecyclerView.Adapter<InwordsAdapter.ViewHold
         Double d2 = Double.parseDouble(inventoryDetail.getPaidAmount());
         String s = nf.format(d2);
 
-        holder.tvAmount.setText(context.getResources().getString(R.string.rs) + " " + s);
+        holder.tvAmount.setText(" " + context.getResources().getString(R.string.rs) + s);
         holder.tvDate.setText(inventoryDetail.getInwardedOn().substring(0, inventoryDetail.getInwardedOn().indexOf("T")));
 
         boolean paidStatus = inventoryDetail.isInvoicePaid();

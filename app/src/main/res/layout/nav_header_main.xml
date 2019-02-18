@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:text="Gautam Surani"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <tech.fraction.webapp.ui.MyTextView
                 android:id="@+id/tvLogout"
