@@ -135,6 +135,12 @@ public class AddEditInwardActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         inwardItemAdapter.setOnItemClickListener(new InwardItemAdapter.OnClickListener() {
             @Override
@@ -434,6 +440,7 @@ public class AddEditInwardActivity extends AppCompatActivity {
         rlProgress = findViewById(R.id.rlProgress);
         Toolbar tb = findViewById(R.id.toolbar);
         setSupportActionBar(tb);
+        ImageView ivBack = findViewById(R.id.ivBack);
     }
 
     @Override

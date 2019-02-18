@@ -157,7 +157,7 @@ public class AddEditOutwardActivity extends AppCompatActivity {
                     Utils.ShowSnakBar("Select Party", rlAddEditOutward, context);
                 } else {
                     Intent intent = new Intent(AddEditOutwardActivity.this, SelectedOutwardActivity.class);
-                    intent.putExtra("mode", "add");
+                    intent.putExtra("mode", mode);
                     intent.putExtra("accountId", selectedAccount.getId());
                     intent.putExtra("outwardItemsList", outwardItemsList);
 
@@ -350,6 +350,12 @@ public class AddEditOutwardActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        if (mode.equals("edit")) {
+            selectedAccount = new Account();
+            outwardNumber = "";
+            outwardDate = "";
+            outwardItemsList.clear();
+        }
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
