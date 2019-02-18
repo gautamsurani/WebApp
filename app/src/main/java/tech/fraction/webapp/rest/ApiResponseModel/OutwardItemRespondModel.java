@@ -1,8 +1,10 @@
 package tech.fraction.webapp.rest.ApiResponseModel;
 
+import java.io.Serializable;
+
 import tech.fraction.webapp.model.DataOutwardItem;
 
-public class OutwardItemRespondModel {
+public class OutwardItemRespondModel implements Serializable {
     private String Message;
 
     private DataOutwardItem Data;

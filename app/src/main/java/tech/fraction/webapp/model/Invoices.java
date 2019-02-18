@@ -1,8 +1,9 @@
 package tech.fraction.webapp.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Invoices {
+public class Invoices implements Serializable {
     private String AccountId;
 
     private boolean IsFullyPaid;

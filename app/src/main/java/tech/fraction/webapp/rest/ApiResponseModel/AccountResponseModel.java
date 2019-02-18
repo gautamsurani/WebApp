@@ -1,10 +1,11 @@
 package tech.fraction.webapp.rest.ApiResponseModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import tech.fraction.webapp.model.Account;
 
-public class AccountResponseModel {
+public class AccountResponseModel implements Serializable {
 
     private ArrayList<Account> account;
 

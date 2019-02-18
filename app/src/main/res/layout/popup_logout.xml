@@ -13,7 +13,7 @@
         android:textColor="@color/light_black"
         android:layout_marginBottom="10dp"
         android:textStyle="bold"
-        android:text="Confirmation"/>
+        android:text="@string/Confirmation"/>
 
     <TextView
         android:id="@+id/txt_message"
@@ -23,7 +23,7 @@
         android:textSize="16sp"
         android:layout_below="@+id/txt_title"
         android:layout_marginBottom="20dp"
-        android:text="Are you sure you want to logout?"/>
+        android:text="@string/popup_hint"/>
     <LinearLayout
         android:id="@+id/ll_bottom"
         android:layout_width="match_parent"
@@ -41,7 +41,7 @@
             android:layout_weight="1"
             android:background="@drawable/mybutton"
             android:gravity="center"
-            android:text="OK"
+            android:text="@string/OK"
             android:textColor="@android:color/white" />
 
         <tech.fraction.webapp.ui.MyTextView
@@ -53,7 +53,7 @@
             android:padding="1dp"
             android:background="@drawable/border_edittext"
             android:gravity="center"
-            android:text="Cancel" />
+            android:text="@string/Cancel" />
 
 
     </LinearLayout>

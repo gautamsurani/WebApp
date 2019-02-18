@@ -36,7 +36,9 @@ import tech.fraction.webapp.model.InventoryDetail;
 import tech.fraction.webapp.model.PersonInformation;
 import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
 import tech.fraction.webapp.rest.ApiRequestModel.InwardRequestModel;
+import tech.fraction.webapp.rest.ApiResponseModel.DetailInwardResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.InwardResponseModel;
+import tech.fraction.webapp.rest.ApiResponseModel.SaveInwardResponseModel;
 import tech.fraction.webapp.rest.RetrofitInstance;
 import tech.fraction.webapp.util.Utils;
 
@@ -99,9 +101,11 @@ public class InwardsListFragment extends BaseFragment {
             @Override
             public void onClick(int position, int witch) {
 
+
+
                 Intent intent = new Intent(context, AddEditInwardActivity.class);
+                intent.putExtra("inwardItemDetailId",inventoryDetails.get(position).getInwardDetailId());
                 intent.putExtra("mode", "edit");
-                intent.putExtra("inventoryDetails", inventoryDetails.get(position));
                 startActivity(intent);
                 context.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
@@ -180,6 +184,7 @@ public class InwardsListFragment extends BaseFragment {
             retryInternet("getInward");
         } else {
             callGetInwardAPI();
+
         }
 
         MainActivity.setOnFilterApplyClickListener(new MainActivity.OnFilterListener() {
@@ -213,6 +218,8 @@ public class InwardsListFragment extends BaseFragment {
 
         return view;
     }
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

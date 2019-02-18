@@ -1,6 +1,8 @@
 package tech.fraction.webapp.rest.ApiRequestModel;
 
-public class LoginRequestModel {
+import java.io.Serializable;
+
+public class LoginRequestModel implements Serializable {
     private String emailId;
     private String password;
     private String returnUrl;

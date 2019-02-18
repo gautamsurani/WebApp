@@ -1,11 +1,12 @@
 package tech.fraction.webapp.rest.ApiRequestModel;
 
+import java.io.Serializable;
 import java.util.List;
 
 import tech.fraction.webapp.model.OutwardDetails;
 import tech.fraction.webapp.model.Transporter;
 
-public class SaveOutwardRequestModel {
+public class SaveOutwardRequestModel implements Serializable {
 
     private List<OutwardDetails> OutwardsInwardItems;
 

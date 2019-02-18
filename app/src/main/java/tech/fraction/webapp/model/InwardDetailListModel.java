@@ -1,6 +1,8 @@
 package tech.fraction.webapp.model;
 
-public class InwardDetailListModel {
+import java.io.Serializable;
+
+public class InwardDetailListModel implements Serializable {
 
     private String name;
     private String location;

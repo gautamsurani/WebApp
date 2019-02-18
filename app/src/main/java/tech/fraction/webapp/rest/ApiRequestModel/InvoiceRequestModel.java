@@ -1,10 +1,11 @@
 package tech.fraction.webapp.rest.ApiRequestModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import tech.fraction.webapp.model.PartyWiseInvoicePaging;
 
-public class InvoiceRequestModel {
+public class InvoiceRequestModel implements Serializable {
 
     private int totalRecords;
 

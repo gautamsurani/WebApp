@@ -1,8 +1,10 @@
 package tech.fraction.webapp.rest.ApiResponseModel;
 
+import java.io.Serializable;
+
 import tech.fraction.webapp.model.DataSaveInward;
 
-public class SaveInwardResponseModel {
+public class SaveInwardResponseModel implements Serializable {
     private String Message;
 
     private DataSaveInward Data;

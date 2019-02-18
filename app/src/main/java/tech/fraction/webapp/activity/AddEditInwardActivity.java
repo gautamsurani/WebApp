@@ -38,13 +38,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import tech.fraction.webapp.R;
 import tech.fraction.webapp.adapter.InwardItemAdapter;
 import tech.fraction.webapp.model.Account;
-import tech.fraction.webapp.model.InventoryDetail;
+
+
 import tech.fraction.webapp.model.InwardItems;
 import tech.fraction.webapp.model.InwardVehicleDetail;
 import tech.fraction.webapp.model.SearchTextViewModel;
 import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
 import tech.fraction.webapp.rest.ApiRequestModel.SaveInwardRequestModel;
 import tech.fraction.webapp.rest.ApiResponseModel.AccountResponseModel;
+import tech.fraction.webapp.rest.ApiResponseModel.DetailInwardResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.SaveInwardResponseModel;
 import tech.fraction.webapp.rest.RetrofitInstance;
 import tech.fraction.webapp.util.AppConstant;
@@ -60,7 +62,7 @@ public class AddEditInwardActivity extends AppCompatActivity {
 
     ImageView ivBack;
 
-    TextView tvAddItem, tvInwardNo, tvDate,tvParty, tvTitle, tvSave;
+    TextView tvAddItem, tvInwardNo, tvDate, tvParty, tvTitle, tvSave;
 
     Activity context;
 
@@ -75,17 +77,17 @@ public class AddEditInwardActivity extends AppCompatActivity {
 
     public static List<InwardItems> inwardItems = new ArrayList<>();
 
-    SaveInwardRequestModel saveInwardRequestModel;
-
     ArrayList<Account> accounts = new ArrayList<>();
 
     private static Account selectedAccount = new Account();
+    DetailInwardResponseModel detailInwardResponseModel = new DetailInwardResponseModel();
 
     public static String inwardNumber = "", inwardDate = "";
 
-    InventoryDetail inventoryDetail;
 
     String mode = "";
+    int inwardDetailId;
+    SaveInwardRequestModel saveInwardRequestModel = new SaveInwardRequestModel();
 
     @Override
     protected void onResume() {
@@ -109,34 +111,15 @@ public class AddEditInwardActivity extends AppCompatActivity {
 
         initItemRecyclerView();
 
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             mode = bundle.getString("mode", "");
-        }
-        inventoryDetail = (InventoryDetail) getIntent().getSerializableExtra("inventoryDetails");
-        if (mode.equals("add")) {
-            tvTitle.setText("Add Inward");
-        } else {
-            tvTitle.setText("Edit Inward");
-        }
-        if (mode.equals("edit")) {
-            selectedAccount.setId(inventoryDetail.getAccountId());
-            selectedAccount.setName(inventoryDetail.getAccountName());
-            selectedAccount.setAddress(inventoryDetail.getAddress());
-            selectedAccount.setPersonId(Utils.getPersonalInfo(context).getPersonId());
-            inwardNumber = inventoryDetail.getInwardNo();
-            inwardDate = inventoryDetail.getInwardedOn();
-            inwardItems = inventoryDetail.getInwardItems();
-            etVehicleNo.setText(inventoryDetail.getTransporter().getVehicleNo());
-            etDriverName.setText(inventoryDetail.getTransporter().getDriverName());
-            etDriverNo.setText(inventoryDetail.getTransporter().getDriverContactNumber());
-            etTransporter.setText(inventoryDetail.getTransporter().getTransporterDetail());
-            etRemark.setText(inventoryDetail.getTransporter().getRemarks());
-
-
+            inwardDetailId = bundle.getInt("inwardItemDetailId");
         }
 
-        initCache();
+        CallGetInwardItemDetailApi(inwardDetailId, Utils.getPersonalInfo(context).getAccountId());
+
 
         tvAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,13 +167,13 @@ public class AddEditInwardActivity extends AppCompatActivity {
                             0, null, Utils.getPersonalInfo(context).getPersonId());
                 } else {
                     InwardVehicleDetail inwardVehicleDetail = new InwardVehicleDetail("", etVehicleNo.getText().toString(), etTransporter.getText().toString()
-                            , etRemark.getText().toString(), etDriverNo.getText().toString(), etDriverName.getText().toString(), inventoryDetail.getTransporter().getId(),
-                            inventoryDetail.getTransporter().getInwardDetailId());
+                            , etRemark.getText().toString(), etDriverNo.getText().toString(), etDriverName.getText().toString(), saveInwardRequestModel.getInwardVehicleDetail().getId(),
+                            saveInwardRequestModel.getInwardVehicleDetail().getInwardDetailId());
 
-                    saveInwardRequestModel = new SaveInwardRequestModel(inventoryDetail.getPaidStatus(), false, inwardItems, selectedAccount.getId(),
-                            selectedAccount.getName(), inventoryDetail.getInwardedOn(), null, inwardVehicleDetail, null, true,
-                            null, null, inwardNumber, inventoryDetail.getLastInvoiceGeneratedOn(), inventoryDetail.getPaidAmount(),
-                            inventoryDetail.getInwardDetailId(), null, Utils.getPersonalInfo(context).getPersonId());
+                    saveInwardRequestModel = new SaveInwardRequestModel(saveInwardRequestModel.getPaidStatus(), false, inwardItems, selectedAccount.getId(),
+                            selectedAccount.getName(), saveInwardRequestModel.getInwardedOn(), null, inwardVehicleDetail, null, true,
+                            null, null, inwardNumber, saveInwardRequestModel.getLastInvoiceGeneratedOn(), saveInwardRequestModel.getTotalPaidAmount(),
+                            inwardDetailId, null, Utils.getPersonalInfo(context).getPersonId());
 
                 }
 
@@ -212,10 +195,6 @@ public class AddEditInwardActivity extends AppCompatActivity {
                 startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
             }
         });
-
-        if (accounts.size() == 0) {
-            new AccountAsync().execute();
-        }
 
         tvDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -256,6 +235,52 @@ public class AddEditInwardActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void CallGetInwardItemDetailApi(int inwardDetailId, int accountId) {
+
+        Call<DetailInwardResponseModel> call = apiInterface.getInwardItemDetail(inwardDetailId, accountId);
+        call.enqueue(new Callback<DetailInwardResponseModel>() {
+            @Override
+            public void onResponse(Call<DetailInwardResponseModel> call, Response<DetailInwardResponseModel> response) {
+                detailInwardResponseModel = response.body();
+                saveInwardRequestModel = detailInwardResponseModel.getData().getInwardDetails();
+                setData();
+            }
+
+            @Override
+            public void onFailure(Call<DetailInwardResponseModel> call, Throwable t) {
+
+                Log.d("fsd", "fdfdf");
+            }
+        });
+    }
+
+    private void setData() {
+        if (mode.equals("add")) {
+            tvTitle.setText("Add Inward");
+        } else {
+            tvTitle.setText("Edit Inward");
+        }
+        if (mode.equals("edit")) {
+            selectedAccount.setId(saveInwardRequestModel.getAccountId());
+            selectedAccount.setName(saveInwardRequestModel.getBroker());
+            selectedAccount.setPersonId(Utils.getPersonalInfo(context).getPersonId());
+            inwardNumber = saveInwardRequestModel.getNumber();
+            inwardDate = saveInwardRequestModel.getInwardedOn();
+            inwardItems = saveInwardRequestModel.getInwardItemDetailPoco();
+            etVehicleNo.setText(saveInwardRequestModel.getInwardVehicleDetail().getVehicleNo());
+            etDriverName.setText(saveInwardRequestModel.getInwardVehicleDetail().getDriverName());
+            etDriverNo.setText(saveInwardRequestModel.getInwardVehicleDetail().getDriverContactNumber());
+            etTransporter.setText(saveInwardRequestModel.getInwardVehicleDetail().getTransporterDetail());
+            etRemark.setText(saveInwardRequestModel.getInwardVehicleDetail().getRemarks());
+        }
+
+        initCache();
+
+        if (accounts.size() == 0) {
+            new AccountAsync().execute();
+        }
     }
 
     public void setDate(final TextView textView) {

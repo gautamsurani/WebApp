@@ -30,7 +30,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="2dp"
-                android:text="Inward No."
+                android:text="@string/Inward_No"
                 android:textColor="@android:color/black" />
 
             <LinearLayout
@@ -77,7 +77,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="2dp"
-                android:text="Party Name"
+                android:text="@string/Party_Name"
                 android:textColor="@android:color/black" />
 
             <RelativeLayout
@@ -95,7 +95,7 @@
                     android:layout_marginRight="10dp"
                     android:background="@drawable/border_edittext"
                     android:gravity="center_vertical"
-                    android:hint="Select Party Name "
+                    android:hint="@string/Select_Party_Name"
                     android:padding="10dp" />
 
                 <ProgressBar
@@ -126,7 +126,7 @@
                 android:layout_marginRight="10dp"
                 android:background="@drawable/mybutton"
                 android:gravity="center"
-                android:text="Add Item "
+                android:text="@string/Add_Item"
                 android:textColor="@color/white" />
 
             <LinearLayout
@@ -142,7 +142,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="2dp"
-                    android:text="Vehicle No."
+                    android:text="@string/Vehicle_No"
                     android:textColor="@android:color/black" />
 
                 <tech.fraction.webapp.ui.MyEditText
@@ -162,7 +162,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="2dp"
-                    android:text="Tranporter"
+                    android:text="@string/Tranporter"
                     android:textColor="@android:color/black" />
 
                 <tech.fraction.webapp.ui.MyEditText
@@ -182,7 +182,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="2dp"
-                    android:text="Driver Name"
+                    android:text="@string/Driver_Name"
                     android:textColor="@android:color/black" />
 
                 <tech.fraction.webapp.ui.MyEditText
@@ -203,7 +203,7 @@
                     android:layout_marginRight="10dp"
 
                     android:layout_marginBottom="2dp"
-                    android:text="Driver Contact No."
+                    android:text="@string/Driver_Contact_No"
                     android:textColor="@android:color/black" />
 
                 <tech.fraction.webapp.ui.MyEditText
@@ -236,7 +236,7 @@
                     android:gravity="top"
                     android:lines="3"
                     android:padding="10dp"
-                    android:text="test" />
+                    android:text="@string/test" />
 
                 <tech.fraction.webapp.ui.MyTextView
                     android:id="@+id/tvSave"
@@ -248,7 +248,7 @@
                     android:layout_marginBottom="15dp"
                     android:background="@color/colorPrimary"
                     android:gravity="center"
-                    android:text="Save"
+                    android:text="@string/Save"
                     android:textColor="@android:color/white" />
             </LinearLayout>
         </RelativeLayout>

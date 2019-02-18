@@ -29,14 +29,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Dhani Akhi[Locale Bardhan]"
+                android:text="@string/row_name_item"
                 android:textColor="@color/light_black" />
 
             <tech.fraction.webapp.ui.MyTextView
                 android:id="@+id/detail_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="100/200"
+                android:text="@string/row_detail_value"
                 android:textColor="@color/colorPrimary" />
         </LinearLayout>
 
@@ -52,13 +52,13 @@
             <tech.fraction.webapp.ui.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Location :" />
+                android:text="@string/row_location_name" />
 
             <tech.fraction.webapp.ui.MyBoldTextView
                 android:id="@+id/txt_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="A304,A304,A304"
+                android:text="@string/row_location"
                 android:textColor="@color/light_black" />
         </LinearLayout>
 
@@ -73,13 +73,13 @@
             <tech.fraction.webapp.ui.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Unloading Charges :" />
+                android:text="@string/row_unloading" />
 
             <tech.fraction.webapp.ui.MyBoldTextView
                 android:id="@+id/txt_unloading_charges"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1500"
+                android:text="@string/row_unloading_charge"
                 android:textColor="@color/light_black" />
         </LinearLayout>
     </RelativeLayout>

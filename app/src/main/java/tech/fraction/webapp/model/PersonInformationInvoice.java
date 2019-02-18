@@ -1,8 +1,9 @@
 package tech.fraction.webapp.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PersonInformationInvoice {
+public class PersonInformationInvoice implements Serializable {
 
     private int UniqRecordId;
 

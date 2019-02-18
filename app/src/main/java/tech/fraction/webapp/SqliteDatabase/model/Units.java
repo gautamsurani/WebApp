@@ -1,6 +1,8 @@
 package tech.fraction.webapp.SqliteDatabase.model;
 
-public class Units {
+import java.io.Serializable;
+
+public class Units implements Serializable {
 
     int id;
     String name,weight,weightUnit;

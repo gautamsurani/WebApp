@@ -1,6 +1,8 @@
 package tech.fraction.webapp.model;
 
-public class PartyWiseInvoicePaging {
+import java.io.Serializable;
+
+public class PartyWiseInvoicePaging implements Serializable {
 
     private int accountId;
 

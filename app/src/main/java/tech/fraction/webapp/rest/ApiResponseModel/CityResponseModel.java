@@ -1,11 +1,12 @@
 package tech.fraction.webapp.rest.ApiResponseModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import tech.fraction.webapp.SqliteDatabase.model.City;
 import tech.fraction.webapp.SqliteDatabase.model.State;
 
-public class CityResponseModel {
+public class CityResponseModel implements Serializable {
     private ArrayList<City> city;
 
 

@@ -87,7 +87,7 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
             String qty;
 
             public void afterTextChanged(Editable s) {
-                if(!qty.isEmpty()) {
+                if (!qty.isEmpty()) {
                     outwardDetails.get(position).setOutwardQuantity(Integer.parseInt(qty));
                 }
             }
@@ -98,7 +98,7 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 qty = s.toString();
-                if(!qty.isEmpty()) {
+                if (!qty.isEmpty()) {
 
                     if (Integer.parseInt(qty) > outwardDetails.get(position).getStock()) {
                         final Dialog openDialog = new Dialog(context);
@@ -110,7 +110,7 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
                         TextView tvOkay = (TextView) openDialog.findViewById(R.id.tvOkay);
                         TextView tvMessage = (TextView) openDialog.findViewById(R.id.tvMessage);
                         tvMessage.setText(outwardDetails.get(position).getItemName() + " - " + outwardDetails.get(position).getUnitName() + " available stock is " +
-                                outwardDetails.get(position).getStock()+"\n"+"Please Enter Proper Quantity");
+                                outwardDetails.get(position).getStock() + "\n" + "Please Enter Proper Quantity");
                         tvOkay.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -123,7 +123,7 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
                     }
                 }
 
-                }
+            }
 
         });
 

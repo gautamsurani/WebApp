@@ -26,7 +26,7 @@
             android:layout_toRightOf="@+id/img_truck"
             android:paddingLeft="10dp"
             android:layout_marginTop="5dp"
-            android:text="Sweta Panchal "
+            android:text="@string/row_name"
             android:gravity="center"
             android:textColor="@color/light_black"
             android:textSize="18sp"

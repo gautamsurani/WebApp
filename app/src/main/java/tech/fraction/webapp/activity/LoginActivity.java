@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -75,7 +76,7 @@ public class LoginActivity extends BaseActivity {
         txtForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(context,ForgotPasswordActivity.class);
+                Intent intent = new Intent(context, ForgotPasswordActivity.class);
                 startActivity(intent);
             }
         });

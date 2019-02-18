@@ -1,6 +1,8 @@
 package tech.fraction.webapp.model;
 
-public class UserRights {
+import java.io.Serializable;
+
+public class UserRights implements Serializable {
     private boolean RightsManagement_AssignActionMethods;
 
     private boolean PurchasedStock_View;

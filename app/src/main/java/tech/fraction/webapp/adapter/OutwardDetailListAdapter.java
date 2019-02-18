@@ -70,7 +70,8 @@ public class OutwardDetailListAdapter extends RecyclerView.Adapter<OutwardDetail
             if (location.isEmpty()) {
                 location = items.getInwardItemLocationPoco().get(i).getRackName();
             } else {
-                location = location + ", " + items.getInwardItemLocationPoco().get(i).getRackName();;
+                location = location + ", " + items.getInwardItemLocationPoco().get(i).getRackName();
+                ;
             }
         }
 
@@ -118,7 +119,7 @@ public class OutwardDetailListAdapter extends RecyclerView.Adapter<OutwardDetail
         return outwardItems.size();
     }
 
-     class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvName, tvLocation, tv_unloadingCharges, tv_value;
         RelativeLayout rlMain;
         ImageView edit, delete;

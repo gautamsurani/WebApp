@@ -36,7 +36,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="2dp"
-                android:text="Vehicle No."
+                android:text="@string/Vehicle_No"
                 android:textColor="@android:color/black" />
 
             <EditText
@@ -57,7 +57,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="2dp"
-                android:text="Tranporter"
+                android:text="@string/Tranporter"
                 android:textColor="@android:color/black" />
 
             <EditText
@@ -78,7 +78,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="2dp"
-                android:text="Driver Name"
+                android:text="@string/Driver_Name"
                 android:textColor="@android:color/black" />
 
             <EditText
@@ -100,7 +100,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="2dp"
-                android:text="Driver Contact No."
+                android:text="@string/Driver_Contact_No"
                 android:textColor="@android:color/black" />
 
             <EditText
@@ -121,7 +121,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="2dp"
-                android:text="Remark"
+                android:text="@string/Remark"
                 android:textColor="@android:color/black" />
 
             <EditText
@@ -134,7 +134,7 @@
                 android:background="@drawable/border_edittext"
                 android:lines="3"
                 android:paddingLeft="10dp"
-                android:text="test" />
+                android:text="@string/test" />
 
             <TextView
                 android:id="@+id/txt_save"
@@ -145,7 +145,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@color/colorPrimary"
                 android:gravity="center"
-                android:text="Save"
+                android:text="@string/Save"
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -157,7 +157,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/mybutton"
                 android:gravity="center"
-                android:text="Print"
+                android:text="@string/Print"
                 android:textColor="@android:color/white" />
 
             <TextView
@@ -168,7 +168,7 @@
                 android:layout_marginRight="10dp"
                 android:background="@android:color/white"
                 android:gravity="center"
-                android:text="Close" />
+                android:text="@string/Close" />
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

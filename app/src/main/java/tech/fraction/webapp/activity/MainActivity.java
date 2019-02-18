@@ -459,8 +459,8 @@ public class MainActivity extends AppCompatActivity {
         if (onClickListenerInvoice != null) {
             sheetBehaviorInvoice.setState(BottomSheetBehavior.STATE_COLLAPSED);
             String broker = "", invoiceNo = "", inwardNo = "", outwardNo = "",
-                   receiptType = "", paidStatus = "",month = "", year = "";
-            int paidOn = -1,invoiceGeneratedPeriod = -1;
+                    receiptType = "", paidStatus = "", month = "", year = "";
+            int paidOn = -1, invoiceGeneratedPeriod = -1;
             if (selectedAccount != null) {
                 if (selectedAccount.getName() != null) {
                     broker = selectedAccount.getName();
@@ -584,13 +584,13 @@ public class MainActivity extends AppCompatActivity {
                     paidOn = -1;
                     break;
                 case "Within 2 Days":
-                    paidOn= 2;
+                    paidOn = 2;
                     break;
                 case "Today":
                     paidOn = 0;
                     break;
                 case "Within 1 Week":
-                    paidOn= 8;
+                    paidOn = 8;
                     break;
                 case "Within 15 Days":
                     paidOn = 15;
@@ -601,12 +601,12 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-            onClickListenerInvoice.onFilterInvoiceApplyClick(broker,invoiceNo,inwardNo,outwardNo,month,year,receiptType,invoiceGeneratedPeriod,paidStatus,paidOn);
+            onClickListenerInvoice.onFilterInvoiceApplyClick(broker, invoiceNo, inwardNo, outwardNo, month, year, receiptType, invoiceGeneratedPeriod, paidStatus, paidOn);
         }
 
     }
-    private void resetInvoiceFilter()
-    {
+
+    private void resetInvoiceFilter() {
         selectedAccount = null;
         tvBrokerInvoice.setText("");
         etInvoiceNo.setText("");
@@ -620,7 +620,6 @@ public class MainActivity extends AppCompatActivity {
         spPaidOnInv.setSelection(0);
         sheetBehaviorInvoice.setState(BottomSheetBehavior.STATE_COLLAPSED);
         setInvoiceFilter();
-
 
 
     }
@@ -911,7 +910,6 @@ public class MainActivity extends AppCompatActivity {
         sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         setInwardFilter();
     }
-
 
 
     public static OnFilterListener onClickListener;

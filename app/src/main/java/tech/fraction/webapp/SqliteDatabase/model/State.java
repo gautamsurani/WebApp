@@ -1,6 +1,8 @@
 package tech.fraction.webapp.SqliteDatabase.model;
 
-public class State
+import java.io.Serializable;
+
+public class State implements Serializable
 {
     private String code;
 

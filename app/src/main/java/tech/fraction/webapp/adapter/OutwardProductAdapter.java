@@ -57,8 +57,8 @@ public class OutwardProductAdapter extends RecyclerView.Adapter<OutwardProductAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
         viewHolder.tvItemName.setText(outwardItems.get(position).getItemName());
-        viewHolder.tvStock.setText(outwardItems.get(position).getOutwardQuantity()+"/"+outwardItems.get(position).getStock());
-        viewHolder.tvUnloadingCharge.setText("Loading Charges: "+outwardItems.get(position).getLoadingCharges());
+        viewHolder.tvStock.setText(outwardItems.get(position).getOutwardQuantity() + "/" + outwardItems.get(position).getStock());
+        viewHolder.tvUnloadingCharge.setText("Loading Charges: " + outwardItems.get(position).getLoadingCharges());
 
     }
 
@@ -69,7 +69,8 @@ public class OutwardProductAdapter extends RecyclerView.Adapter<OutwardProductAd
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvItemName,tvStock,tvUnloadingCharge;
+        TextView tvItemName, tvStock, tvUnloadingCharge;
+
         public ViewHolder(@NonNull View item) {
             super(item);
             tvItemName = item.findViewById(R.id.tvItemName);

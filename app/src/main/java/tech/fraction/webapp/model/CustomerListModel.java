@@ -1,6 +1,8 @@
 package tech.fraction.webapp.model;
 
-public class CustomerListModel {
+import java.io.Serializable;
+
+public class CustomerListModel implements Serializable {
 
 
     String name;
