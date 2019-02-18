@@ -1,6 +1,7 @@
 package tech.fraction.webapp.rest.ApiRequestModel;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import tech.fraction.webapp.model.OutwardDetails;
@@ -8,7 +9,7 @@ import tech.fraction.webapp.model.Transporter;
 
 public class SaveOutwardRequestModel implements Serializable {
 
-    private List<OutwardDetails> OutwardsInwardItems;
+    private ArrayList<OutwardDetails> OutwardsInwardItems;
 
     private int AccountId;
 
@@ -30,8 +31,10 @@ public class SaveOutwardRequestModel implements Serializable {
 
     private Double TotalOtherCharges;
 
+    public SaveOutwardRequestModel() {
+    }
 
-    public SaveOutwardRequestModel(List<OutwardDetails> outwardsInwardItems, int accountId, String broker, String currentInvoices, boolean isModified, int id,
+    public SaveOutwardRequestModel(ArrayList<OutwardDetails> outwardsInwardItems, int accountId, String broker, String currentInvoices, boolean isModified, int id,
                                    String outwardNo, Double totalLoadingCharges, tech.fraction.webapp.model.Transporter transporter, String outwardOn,
                                    Double totalOtherCharges) {
         OutwardsInwardItems = outwardsInwardItems;
@@ -47,11 +50,11 @@ public class SaveOutwardRequestModel implements Serializable {
         TotalOtherCharges = totalOtherCharges;
     }
 
-    public List<OutwardDetails> getOutwardsInwardItems() {
+    public ArrayList<OutwardDetails> getOutwardsInwardItems() {
         return OutwardsInwardItems;
     }
 
-    public void setOutwardsInwardItems(List<OutwardDetails> outwardsInwardItems) {
+    public void setOutwardsInwardItems(ArrayList<OutwardDetails> outwardsInwardItems) {
         OutwardsInwardItems = outwardsInwardItems;
     }
 
