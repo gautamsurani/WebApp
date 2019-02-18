@@ -140,7 +140,7 @@ public class SelectItemForOutwardActivity extends BaseActivity {
 
         call.enqueue(new Callback<OutwardItemRespondModel>() {
             @Override
-            public void onResponse(Call<OutwardItemRespondModel> call, Response<OutwardItemRespondModel> response) {
+            public void onResponse(@NonNull Call<OutwardItemRespondModel> call, @NonNull Response<OutwardItemRespondModel> response) {
                 IsLAstLoading = true;
                 progress_circular.setVisibility(View.GONE);
                 OutwardItemRespondModel outwardItemRespondModel = response.body();

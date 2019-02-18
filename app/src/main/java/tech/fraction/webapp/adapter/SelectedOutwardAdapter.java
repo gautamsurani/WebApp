@@ -75,7 +75,7 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
         }
         viewHolder.tvLocation.setText("Location: " + location);
         if (!outwardDetails.get(position).getInwardedOn().isEmpty()) {
-            viewHolder.tv0utDate.setText(Utils.FormatDate(outwardDetails.get(position).getInwardedOn()));
+            viewHolder.tv0utDate.setText(Utils.FormatDate(outwardDetails.get(position).getInwardDetail().getNumber()));
         } else {
             viewHolder.tv0utDate.setText("");
         }
