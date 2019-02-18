@@ -18,7 +18,7 @@
         android:background="@drawable/mybutton"
         android:gravity="center"
         android:padding="10dp"
-        android:text="Partywise Invoice"
+        android:text="@string/Partywise_Invoice"
         android:textColor="@color/white" />
 
     <RelativeLayout

@@ -1,6 +1,8 @@
 package tech.fraction.webapp.model;
 
-public class SubSubMenuList {
+import java.io.Serializable;
+
+public class SubSubMenuList implements Serializable {
     String menuName;
 
     public String getMenuName() {

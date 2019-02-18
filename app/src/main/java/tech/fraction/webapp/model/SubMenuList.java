@@ -1,9 +1,10 @@
 package tech.fraction.webapp.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubMenuList {
+public class SubMenuList implements Serializable {
     String menuName;
     List<SubSubMenuList> subSubMenuLists = new ArrayList<>();
 

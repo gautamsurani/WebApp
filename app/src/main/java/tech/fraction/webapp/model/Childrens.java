@@ -1,8 +1,9 @@
 package tech.fraction.webapp.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Childrens {
+public class Childrens implements Serializable {
 
     private List<Childrens> Childrens;
 

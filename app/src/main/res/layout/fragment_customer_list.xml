@@ -17,7 +17,7 @@
         android:background="@drawable/mybutton"
         android:gravity="center"
         android:padding="10dp"
-        android:text="Add Customer"
+        android:text="@string/Add_Customer"
         android:textColor="@color/white" />
 
     <android.support.v7.widget.RecyclerView

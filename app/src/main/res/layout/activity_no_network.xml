@@ -30,7 +30,7 @@
             android:layout_below="@+id/ivNoICon"
             android:layout_marginTop="25dp"
             android:gravity="center"
-            android:text="No Connection"
+            android:text="@string/No_Connection"
             android:textColor="@color/white"
             android:textSize="24sp"
             tools:ignore="HardcodedText" />
@@ -64,7 +64,7 @@
         android:gravity="center"
         android:paddingTop="14dp"
         android:paddingBottom="14dp"
-        android:text="REFRESH"
+        android:text="@string/REFRESH"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         android:textStyle="bold"

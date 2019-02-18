@@ -29,7 +29,7 @@
                 android:layout_marginRight="15dp"
 
                 android:layout_marginBottom="2dp"
-                android:text="Outward No."
+                android:text="@string/Outward_No"
                 android:textColor="@android:color/black" />
 
             <LinearLayout
@@ -75,7 +75,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="2dp"
-                android:text="Party Name"
+                android:text="@string/Party_Name"
                 android:textColor="@android:color/black" />
 
             <RelativeLayout
@@ -94,7 +94,7 @@
 
                     android:background="@drawable/border_edittext"
                     android:gravity="center_vertical"
-                    android:hint="Enter Party Name "
+                    android:hint="@string/Enter_Party_Name"
                     android:padding="10dp" />
 
                 <ProgressBar
@@ -127,7 +127,7 @@
                 android:layout_marginRight="15dp"
                 android:background="@drawable/mybutton"
                 android:gravity="center"
-                android:text="Select Item "
+                android:text="@string/Select_Item"
                 android:textColor="@color/white" />
 
             <LinearLayout
@@ -164,7 +164,7 @@
                     android:layout_marginTop="15dp"
 
                     android:layout_marginBottom="2dp"
-                    android:text="Tranporter"
+                    android:text="@string/Tranporter"
                     android:textColor="@android:color/black" />
 
                 <EditText
@@ -184,7 +184,7 @@
                     android:layout_marginTop="15dp"
 
                     android:layout_marginBottom="2dp"
-                    android:text="Driver Name"
+                    android:text="@string/Driver_Name"
                     android:textColor="@android:color/black" />
 
                 <EditText
@@ -205,7 +205,7 @@
                     android:layout_marginTop="15dp"
 
                     android:layout_marginBottom="2dp"
-                    android:text="Driver Contact No."
+                    android:text="@string/Driver_Contact_No"
                     android:textColor="@android:color/black" />
 
                 <EditText
@@ -225,7 +225,7 @@
                     android:layout_marginTop="15dp"
 
                     android:layout_marginBottom="2dp"
-                    android:text="Remark"
+                    android:text="@string/Remark"
                     android:textColor="@android:color/black" />
 
                 <EditText
@@ -237,7 +237,7 @@
                     android:gravity="top"
                     android:lines="3"
                     android:padding="10dp"
-                    android:text="test" />
+                    android:text="@string/test" />
 
                 <TextView
                     android:id="@+id/txt_save"
@@ -249,7 +249,7 @@
                     android:layout_marginBottom="15dp"
                     android:background="@color/colorPrimary"
                     android:gravity="center"
-                    android:text="Save"
+                    android:text="@string/Save"
                     android:textColor="@android:color/white" />
             </LinearLayout>
         </RelativeLayout>

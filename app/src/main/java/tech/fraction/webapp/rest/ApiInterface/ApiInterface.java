@@ -16,6 +16,7 @@ import tech.fraction.webapp.rest.ApiRequestModel.SaveOutwardRequestModel;
 import tech.fraction.webapp.rest.ApiResponseModel.AccountResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.CityResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.CountryResponseModel;
+import tech.fraction.webapp.rest.ApiResponseModel.DetailInwardResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.InvoiceResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.InwardResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.ItemResoponseModel;
@@ -75,6 +76,9 @@ public interface ApiInterface {
 
     @POST("master/loadoutwarditemdetails")
     Call<OutwardItemRespondModel> getOutwardItem(@Query("accountId") int accountId);
+
+    @POST("master/editinwards")
+    Call<DetailInwardResponseModel> getInwardItemDetail(@Query("inwardDetailId") int inwardDetailId, @Query("accountId") int accountId);
 
     @POST("master/saveoutwarddetail")
     Call<SaveOutwardResponseModel> saveOutwardItems(@Body SaveOutwardRequestModel saveOutwardRequestModel);

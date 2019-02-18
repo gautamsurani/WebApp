@@ -60,10 +60,9 @@ public class InvoiceProductAdapter extends RecyclerView.Adapter<InvoiceProductAd
     public void onBindViewHolder(@NonNull InvoiceProductAdapter.ViewHolder viewHolder, final int position) {
 
 
-
-        viewHolder.tvItemName.setText(invoiceProductList.get(position).getItemName()+invoiceProductList.get(position).getWeight());
-        viewHolder.tvItemPrice.setText(String.format("%.2f",invoiceProductList.get(position).getTotalAmount())+context.getResources().getString(R.string.rs));
-        viewHolder.tvDate.setText(Utils.FormatDate(invoiceProductList.get(position).getFromDate())+" to "+Utils.FormatDate(invoiceProductList.get(position).getToDate()));
+        viewHolder.tvItemName.setText(invoiceProductList.get(position).getItemName() + invoiceProductList.get(position).getWeight());
+        viewHolder.tvItemPrice.setText(String.format("%.2f", invoiceProductList.get(position).getTotalAmount()) + context.getResources().getString(R.string.rs));
+        viewHolder.tvDate.setText(Utils.FormatDate(invoiceProductList.get(position).getFromDate()) + " to " + Utils.FormatDate(invoiceProductList.get(position).getToDate()));
         viewHolder.recRowProductInvoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

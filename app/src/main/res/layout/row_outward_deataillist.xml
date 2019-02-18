@@ -18,13 +18,13 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:text="Dhani Akhi[Locale Bardhan]"/>
+        android:text="@string/row_name_item"/>
     <tech.fraction.webapp.ui.MyTextView
         android:id="@+id/detail_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimary"
-        android:text="100/200"/>
+        android:text="@string/row_detail_value"/>
 </LinearLayout>
     <LinearLayout
         android:id="@+id/ll_two"
@@ -37,12 +37,12 @@
         <tech.fraction.webapp.ui.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Location :"/>
+            android:text="@string/row_location_name"/>
         <tech.fraction.webapp.ui.MyBoldTextView
             android:id="@+id/txt_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="A304,A304,A304"/>
+            android:text="@string/row_location"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,11 +54,11 @@
         <tech.fraction.webapp.ui.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Unloading Charges :"/>
+            android:text="@string/row_unloading"/>
         <tech.fraction.webapp.ui.MyBoldTextView
             android:id="@+id/txt_unloading_charges"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1500"/>
+            android:text="@string/row_unloading_charge"/>
     </LinearLayout>
 </RelativeLayout>

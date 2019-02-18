@@ -1,6 +1,8 @@
 package tech.fraction.webapp.rest.ApiRequestModel;
 
-public class OutwardRequestModel {
+import java.io.Serializable;
+
+public class OutwardRequestModel implements Serializable {
     private int totalRecords;
 
     private String item;

@@ -65,10 +65,10 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
         viewHolder.tvName.setText(invoiceList.get(position).getAccountName());
 
 
-        viewHolder.tvInvDate.setText(Utils.FormatDate(invoiceList.get(position).getGeneratedOn()) );
-        viewHolder.tvPaidAmount.setText("PA: "+invoiceList.get(position).getPaidAmount()+context.getResources().getString(R.string.rs));
+        viewHolder.tvInvDate.setText(Utils.FormatDate(invoiceList.get(position).getGeneratedOn()));
+        viewHolder.tvPaidAmount.setText("PA: " + invoiceList.get(position).getPaidAmount() + context.getResources().getString(R.string.rs));
         viewHolder.tvInvNo.setText(invoiceList.get(position).getNumber());
-        String s="TA: "+String.format("%.2f", invoiceList.get(position).getTotalAmount())+context.getResources().getString(R.string.rs);
+        String s = "TA: " + String.format("%.2f", invoiceList.get(position).getTotalAmount()) + context.getResources().getString(R.string.rs);
         Spannable wordtoSpan = new SpannableString(s);
 
         wordtoSpan.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.colorPrimary)), 4, s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -106,7 +106,7 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvName, tvInvDate, tvInvNo, tvPayNow,tvPaidAmount,tvTotalAmount;
+        TextView tvName, tvInvDate, tvInvNo, tvPayNow, tvPaidAmount, tvTotalAmount;
         CardView cardRowInvoice;
         RecyclerView rec_view;
 

@@ -1,6 +1,8 @@
 package tech.fraction.webapp.model;
 
-public class InvoiceDetails {
+import java.io.Serializable;
+
+public class InvoiceDetails implements Serializable {
 
     private int TotalOutwardRent;
 

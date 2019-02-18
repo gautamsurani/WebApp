@@ -57,7 +57,7 @@ public class SelectItemForOutwardAdapter extends RecyclerView.Adapter<SelectItem
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int position) {
 
         viewHolder.tvInwardNo.setText(outwardDetails.get(position).getInwardDetail().getNumber());
-        viewHolder.tvName.setText(outwardDetails.get(position).getItemName()+"-"+outwardDetails.get(position).getUnitName());
+        viewHolder.tvName.setText(outwardDetails.get(position).getItemName() + "-" + outwardDetails.get(position).getUnitName());
 
         viewHolder.tvStock.setText("Stock : " + outwardDetails.get(position).getStock() + " / " + outwardDetails.get(position).getQuantity());
 

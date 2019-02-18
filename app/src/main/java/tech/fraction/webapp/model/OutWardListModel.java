@@ -1,6 +1,8 @@
 package tech.fraction.webapp.model;
 
-public class OutWardListModel {
+import java.io.Serializable;
+
+public class OutWardListModel implements Serializable {
    private String name ,id,date,charge;
 
     public OutWardListModel(String name, String id, String date, String charge) {

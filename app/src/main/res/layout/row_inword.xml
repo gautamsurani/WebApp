@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp"
-    android:clickable="false"
     app:cardCornerRadius="0dp"
     app:cardElevation="2dp">
 
@@ -19,8 +18,8 @@
             android:id="@+id/ll1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -37,9 +36,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingLeft="5dp"
-                android:text="Sweta Panchal "
+                android:text="@string/row_name"
                 android:textColor="@color/light_black"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <tech.fraction.webapp.ui.MyTextView
                 android:id="@+id/tvInwardNo"
@@ -48,7 +47,7 @@
                 android:layout_marginRight="30dp"
                 android:background="@drawable/border"
                 android:padding="5dp"
-                android:text="123456"
+                android:text="@string/row_inward_no"
                 android:textColor="@color/colorPrimary"
                 android:textSize="15sp" />
         </LinearLayout>
@@ -57,10 +56,10 @@
             android:id="@+id/ll2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ll1"
+            android:gravity="center_vertical"
             android:layout_marginLeft="43dp"
             android:layout_marginBottom="10dp"
-            android:gravity="center_vertical"
+            android:layout_below="@+id/ll1"
             android:orientation="horizontal">
 
             <tech.fraction.webapp.ui.MyTextView
@@ -68,21 +67,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:drawableLeft="@drawable/calender"
+                android:text="@string/row_date"
                 android:drawablePadding="5dp"
+                android:textSize="16sp"
                 android:gravity="center_vertical"
-                android:paddingRight="5dp"
-                android:text="02-01-2019"
-                android:textSize="16sp" />
+                android:paddingRight="5dp" />
 
             <tech.fraction.webapp.ui.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:drawableLeft="@drawable/ic_time_black_24dp"
+                android:text="@string/row_invoice_due_today"
                 android:drawablePadding="5dp"
+                android:textSize="16sp"
                 android:gravity="center_vertical"
-                android:paddingLeft="5dp"
-                android:text="Invoice due today"
-                android:textSize="16sp" />
+                android:paddingLeft="5dp" />
 
         </LinearLayout>
 
@@ -90,10 +89,11 @@
             android:id="@+id/rvProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ll2"
-            android:background="#ECECEC" />
+            android:background="#ECECEC"
+            android:layout_below="@+id/ll2" />
 
         <LinearLayout
+            android:id="@+id/layout_view_three"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_below="@+id/rvProduct"
@@ -107,7 +107,7 @@
             <tech.fraction.webapp.ui.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Paid : "
+                android:text="@string/row_paid"
                 android:textColor="@color/light_black"
                 android:textSize="15sp" />
 
@@ -116,7 +116,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="100/800"
+                android:text="@string/row_paid_amont"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp" />
 
@@ -129,10 +129,10 @@
                 android:paddingTop="5dp"
                 android:paddingRight="10dp"
                 android:paddingBottom="5dp"
+                android:visibility="gone"
                 android:text="Pay Now"
                 android:textColor="@color/white"
-                android:textSize="16sp"
-                android:visibility="gone" />
+                android:textSize="16sp" />
 
 
         </LinearLayout>

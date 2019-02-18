@@ -1,8 +1,9 @@
 package tech.fraction.webapp.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class InwardData {
+public class InwardData implements Serializable {
 
     private List<InventoryDetail> PersonInformation;
 

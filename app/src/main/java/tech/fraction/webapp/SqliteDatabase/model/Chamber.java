@@ -1,6 +1,8 @@
 package tech.fraction.webapp.SqliteDatabase.model;
 
-public class Chamber {
+import java.io.Serializable;
+
+public class Chamber implements Serializable {
 
     int id;
     String name;

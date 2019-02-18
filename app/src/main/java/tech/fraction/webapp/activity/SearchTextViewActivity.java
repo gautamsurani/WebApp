@@ -41,6 +41,7 @@ public class SearchTextViewActivity extends AppCompatActivity {
 
         context = this;
 
+
         rec_view = findViewById(R.id.rec_view);
         tvNoFound = findViewById(R.id.tv_no_found);
         edtSearch = findViewById(R.id.edt_search);

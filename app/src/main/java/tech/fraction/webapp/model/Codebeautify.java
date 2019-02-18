@@ -1,6 +1,8 @@
 package tech.fraction.webapp.model;
 
-public class Codebeautify {
+import java.io.Serializable;
+
+public class Codebeautify  implements Serializable {
  Paging PagingObject;
  SearchField SearchFieldObject;
 

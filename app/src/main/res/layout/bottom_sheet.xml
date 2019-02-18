@@ -26,7 +26,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Refine Result"
+            android:text="@string/Refine_Result"
             android:textColor="@color/white"
             android:textSize="18dp" />
 
@@ -55,7 +55,7 @@
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
                 android:paddingRight="20dp"
-                android:text="Broker"
+                android:text="@string/Broker"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
 
@@ -76,7 +76,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:gravity="center_vertical"
-                    android:hint="Select Broker Name "
+                    android:hint="@string/Select_Broker_Name"
                     android:textColor="@color/light_black"
                     android:textSize="16sp" />
 
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="Inward No"
+                android:text="@string/Inward_No"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
 
@@ -109,7 +109,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/search_bg"
                 android:gravity="center_vertical"
-                android:hint="Enter Inward No"
+                android:hint="@string/Enter_Inward_No"
                 android:paddingLeft="10dp"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
@@ -119,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="Item"
+                android:text="@string/item"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
 
@@ -134,7 +134,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/search_bg"
                 android:gravity="center_vertical"
-                android:hint="Select Item"
+                android:hint="@string/Select_Item"
                 android:paddingLeft="10dp"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="Unit"
+                android:text="@string/Unit"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
 
@@ -158,7 +158,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/search_bg"
                 android:gravity="center_vertical"
-                android:hint="Enter Unit"
+                android:hint="@string/Enter_Unit"
                 android:paddingLeft="10dp"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
@@ -168,7 +168,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="Marko"
+                android:text="@string/Marko"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
 
@@ -182,7 +182,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/search_bg"
                 android:gravity="center_vertical"
-                android:hint="Enter Marko"
+                android:hint="@string/Enter_Marko"
                 android:paddingLeft="10dp"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
@@ -192,7 +192,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="Location"
+                android:text="@string/Location"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
 
@@ -206,7 +206,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/search_bg"
                 android:gravity="center_vertical"
-                android:hint="Enter Location"
+                android:hint="@string/Enter_Location"
                 android:paddingLeft="10dp"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
@@ -216,7 +216,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="Inward On"
+                android:text="@string/Inward_On"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
 
@@ -256,7 +256,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="Short By"
+                android:text="@string/Short_By"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -303,7 +303,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="Sort By Expression"
+                android:text="@string/Sort_By_Expression"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -341,7 +341,7 @@
                 android:layout_marginTop="10dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="Invoice Generation Due"
+                android:text="@string/Invoice_Generation_Due"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
 
@@ -379,7 +379,7 @@
                 android:layout_marginTop="10dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="Invoice Generated Period"
+                android:text="@string/Invoice_Generated_Period"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
 
@@ -417,7 +417,7 @@
                 android:layout_marginTop="10dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="Paid Status"
+                android:text="@string/Paid_Status"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
 
@@ -455,7 +455,7 @@
                 android:layout_marginTop="10dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="Paid On"
+                android:text="@string/Paid_On"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
 
@@ -511,7 +511,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Reset Filters"
+            android:text="@string/Reset_Filters"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp" />
 
@@ -524,7 +524,7 @@
             android:background="@color/colorPrimary"
             android:clickable="true"
             android:gravity="center"
-            android:text="Apply Filter"
+            android:text="@string/Apply_Filter"
             android:textColor="@android:color/white"
             android:textSize="16sp" />
 

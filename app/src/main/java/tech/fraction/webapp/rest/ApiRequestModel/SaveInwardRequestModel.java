@@ -1,11 +1,12 @@
 package tech.fraction.webapp.rest.ApiRequestModel;
 
+import java.io.Serializable;
 import java.util.List;
 
 import tech.fraction.webapp.model.InwardItems;
 import tech.fraction.webapp.model.InwardVehicleDetail;
 
-public class SaveInwardRequestModel {
+public class SaveInwardRequestModel implements Serializable {
     private String PaidStatus;
 
     private boolean CanGenerateInvoice;
@@ -41,6 +42,9 @@ public class SaveInwardRequestModel {
     private String LastInvoicePaidOn;
 
     private int AddedBy;
+
+    public SaveInwardRequestModel() {
+    }
 
     public SaveInwardRequestModel(String paidStatus, boolean canGenerateInvoice, List<InwardItems> inwardItemDetailPoco, int accountId, String broker,
                                   String inwardedOn, String lastInvoiceToDate, tech.fraction.webapp.model.InwardVehicleDetail inwardVehicleDetail,

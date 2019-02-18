@@ -18,7 +18,7 @@
         android:background="@drawable/mybutton"
         android:gravity="center"
         android:padding="10dp"
-        android:text="Add Outward"
+        android:text="@string/Add_Outward"
         android:textColor="@color/white" />
 
     <RelativeLayout

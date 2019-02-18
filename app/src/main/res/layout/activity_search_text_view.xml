@@ -35,7 +35,7 @@
         android:background="@drawable/border_edittext"
         android:drawableLeft="@drawable/search"
         android:drawablePadding="5dp"
-        android:hint="Search By Party Name"
+        android:hint="@string/Search_By_Party_Name"
         android:paddingLeft="10dp"
         android:paddingRight="10dp" />
 
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/rec_view"
         android:gravity="center"
-        android:text="No Reocrd Found"
+        android:text="@string/No_Reocrd_Found"
         android:visibility="gone" />
 
 </RelativeLayout>

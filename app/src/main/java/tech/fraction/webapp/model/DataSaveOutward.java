@@ -1,6 +1,8 @@
 package tech.fraction.webapp.model;
 
-public class DataSaveOutward {
+import java.io.Serializable;
+
+public class DataSaveOutward implements Serializable {
     private int RecordId;
 
     public int getRecordId() {
