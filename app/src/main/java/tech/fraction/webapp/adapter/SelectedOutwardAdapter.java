@@ -79,7 +79,7 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
         } else {
             viewHolder.tv0utDate.setText("");
         }
-        viewHolder.tvOutNo.setText(Utils.ifIsStringNull(outwardDetails.get(position).getInwardNo()));
+        viewHolder.tvOutNo.setText(Utils.ifIsStringNull(outwardDetails.get(position).getInwardDetail().getNumber()));
 
         viewHolder.etQty.setText(String.valueOf(outwardDetails.get(position).getOutwardQuantity()));
         viewHolder.etLC.setText(String.valueOf(outwardDetails.get(position).getLoadingCharges()));
