@@ -3,19 +3,17 @@
     android:id="@+id/rl_detail"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="2dp"
     android:background="@android:color/white"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp">
+    android:paddingTop="10dp">
 
     <LinearLayout
         android:id="@+id/ll_one"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:orientation="horizontal">
+        android:paddingRight="10dp">
 
         <tech.fraction.webapp.ui.MyBoldTextView
             android:id="@+id/txt_name"
@@ -39,9 +37,9 @@
         android:layout_height="30dp"
         android:layout_below="@id/ll_one"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:orientation="horizontal">
+        android:paddingRight="10dp">
 
         <tech.fraction.webapp.ui.MyTextView
             android:layout_width="wrap_content"
@@ -62,9 +60,9 @@
         android:layout_height="30dp"
         android:layout_below="@+id/ll_two"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:orientation="horizontal">
+        android:paddingRight="10dp">
 
         <tech.fraction.webapp.ui.MyTextView
             android:layout_width="wrap_content"

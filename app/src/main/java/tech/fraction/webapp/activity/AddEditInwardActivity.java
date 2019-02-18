@@ -20,9 +20,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,7 +31,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import tech.fraction.webapp.R;
 import tech.fraction.webapp.adapter.InwardItemAdapter;
 import tech.fraction.webapp.model.Account;
@@ -42,6 +38,7 @@ import tech.fraction.webapp.model.InventoryDetail;
 import tech.fraction.webapp.model.InwardItems;
 import tech.fraction.webapp.model.InwardVehicleDetail;
 import tech.fraction.webapp.model.SearchTextViewModel;
+import tech.fraction.webapp.model.Transporter;
 import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
 import tech.fraction.webapp.rest.ApiRequestModel.SaveInwardRequestModel;
 import tech.fraction.webapp.rest.ApiResponseModel.AccountResponseModel;
@@ -54,18 +51,17 @@ public class AddEditInwardActivity extends AppCompatActivity {
 
     RecyclerView rec_view;
 
-    RelativeLayout rl_editInward;
+    RelativeLayout rl_editInward, rlProgress;
 
     InwardItemAdapter inwardItemAdapter;
 
-    ImageView ivBack;
+    ImageView ivBack, tvAddItem;
 
-    TextView tvAddItem, tvInwardNo, tvDate,tvParty, tvTitle, tvSave;
+    TextView tvInwardNo, tvDate, tvParty, tvTitle, tvSave;
 
     Activity context;
 
     ProgressBar pbParty;
-
 
     ApiInterface apiInterface;
 
@@ -87,6 +83,8 @@ public class AddEditInwardActivity extends AppCompatActivity {
 
     String mode = "";
 
+    Transporter transporter;
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -104,7 +102,6 @@ public class AddEditInwardActivity extends AppCompatActivity {
         retrofit = RetrofitInstance.getClient();
         apiInterface = retrofit.create(ApiInterface.class);
 
-
         initComp();
 
         initItemRecyclerView();
@@ -120,6 +117,10 @@ public class AddEditInwardActivity extends AppCompatActivity {
             tvTitle.setText("Edit Inward");
         }
         if (mode.equals("edit")) {
+
+            tvDate.setEnabled(false);
+            tvParty.setEnabled(false);
+
             selectedAccount.setId(inventoryDetail.getAccountId());
             selectedAccount.setName(inventoryDetail.getAccountName());
             selectedAccount.setAddress(inventoryDetail.getAddress());
@@ -127,13 +128,16 @@ public class AddEditInwardActivity extends AppCompatActivity {
             inwardNumber = inventoryDetail.getInwardNo();
             inwardDate = inventoryDetail.getInwardedOn();
             inwardItems = inventoryDetail.getInwardItems();
-            etVehicleNo.setText(inventoryDetail.getTransporter().getVehicleNo());
-            etDriverName.setText(inventoryDetail.getTransporter().getDriverName());
-            etDriverNo.setText(inventoryDetail.getTransporter().getDriverContactNumber());
-            etTransporter.setText(inventoryDetail.getTransporter().getTransporterDetail());
-            etRemark.setText(inventoryDetail.getTransporter().getRemarks());
-
-
+            transporter = inventoryDetail.getTransporter();
+            if (transporter != null) {
+                etVehicleNo.setText(Utils.ifIsStringNull(transporter.getVehicleNo()));
+                etDriverName.setText(Utils.ifIsStringNull(transporter.getDriverName()));
+                etDriverNo.setText(Utils.ifIsStringNull(transporter.getDriverContactNumber()));
+                etTransporter.setText(Utils.ifIsStringNull(transporter.getTransporterDetail()));
+                etRemark.setText(Utils.ifIsStringNull(transporter.getRemarks()));
+            } else {
+                transporter = new Transporter();
+            }
         }
 
         initCache();
@@ -169,10 +173,17 @@ public class AddEditInwardActivity extends AppCompatActivity {
         tvSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (selectedAccount.getName() == null) {
+                    Utils.ShowSnakBar("Please select party name", rl_editInward, context);
+                    return;
+                }
+
                 if (inwardItems.size() == 0) {
                     Utils.ShowSnakBar("Add atleast one item", rl_editInward, context);
                     return;
                 }
+
                 if (mode.equals("add")) {
                     InwardVehicleDetail inwardVehicleDetail = new InwardVehicleDetail("", etVehicleNo.getText().toString(),
                             etTransporter.getText().toString(), etRemark.getText().toString(), etDriverNo.getText().toString(),
@@ -183,9 +194,14 @@ public class AddEditInwardActivity extends AppCompatActivity {
                             false, null, null, inwardNumber, null, null,
                             0, null, Utils.getPersonalInfo(context).getPersonId());
                 } else {
-                    InwardVehicleDetail inwardVehicleDetail = new InwardVehicleDetail("", etVehicleNo.getText().toString(), etTransporter.getText().toString()
-                            , etRemark.getText().toString(), etDriverNo.getText().toString(), etDriverName.getText().toString(), inventoryDetail.getTransporter().getId(),
-                            inventoryDetail.getTransporter().getInwardDetailId());
+                    InwardVehicleDetail inwardVehicleDetail = new InwardVehicleDetail(""
+                            , etVehicleNo.getText().toString()
+                            , etTransporter.getText().toString()
+                            , etRemark.getText().toString()
+                            , etDriverNo.getText().toString()
+                            , etDriverName.getText().toString()
+                            , Utils.ifIsIntNull(transporter.getId())
+                            , inventoryDetail.getInwardDetailId());
 
                     saveInwardRequestModel = new SaveInwardRequestModel(inventoryDetail.getPaidStatus(), false, inwardItems, selectedAccount.getId(),
                             selectedAccount.getName(), inventoryDetail.getInwardedOn(), null, inwardVehicleDetail, null, true,
@@ -193,7 +209,6 @@ public class AddEditInwardActivity extends AppCompatActivity {
                             inventoryDetail.getInwardDetailId(), null, Utils.getPersonalInfo(context).getPersonId());
 
                 }
-
 
                 CallAddInwardApi();
             }
@@ -213,7 +228,7 @@ public class AddEditInwardActivity extends AppCompatActivity {
             }
         });
 
-        if (accounts.size() == 0) {
+        if (accounts.size() == 0 && mode.equals("add")) {
             new AccountAsync().execute();
         }
 
@@ -233,27 +248,26 @@ public class AddEditInwardActivity extends AppCompatActivity {
     }
 
     private void CallAddInwardApi() {
-
+        rlProgress.setVisibility(View.VISIBLE);
 
         Call<SaveInwardResponseModel> call = apiInterface.saveInward(saveInwardRequestModel);
 
         call.enqueue(new Callback<SaveInwardResponseModel>() {
             @Override
             public void onResponse(Call<SaveInwardResponseModel> call, Response<SaveInwardResponseModel> response) {
+                rlProgress.setVisibility(View.GONE);
                 SaveInwardResponseModel saveInwardResponseModel = response.body();
                 Log.d("", "===>" + response.body().toString());
                 if (saveInwardResponseModel.getIsValid()) {
                     Utils.ShowSnakBar("Item added Successfully", rl_editInward, context);
-
                 }
-
+                onBackPressed();
             }
 
             @Override
             public void onFailure(Call<SaveInwardResponseModel> call, Throwable t) {
+                rlProgress.setVisibility(View.GONE);
                 Log.d("", "===>failure");
-
-
             }
         });
     }
@@ -392,6 +406,7 @@ public class AddEditInwardActivity extends AppCompatActivity {
         etDriverNo = findViewById(R.id.etDriverNo);
         etRemark = findViewById(R.id.etRemark);
         rl_editInward = findViewById(R.id.rl_editInward);
+        rlProgress = findViewById(R.id.rlProgress);
         Toolbar tb = findViewById(R.id.toolbar);
         setSupportActionBar(tb);
     }

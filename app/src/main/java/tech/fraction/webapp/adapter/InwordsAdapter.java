@@ -58,6 +58,15 @@ public class InwordsAdapter extends RecyclerView.Adapter<InwordsAdapter.ViewHold
         ProductAdapter productAdapter = new ProductAdapter(context);
         productAdapter.setList(inventoryDetail.getInwardItems());
 
+        productAdapter.setOnItemClickListener(new ProductAdapter.OnClickListener() {
+            @Override
+            public void onClick(int i, int witch) {
+                if (onClickListener != null) {
+                    onClickListener.onClick(position, 0);
+                }
+            }
+        });
+
         holder.rvProduct.setLayoutManager(new LinearLayoutManager(context));
         holder.rvProduct.setAdapter(productAdapter);
 

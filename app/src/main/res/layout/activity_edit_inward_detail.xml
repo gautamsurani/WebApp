@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/rl_editInward"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <include
@@ -13,6 +13,7 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/tvSave"
         android:layout_below="@+id/toolbar_custom"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
@@ -22,235 +23,331 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/txt_inwardNo"
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="2dp"
-                android:text="Inward No."
-                android:textColor="@android:color/black" />
+                android:layout_marginTop="5dp"
+                app:cardCornerRadius="5dp"
+                app:cardUseCompatPadding="true">
 
-            <LinearLayout
-                android:id="@+id/ll"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_below="@+id/txt_inwardNo"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="15dp"
-                android:background="@drawable/border_edittext"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                <tech.fraction.webapp.ui.MyTextView
-                    android:id="@+id/tvInwardNo"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="1dp"
-                    android:layout_weight="1"
-                    android:background="#E6E7E7"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp" />
+                    <tech.fraction.webapp.ui.MyTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_below="@id/rec_view"
+                        android:background="@color/colorAccent"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="Inward Detail"
+                        android:textColor="@color/white" />
 
-                <tech.fraction.webapp.ui.MyTextView
-                    android:id="@+id/tvDate"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="#00FCFCFC"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="02-10-2019"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/txt_inwardNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="2dp"
+                        android:text="Inward No."
+                        android:textColor="@android:color/black" />
 
-            </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ll"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/txt_inwardNo"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/border_edittext"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <tech.fraction.webapp.ui.MyTextView
+                            android:id="@+id/tvInwardNo"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin=".7dp"
+                            android:layout_weight="1"
+                            android:background="#E6E7E7"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="10dp" />
+
+                        <tech.fraction.webapp.ui.MyTextView
+                            android:id="@+id/tvDate"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="#00FCFCFC"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="10dp"
+                            android:text="02-10-2019"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
 
 
-            <tech.fraction.webapp.ui.MyTextView
-                android:id="@+id/txt_party"
+                    <tech.fraction.webapp.ui.MyTextView
+                        android:id="@+id/txt_party"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ll"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="2dp"
+                        android:text="Party Name"
+                        android:textColor="@android:color/black" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_p"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_party"
+                        android:layout_marginBottom="15dp">
+
+                        <TextView
+                            android:id="@+id/tvParty"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/border_edittext"
+                            android:enabled="false"
+                            android:gravity="center_vertical"
+                            android:hint="Select Party Name "
+                            android:padding="10dp" />
+
+                        <ProgressBar
+                            android:id="@+id/pbParty"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="20dp"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ll"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="2dp"
-                android:text="Party Name"
-                android:textColor="@android:color/black" />
+                android:layout_below="@+id/cv1"
+                android:layout_marginTop="5dp"
+                app:cardCornerRadius="5dp"
+                app:cardUseCompatPadding="true">
 
-            <RelativeLayout
-                android:id="@+id/rl_p"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <tech.fraction.webapp.ui.MyTextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_below="@id/rec_view"
+                            android:layout_weight="1"
+                            android:background="@color/colorAccent"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="10dp"
+                            android:text="Item List"
+                            android:textColor="@color/white" />
+
+                        <ImageView
+                            android:id="@+id/tvAddItem"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:background="#E6E7E7"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:padding="6dp"
+                            android:src="@drawable/plus_icon"
+                            android:tint="@color/white" />
+                    </LinearLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rec_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_party"
-                android:layout_marginBottom="15dp">
+                android:layout_below="@id/cv2"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                app:cardCornerRadius="5dp"
+                app:cardUseCompatPadding="true">
 
-                <TextView
-                    android:id="@+id/tvParty"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/border_edittext"
-                    android:gravity="center_vertical"
-                    android:hint="Select Party Name "
-                    android:padding="10dp" />
-
-                <ProgressBar
-                    android:id="@+id/pbParty"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="20dp"
-                    android:visibility="gone" />
-            </RelativeLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rec_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rl_p"
-                android:nestedScrollingEnabled="false">
-
-            </android.support.v7.widget.RecyclerView>
-
-            <tech.fraction.webapp.ui.MyTextView
-                android:id="@+id/tvAddItem"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_below="@id/rec_view"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/mybutton"
-                android:gravity="center"
-                android:text="Add Item "
-                android:textColor="@color/white" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvAddItem"
-                android:orientation="vertical">
-
-                <tech.fraction.webapp.ui.MyTextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="2dp"
-                    android:text="Vehicle No."
-                    android:textColor="@android:color/black" />
+                    android:orientation="vertical">
 
-                <tech.fraction.webapp.ui.MyEditText
-                    android:id="@+id/etVehicleNo"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/border_edittext"
-                    android:paddingLeft="10dp" />
+                    <tech.fraction.webapp.ui.MyTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_below="@id/rec_view"
+                        android:background="@color/colorAccent"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="Transport Detail"
+                        android:textColor="@color/white" />
 
-                <tech.fraction.webapp.ui.MyTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="2dp"
-                    android:text="Tranporter"
-                    android:textColor="@android:color/black" />
+                    <tech.fraction.webapp.ui.MyTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="2dp"
+                        android:text="Vehicle No."
+                        android:textColor="@android:color/black" />
 
-                <tech.fraction.webapp.ui.MyEditText
-                    android:id="@+id/etTransporter"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/border_edittext"
-                    android:paddingLeft="10dp" />
+                    <tech.fraction.webapp.ui.MyEditText
+                        android:id="@+id/etVehicleNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/border_edittext"
+                        android:paddingLeft="10dp"
+                        android:textSize="16sp" />
 
-                <tech.fraction.webapp.ui.MyTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="2dp"
-                    android:text="Driver Name"
-                    android:textColor="@android:color/black" />
+                    <tech.fraction.webapp.ui.MyTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="2dp"
+                        android:text="Tranporter"
+                        android:textColor="@android:color/black" />
 
-                <tech.fraction.webapp.ui.MyEditText
-                    android:id="@+id/etDriverName"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/border_edittext"
-                    android:paddingLeft="10dp" />
+                    <tech.fraction.webapp.ui.MyEditText
+                        android:id="@+id/etTransporter"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/border_edittext"
+                        android:paddingLeft="10dp"
+                        android:textSize="16sp" />
 
-                <tech.fraction.webapp.ui.MyTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="10dp"
+                    <tech.fraction.webapp.ui.MyTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="2dp"
+                        android:text="Driver Name"
+                        android:textColor="@android:color/black" />
 
-                    android:layout_marginBottom="2dp"
-                    android:text="Driver Contact No."
-                    android:textColor="@android:color/black" />
+                    <tech.fraction.webapp.ui.MyEditText
+                        android:id="@+id/etDriverName"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/border_edittext"
+                        android:paddingLeft="10dp"
+                        android:textSize="16sp" />
 
-                <tech.fraction.webapp.ui.MyEditText
-                    android:id="@+id/etDriverNo"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/border_edittext"
-                    android:paddingLeft="10dp" />
+                    <tech.fraction.webapp.ui.MyTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="2dp"
+                        android:text="Driver Contact No."
+                        android:textColor="@android:color/black" />
 
-                <tech.fraction.webapp.ui.MyTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="2dp"
-                    android:textColor="@android:color/black" />
+                    <tech.fraction.webapp.ui.MyEditText
+                        android:id="@+id/etDriverNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/border_edittext"
+                        android:paddingLeft="10dp"
+                        android:textSize="16sp" />
 
-                <tech.fraction.webapp.ui.MyEditText
-                    android:id="@+id/etRemark"
-                    android:layout_width="match_parent"
-                    android:layout_height="87dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    <tech.fraction.webapp.ui.MyTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="2dp"
+                        android:text="Remark"
+                        android:textColor="@android:color/black" />
 
-                    android:background="@drawable/border_edittext"
-                    android:gravity="top"
-                    android:lines="3"
-                    android:padding="10dp"
-                    android:text="test" />
+                    <tech.fraction.webapp.ui.MyEditText
+                        android:id="@+id/etRemark"
+                        android:layout_width="match_parent"
+                        android:layout_height="87dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/border_edittext"
+                        android:gravity="top"
+                        android:lines="3"
+                        android:padding="10dp"
+                        android:textSize="16sp" />
 
-                <tech.fraction.webapp.ui.MyTextView
-                    android:id="@+id/tvSave"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="15dp"
-                    android:background="@color/colorPrimary"
-                    android:gravity="center"
-                    android:text="Save"
-                    android:textColor="@android:color/white" />
-            </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
+
+    <tech.fraction.webapp.ui.MyTextView
+        android:id="@+id/tvSave"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="Save"
+        android:textColor="@android:color/white" />
+
+    <RelativeLayout
+        android:id="@+id/rlProgress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_custom"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+
 </RelativeLayout>

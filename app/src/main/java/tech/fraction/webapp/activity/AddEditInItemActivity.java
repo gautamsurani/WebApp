@@ -16,8 +16,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -79,7 +81,7 @@ public class AddEditInItemActivity extends AppCompatActivity {
 
     String mode;
 
-    String quantity = "", marko = "", unloadingCharge = "";
+    String quantity = "", marko = "", unloadingCharge = "", rentPerUnit = "";
 
     int selectedPosition = -1;
 
@@ -154,7 +156,7 @@ public class AddEditInItemActivity extends AppCompatActivity {
         spnUnit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selectedItems == null) {
+                if (selectedItems.getName() == null) {
                     Utils.ShowSnakBar("Please Select Item", rlMain, context);
                 } else {
                     ArrayList<SearchTextViewModel> searchTextViewModels = new ArrayList<>();
@@ -203,10 +205,35 @@ public class AddEditInItemActivity extends AppCompatActivity {
                 quantity = etQuantity.getText().toString();
                 marko = etMarko.getText().toString();
                 unloadingCharge = etUnloadingCharge.getText().toString();
+                rentPerUnit = etRent.getText().toString();
+
                 inwardItem = new InwardItems();
+
+                if (selectedItems.getName() == null) {
+                    Utils.ShowSnakBar("Please Select Item", rlMain, context);
+                    return;
+                }
+                if (selectedItemRent.getUnit() == null) {
+                    Utils.ShowSnakBar("Please Select Unit", rlMain, context);
+                    return;
+                }
+                if (rentPerUnit.isEmpty()) {
+                    Utils.ShowSnakBar("Please Enter Rent", rlMain, context);
+                    return;
+                }
+                if (quantity.isEmpty()) {
+                    Utils.ShowSnakBar("Please Enter Quantity", rlMain, context);
+                    return;
+                }
+                if (unloadingCharge.isEmpty()) {
+                    Utils.ShowSnakBar("Please Enter Unloading Charges", rlMain, context);
+                    return;
+                }
+                if (selectedRacksList.size() == 0) {
+                    Utils.ShowSnakBar("Please Select Location", rlMain, context);
+                    return;
+                }
                 if (mode.equals("add")) {
-
-
                     inwardItem.setItemId(selectedItems.getId());
                     if (AddEditInwardActivity.inwardItems.size() == 0) {
                         inwardItem.setRawId(1);
@@ -219,7 +246,7 @@ public class AddEditInItemActivity extends AppCompatActivity {
                     inwardItem.setItemName(selectedItems.getName());
                     inwardItem.setUnitId(selectedItemRent.getUnitId());
                     inwardItem.setUnitName(selectedItemRent.getUnit());
-                    inwardItem.setRentPerUnit(selectedItemRent.getRent());
+                    inwardItem.setRentPerUnit(Double.parseDouble(rentPerUnit));
                     inwardItem.setQuantity(Integer.parseInt(quantity));
                     inwardItem.setMarkoName(marko);
                     inwardItem.setAccountId(0);
@@ -245,7 +272,7 @@ public class AddEditInItemActivity extends AppCompatActivity {
                     AddEditInwardActivity.inwardItems.get(selectedPosition).setItemName(selectedItems.getName());
                     AddEditInwardActivity.inwardItems.get(selectedPosition).setUnitId(selectedItemRent.getUnitId());
                     AddEditInwardActivity.inwardItems.get(selectedPosition).setUnitName(selectedItemRent.getUnit());
-                    AddEditInwardActivity.inwardItems.get(selectedPosition).setRentPerUnit(selectedItemRent.getRent());
+                    AddEditInwardActivity.inwardItems.get(selectedPosition).setRentPerUnit(Double.parseDouble(rentPerUnit));
                     AddEditInwardActivity.inwardItems.get(selectedPosition).setQuantity(Integer.parseInt(quantity));
                     AddEditInwardActivity.inwardItems.get(selectedPosition).setMarkoName(marko);
                     if (AddEditInwardActivity.inwardItems.get(selectedPosition).getRawId() == 0) {
@@ -312,7 +339,7 @@ public class AddEditInItemActivity extends AppCompatActivity {
             if (searchTextViewModel.getId() == items.get(i).getId()) {
                 selectedItems = items.get(i);
                 spnItem.setText(selectedItems.getName());
-                selectedItemRent = null;
+                selectedItemRent = new ItemRent();
                 spnUnit.setText("");
                 etRent.setText("");
                 return;

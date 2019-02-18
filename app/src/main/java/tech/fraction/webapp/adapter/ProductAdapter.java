@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -56,6 +57,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.tvProductName.setText(inwardItems1.getItemName());
         holder.tvCount.setText(inwardItems1.getStock() + " / " + inwardItems1.getQuantity());
         holder.tvUnloadCharge.setText("Unloading Charge: " + inwardItems1.getUnloadingCharges());
+        holder.layout_view_one.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onClickListener != null) {
+                    onClickListener.onClick(position, 0);
+                }
+            }
+        });
     }
 
     public void clearData() {
@@ -70,12 +79,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvProductName, tvCount, tvUnloadCharge;
+        LinearLayout layout_view_one;
 
         ViewHolder(View item) {
             super(item);
             tvProductName = item.findViewById(R.id.tvProductName);
             tvCount = item.findViewById(R.id.tvCount);
             tvUnloadCharge = item.findViewById(R.id.tvUnloadCharge);
+            layout_view_one = item.findViewById(R.id.layout_view_one);
         }
     }
 }

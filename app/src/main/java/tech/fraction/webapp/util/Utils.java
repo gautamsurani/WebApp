@@ -162,6 +162,28 @@ public class Utils {
         snackbar.show();
     }
 
+    public static String ifIsStringNull(Object s) {
+        if (s == null) {
+            s = "";
+        }
+        return s.toString();
+    }
+
+    public static int ifIsIntNull(Object s) {
+        if (s == null) {
+            s = 0;
+        }
+        return Integer.parseInt(s.toString());
+    }
+
+    public static boolean ifIsObjectNull(Object s) {
+        boolean isNull = false;
+        if (s == null) {
+            isNull = true;
+        }
+        return isNull;
+    }
+
     public static void showToast(Context context, String msg) {
         if (!msg.isEmpty()) {
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
@@ -394,8 +416,7 @@ public class Utils {
         return format.format(new BigDecimal(value));
     }
 
-    public static String FormatDate(String s)
-    {
+    public static String FormatDate(String s) {
         String date;
         if (s.contains("T")) {
             date = s.substring(0, s.indexOf("T"));
