@@ -99,7 +99,8 @@ public class OutwordListFragment extends BaseFragment {
             @Override
             public void onClick(int position, int witch) {
                 Intent i = new Intent(context, AddEditOutwardActivity.class);
-                i.putExtra("outWardList", outWardList.get(position));
+                i.putExtra("outwardId", outWardList.get(position).getOutwardId());
+                i.putExtra("mode", "edit");
                 startActivity(i);
                 context.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }

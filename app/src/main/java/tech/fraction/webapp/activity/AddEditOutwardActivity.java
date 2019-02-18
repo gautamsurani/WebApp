@@ -23,12 +23,14 @@ import retrofit2.Retrofit;
 import tech.fraction.webapp.R;
 import tech.fraction.webapp.adapter.OutwardDetailListAdapter;
 import tech.fraction.webapp.model.Account;
+import tech.fraction.webapp.model.InwardVehicleDetail;
 import tech.fraction.webapp.model.OutwardDetails;
 import tech.fraction.webapp.model.SearchTextViewModel;
 import tech.fraction.webapp.model.Transporter;
 import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
 import tech.fraction.webapp.rest.ApiRequestModel.SaveOutwardRequestModel;
 import tech.fraction.webapp.rest.ApiResponseModel.AccountResponseModel;
+import tech.fraction.webapp.rest.ApiResponseModel.DetailOutwardResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.SaveOutwardResponseModel;
 import tech.fraction.webapp.rest.CommonApiCall.AccountApiCall;
 import tech.fraction.webapp.rest.RetrofitInstance;
@@ -50,10 +52,14 @@ public class AddEditOutwardActivity extends AppCompatActivity {
     String vehicleNo, transporterName, driverName, driverNo, remark;
     RelativeLayout scrollView, rlAddEditOutward;
     SaveOutwardRequestModel saveOutwardRequestModel;
+    int outwardId;
+    String mode="";
+    Transporter transporter;
+    DetailOutwardResponseModel detailOutwardResponseModel=new DetailOutwardResponseModel();
     public static ArrayList<OutwardDetails> outwardItemsList = new ArrayList<>();
 
     ArrayList<Account> lstAccount = new ArrayList<>();
-    private static Account selectedAccount;
+    private static Account selectedAccount=new Account();
     private static String outwardNumber = "", outwardDate = "";
 
     @Override
@@ -85,11 +91,14 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         retrofit = RetrofitInstance.getClient();
         apiInterface = retrofit.create(ApiInterface.class);
 
-        String mode = "";
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             mode = bundle.getString("mode", "");
+            outwardId = bundle.getInt("outwardId", -1);
         }
+
+        CallGetOutwardItemDetailApi(outwardId, Utils.getPersonalInfo(context).getAccountId());
         if (mode.equals("add")) {
             tvTitle.setText("Add Outward");
         } else {
@@ -157,26 +166,64 @@ public class AddEditOutwardActivity extends AppCompatActivity {
                 }
             }
         });
-//        outwardDetailListAdapter.setOnItemClickListener(new OutwardDetailListAdapter.OnClickListener() {
-//            @Override
-//            public void onClick(int position, int witch) {
-//                if (witch == 1) {
-//                    Intent intent = new Intent(context, AddEditOutItemActivity.class);
-//                    intent.putExtra("mode", "edit");
-//                    intent.putExtra("item", outwardItemsList.get(position));
-//                    intent.putExtra("position", String.valueOf(position));
-//                    startActivity(intent);
-//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//                } else if (witch == 2) {
-//                    outwardItemsList.remove(position);
-//                    outwardDetailListAdapter.setList(outwardItemsList);
-//                    outwardDetailListAdapter.notifyDataSetChanged();
-//                }
-//            }
-//        });
+
+    }
+
+    private void CallGetOutwardItemDetailApi(int outwardId, int accountId) {
+        Call<DetailOutwardResponseModel> call=apiInterface.getOutwardItemDetail(outwardId,accountId);
+
+        call.enqueue(new Callback<DetailOutwardResponseModel>() {
+            @Override
+            public void onResponse(Call<DetailOutwardResponseModel> call, Response<DetailOutwardResponseModel> response) {
+                detailOutwardResponseModel=response.body();
+                saveOutwardRequestModel=detailOutwardResponseModel.getData().getInwardDetails();
+                setData();
+            }
+
+            @Override
+            public void onFailure(Call<DetailOutwardResponseModel> call, Throwable t) {
+
+                Log.d("","");
+            }
+        });
+
+    }
+    private void setData() {
+        if (mode.equals("add")) {
+            tvTitle.setText("Add Outward");
+        } else {
+            tvTitle.setText("Edit Outward");
+        }
+        if (mode.equals("edit")) {
+
+            tvDate.setEnabled(false);
+            tvParty.setEnabled(false);
+
+            selectedAccount.setId(saveOutwardRequestModel.getAccountId());
+            selectedAccount.setName(saveOutwardRequestModel.getBroker());
+            selectedAccount.setPersonId(Utils.getPersonalInfo(context).getPersonId());
+            outwardNumber = saveOutwardRequestModel.getOutwardNo();
+            outwardDate = saveOutwardRequestModel.getOutwardOn();
+            outwardItemsList = saveOutwardRequestModel.getOutwardsInwardItems();
+            outwardDetailListAdapter.setList(outwardItemsList);
+            outwardDetailListAdapter.notifyDataSetChanged();
+            transporter = saveOutwardRequestModel.getTransporter();
+            if (transporter != null) {
+                edt_vehicleNo.setText(Utils.ifIsStringNull(transporter.getVehicleNo()));
+                edt_driverName.setText(Utils.ifIsStringNull(transporter.getDriverName()));
+                edt_driverNo.setText(Utils.ifIsStringNull(transporter.getDriverContactNumber()));
+                edt_transporter.setText(Utils.ifIsStringNull(transporter.getTransporterDetail()));
+                edt_remark.setText(Utils.ifIsStringNull(transporter.getRemarks()));
+            } else {
+                transporter = new Transporter();
+            }
+        }
+
+        initCache();
 
 
     }
+
 
     private void CallSaveOutwardApi() {
 
