@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,19 +101,11 @@ public class InwardsListFragment extends BaseFragment {
         inwordsAdapter.setOnItemClickListener(new InwordsAdapter.OnClickListener() {
             @Override
             public void onClick(int position, int witch) {
-
-
-
                 Intent intent = new Intent(context, AddEditInwardActivity.class);
                 intent.putExtra("inwardItemDetailId",inventoryDetails.get(position).getInwardDetailId());
                 intent.putExtra("mode", "edit");
                 startActivity(intent);
                 context.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-
-                /*Intent intent = new Intent(context, InwardDetailActivity.class);
-                intent.putExtra("inward", inventoryDetails.get(position));
-                startActivity(intent);
-                context.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);*/
             }
         });
 
@@ -224,8 +217,6 @@ public class InwardsListFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
     }
 
     List<InventoryDetail> inventoryDetails = new ArrayList<>();
