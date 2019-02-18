@@ -114,8 +114,17 @@ public class AddEditInwardActivity extends AppCompatActivity {
             inwardDetailId = bundle.getInt("inwardItemDetailId", -1);
         }
 
+        if (mode.equals("add")) {
+            tvTitle.setText("Add Inward");
+            initCache();
+        } else {
+            tvTitle.setText("Edit Inward");
+            CallGetInwardItemDetailApi(inwardDetailId, Utils.getPersonalInfo(context).getAccountId());
+        }
 
-        CallGetInwardItemDetailApi(inwardDetailId, Utils.getPersonalInfo(context).getAccountId());
+        if (accounts.size() == 0 && mode.equals("add")) {
+            new AccountAsync().execute();
+        }
 
         tvAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -222,8 +231,10 @@ public class AddEditInwardActivity extends AppCompatActivity {
             public void onResponse(Call<DetailInwardResponseModel> call, Response<DetailInwardResponseModel> response) {
                 rlProgress.setVisibility(View.GONE);
                 detailInwardResponseModel = response.body();
-                saveInwardRequestModel = detailInwardResponseModel.getData().getInwardDetails();
-                setData();
+                if (detailInwardResponseModel != null) {
+                    saveInwardRequestModel = detailInwardResponseModel.getData().getInwardDetails();
+                    setData();
+                }
             }
 
             @Override
@@ -235,41 +246,30 @@ public class AddEditInwardActivity extends AppCompatActivity {
     }
 
     private void setData() {
-        if (mode.equals("add")) {
-            tvTitle.setText("Add Inward");
+
+        tvDate.setEnabled(false);
+        tvParty.setEnabled(false);
+
+        selectedAccount.setId(saveInwardRequestModel.getAccountId());
+        selectedAccount.setName(saveInwardRequestModel.getBroker());
+        selectedAccount.setPersonId(Utils.getPersonalInfo(context).getPersonId());
+        inwardNumber = saveInwardRequestModel.getNumber();
+        inwardDate = saveInwardRequestModel.getInwardedOn();
+        inwardItems = saveInwardRequestModel.getInwardItemDetailPoco();
+        inwardItemAdapter.setList(inwardItems);
+        inwardItemAdapter.notifyDataSetChanged();
+        inwardVehicleDetail = saveInwardRequestModel.getInwardVehicleDetail();
+        if (inwardVehicleDetail != null) {
+            etVehicleNo.setText(Utils.ifIsStringNull(inwardVehicleDetail.getVehicleNo()));
+            etDriverName.setText(Utils.ifIsStringNull(inwardVehicleDetail.getDriverName()));
+            etDriverNo.setText(Utils.ifIsStringNull(inwardVehicleDetail.getDriverContactNumber()));
+            etTransporter.setText(Utils.ifIsStringNull(inwardVehicleDetail.getTransporterDetail()));
+            etRemark.setText(Utils.ifIsStringNull(inwardVehicleDetail.getRemarks()));
         } else {
-            tvTitle.setText("Edit Inward");
-        }
-        if (mode.equals("edit")) {
-
-            tvDate.setEnabled(false);
-            tvParty.setEnabled(false);
-
-            selectedAccount.setId(saveInwardRequestModel.getAccountId());
-            selectedAccount.setName(saveInwardRequestModel.getBroker());
-            selectedAccount.setPersonId(Utils.getPersonalInfo(context).getPersonId());
-            inwardNumber = saveInwardRequestModel.getNumber();
-            inwardDate = saveInwardRequestModel.getInwardedOn();
-            inwardItems = saveInwardRequestModel.getInwardItemDetailPoco();
-            inwardItemAdapter.setList(inwardItems);
-            inwardItemAdapter.notifyDataSetChanged();
-            inwardVehicleDetail = saveInwardRequestModel.getInwardVehicleDetail();
-            if (inwardVehicleDetail != null) {
-                etVehicleNo.setText(Utils.ifIsStringNull(inwardVehicleDetail.getVehicleNo()));
-                etDriverName.setText(Utils.ifIsStringNull(inwardVehicleDetail.getDriverName()));
-                etDriverNo.setText(Utils.ifIsStringNull(inwardVehicleDetail.getDriverContactNumber()));
-                etTransporter.setText(Utils.ifIsStringNull(inwardVehicleDetail.getTransporterDetail()));
-                etRemark.setText(Utils.ifIsStringNull(inwardVehicleDetail.getRemarks()));
-            } else {
-                inwardVehicleDetail = new InwardVehicleDetail();
-            }
+            inwardVehicleDetail = new InwardVehicleDetail();
         }
 
         initCache();
-
-        if (accounts.size() == 0 && mode.equals("add")) {
-            new AccountAsync().execute();
-        }
     }
 
 

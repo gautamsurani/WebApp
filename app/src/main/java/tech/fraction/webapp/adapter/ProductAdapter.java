@@ -56,7 +56,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         InwardItems inwardItems1 = inwardItems.get(position);
         holder.tvProductName.setText(inwardItems1.getItemName());
         holder.tvCount.setText(inwardItems1.getStock() + " / " + inwardItems1.getQuantity());
-        holder.tvUnloadCharge.setText("Unloading Charge: " + inwardItems1.getUnloadingCharges());
+        holder.tvUnloadCharge.setText("Unloading Charge : " + context.getResources().getString(R.string.rs) + inwardItems1.getUnloadingCharges());
         holder.layout_view_one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

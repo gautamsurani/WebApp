@@ -43,9 +43,8 @@
                         android:background="@color/colorAccent"
                         android:gravity="center_vertical"
                         android:paddingLeft="10dp"
-                        android:text="Inward Detail"
+                        android:text="Inward Information"
                         android:textColor="@color/white" />
-
 
 
                     <TextView
@@ -164,7 +163,7 @@
                             android:background="@color/colorAccent"
                             android:gravity="center_vertical"
                             android:paddingLeft="10dp"
-                            android:text="Item List"
+                            android:text="Items"
                             android:textColor="@color/white" />
 
                         <ImageView
@@ -209,7 +208,7 @@
                         android:background="@color/colorAccent"
                         android:gravity="center_vertical"
                         android:paddingLeft="10dp"
-                        android:text="Transport Detail"
+                        android:text="Transport Information"
                         android:textColor="@color/white" />
 
                     <tech.fraction.webapp.ui.MyTextView

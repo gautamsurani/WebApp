@@ -56,7 +56,7 @@ public class SelectItemForOutwardActivity extends BaseActivity {
 
     LinearLayout linearShowToastMsg;
 
-    TextView txtToastCountMsg, tvAddInward;
+    TextView txtToastCountMsg;
 
     List<OutwardDetails> outwardDetails = new ArrayList<>();
     List<OutwardDetails> selectedOutwardDetails = new ArrayList<>();
@@ -173,7 +173,6 @@ public class SelectItemForOutwardActivity extends BaseActivity {
         tvDone = findViewById(R.id.tvDone);
         linearShowToastMsg = findViewById(R.id.linearShowToastMsg);
         txtToastCountMsg = findViewById(R.id.txtToastCountMsg);
-        tvAddInward = findViewById(R.id.tvAddInward);
         tvTitle = findViewById(R.id.tvTitle);
         tvTitle.setText("Select Items");
     }
