@@ -285,9 +285,8 @@ public class AddEditInwardActivity extends AppCompatActivity {
                 SaveInwardResponseModel saveInwardResponseModel = response.body();
                 Log.d("", "===>" + response.body().toString());
                 if (saveInwardResponseModel.getIsValid()) {
-                    Utils.ShowSnakBar("Item added Successfully", rl_editInward, context);
+                    Utils.ShowSnakBar(saveInwardResponseModel.getMessage(), rl_editInward, context);
                 }
-                onBackPressed();
             }
 
             @Override
