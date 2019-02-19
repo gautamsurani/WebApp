@@ -7,6 +7,8 @@
     android:background="#FFFFFF"
     android:clickable="true"
     android:elevation="@dimen/design_appbar_elevation"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical"
     app:behavior_hideable="true"
     app:behavior_peekHeight="0dp"

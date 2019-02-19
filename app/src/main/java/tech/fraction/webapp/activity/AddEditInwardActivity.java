@@ -302,7 +302,7 @@ public class AddEditInwardActivity extends AppCompatActivity {
                     Utils.ShowSnakBar(saveInwardResponseModel.getMessage(), rl_editInward, context);
                 }
                 if (mode.equals("add")) {
-                    clearCatch();
+                    clearCache();
                     onBackPressed();
                 }
             }
@@ -456,12 +456,12 @@ public class AddEditInwardActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         if (mode.equals("edit")) {
-            clearCatch();
+            clearCache();
         }
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
-    private void clearCatch() {
+    private void clearCache() {
         selectedAccount = new Account();
         inwardNumber = "";
         inwardDate = "";

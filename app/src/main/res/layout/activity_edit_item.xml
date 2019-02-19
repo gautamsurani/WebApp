@@ -267,7 +267,7 @@
             android:textColor="@android:color/white" />
 
         <tech.fraction.webapp.ui.MyTextView
-            android:id="@+id/txt_close"
+            android:id="@+id/tvCancel"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"

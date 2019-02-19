@@ -142,6 +142,8 @@ public class Utils {
             InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
             assert imm != null;
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+
         }
     }
 
