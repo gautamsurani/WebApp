@@ -1,8 +1,10 @@
 package tech.fraction.webapp.rest.ApiRequestModel;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import tech.fraction.webapp.model.Invoices;
 import tech.fraction.webapp.model.InwardItems;
 import tech.fraction.webapp.model.InwardVehicleDetail;
 
@@ -23,7 +25,7 @@ public class SaveInwardRequestModel implements Serializable {
 
     private InwardVehicleDetail InwardVehicleDetail;
 
-    private String Invoices;
+    private ArrayList<Invoices> Invoices;
 
     private boolean IsModified;
 
@@ -48,7 +50,7 @@ public class SaveInwardRequestModel implements Serializable {
 
     public SaveInwardRequestModel(String paidStatus, boolean canGenerateInvoice, List<InwardItems> inwardItemDetailPoco, int accountId, String broker,
                                   String inwardedOn, String lastInvoiceToDate, tech.fraction.webapp.model.InwardVehicleDetail inwardVehicleDetail,
-                                  String invoices, boolean isModified, String lastInvoiceFromDate, String lastPaidAmount, String number,
+                                  ArrayList<Invoices> invoices, boolean isModified, String lastInvoiceFromDate, String lastPaidAmount, String number,
                                   String lastInvoiceGeneratedOn, String totalPaidAmount, int id, String lastInvoicePaidOn, int addedBy) {
         PaidStatus = paidStatus;
         CanGenerateInvoice = canGenerateInvoice;
@@ -134,11 +136,11 @@ public class SaveInwardRequestModel implements Serializable {
         InwardVehicleDetail = inwardVehicleDetail;
     }
 
-    public String getInvoices() {
+    public ArrayList<Invoices> getInvoices() {
         return Invoices;
     }
 
-    public void setInvoices(String invoices) {
+    public void setInvoices(ArrayList<Invoices> invoices) {
         Invoices = invoices;
     }
 

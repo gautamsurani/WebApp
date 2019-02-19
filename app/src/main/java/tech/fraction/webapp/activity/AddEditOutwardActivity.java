@@ -14,8 +14,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.Random;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,17 +52,19 @@ public class AddEditOutwardActivity extends AppCompatActivity {
     EditText edt_vehicleNo, edt_transporter, edt_driverName, edt_driverNo, edt_remark;
     TextView txtSave, txtAddItem, tvTitle, tvOutwardNo, tvDate, tvParty;
     String vehicleNo, transporterName, driverName, driverNo, remark;
-    RelativeLayout scrollView, rlAddEditOutward;
+    RelativeLayout scrollView;
     SaveOutwardRequestModel saveOutwardRequestModel;
     int outwardId;
-    String mode="";
+    String mode = "";
     Transporter transporter;
-    DetailOutwardResponseModel detailOutwardResponseModel=new DetailOutwardResponseModel();
+    DetailOutwardResponseModel detailOutwardResponseModel = new DetailOutwardResponseModel();
     public static ArrayList<OutwardDetails> outwardItemsList = new ArrayList<>();
 
     ArrayList<Account> lstAccount = new ArrayList<>();
-    private static Account selectedAccount=new Account();
+    private static Account selectedAccount = new Account();
     private static String outwardNumber = "", outwardDate = "";
+
+    RelativeLayout rlProgress, rlMain;
 
     @Override
     protected void onResume() {
@@ -90,7 +94,6 @@ public class AddEditOutwardActivity extends AppCompatActivity {
 
         retrofit = RetrofitInstance.getClient();
         apiInterface = retrofit.create(ApiInterface.class);
-
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -153,8 +156,8 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         txtAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selectedAccount == null) {
-                    Utils.ShowSnakBar("Select Party", rlAddEditOutward, context);
+                if (selectedAccount.getName() == null) {
+                    Utils.ShowSnakBar("Select Party", rlMain, context);
                 } else {
                     Intent intent = new Intent(AddEditOutwardActivity.this, SelectedOutwardActivity.class);
                     intent.putExtra("mode", mode);
@@ -170,24 +173,25 @@ public class AddEditOutwardActivity extends AppCompatActivity {
     }
 
     private void CallGetOutwardItemDetailApi(int outwardId, int accountId) {
-        Call<DetailOutwardResponseModel> call=apiInterface.getOutwardItemDetail(outwardId,accountId);
+        Call<DetailOutwardResponseModel> call = apiInterface.getOutwardItemDetail(outwardId, accountId);
 
         call.enqueue(new Callback<DetailOutwardResponseModel>() {
             @Override
             public void onResponse(Call<DetailOutwardResponseModel> call, Response<DetailOutwardResponseModel> response) {
-                detailOutwardResponseModel=response.body();
-                saveOutwardRequestModel=detailOutwardResponseModel.getData().getInwardDetails();
+                detailOutwardResponseModel = response.body();
+                saveOutwardRequestModel = detailOutwardResponseModel.getData().getInwardDetails();
                 setData();
             }
 
             @Override
             public void onFailure(Call<DetailOutwardResponseModel> call, Throwable t) {
 
-                Log.d("","");
+                Log.d("", "");
             }
         });
 
     }
+
     private void setData() {
         if (mode.equals("add")) {
             tvTitle.setText("Add Outward");
@@ -221,24 +225,26 @@ public class AddEditOutwardActivity extends AppCompatActivity {
 
         initCache();
 
-
     }
 
 
     private void CallSaveOutwardApi() {
-
-        Call<SaveOutwardResponseModel> call=apiInterface.saveOutwardItems(saveOutwardRequestModel);
+        rlProgress.setVisibility(View.VISIBLE);
+        Call<SaveOutwardResponseModel> call = apiInterface.saveOutwardItems(saveOutwardRequestModel);
         call.enqueue(new Callback<SaveOutwardResponseModel>() {
             @Override
             public void onResponse(Call<SaveOutwardResponseModel> call, Response<SaveOutwardResponseModel> response) {
+                rlProgress.setVisibility(View.GONE);
                 SaveOutwardResponseModel saveOutwardResponseModel = new SaveOutwardResponseModel();
                 saveOutwardResponseModel = response.body();
+                if (saveOutwardResponseModel.isValid()) {
+                    Utils.ShowSnakBar(saveOutwardResponseModel.getMessage(), rlMain, context);
+                }
             }
 
             @Override
             public void onFailure(Call<SaveOutwardResponseModel> call, Throwable t) {
-                Log.d("Failure", "======>");
-
+                rlProgress.setVisibility(View.GONE);
             }
         });
 
@@ -255,8 +261,6 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         saveOutwardRequestModel = new SaveOutwardRequestModel(outwardItemsList, selectedAccount.getId(), selectedAccount.getName(),
                 null, false, 0, tvOutwardNo.getText().toString(), 0.0, transporter,
                 "02-15-2019", 0.0);
-
-
     }
 
     private void initItemRecyclerView() {
@@ -264,7 +268,6 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         rec_view.setHasFixedSize(true);
         outwardDetailListAdapter = new OutwardDetailListAdapter(AddEditOutwardActivity.this, true);
         rec_view.setAdapter(outwardDetailListAdapter);
-
     }
 
     @Override
@@ -289,14 +292,13 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         }
     }
 
-
     private void initCache() {
         GenerateInwardNumber();
         if (outwardDate.isEmpty()) {
             outwardDate = Utils.getTodayDate();
         }
         tvDate.setText(outwardDate);
-        if (selectedAccount != null) {
+        if (selectedAccount.getName() != null) {
             tvParty.setText(selectedAccount.getName());
         }
     }
@@ -369,11 +371,12 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         edt_remark = findViewById(R.id.edt_remark);
         txtSave = findViewById(R.id.txt_save);
         txtAddItem = findViewById(R.id.txt_additem);
-        rlAddEditOutward = findViewById(R.id.rlAddEditOutward);
+        rlMain = findViewById(R.id.rlMain);
         tvTitle = findViewById(R.id.tvTitle);
         pbParty = findViewById(R.id.pbParty);
         tvOutwardNo = findViewById(R.id.tvOutwardNo);
         tvDate = findViewById(R.id.tvDate);
         tvParty = findViewById(R.id.tvParty);
+        rlProgress = findViewById(R.id.rlProgress);
     }
 }

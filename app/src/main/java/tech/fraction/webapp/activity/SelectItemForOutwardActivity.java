@@ -149,7 +149,7 @@ public class SelectItemForOutwardActivity extends BaseActivity {
 
                 for (int i = 0; i < outwardDetails.size(); i++) {
                     for (int j = 0; j < selectedOutwardDetails.size(); j++) {
-                        if (outwardDetails.get(i).getInwardDetailId() == selectedOutwardDetails.get(j).getInwardDetailId()) {
+                        if (outwardDetails.get(i).getInwardItemDetailId() == selectedOutwardDetails.get(j).getInwardItemDetailId()) {
                             outwardDetails.get(i).setSelected(true);
                         }
                     }
