@@ -17,7 +17,7 @@
         android:layout_weight="1"
         android:paddingLeft="8dp"
         android:gravity="center_vertical"
-        android:text="A304"
+        android:text="@string/row_edit_location"
         android:lines="1"
         android:textSize="13sp" />
 

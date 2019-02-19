@@ -22,7 +22,7 @@
             android:paddingLeft="30dp"
             android:paddingRight="15dp"
             android:text="Inwards"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <ImageView
             android:id="@+id/ivSubMenu"

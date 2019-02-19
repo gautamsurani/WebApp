@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -19,7 +20,6 @@ import tech.fraction.webapp.base.NoNetworkActivity;
 import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
 import tech.fraction.webapp.rest.ApiResponseModel.LoginResponseModel;
 import tech.fraction.webapp.rest.RetrofitInstance;
-import tech.fraction.webapp.rest.RetrofitInstance0ne;
 import tech.fraction.webapp.util.Utils;
 import tech.fraction.webapp.util.ValidationUtil;
 
@@ -70,6 +70,14 @@ public class LoginActivity extends BaseActivity {
                     return;
                 }
                 callDoLoginAPI();
+            }
+        });
+
+        txtForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ForgotPasswordActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -145,6 +153,7 @@ public class LoginActivity extends BaseActivity {
         edtPassword = findViewById(R.id.edt_pwd);
         rlLogin = findViewById(R.id.rl_login);
     }
+
 
     private void getData() {
         emailId = edtEmail.getText().toString();

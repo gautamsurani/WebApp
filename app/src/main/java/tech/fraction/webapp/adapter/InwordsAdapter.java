@@ -58,17 +58,26 @@ public class InwordsAdapter extends RecyclerView.Adapter<InwordsAdapter.ViewHold
         ProductAdapter productAdapter = new ProductAdapter(context);
         productAdapter.setList(inventoryDetail.getInwardItems());
 
+        productAdapter.setOnItemClickListener(new ProductAdapter.OnClickListener() {
+            @Override
+            public void onClick(int i, int witch) {
+                if (onClickListener != null) {
+                    onClickListener.onClick(position, 0);
+                }
+            }
+        });
+
         holder.rvProduct.setLayoutManager(new LinearLayoutManager(context));
         holder.rvProduct.setAdapter(productAdapter);
 
-        holder.tvName.setText(inventoryDetail.getFirstName());
+        holder.tvName.setText(inventoryDetail.getAccountName());
         holder.tvInwardNo.setText(inventoryDetail.getInwardNo());
 
         NumberFormat nf = new DecimalFormat("#.##");
         Double d2 = Double.parseDouble(inventoryDetail.getPaidAmount());
         String s = nf.format(d2);
 
-        holder.tvAmount.setText(context.getResources().getString(R.string.rs) + " " + s);
+        holder.tvAmount.setText(" " + context.getResources().getString(R.string.rs) + s);
         holder.tvDate.setText(inventoryDetail.getInwardedOn().substring(0, inventoryDetail.getInwardedOn().indexOf("T")));
 
         boolean paidStatus = inventoryDetail.isInvoicePaid();

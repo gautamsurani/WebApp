@@ -1,6 +1,8 @@
 package tech.fraction.webapp.model;
 
-public class OutwardDetailModel {
+import java.io.Serializable;
+
+public class OutwardDetailModel implements Serializable {
     private String name;
     private String location;
     private String unloadingCharges;

@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@+id/rvProduct"
-    android:paddingLeft="5dp"
-    android:layout_marginTop="1dp"
+    android:layout_marginTop=".7dp"
     android:background="@color/white"
-    android:paddingRight="10dp"
     android:gravity="center_vertical"
     android:orientation="vertical"
+    android:paddingLeft="5dp"
     android:paddingTop="5dp"
+    android:paddingRight="10dp"
     android:paddingBottom="5dp">
 
     <LinearLayout
@@ -34,7 +34,7 @@
             android:paddingRight="5dp"
             android:text="MarchPowder[ IPL 35]"
             android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:textSize="15sp" />
 
         <tech.fraction.webapp.ui.MyTextView
             android:id="@+id/tvCount"
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:text="100/200"
             android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 

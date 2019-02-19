@@ -1,8 +1,9 @@
 package tech.fraction.webapp.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class InwordsList {
+public class InwordsList implements Serializable {
     String name,id,date,charge;
     List<ProductList> productLists;
 

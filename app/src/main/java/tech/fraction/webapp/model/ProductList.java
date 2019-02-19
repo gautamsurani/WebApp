@@ -1,6 +1,8 @@
 package tech.fraction.webapp.model;
 
-public class ProductList {
+import java.io.Serializable;
+
+public class ProductList implements Serializable {
     String name,count;
 
     public ProductList() {

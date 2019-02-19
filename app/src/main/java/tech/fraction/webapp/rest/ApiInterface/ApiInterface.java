@@ -2,27 +2,32 @@ package tech.fraction.webapp.rest.ApiInterface;
 
 import com.google.gson.JsonObject;
 
-import org.json.JSONObject;
-
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-import tech.fraction.webapp.model.AddEditInwardModel;
 import tech.fraction.webapp.model.Codebeautify;
+import tech.fraction.webapp.rest.ApiRequestModel.InvoiceRequestModel;
 import tech.fraction.webapp.rest.ApiRequestModel.InwardRequestModel;
 import tech.fraction.webapp.rest.ApiRequestModel.OutwardRequestModel;
+import tech.fraction.webapp.rest.ApiRequestModel.SaveInwardRequestModel;
+import tech.fraction.webapp.rest.ApiRequestModel.SaveOutwardRequestModel;
 import tech.fraction.webapp.rest.ApiResponseModel.AccountResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.CityResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.CountryResponseModel;
+import tech.fraction.webapp.rest.ApiResponseModel.DetailInwardResponseModel;
+import tech.fraction.webapp.rest.ApiResponseModel.DetailOutwardResponseModel;
+import tech.fraction.webapp.rest.ApiResponseModel.InvoiceResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.InwardResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.ItemResoponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.LoginResponseModel;
+import tech.fraction.webapp.rest.ApiResponseModel.OutwardItemRespondModel;
 import tech.fraction.webapp.rest.ApiResponseModel.OutwardResoinseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.RackResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.RentResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.SaveInwardResponseModel;
+import tech.fraction.webapp.rest.ApiResponseModel.SaveOutwardResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.StateResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.UnitResponseModel;
 
@@ -65,9 +70,22 @@ public interface ApiInterface {
     Call<OutwardResoinseModel> getAllOurward(@Body OutwardRequestModel outwardRequestModel);
 
     @POST("master/SaveInwardDetail")
-    Call<SaveInwardResponseModel> saveInward(@Body AddEditInwardModel addEditInwardModel);
+    Call<SaveInwardResponseModel> saveInward(@Body SaveInwardRequestModel saveInwardRequestModel);
 
-    @POST("master/SaveInwardDetail")
-    Call<SaveInwardResponseModel> saveInwardJson(@Body JsonObject addEditInwardModel);
+    @POST("master/invoiceswithpaging")
+    Call<InvoiceResponseModel> getAllInvoice(@Body InvoiceRequestModel invoiceRequestModel);
+
+    @POST("master/loadoutwarditemdetails")
+    Call<OutwardItemRespondModel> getOutwardItem(@Query("accountId") int accountId);
+
+    @POST("master/editinwards")
+    Call<DetailInwardResponseModel> getInwardItemDetail(@Query("inwardDetailId") int inwardDetailId, @Query("accountId") int accountId);
+
+    @POST("master/editoutwarddetail")
+    Call<DetailOutwardResponseModel> getOutwardItemDetail(@Query("outwardId") int outwardId, @Query("accountId") int accountId);
+
+    @POST("master/saveoutwarddetail")
+    Call<SaveOutwardResponseModel> saveOutwardItems(@Body SaveOutwardRequestModel saveOutwardRequestModel);
+
 
 }

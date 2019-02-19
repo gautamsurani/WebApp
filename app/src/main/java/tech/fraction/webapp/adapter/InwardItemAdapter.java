@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tech.fraction.webapp.R;
-import tech.fraction.webapp.model.InwardItemList;
 import tech.fraction.webapp.model.InwardItems;
 
 
@@ -66,7 +65,7 @@ public class InwardItemAdapter extends RecyclerView.Adapter<InwardItemAdapter.Vi
         String location = "";
         for (int i = 0; i < items.getInwardItemLocationPoco().size(); i++) {
             if (location.isEmpty()) {
-                location = items.getInwardItemLocationPoco().get(i).getRackName();
+                location = " " + items.getInwardItemLocationPoco().get(i).getRackName();
             } else {
                 location = location + ", " + items.getInwardItemLocationPoco().get(i).getRackName();
             }
@@ -74,7 +73,7 @@ public class InwardItemAdapter extends RecyclerView.Adapter<InwardItemAdapter.Vi
 
         holder.tvLocation.setText(location);
 
-        holder.tv_unloadingCharges.setText(items.getUnloadingCharges() + "");
+        holder.tv_unloadingCharges.setText(" " + context.getResources().getString(R.string.rs) + items.getUnloadingCharges());
         holder.tv_value.setText("0/" + items.getQuantity());
         holder.rlMain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,7 +104,6 @@ public class InwardItemAdapter extends RecyclerView.Adapter<InwardItemAdapter.Vi
         } else {
 
         }
-
     }
 
     public void clearData() {

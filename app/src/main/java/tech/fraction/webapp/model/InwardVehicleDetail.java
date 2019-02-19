@@ -19,6 +19,9 @@ public class InwardVehicleDetail implements Serializable {
 
     private int InwardDetailId;
 
+    public InwardVehicleDetail() {
+    }
+
     public InwardVehicleDetail(String inwardDetail, String vehicleNo, String transporterDetail, String remarks,
                                String driverContactNumber, String driverName, int id, int inwardDetailId) {
         InwardDetail = inwardDetail;

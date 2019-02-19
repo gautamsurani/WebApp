@@ -45,29 +45,44 @@ import tech.fraction.webapp.util.Utils;
 public class AddEditInItemActivity extends AppCompatActivity {
 
     RecyclerView rec_view;
+
     RacksAdapter racksAdapter;
+
     TextView tvHeading, spnItem, spnUnit, spnLocation, tvUpdate;
     ImageView ivBack;
+
     ApiInterface apiInterface;
+
     Retrofit retrofit;
+
     RelativeLayout rlProgress, rlMain;
+
     Activity context;
+
     SqLiteHelperFunctions sqLiteHelperFunctions;
+
     EditText etRent, etQuantity, etMarko, etUnloadingCharge;
 
     Items selectedItems = new Items();
+
     List<Items> items;
 
     ItemRent selectedItemRent = new ItemRent();
+
     List<ItemRent> itemRents;
 
     InwardItemLocationPoco selectedRacks = new InwardItemLocationPoco();
+
     List<InwardItemLocationPoco> selectedRacksList = new ArrayList<>();
+
     List<InwardItemLocationPoco> itemRacks = new ArrayList<>();
 
     InwardItems inwardItem;
 
-    String quantity = "", marko = "", unloadingCharge = "";
+    String mode;
+
+    String quantity = "", marko = "", unloadingCharge = "", rentPerUnit = "";
+
     int selectedPosition = -1;
 
     @Override
@@ -88,7 +103,7 @@ public class AddEditInItemActivity extends AppCompatActivity {
 
         initRecyclerView();
 
-        String mode = getIntent().getStringExtra("mode");
+        mode = getIntent().getStringExtra("mode");
         if (mode.equals("add")) {
             tvHeading.setText("Add Item");
         } else if (mode.equals("edit")) {
@@ -129,7 +144,7 @@ public class AddEditInItemActivity extends AppCompatActivity {
                 ArrayList<SearchTextViewModel> searchTextViewModels = new ArrayList<>();
                 items = sqLiteHelperFunctions.getAllItems();
                 for (int i = 0; i < items.size(); i++) {
-                    searchTextViewModels.add(new SearchTextViewModel(items.get(i).getId(),items.get(i).getName()));
+                    searchTextViewModels.add(new SearchTextViewModel(items.get(i).getId(), items.get(i).getName()));
                 }
                 Intent i = new Intent(AddEditInItemActivity.this, SearchTextViewActivity.class);
                 i.putExtra("itemsList", searchTextViewModels);
@@ -141,7 +156,7 @@ public class AddEditInItemActivity extends AppCompatActivity {
         spnUnit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selectedItems == null) {
+                if (selectedItems.getName() == null) {
                     Utils.ShowSnakBar("Please Select Item", rlMain, context);
                 } else {
                     ArrayList<SearchTextViewModel> searchTextViewModels = new ArrayList<>();
@@ -190,32 +205,81 @@ public class AddEditInItemActivity extends AppCompatActivity {
                 quantity = etQuantity.getText().toString();
                 marko = etMarko.getText().toString();
                 unloadingCharge = etUnloadingCharge.getText().toString();
-                inwardItem = new InwardItems();
-                inwardItem.setItemId(selectedItems.getId());
-                if(AddEditInwardActivity.inwardItems.size()==0)
-                {
-                    inwardItem.setRawId(1);
-                }else
-                {
-                    int rawId=AddEditInwardActivity.inwardItems.get(AddEditInwardActivity.inwardItems.size()-1).getRawId();
-                    rawId=rawId+1;
-                    inwardItem.setRawId(rawId);
-                }
-                inwardItem.setItemName(selectedItems.getName());
-                inwardItem.setUnitId(selectedItemRent.getUnitId());
-                inwardItem.setUnitName(selectedItemRent.getUnit());
-                inwardItem.setRentPerUnit(selectedItemRent.getRent());
-                inwardItem.setQuantity(Integer.parseInt(quantity));
-                inwardItem.setMarkoName(marko);
-                inwardItem.setAccountId(Utils.getPersonalInfo(context).getAccountId());
-                inwardItem.setUnloadingCharges(Integer.parseInt(unloadingCharge));
-                inwardItem.setInwardItemLocationPoco(selectedRacksList);
+                rentPerUnit = etRent.getText().toString();
 
-                if (selectedPosition != -1) {
-                    AddEditInwardActivity.inwardItems.remove(selectedPosition);
-                    AddEditInwardActivity.inwardItems.add(selectedPosition, inwardItem);
-                } else {
+                inwardItem = new InwardItems();
+
+                if (selectedItems.getName() == null) {
+                    Utils.ShowSnakBar("Please Select Item", rlMain, context);
+                    return;
+                }
+                if (selectedItemRent.getUnit() == null) {
+                    Utils.ShowSnakBar("Please Select Unit", rlMain, context);
+                    return;
+                }
+                if (rentPerUnit.isEmpty()) {
+                    Utils.ShowSnakBar("Please Enter Rent", rlMain, context);
+                    return;
+                }
+                if (quantity.isEmpty()) {
+                    Utils.ShowSnakBar("Please Enter Quantity", rlMain, context);
+                    return;
+                }
+                if (unloadingCharge.isEmpty()) {
+                    Utils.ShowSnakBar("Please Enter Unloading Charges", rlMain, context);
+                    return;
+                }
+                if (selectedRacksList.size() == 0) {
+                    Utils.ShowSnakBar("Please Select Location", rlMain, context);
+                    return;
+                }
+                if (mode.equals("add")) {
+                    inwardItem.setItemId(selectedItems.getId());
+                    if (AddEditInwardActivity.inwardItems.size() == 0) {
+                        inwardItem.setRawId(1);
+                    } else {
+                        int rawId = AddEditInwardActivity.inwardItems.get(AddEditInwardActivity.inwardItems.size() - 1).getRawId();
+                        rawId = rawId + 1;
+                        inwardItem.setRawId(rawId);
+                    }
+                    inwardItem.setItemId(selectedItems.getId());
+                    inwardItem.setItemName(selectedItems.getName());
+                    inwardItem.setUnitId(selectedItemRent.getUnitId());
+                    inwardItem.setUnitName(selectedItemRent.getUnit());
+                    inwardItem.setRentPerUnit(Double.parseDouble(rentPerUnit));
+                    inwardItem.setQuantity(Integer.parseInt(quantity));
+                    inwardItem.setMarkoName(marko);
+                    inwardItem.setAccountId(0);
+                    inwardItem.setUnloadingCharges(Integer.parseInt(unloadingCharge));
+                    inwardItem.setInwardItemLocationPoco(selectedRacksList);
+                    inwardItem.setOutwardId(0);
+                    inwardItem.setOutwardDetailId(0);
+                    inwardItem.setInwardDetailId(0);
+                    inwardItem.setOtherCharges(0);
+                    inwardItem.setTotalOutwardQuantity(0);
+                    inwardItem.setLoadingCharges(0);
+                    inwardItem.setModified(false);
+                    inwardItem.setInwardedOn("12-02-2019");
+                    inwardItem.setStock(0);
+                    inwardItem.setInwardDetail("Inwarded By Aashita");
+                    inwardItem.setInwardDetail(AddEditInwardActivity.inwardNumber);
+                    inwardItem.setWeight(12);
+                    inwardItem.setLabel("aashu");
+                    inwardItem.setOutwardQuantity(0);
                     AddEditInwardActivity.inwardItems.add(inwardItem);
+                } else {
+                    AddEditInwardActivity.inwardItems.get(selectedPosition).setItemId(selectedItems.getId());
+                    AddEditInwardActivity.inwardItems.get(selectedPosition).setItemName(selectedItems.getName());
+                    AddEditInwardActivity.inwardItems.get(selectedPosition).setUnitId(selectedItemRent.getUnitId());
+                    AddEditInwardActivity.inwardItems.get(selectedPosition).setUnitName(selectedItemRent.getUnit());
+                    AddEditInwardActivity.inwardItems.get(selectedPosition).setRentPerUnit(Double.parseDouble(rentPerUnit));
+                    AddEditInwardActivity.inwardItems.get(selectedPosition).setQuantity(Integer.parseInt(quantity));
+                    AddEditInwardActivity.inwardItems.get(selectedPosition).setMarkoName(marko);
+                    if (AddEditInwardActivity.inwardItems.get(selectedPosition).getRawId() == 0) {
+                        AddEditInwardActivity.inwardItems.get(selectedPosition).setModified(true);
+                    }
+                    AddEditInwardActivity.inwardItems.get(selectedPosition).setUnloadingCharges(Integer.parseInt(unloadingCharge));
+                    AddEditInwardActivity.inwardItems.get(selectedPosition).setInwardItemLocationPoco(selectedRacksList);
                 }
                 onBackPressed();
             }
@@ -225,7 +289,6 @@ public class AddEditInItemActivity extends AppCompatActivity {
     }
 
     private void getData() {
-
 
 
     }
@@ -276,7 +339,7 @@ public class AddEditInItemActivity extends AppCompatActivity {
             if (searchTextViewModel.getId() == items.get(i).getId()) {
                 selectedItems = items.get(i);
                 spnItem.setText(selectedItems.getName());
-                selectedItemRent = null;
+                selectedItemRent = new ItemRent();
                 spnUnit.setText("");
                 etRent.setText("");
                 return;
@@ -315,8 +378,8 @@ public class AddEditInItemActivity extends AppCompatActivity {
                 }
             }
             if (!isIn) {
-                int selectedRawId=selectedRacksList.get(selectedRacksList.size()-1).getRawId();
-                selectedRawId=selectedRawId+1;
+                int selectedRawId = selectedRacksList.get(selectedRacksList.size() - 1).getRawId();
+                selectedRawId = selectedRawId + 1;
                 selectedRacks.setRawId(selectedRawId);
                 selectedRacksList.add(selectedRacks);
                 racksAdapter.notifyDataSetChanged();
@@ -340,6 +403,7 @@ public class AddEditInItemActivity extends AppCompatActivity {
         etQuantity = findViewById(R.id.etQuantity);
         etMarko = findViewById(R.id.etMarko);
         etUnloadingCharge = findViewById(R.id.etUnloadingCharge);
+        ImageView ivBack = findViewById(R.id.ivBack);
     }
 
     @SuppressLint("StaticFieldLeak")

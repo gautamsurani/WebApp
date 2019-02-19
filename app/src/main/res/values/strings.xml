@@ -1,22 +1,120 @@
 <resources>
     <string name="app_name">Ambika Cold Storage</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
-
     <string name="prefrence_file_name">user_detail</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="no_network_msg">Ops… Its seems you can\'t connect to our network, Please check your internet connection</string>
-
     <string name="inword_list_title">Your Inwords</string>
     <string name="outword_list_title">Your Outwords</string>
     <string name="customer_list_title">Customer List</string>
-
+    <string name="invoice_list_title">Invoices</string>
     <string name="press_again_exit_app">Press again to exit from the app</string>
-
     <string name="rs">\u20B9</string>
+    <string name="item">Item</string>
+    <string name="DONE">DONE</string>
+    <string name="Enter_Inward_Number">Enter Inward Number</string>
+    <string name="Inward_Number">Inward Number</string>
+    <string name="Enter_Outward_Number">Enter Outward Number</string>
+    <string name="Invoice_No">Invoice No</string>
+    <string name="To_Date">To Date</string>
+    <string name="From_Date">From Date</string>
+    <string name="Apply_Filter">Apply Filter</string>
+    <string name="Reset_Filters">Reset Filters</string>
+    <string name="Paid_On">Paid On</string>
+    <string name="Invoice_Generated_Period">Invoice Generated Period</string>
+    <string name="Invoice_Generation_Due">Invoice Generation Due</string>
+    <string name="Sort_By_Expression">Sort By Expression</string>
+    <string name="hint_alert">Tuver Aakha - SKL GOLD - 30KG Bags available stock is 300 Please enter proper outward quanity. </string>
+    <string name="Short_By">Short By</string>
+    <string name="Broker">Broker</string>
+    <string name="Month">Month</string>
+    <string name="OK">OK</string>
+    <string name="popup_hint">Are you sure you want to logout?</string>
+    <string name="Confirmation">Confirmation</string>
+    <string name="Invoice_Status">Invoice Status</string>
+    <string name="Year">Year</string>
+    <string name="Alert">Alert</string>
+    <string name="Okay">Okay</string>
+    <string name="Add_Outward">Add Outward</string>
+    <string name="Add_Inward">Add Inward</string>
+    <string name="Add_Customer">Add Customer</string>
+    <string name="Outwarded_On">Outwarded On</string>
+    <string name="Receipt_Type">Receipt Type</string>
+    <string name="Paid_Status">Paid Status</string>
+    <string name="Inward_On">Inward On</string>
+    <string name="Enter_Location">Enter Location</string>
+    <string name="Enter_Marko">Enter Marko</string>
+    <string name="Enter_Unit">Enter Unit</string>
+    <string name="Enter_Inward_No">Enter Inward No</string>
+    <string name="Select_Broker_Name">Select Broker Name</string>
+    <string name="Refine_Result">Refine Result</string>
+    <string name="No_Connection">No Connection</string>
+    <string name="Select_Item">Select Item</string>
+    <string name="Unit">Unit</string>
+    <string name="Search_By_Party_Name">Search By Party Name</string>
+    <string name="Partywise_Invoice">Partywise Invoice</string>
+    <string name="REFRESH">REFRESH</string>
+    <string name="Login">Login</string>
+    <string name="Select_Unit">Select Unit</string>
+    <string name="Rent_Month">Rent/Month</string>
+    <string name="Inward_Quantity">Inward Quantity</string>
+    <string name="Marko">Marko</string>
+    <string name="Forgot_Password">Forgot Password</string>
+    <string name="Unloading_Charges">Unloading Charges</string>
+    <string name="Location"> Location</string>
+    <string name="Password"> Password</string>
+    <string name="Submit"> Submit</string>
+    <string name="Select_Location"> Select Location</string>
+    <string name="Update">Update</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Save">Save</string>
+    <string name="Print">Print</string>
+    <string name="Close">Close</string>
+    <string name="test">test</string>
+    <string name="Email">Email</string>
+    <string name="Remark">Remark</string>
+    <string name="Enter_Party_Name">Enter Party Name</string>
+    <string name="Outward_No">Outward No.</string>
+    <string name="Driver_Contact_No">Driver Contact No.</string>
+    <string name="Driver_Name">Driver Name</string>
+    <string name="Tranporter">Tranporter</string>
+    <string name="Vehicle_No">Vehicle No.</string>
+    <string name="Add_Item">Add Item </string>
+    <string name="Select_Party_Name">Select Party Name</string>
+    <string name="Inward_No">Inward No.</string>
+    <string name="Party_Name">Party Name</string>
+    <string name="No_Reocrd_Found">No Reocrd Found</string>
+    <string name="Search_By_Item_Name">Search By Item Name</string>
+
+    <!--Row file-->
+    <string name="Update1">Update</string>
+    <string name="row_name">Shweta Panchal</string>
+    <string name="row_email">milap@gmail.com </string>
+    <string name="row_invoice_no">INV18558 </string>
+    <string name="row_phone_no">9855555555,9855555555 </string>
+    <string name="row_role">Role : Customer</string>
+    <string name="row_edit_location">A304</string>
+    <string name="row_date">20-02-2019</string>
+    <string name="row_pay_now">Pay Now</string>
+    <string name="row_pa">PA:403.56</string>
+    <string name="row_ta">TA:403.56</string>
+    <string name="row_location">A304,A304,A304</string>
+    <string name="row_location_name">Location :</string>
+    <string name="row_unloading_charge">1500</string>
+    <string name="row_unloading">Unloading Charges :</string>
+    <string name="row_item_name">Choli-25kg Bag</string>
+    <string name="row_paid">Paid : </string>
+    <string name="row_paid_amont">100/800</string>
+    <string name="row_inward_no">123456</string>
+    <string name="row_item_price">342</string>
+    <string name="row_detail_value">100/200</string>
+    <string name="row_invoice_due_today">Invoice due today</string>
+    <string name="row_name_item">Dhani Akhi[Locale Bardhan]</string>
+    <string name="row_from_to_date">20-02-2019 to 24-02-2019</string>
+    <string name="row_loading_charge">Loading Charge </string>
+
 
 </resources>

@@ -1,6 +1,8 @@
 package tech.fraction.webapp.model;
 
-public class Paging {
+import java.io.Serializable;
+
+public class Paging implements Serializable {
     private String JsFunction;
 
     private int TotalRecords;

@@ -1,6 +1,8 @@
 package tech.fraction.webapp.model;
 
-public class SearchField {
+import java.io.Serializable;
+
+public class SearchField implements Serializable {
  private String InwardNo;
  private String Item;
  private String Unit;

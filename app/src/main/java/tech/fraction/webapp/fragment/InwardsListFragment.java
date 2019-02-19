@@ -1,12 +1,12 @@
 package tech.fraction.webapp.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,7 +27,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import tech.fraction.webapp.R;
 import tech.fraction.webapp.activity.AddEditInwardActivity;
-import tech.fraction.webapp.activity.InwardDetailActivity;
 import tech.fraction.webapp.activity.MainActivity;
 import tech.fraction.webapp.adapter.InwordsAdapter;
 import tech.fraction.webapp.base.BaseFragment;
@@ -38,6 +37,7 @@ import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
 import tech.fraction.webapp.rest.ApiRequestModel.InwardRequestModel;
 import tech.fraction.webapp.rest.ApiResponseModel.InwardResponseModel;
 import tech.fraction.webapp.rest.RetrofitInstance;
+import tech.fraction.webapp.util.AppConstant;
 import tech.fraction.webapp.util.Utils;
 
 import static tech.fraction.webapp.util.AppConstant.NO_NETWORK_REQUEST_CODE;
@@ -48,12 +48,19 @@ import static tech.fraction.webapp.util.AppConstant.NO_NETWORK_REQUEST_CODE;
 public class InwardsListFragment extends BaseFragment {
 
     RecyclerView rvInwords;
+
     Activity context;
+
     InwordsAdapter inwordsAdapter;
+
     TextView tvTitle;
+
     Retrofit retrofit;
+
     ApiInterface apiInterface;
+
     ProgressBar progress_circular;
+
     RelativeLayout rlMain;
 
     int this_visible_item_count = 0;
@@ -68,7 +75,13 @@ public class InwardsListFragment extends BaseFragment {
 
     LinearLayout linearShowToastMsg;
 
-    TextView txtToastCountMsg, tvAddInward;
+    TextView txtToastCountMsg;
+
+    int totalRecord;
+
+    FloatingActionButton btnAddInward;
+
+    PersonInformation personInformation;
 
     public InwardsListFragment() {
         // Required empty public constructor
@@ -89,15 +102,20 @@ public class InwardsListFragment extends BaseFragment {
 
         linearLayoutManager = new LinearLayoutManager(context);
 
+        personInformation = Utils.getPersonalInfo(context);
+
         inwordsAdapter = new InwordsAdapter(context);
+
         rvInwords.setLayoutManager(linearLayoutManager);
+
         rvInwords.setAdapter(inwordsAdapter);
 
         inwordsAdapter.setOnItemClickListener(new InwordsAdapter.OnClickListener() {
             @Override
             public void onClick(int position, int witch) {
-                Intent intent = new Intent(context, InwardDetailActivity.class);
-                intent.putExtra("inward", inventoryDetails.get(position));
+                Intent intent = new Intent(context, AddEditInwardActivity.class);
+                intent.putExtra("inwardItemDetailId", inventoryDetails.get(position).getInwardDetailId());
+                intent.putExtra("mode", "edit");
                 startActivity(intent);
                 context.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
@@ -115,7 +133,7 @@ public class InwardsListFragment extends BaseFragment {
                 this_visible_item_count = linearLayoutManager.findFirstCompletelyVisibleItemPosition();
 
                 if (this_visible_item_count != -1) {
-                    txtToastCountMsg.setText("Showing " + String.valueOf(this_visible_item_count + "/" + 5000 + " items"));
+                    txtToastCountMsg.setText("Showing " + String.valueOf(this_visible_item_count + "/" + totalRecord + " items"));
                 }
 
                 if (timer != null) {
@@ -131,7 +149,6 @@ public class InwardsListFragment extends BaseFragment {
                 }.start();
 
                 if (dy > 0) {
-
                     visibleItemCount = linearLayoutManager.getChildCount();
                     totalItemCount = linearLayoutManager.getItemCount();
                     pastVisibleItems = linearLayoutManager.findFirstVisibleItemPosition();
@@ -149,7 +166,7 @@ public class InwardsListFragment extends BaseFragment {
             }
         });
 
-        tvAddInward.setOnClickListener(new View.OnClickListener() {
+        btnAddInward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, AddEditInwardActivity.class);
@@ -159,26 +176,13 @@ public class InwardsListFragment extends BaseFragment {
             }
         });
 
-        PersonInformation personInformation = Utils.getPersonalInfo(context);
-
-        inwardRequestModel = new InwardRequestModel(0, 25, "",
-                "GetInwradsWithPaging(CurrentPage,'I')", "", "SrNumber", "", "", "",
-                -1, personInformation.getPersonType(), "", "", "",
-                -1, "", personInformation.getAccountId(), "", "", "DESC",
-                -999999999, 1, personInformation.getAccountId(), "", "");
-
-        if (!global.isNetworkAvailable()) {
-            retryInternet("getInward");
-        } else {
-            callGetInwardAPI();
-        }
-
         MainActivity.setOnFilterApplyClickListener(new MainActivity.OnFilterListener() {
             @Override
             public void onFilterApplyClick(String broker, String inwardNo, String item, String unit,
                                            String marko, String location, String inwardedOn, String sortBy,
-                                           String sortByExpression, int invoiceGenerationDue, int invoiceGeneratedPeriod,
-                                           String paidStatus, int paidOn) {
+                                           String sortByExpression, int invoiceGenerationDue,
+                                           int invoiceGeneratedPeriod, String paidStatus, int paidOn) {
+
                 inventoryDetails.clear();
                 inwardRequestModel.setBroker(broker);
                 inwardRequestModel.setPageIndex(1);
@@ -194,6 +198,7 @@ public class InwardsListFragment extends BaseFragment {
                 inwardRequestModel.setInvoiceGeneratedPeriod(invoiceGeneratedPeriod);
                 inwardRequestModel.setPaidStatus(paidStatus);
                 inwardRequestModel.setPaidOn(paidOn);
+
                 if (!global.isNetworkAvailable()) {
                     retryInternet("getInward");
                 } else {
@@ -208,8 +213,6 @@ public class InwardsListFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
     }
 
     List<InventoryDetail> inventoryDetails = new ArrayList<>();
@@ -217,7 +220,6 @@ public class InwardsListFragment extends BaseFragment {
     private void callGetInwardAPI() {
 
         progress_circular.setVisibility(View.VISIBLE);
-
 
         Call<InwardResponseModel> call = apiInterface.getInward(inwardRequestModel);
 
@@ -228,7 +230,13 @@ public class InwardsListFragment extends BaseFragment {
                 progress_circular.setVisibility(View.GONE);
                 InwardResponseModel inwardResponseModels = response.body();
                 assert inwardResponseModels != null;
-                inventoryDetails.addAll(inwardResponseModels.getData().getInventoryDetail());
+                if (inwardResponseModels.getIsValid()) {
+                    totalRecord = inwardResponseModels.getData().getPaging().getTotalRecords();
+                    inventoryDetails.addAll(inwardResponseModels.getData().getInventoryDetail());
+                } else {
+                    Utils.ShowSnakBar(inwardResponseModels.getMessage(), rlMain, context);
+                    inventoryDetails.clear();
+                }
                 inwordsAdapter.setList(inventoryDetails);
                 inwordsAdapter.notifyDataSetChanged();
             }
@@ -262,7 +270,22 @@ public class InwardsListFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        tvTitle.setText(getResources().getString(R.string.inword_list_title));
+        if (AppConstant.canResume) {
+            AppConstant.canResume = false;
+            inventoryDetails.clear();
+            tvTitle.setText(getResources().getString(R.string.inword_list_title));
+            inwardRequestModel = new InwardRequestModel(0, 25, "",
+                    "GetInwradsWithPaging(CurrentPage,'I')", "", "SrNumber", "", "", "",
+                    -1, personInformation.getPersonType(), "", "", "",
+                    -1, "", personInformation.getAccountId(), "", "", "DESC",
+                    -999999999, 1, personInformation.getAccountId(), "", "");
+
+            if (!global.isNetworkAvailable()) {
+                retryInternet("getInward");
+            } else {
+                callGetInwardAPI();
+            }
+        }
     }
 
     private void initComp(View view) {
@@ -271,7 +294,7 @@ public class InwardsListFragment extends BaseFragment {
         rlMain = view.findViewById(R.id.rlMain);
         linearShowToastMsg = view.findViewById(R.id.linearShowToastMsg);
         txtToastCountMsg = view.findViewById(R.id.txtToastCountMsg);
-        tvAddInward = view.findViewById(R.id.tvAddInward);
+        btnAddInward = view.findViewById(R.id.btnAddInward);
         tvTitle = context.findViewById(R.id.tvTitle);
     }
 }

@@ -1,6 +1,8 @@
 package tech.fraction.webapp.model;
 
-public class Account {
+import java.io.Serializable;
+
+public class Account implements Serializable {
     private String address;
 
     private String stNo;

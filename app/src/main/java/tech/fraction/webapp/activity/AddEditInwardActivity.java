@@ -20,9 +20,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,12 +34,13 @@ import retrofit2.Retrofit;
 import tech.fraction.webapp.R;
 import tech.fraction.webapp.adapter.InwardItemAdapter;
 import tech.fraction.webapp.model.Account;
-import tech.fraction.webapp.model.AddEditInwardModel;
 import tech.fraction.webapp.model.InwardItems;
 import tech.fraction.webapp.model.InwardVehicleDetail;
 import tech.fraction.webapp.model.SearchTextViewModel;
 import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
+import tech.fraction.webapp.rest.ApiRequestModel.SaveInwardRequestModel;
 import tech.fraction.webapp.rest.ApiResponseModel.AccountResponseModel;
+import tech.fraction.webapp.rest.ApiResponseModel.DetailInwardResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.SaveInwardResponseModel;
 import tech.fraction.webapp.rest.RetrofitInstance;
 import tech.fraction.webapp.util.AppConstant;
@@ -51,23 +49,42 @@ import tech.fraction.webapp.util.Utils;
 public class AddEditInwardActivity extends AppCompatActivity {
 
     RecyclerView rec_view;
-    RelativeLayout rl_editInward;
+
+    RelativeLayout rl_editInward, rlProgress;
+
     InwardItemAdapter inwardItemAdapter;
-    ImageView ivBack;
-    TextView tvAddItem, tvInwardNo, tvDate;
+
+    ImageView ivBack, tvAddItem;
+
+    TextView tvInwardNo, tvDate, tvParty, tvTitle, tvSave;
+
     Activity context;
+
     ProgressBar pbParty;
-    TextView tvParty, tvTitle, tvSave;
+
     ApiInterface apiInterface;
+
     Retrofit retrofit;
+
     EditText etVehicleNo, etTransporter, etDriverName, etDriverNo, etRemark;
-    AddEditInwardModel addEditInwardModel;
 
     public static List<InwardItems> inwardItems = new ArrayList<>();
 
+    SaveInwardRequestModel saveInwardRequestModel;
+
     ArrayList<Account> accounts = new ArrayList<>();
-    private static Account selectedAccount;
-    private static String inwardNumber = "", inwardDate = "";
+
+    private static Account selectedAccount = new Account();
+
+    public static String inwardNumber = "", inwardDate = "";
+
+    String mode = "";
+
+    InwardVehicleDetail inwardVehicleDetail;
+
+    int inwardDetailId;
+
+    DetailInwardResponseModel detailInwardResponseModel = new DetailInwardResponseModel();
 
     @Override
     protected void onResume() {
@@ -83,21 +100,28 @@ public class AddEditInwardActivity extends AppCompatActivity {
 
         context = this;
 
-
         retrofit = RetrofitInstance.getClient();
         apiInterface = retrofit.create(ApiInterface.class);
 
         initComp();
 
-        initCache();
-
         initItemRecyclerView();
 
-        String mode = getIntent().getStringExtra("mode");
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            mode = bundle.getString("mode", "");
+            inwardDetailId = bundle.getInt("inwardItemDetailId", -1);
+        }
+
         if (mode.equals("add")) {
             tvTitle.setText("Add Inward");
+            initCache();
+            if (accounts.size() == 0) {
+                new AccountAsync().execute();
+            }
         } else {
             tvTitle.setText("Edit Inward");
+            CallGetInwardItemDetailApi(inwardDetailId, Utils.getPersonalInfo(context).getAccountId());
         }
 
         tvAddItem.setOnClickListener(new View.OnClickListener() {
@@ -107,6 +131,12 @@ public class AddEditInwardActivity extends AppCompatActivity {
                 intent.putExtra("mode", "add");
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
 
@@ -131,19 +161,44 @@ public class AddEditInwardActivity extends AppCompatActivity {
         tvSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*if(inwardItems.size()==0)
-                {
-                    Utils.ShowSnakBar("Add atleast one item",rl_editInward,context);
+
+                if (selectedAccount.getName() == null) {
+                    Utils.ShowSnakBar("Please select party name", rl_editInward, context);
                     return;
                 }
-                InwardVehicleDetail inwardVehicleDetail = new InwardVehicleDetail("", etVehicleNo.getText().toString(),
-                        etTransporter.getText().toString(), etRemark.getText().toString(), etDriverNo.getText().toString(),
-                        etDriverName.getText().toString(), 0, 0);
 
-                addEditInwardModel = new AddEditInwardModel(null, false, inwardItems,
-                        selectedAccount.getId(), "", tvDate.getText().toString(), null, inwardVehicleDetail, null,
-                        false, null, null, null, null, null,
-                        0, null, Utils.getPersonalInfo(context).getPersonId());*/
+                if (inwardItems.size() == 0) {
+                    Utils.ShowSnakBar("Add atleast one item", rl_editInward, context);
+                    return;
+                }
+
+                if (mode.equals("add")) {
+                    InwardVehicleDetail inwardVehicleDetail = new InwardVehicleDetail("", etVehicleNo.getText().toString(),
+                            etTransporter.getText().toString(), etRemark.getText().toString(), etDriverNo.getText().toString(),
+                            etDriverName.getText().toString(), 0, 0);
+
+                    saveInwardRequestModel = new SaveInwardRequestModel(null, false, inwardItems,
+                            selectedAccount.getId(), selectedAccount.getName(), "12-02-2019", null, inwardVehicleDetail, null,
+                            false, null, null, inwardNumber, null, null,
+                            0, null, Utils.getPersonalInfo(context).getPersonId());
+                } else {
+
+                    int inwardVehicalId = 0, inwardDetailId1 = 0;
+
+                    if (saveInwardRequestModel.getInwardVehicleDetail() != null) {
+                        inwardVehicalId = saveInwardRequestModel.getInwardVehicleDetail().getId();
+                        inwardDetailId1 = saveInwardRequestModel.getInwardVehicleDetail().getInwardDetailId();
+                    }
+                    InwardVehicleDetail inwardVehicleDetail = new InwardVehicleDetail("", etVehicleNo.getText().toString(), etTransporter.getText().toString()
+                            , etRemark.getText().toString(), etDriverNo.getText().toString(), etDriverName.getText().toString(), inwardVehicalId,
+                            inwardDetailId1);
+
+                    saveInwardRequestModel = new SaveInwardRequestModel(saveInwardRequestModel.getPaidStatus(), false, inwardItems, selectedAccount.getId(),
+                            selectedAccount.getName(), saveInwardRequestModel.getInwardedOn(), null, inwardVehicleDetail, null, true,
+                            null, null, inwardNumber, saveInwardRequestModel.getLastInvoiceGeneratedOn(), saveInwardRequestModel.getTotalPaidAmount(),
+                            inwardDetailId, null, Utils.getPersonalInfo(context).getPersonId());
+
+                }
 
                 CallAddInwardApi();
             }
@@ -163,9 +218,6 @@ public class AddEditInwardActivity extends AppCompatActivity {
             }
         });
 
-        if (accounts.size() == 0) {
-            new AccountAsync().execute();
-        }
 
         tvDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,36 +234,82 @@ public class AddEditInwardActivity extends AppCompatActivity {
         });
     }
 
-    private void CallAddInwardApi() {
-
-        String s = "{\"Invoices\":null,\"InwardVehicleDetail\":{\"InwardDetail\":null,\"Id\":2223,\"InwardDetailId\":3334,\"VehicleNo\":\"34535\",\"TransporterDetail\":\"Arbuda\",\"DriverName\":\"Mahes \",\n" +
-                "\"DriverContactNumber\":\"6589415256\",\"Remarks\":\"test\"},\"Id\":3334,\"Number\":\"704275\",\"AccountId\":14,\"InwardedOn\":\"\\/Date(1549630862000)\\/\",\"AddedBy\":1,\"LastInvoiceGeneratedOn\":null,\n" +
-                "\"LastInvoiceFromDate\":null,\"LastInvoiceToDate\":null,\"PaidStatus\":null,\"LastPaidAmount\":null,\"TotalPaidAmount\":null,\"LastInvoicePaidOn\":null,\"Broker\":\"Pritambhai Vasantmal\",\n" +
-                "\"CanGenerateInvoice\":false,\"IsModified\":false,\"InwardItemDetailPoco\":[{\"ItemName\":\"Val\",\"UnitId\":2,\"RentPerUnit\":10.0000,\"UnloadingCharges\":50.0000,\"Label\":\"krishna\",\n" +
-                "\"OutwardDetailId\":0,\"OutwardId\":0,\"LoadingCharges\":0,\"OtherCharges\":0,\"RawId\":1,\"AccountId\":0,\"InwardDetailId\":3334,\"InwardItemDetailId\":5218,\"InwardNo\":null,\"ItemId\":5,\n" +
-                "\"UnitName\":\"50kg bag\",\"Quantity\":50,\"Stock\":0,\"Weight\":50,\"OutwardWeight\":0,\"OutwardQuantity\":0,\"TotalOutwardQuantity\":0,\"Location\":null,\"IsModified\":false,\n" +
-                "\"InwardedOn\":\"\\/Date(-62135596800000)\\/\",\"InwardDetail\":null,\"OutwardDetails\":null,\"InwardItemLocationPoco\":[{\"RawId\":1,\"Id\":13879,\"InwardItemDetailId\":5218,\"RackId\":6,\n" +
-                "\"FloorId\":1,\"ChamberId\":1,\"RackName\":\"A103\",\"InwardItemDetail\":null,\"Rack\":null},{\"RawId\":1,\"Id\":13880,\"InwardItemDetailId\":5218,\"RackId\":39,\"FloorId\":2,\"ChamberId\":1,\n" +
-                "\"RackName\":\"A202\",\"InwardItemDetail\":null,\"Rack\":null},{\"RawId\":1,\"Id\":13881,\"InwardItemDetailId\":5218,\"RackId\":452,\"FloorId\":1,\"ChamberId\":1,\"RackName\":\"A101\",\n" +
-                "\"InwardItemDetail\":null,\"Rack\":null}]}]}";
-        JsonParser parser = new JsonParser();
-        JsonObject jsonObject = parser.parse(s).getAsJsonObject();
-
-        Call<SaveInwardResponseModel> call = apiInterface.saveInwardJson(jsonObject);
-
-        call.enqueue(new Callback<SaveInwardResponseModel>() {
+    private void CallGetInwardItemDetailApi(int inwardDetailId, int accountId) {
+        rlProgress.setVisibility(View.VISIBLE);
+        Call<DetailInwardResponseModel> call = apiInterface.getInwardItemDetail(inwardDetailId, accountId);
+        call.enqueue(new Callback<DetailInwardResponseModel>() {
             @Override
-            public void onResponse(Call<SaveInwardResponseModel> call, Response<SaveInwardResponseModel> response) {
-                SaveInwardResponseModel saveInwardResponseModel = response.body();
-                Log.d("", "===>" + response.body().toString());
-
+            public void onResponse(@NonNull Call<DetailInwardResponseModel> call, @NonNull Response<DetailInwardResponseModel> response) {
+                rlProgress.setVisibility(View.GONE);
+                detailInwardResponseModel = response.body();
+                if (detailInwardResponseModel != null) {
+                    saveInwardRequestModel = detailInwardResponseModel.getData().getInwardDetails();
+                    setData();
+                }
             }
 
             @Override
-            public void onFailure(Call<SaveInwardResponseModel> call, Throwable t) {
-                Log.d("", "===>failure");
+            public void onFailure(@NonNull Call<DetailInwardResponseModel> call, @NonNull Throwable t) {
+                rlProgress.setVisibility(View.GONE);
+                Log.d("fsd", "fdfdf");
+            }
+        });
+    }
+
+    private void setData() {
+
+        tvDate.setEnabled(false);
+        tvParty.setEnabled(false);
+
+        selectedAccount.setId(saveInwardRequestModel.getAccountId());
+        selectedAccount.setName(saveInwardRequestModel.getBroker());
+        selectedAccount.setPersonId(Utils.getPersonalInfo(context).getPersonId());
+        inwardNumber = saveInwardRequestModel.getNumber();
+        inwardDate = saveInwardRequestModel.getInwardedOn();
+        inwardItems = saveInwardRequestModel.getInwardItemDetailPoco();
+        inwardItemAdapter.setList(inwardItems);
+        inwardItemAdapter.notifyDataSetChanged();
+        inwardVehicleDetail = saveInwardRequestModel.getInwardVehicleDetail();
+        if (inwardVehicleDetail != null) {
+            etVehicleNo.setText(Utils.ifIsStringNull(inwardVehicleDetail.getVehicleNo()));
+            etDriverName.setText(Utils.ifIsStringNull(inwardVehicleDetail.getDriverName()));
+            etDriverNo.setText(Utils.ifIsStringNull(inwardVehicleDetail.getDriverContactNumber()));
+            etTransporter.setText(Utils.ifIsStringNull(inwardVehicleDetail.getTransporterDetail()));
+            etRemark.setText(Utils.ifIsStringNull(inwardVehicleDetail.getRemarks()));
+        } else {
+            inwardVehicleDetail = new InwardVehicleDetail();
+        }
+
+        initCache();
+    }
 
 
+    private void CallAddInwardApi() {
+        rlProgress.setVisibility(View.VISIBLE);
+
+        Call<SaveInwardResponseModel> call = apiInterface.saveInward(saveInwardRequestModel);
+
+        call.enqueue(new Callback<SaveInwardResponseModel>() {
+            @Override
+            public void onResponse(@NonNull Call<SaveInwardResponseModel> call, @NonNull Response<SaveInwardResponseModel> response) {
+                rlProgress.setVisibility(View.GONE);
+                AppConstant.canResume = true;
+                SaveInwardResponseModel saveInwardResponseModel = response.body();
+                assert response.body() != null;
+                Log.d("", "===>" + response.body().toString());
+                assert saveInwardResponseModel != null;
+                if (saveInwardResponseModel.getIsValid()) {
+                    Utils.ShowSnakBar(saveInwardResponseModel.getMessage(), rl_editInward, context);
+                }
+                if (mode.equals("add")) {
+                    clearCatch();
+                    onBackPressed();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<SaveInwardResponseModel> call, @NonNull Throwable t) {
+                rlProgress.setVisibility(View.GONE);
             }
         });
     }
@@ -309,8 +407,7 @@ public class AddEditInwardActivity extends AppCompatActivity {
             call.enqueue(new Callback<AccountResponseModel>() {
                 @Override
                 public void onResponse(@NonNull Call<AccountResponseModel> call, @NonNull Response<AccountResponseModel> response) {
-                    AccountResponseModel accountResponseModel = new AccountResponseModel();
-                    accountResponseModel = response.body();
+                    AccountResponseModel accountResponseModel = response.body();
                     assert accountResponseModel != null;
                     accounts = accountResponseModel.getAccount();
                     pbParty.setVisibility(View.INVISIBLE);
@@ -322,7 +419,6 @@ public class AddEditInwardActivity extends AppCompatActivity {
                 public void onFailure(@NonNull Call<AccountResponseModel> call, @NonNull Throwable t) {
                     pbParty.setVisibility(View.INVISIBLE);
                     tvParty.setText("Fail to load party name");
-                    Log.d("fsd", "fail");
                 }
             });
             return null;
@@ -350,13 +446,25 @@ public class AddEditInwardActivity extends AppCompatActivity {
         etDriverNo = findViewById(R.id.etDriverNo);
         etRemark = findViewById(R.id.etRemark);
         rl_editInward = findViewById(R.id.rl_editInward);
+        rlProgress = findViewById(R.id.rlProgress);
         Toolbar tb = findViewById(R.id.toolbar);
         setSupportActionBar(tb);
+        ImageView ivBack = findViewById(R.id.ivBack);
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        if (mode.equals("edit")) {
+            clearCatch();
+        }
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
+    private void clearCatch() {
+        selectedAccount = new Account();
+        inwardNumber = "";
+        inwardDate = "";
+        inwardItems.clear();
     }
 }

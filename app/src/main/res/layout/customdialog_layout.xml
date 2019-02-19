@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <tech.fraction.webapp.ui.MyTextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/Alert"
+        android:textColor="@color/white"
+        android:textSize="22sp" />
+
+    <tech.fraction.webapp.ui.MyTextView
+        android:id="@+id/tvMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:padding="18dp"
+        android:text="@string/hint_alert"
+        android:textColor="@color/light_black"
+        android:textSize="14sp" />
+
+    <tech.fraction.webapp.ui.MyTextView
+        android:id="@+id/tvOkay"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/mybutton"
+
+        android:gravity="center"
+        android:paddingLeft="15dp"
+
+        android:paddingRight="15dp"
+        android:text="@string/Okay"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+
+        />
+
+</LinearLayout>

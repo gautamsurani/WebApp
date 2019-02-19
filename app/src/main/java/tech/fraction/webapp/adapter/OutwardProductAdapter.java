@@ -57,11 +57,17 @@ public class OutwardProductAdapter extends RecyclerView.Adapter<OutwardProductAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
         viewHolder.tvItemName.setText(outwardItems.get(position).getItemName());
-        viewHolder.tvStock.setText(outwardItems.get(position).getOutwardQuantity()+"/"+outwardItems.get(position).getStock());
-        viewHolder.tvUnloadingCharge.setText("Loading Charges: "+outwardItems.get(position).getLoadingCharges());
-
+        viewHolder.tvStock.setText(outwardItems.get(position).getOutwardQuantity() + "/" + outwardItems.get(position).getStock());
+        viewHolder.tvUnloadingCharge.setText("Loading Charges: " + outwardItems.get(position).getLoadingCharges());
+        viewHolder.rlMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onClickListener != null) {
+                    onClickListener.onClick(position, 0);
+                }
+            }
+        });
     }
-
 
     @Override
     public int getItemCount() {
@@ -69,14 +75,15 @@ public class OutwardProductAdapter extends RecyclerView.Adapter<OutwardProductAd
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvItemName,tvStock,tvUnloadingCharge;
+        TextView tvItemName, tvStock, tvUnloadingCharge;
+        RelativeLayout rlMain;
+
         public ViewHolder(@NonNull View item) {
             super(item);
             tvItemName = item.findViewById(R.id.tvItemName);
             tvStock = item.findViewById(R.id.tvStock);
             tvUnloadingCharge = item.findViewById(R.id.tvUnloadingCharge);
-
-
+            rlMain = item.findViewById(R.id.rlMain);
         }
     }
 }

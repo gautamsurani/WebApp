@@ -11,5 +11,6 @@ public final class AppConstant {
 
     public static final int SEARCH_ACTIVITY_REQUEST_CODE = 201;
 
+    public static boolean canResume = true;
 
 }

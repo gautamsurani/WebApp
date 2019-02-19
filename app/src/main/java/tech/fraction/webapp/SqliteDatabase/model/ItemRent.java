@@ -1,6 +1,8 @@
 package tech.fraction.webapp.SqliteDatabase.model;
 
-public class ItemRent {
+import java.io.Serializable;
+
+public class ItemRent implements Serializable {
     private int itemId;
 
     private String unit;

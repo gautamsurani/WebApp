@@ -1,6 +1,8 @@
 package tech.fraction.webapp.model;
 
-public class Response {
+import java.io.Serializable;
+
+public class Response implements Serializable {
     String message;
 
     boolean isValid;

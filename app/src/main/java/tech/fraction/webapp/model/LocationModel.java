@@ -1,6 +1,8 @@
 package tech.fraction.webapp.model;
 
-public class LocationModel {
+import java.io.Serializable;
+
+public class LocationModel implements Serializable {
 
     String id;
     String name;

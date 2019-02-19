@@ -1,31 +1,37 @@
 package tech.fraction.webapp.rest.ApiResponseModel;
 
-public class SaveInwardResponseModel {
-    boolean isValid;
-    String message;
-    int recordId;
+import java.io.Serializable;
 
-    public int getRecordId() {
-        return recordId;
-    }
+import tech.fraction.webapp.model.DataSaveInward;
 
-    public void setRecordId(int recordId) {
-        this.recordId = recordId;
-    }
+public class SaveInwardResponseModel implements Serializable {
+    private String Message;
 
-    public boolean isValid() {
-        return isValid;
-    }
+    private DataSaveInward Data;
 
-    public void setValid(boolean valid) {
-        isValid = valid;
-    }
+    private boolean IsValid;
 
     public String getMessage() {
-        return message;
+        return Message;
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        Message = message;
+    }
+
+    public DataSaveInward getData() {
+        return Data;
+    }
+
+    public void setData(DataSaveInward data) {
+        Data = data;
+    }
+
+    public boolean getIsValid() {
+        return IsValid;
+    }
+
+    public void setIsValid(boolean isValid) {
+        IsValid = isValid;
     }
 }

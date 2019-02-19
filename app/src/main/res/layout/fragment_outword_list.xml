@@ -4,71 +4,63 @@
     android:id="@+id/rlMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".fragment.InwardsListFragment">
 
-    <TextView
-        android:id="@+id/tvAddOutward"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvOutwords"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/mybutton"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/linearShowToastMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/toptoast_background"
         android:gravity="center"
-        android:padding="10dp"
-        android:text="Add Outward"
-        android:textColor="@color/white" />
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp"
+        android:visibility="gone">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/tvAddOutward">
+        <ImageView
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:src="@drawable/top_arrow" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvOutwords"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <LinearLayout
-            android:id="@+id/linearShowToastMsg"
+        <TextView
+            android:id="@+id/txtToastCountMsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/progressBar1"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/toptoast_background"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="5dp"
-            android:visibility="gone">
+            android:paddingLeft="5dp"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp" />
+    </LinearLayout>
 
-            <ImageView
-                android:id="@+id/imgToastTopIcon"
-                android:layout_width="13dp"
-                android:layout_height="13dp"
-                android:src="@drawable/top_arrow" />
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/txtToastCountMsg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/progressBar1"
-                android:layout_centerHorizontal="true"
-                android:paddingLeft="5dp"
-                android:text=""
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp" />
-        </LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/tvAddOutward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="25dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:src="@drawable/plus_icon" />
 
-        <ProgressBar
-            android:id="@+id/progress_circular"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerInParent="true"
-            android:visibility="gone" />
-    </RelativeLayout>
 </RelativeLayout>

@@ -1,8 +1,9 @@
 package tech.fraction.webapp.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ResponseOutward {
+public class ResponseOutward implements Serializable {
     private int outwardId;
 
     private String lastName;

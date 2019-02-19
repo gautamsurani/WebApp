@@ -1,5 +1,6 @@
 package tech.fraction.webapp.rest.ApiResponseModel;
 
+import java.io.Serializable;
 import java.util.List;
 
 import tech.fraction.webapp.model.Data;
@@ -8,7 +9,7 @@ import tech.fraction.webapp.model.PersonInformation;
 import tech.fraction.webapp.model.Response;
 import tech.fraction.webapp.model.UserRights;
 
-public class LoginResponseModel {
+public class LoginResponseModel implements Serializable {
 
     String Message;
 

@@ -1,20 +1,21 @@
 package tech.fraction.webapp.rest.ApiResponseModel;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 import tech.fraction.webapp.model.InventoryDetail;
 import tech.fraction.webapp.model.InwardData;
 import tech.fraction.webapp.model.Paging;
 
-public class InwardResponseModel {
+public class InwardResponseModel implements Serializable {
 
 
     private String Message;
 
     private InwardData Data;
 
-    private String IsValid;
+    private boolean IsValid;
 
 
     public String getMessage() {
@@ -33,11 +34,11 @@ public class InwardResponseModel {
         Data = data;
     }
 
-    public String getIsValid() {
+    public boolean getIsValid() {
         return IsValid;
     }
 
-    public void setIsValid(String isValid) {
+    public void setIsValid(boolean isValid) {
         IsValid = isValid;
     }
 }
