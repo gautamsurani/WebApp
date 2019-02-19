@@ -1255,7 +1255,6 @@ public class MainActivity extends AppCompatActivity {
         spnPaidStatus.setAdapter(dataAdapter);
     }
 
-
     private void setPaidOnCommonn(Spinner spPaid) {
         List<String> categories = new ArrayList<>();
         categories.add("All");
@@ -1264,17 +1263,13 @@ public class MainActivity extends AppCompatActivity {
         categories.add("Within 1 Week");
         categories.add("Within 15 Days");
         categories.add("Within 30 Days");
-
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
-
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         // attaching data adapter to spinner
         spPaid.setAdapter(dataAdapter);
     }
-
 
     private void initComp() {
         mainView = findViewById(R.id.mainView);
@@ -1322,12 +1317,10 @@ public class MainActivity extends AppCompatActivity {
         rbDefaultSortByExpression = findViewById(R.id.rbDefaultSortByExpression);
         tvBroker = findViewById(R.id.tvBroker);
 
-
         spnOutwardedOn = findViewById(R.id.spnOutwardedOn);
         spInvoiceStatus = findViewById(R.id.spInvoiceStatus);
         spPaidStatusOut = findViewById(R.id.spPaidStatusOut);
         spPaidOnOut = findViewById(R.id.spPaidOnOut);
-
 
         tvOutwardFilterReset = findViewById(R.id.tvOutwardFilterReset);
         tvOutwardFilterApply = findViewById(R.id.tvOutwardFilterApply);
@@ -1344,15 +1337,11 @@ public class MainActivity extends AppCompatActivity {
         spPaidOnInv = findViewById(R.id.spPaidOnInv);
         pbBrokerInvoice = findViewById(R.id.pbBrokerInvoice);
 
-
         tvInvoiceFilterReset = findViewById(R.id.tvInvoiceFilterReset);
         tvInvoiceFilterApply = findViewById(R.id.tvInvoiceFilterApply);
-
-
     }
 
     List<Menu> menus;
-
 
     @SuppressLint("SetTextI18n")
     private void setNavBar() {
@@ -1410,12 +1399,11 @@ public class MainActivity extends AppCompatActivity {
         menuAdapter.setOnItemClickListener(new MenuAdapter.OnClickListener() {
             @Override
             public void onClick(int menuPosition, int subMenuPosition, int subSubMenuPosition) {
-
                 String menuName = getMenuName(menuPosition, subMenuPosition, subSubMenuPosition);
-
                 if (menuName.endsWith("Inwards")) {
                     mDrawerLayout.closeDrawers();
                     if (!tvTitle.getText().equals(getResources().getString(R.string.inword_list_title))) {
+                        AppConstant.canResume = true;
                         openHomeFragment(new InwardsListFragment());
                     }
                 } else if (menuName.equals("Outwards")) {
