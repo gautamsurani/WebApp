@@ -33,10 +33,12 @@ import tech.fraction.webapp.base.BaseFragment;
 import tech.fraction.webapp.base.NoNetworkActivity;
 import tech.fraction.webapp.model.InventoryDetail;
 import tech.fraction.webapp.model.PersonInformation;
+import tech.fraction.webapp.model.Transporter;
 import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
 import tech.fraction.webapp.rest.ApiRequestModel.InwardRequestModel;
 import tech.fraction.webapp.rest.ApiResponseModel.InwardResponseModel;
 import tech.fraction.webapp.rest.RetrofitInstance;
+import tech.fraction.webapp.util.AppConstant;
 import tech.fraction.webapp.util.Utils;
 
 import static tech.fraction.webapp.util.AppConstant.NO_NETWORK_REQUEST_CODE;
@@ -139,7 +141,6 @@ public class InwardsListFragment extends BaseFragment {
                 }.start();
 
                 if (dy > 0) {
-
                     visibleItemCount = linearLayoutManager.getChildCount();
                     totalItemCount = linearLayoutManager.getItemCount();
                     pastVisibleItems = linearLayoutManager.findFirstVisibleItemPosition();
@@ -171,8 +172,9 @@ public class InwardsListFragment extends BaseFragment {
             @Override
             public void onFilterApplyClick(String broker, String inwardNo, String item, String unit,
                                            String marko, String location, String inwardedOn, String sortBy,
-                                           String sortByExpression, int invoiceGenerationDue, int invoiceGeneratedPeriod,
-                                           String paidStatus, int paidOn) {
+                                           String sortByExpression, int invoiceGenerationDue,
+                                           int invoiceGeneratedPeriod, String paidStatus, int paidOn) {
+
                 inventoryDetails.clear();
                 inwardRequestModel.setBroker(broker);
                 inwardRequestModel.setPageIndex(1);
@@ -188,6 +190,7 @@ public class InwardsListFragment extends BaseFragment {
                 inwardRequestModel.setInvoiceGeneratedPeriod(invoiceGeneratedPeriod);
                 inwardRequestModel.setPaidStatus(paidStatus);
                 inwardRequestModel.setPaidOn(paidOn);
+
                 if (!global.isNetworkAvailable()) {
                     retryInternet("getInward");
                 } else {
@@ -210,7 +213,6 @@ public class InwardsListFragment extends BaseFragment {
 
         progress_circular.setVisibility(View.VISIBLE);
 
-
         Call<InwardResponseModel> call = apiInterface.getInward(inwardRequestModel);
 
         call.enqueue(new Callback<InwardResponseModel>() {
@@ -220,8 +222,13 @@ public class InwardsListFragment extends BaseFragment {
                 progress_circular.setVisibility(View.GONE);
                 InwardResponseModel inwardResponseModels = response.body();
                 assert inwardResponseModels != null;
-                totalRecord = inwardResponseModels.getData().getPaging().getTotalRecords();
-                inventoryDetails.addAll(inwardResponseModels.getData().getInventoryDetail());
+                if (inwardResponseModels.getIsValid()) {
+                    totalRecord = inwardResponseModels.getData().getPaging().getTotalRecords();
+                    inventoryDetails.addAll(inwardResponseModels.getData().getInventoryDetail());
+                } else {
+                    Utils.ShowSnakBar(inwardResponseModels.getMessage(), rlMain, context);
+                    inventoryDetails.clear();
+                }
                 inwordsAdapter.setList(inventoryDetails);
                 inwordsAdapter.notifyDataSetChanged();
             }
@@ -255,17 +262,21 @@ public class InwardsListFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        tvTitle.setText(getResources().getString(R.string.inword_list_title));
-        inwardRequestModel = new InwardRequestModel(0, 25, "",
-                "GetInwradsWithPaging(CurrentPage,'I')", "", "SrNumber", "", "", "",
-                -1, personInformation.getPersonType(), "", "", "",
-                -1, "", personInformation.getAccountId(), "", "", "DESC",
-                -999999999, 1, personInformation.getAccountId(), "", "");
+        if (AppConstant.canResume) {
+            AppConstant.canResume = false;
+            inventoryDetails.clear();
+            tvTitle.setText(getResources().getString(R.string.inword_list_title));
+            inwardRequestModel = new InwardRequestModel(0, 25, "",
+                    "GetInwradsWithPaging(CurrentPage,'I')", "", "SrNumber", "", "", "",
+                    -1, personInformation.getPersonType(), "", "", "",
+                    -1, "", personInformation.getAccountId(), "", "", "DESC",
+                    -999999999, 1, personInformation.getAccountId(), "", "");
 
-        if (!global.isNetworkAvailable()) {
-            retryInternet("getInward");
-        } else {
-            callGetInwardAPI();
+            if (!global.isNetworkAvailable()) {
+                retryInternet("getInward");
+            } else {
+                callGetInwardAPI();
+            }
         }
     }
 

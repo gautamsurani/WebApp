@@ -15,7 +15,7 @@ public class InwardResponseModel implements Serializable {
 
     private InwardData Data;
 
-    private String IsValid;
+    private boolean IsValid;
 
 
     public String getMessage() {
@@ -34,11 +34,11 @@ public class InwardResponseModel implements Serializable {
         Data = data;
     }
 
-    public String getIsValid() {
+    public boolean getIsValid() {
         return IsValid;
     }
 
-    public void setIsValid(String isValid) {
+    public void setIsValid(boolean isValid) {
         IsValid = isValid;
     }
 }

@@ -37,7 +37,6 @@ import tech.fraction.webapp.model.Account;
 import tech.fraction.webapp.model.InwardItems;
 import tech.fraction.webapp.model.InwardVehicleDetail;
 import tech.fraction.webapp.model.SearchTextViewModel;
-import tech.fraction.webapp.model.Transporter;
 import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
 import tech.fraction.webapp.rest.ApiRequestModel.SaveInwardRequestModel;
 import tech.fraction.webapp.rest.ApiResponseModel.AccountResponseModel;
@@ -117,13 +116,12 @@ public class AddEditInwardActivity extends AppCompatActivity {
         if (mode.equals("add")) {
             tvTitle.setText("Add Inward");
             initCache();
+            if (accounts.size() == 0) {
+                new AccountAsync().execute();
+            }
         } else {
             tvTitle.setText("Edit Inward");
             CallGetInwardItemDetailApi(inwardDetailId, Utils.getPersonalInfo(context).getAccountId());
-        }
-
-        if (accounts.size() == 0 && mode.equals("add")) {
-            new AccountAsync().execute();
         }
 
         tvAddItem.setOnClickListener(new View.OnClickListener() {
@@ -184,9 +182,16 @@ public class AddEditInwardActivity extends AppCompatActivity {
                             false, null, null, inwardNumber, null, null,
                             0, null, Utils.getPersonalInfo(context).getPersonId());
                 } else {
+
+                    int inwardVehicalId = 0, inwardDetailId1 = 0;
+
+                    if (saveInwardRequestModel.getInwardVehicleDetail() != null) {
+                        inwardVehicalId = saveInwardRequestModel.getInwardVehicleDetail().getId();
+                        inwardDetailId1 = saveInwardRequestModel.getInwardVehicleDetail().getInwardDetailId();
+                    }
                     InwardVehicleDetail inwardVehicleDetail = new InwardVehicleDetail("", etVehicleNo.getText().toString(), etTransporter.getText().toString()
-                            , etRemark.getText().toString(), etDriverNo.getText().toString(), etDriverName.getText().toString(), saveInwardRequestModel.getInwardVehicleDetail().getId(),
-                            saveInwardRequestModel.getInwardVehicleDetail().getInwardDetailId());
+                            , etRemark.getText().toString(), etDriverNo.getText().toString(), etDriverName.getText().toString(), inwardVehicalId,
+                            inwardDetailId1);
 
                     saveInwardRequestModel = new SaveInwardRequestModel(saveInwardRequestModel.getPaidStatus(), false, inwardItems, selectedAccount.getId(),
                             selectedAccount.getName(), saveInwardRequestModel.getInwardedOn(), null, inwardVehicleDetail, null, true,
@@ -234,7 +239,7 @@ public class AddEditInwardActivity extends AppCompatActivity {
         Call<DetailInwardResponseModel> call = apiInterface.getInwardItemDetail(inwardDetailId, accountId);
         call.enqueue(new Callback<DetailInwardResponseModel>() {
             @Override
-            public void onResponse(Call<DetailInwardResponseModel> call, Response<DetailInwardResponseModel> response) {
+            public void onResponse(@NonNull Call<DetailInwardResponseModel> call, @NonNull Response<DetailInwardResponseModel> response) {
                 rlProgress.setVisibility(View.GONE);
                 detailInwardResponseModel = response.body();
                 if (detailInwardResponseModel != null) {
@@ -244,7 +249,7 @@ public class AddEditInwardActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<DetailInwardResponseModel> call, Throwable t) {
+            public void onFailure(@NonNull Call<DetailInwardResponseModel> call, @NonNull Throwable t) {
                 rlProgress.setVisibility(View.GONE);
                 Log.d("fsd", "fdfdf");
             }
@@ -286,19 +291,25 @@ public class AddEditInwardActivity extends AppCompatActivity {
 
         call.enqueue(new Callback<SaveInwardResponseModel>() {
             @Override
-            public void onResponse(Call<SaveInwardResponseModel> call, Response<SaveInwardResponseModel> response) {
+            public void onResponse(@NonNull Call<SaveInwardResponseModel> call, @NonNull Response<SaveInwardResponseModel> response) {
                 rlProgress.setVisibility(View.GONE);
+                AppConstant.canResume = true;
                 SaveInwardResponseModel saveInwardResponseModel = response.body();
+                assert response.body() != null;
                 Log.d("", "===>" + response.body().toString());
+                assert saveInwardResponseModel != null;
                 if (saveInwardResponseModel.getIsValid()) {
                     Utils.ShowSnakBar(saveInwardResponseModel.getMessage(), rl_editInward, context);
+                }
+                if (mode.equals("add")) {
+                    clearCatch();
+                    onBackPressed();
                 }
             }
 
             @Override
-            public void onFailure(Call<SaveInwardResponseModel> call, Throwable t) {
+            public void onFailure(@NonNull Call<SaveInwardResponseModel> call, @NonNull Throwable t) {
                 rlProgress.setVisibility(View.GONE);
-                Log.d("", "===>failure");
             }
         });
     }
@@ -396,8 +407,7 @@ public class AddEditInwardActivity extends AppCompatActivity {
             call.enqueue(new Callback<AccountResponseModel>() {
                 @Override
                 public void onResponse(@NonNull Call<AccountResponseModel> call, @NonNull Response<AccountResponseModel> response) {
-                    AccountResponseModel accountResponseModel = new AccountResponseModel();
-                    accountResponseModel = response.body();
+                    AccountResponseModel accountResponseModel = response.body();
                     assert accountResponseModel != null;
                     accounts = accountResponseModel.getAccount();
                     pbParty.setVisibility(View.INVISIBLE);
@@ -409,7 +419,6 @@ public class AddEditInwardActivity extends AppCompatActivity {
                 public void onFailure(@NonNull Call<AccountResponseModel> call, @NonNull Throwable t) {
                     pbParty.setVisibility(View.INVISIBLE);
                     tvParty.setText("Fail to load party name");
-                    Log.d("fsd", "fail");
                 }
             });
             return null;
@@ -446,13 +455,16 @@ public class AddEditInwardActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
         if (mode.equals("edit")) {
-            selectedAccount = new Account();
-            inwardNumber = "";
-            inwardDate = "";
-            inwardItems.clear();
+            clearCatch();
         }
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
+    private void clearCatch() {
+        selectedAccount = new Account();
+        inwardNumber = "";
+        inwardDate = "";
+        inwardItems.clear();
     }
 }

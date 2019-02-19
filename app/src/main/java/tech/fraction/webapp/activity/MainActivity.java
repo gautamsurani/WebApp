@@ -143,6 +143,8 @@ public class MainActivity extends AppCompatActivity {
 
         context = this;
 
+        AppConstant.canResume = true;
+
         sqLiteHelperFunctions = new SqLiteHelperFunctions(context);
 
         initComp();
