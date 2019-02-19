@@ -219,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
                     case BottomSheetBehavior.STATE_EXPANDED:
                         break;
                     case BottomSheetBehavior.STATE_COLLAPSED:
+                        Utils.hideKeyboard(context);
                         break;
                     case BottomSheetBehavior.STATE_DRAGGING:
                         break;
@@ -744,9 +745,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setInwardFilter() {
-        Utils.hideKeyboard(context);
         if (onClickListener != null) {
-            sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             String broker = "", item = "", inwardedOn = "", sortBy = "", sortByExpression = "", paidStatus = "";
             int invoiceGenerationDue = -1, invoiceGeneratedPeriod = -1, paidOn = -1;
             if (selectedAccount != null) {
@@ -891,6 +890,7 @@ public class MainActivity extends AppCompatActivity {
             }
             onClickListener.onFilterApplyClick(broker, inwardNo, item, unit, marko, location, inwardedOn
                     , sortBy, sortByExpression, invoiceGenerationDue, invoiceGeneratedPeriod, paidStatus, paidOn);
+            sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         }
     }
 
@@ -910,7 +910,6 @@ public class MainActivity extends AppCompatActivity {
         spInvoiceGeneratedPeriod.setSelection(0);
         spPaidStatus.setSelection(0);
         spPaidOn.setSelection(0);
-        sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         setInwardFilter();
     }
 

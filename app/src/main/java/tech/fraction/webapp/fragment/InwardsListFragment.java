@@ -33,7 +33,6 @@ import tech.fraction.webapp.base.BaseFragment;
 import tech.fraction.webapp.base.NoNetworkActivity;
 import tech.fraction.webapp.model.InventoryDetail;
 import tech.fraction.webapp.model.PersonInformation;
-import tech.fraction.webapp.model.Transporter;
 import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
 import tech.fraction.webapp.rest.ApiRequestModel.InwardRequestModel;
 import tech.fraction.webapp.rest.ApiResponseModel.InwardResponseModel;
@@ -49,12 +48,19 @@ import static tech.fraction.webapp.util.AppConstant.NO_NETWORK_REQUEST_CODE;
 public class InwardsListFragment extends BaseFragment {
 
     RecyclerView rvInwords;
+
     Activity context;
+
     InwordsAdapter inwordsAdapter;
+
     TextView tvTitle;
+
     Retrofit retrofit;
+
     ApiInterface apiInterface;
+
     ProgressBar progress_circular;
+
     RelativeLayout rlMain;
 
     int this_visible_item_count = 0;
@@ -99,7 +105,9 @@ public class InwardsListFragment extends BaseFragment {
         personInformation = Utils.getPersonalInfo(context);
 
         inwordsAdapter = new InwordsAdapter(context);
+
         rvInwords.setLayoutManager(linearLayoutManager);
+
         rvInwords.setAdapter(inwordsAdapter);
 
         inwordsAdapter.setOnItemClickListener(new InwordsAdapter.OnClickListener() {
