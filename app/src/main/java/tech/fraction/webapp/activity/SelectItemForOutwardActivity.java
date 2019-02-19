@@ -58,7 +58,7 @@ public class SelectItemForOutwardActivity extends BaseActivity {
 
     LinearLayout linearShowToastMsg;
 
-    TextView txtToastCountMsg, tvAddInward;
+    TextView txtToastCountMsg;
 
     List<OutwardDetails> outwardDetails = new ArrayList<>();
     List<OutwardDetails> selectedOutwardDetails = new ArrayList<>();
@@ -140,7 +140,7 @@ public class SelectItemForOutwardActivity extends BaseActivity {
 
         call.enqueue(new Callback<OutwardItemRespondModel>() {
             @Override
-            public void onResponse(Call<OutwardItemRespondModel> call, Response<OutwardItemRespondModel> response) {
+            public void onResponse(@NonNull Call<OutwardItemRespondModel> call, @NonNull Response<OutwardItemRespondModel> response) {
                 IsLAstLoading = true;
                 progress_circular.setVisibility(View.GONE);
                 OutwardItemRespondModel outwardItemRespondModel = response.body();
@@ -149,7 +149,7 @@ public class SelectItemForOutwardActivity extends BaseActivity {
 
                 for (int i = 0; i < outwardDetails.size(); i++) {
                     for (int j = 0; j < selectedOutwardDetails.size(); j++) {
-                        if (outwardDetails.get(i).getInwardDetailId() == selectedOutwardDetails.get(j).getInwardDetailId()) {
+                        if (outwardDetails.get(i).getInwardItemDetailId() == selectedOutwardDetails.get(j).getInwardItemDetailId()) {
                             outwardDetails.get(i).setSelected(true);
                         }
                     }
@@ -180,7 +180,6 @@ public class SelectItemForOutwardActivity extends BaseActivity {
         tvDone = findViewById(R.id.tvDone);
         linearShowToastMsg = findViewById(R.id.linearShowToastMsg);
         txtToastCountMsg = findViewById(R.id.txtToastCountMsg);
-        tvAddInward = findViewById(R.id.tvAddInward);
         tvTitle = findViewById(R.id.tvTitle);
         ivBack = findViewById(R.id.ivBack);
         tvTitle.setText("Select Items");

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/recRowProductInvoice"
+    android:id="@+id/rlMain"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
     android:layout_marginTop="@dimen/view"
+    android:background="@color/white"
     android:padding="5dp">
 
     <LinearLayout
@@ -19,7 +19,7 @@
             android:layout_gravity="center"
             android:src="@drawable/arrow" />
 
-        <TextView
+        <tech.fraction.webapp.ui.MyTextView
             android:id="@+id/tvItemName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -27,16 +27,16 @@
             android:layout_weight="1"
             android:text="@string/row_item_name"
             android:textColor="@color/light_black"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
-        <TextView
+        <tech.fraction.webapp.ui.MyTextView
             android:id="@+id/tvStock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/row_detail_value"
             android:textColor="@color/light_black"
-            android:textSize="18sp" />
+            android:textSize="14sp" />
 
 
     </LinearLayout>
@@ -49,15 +49,14 @@
         android:orientation="horizontal">
 
 
-
-
-        <TextView
+        <tech.fraction.webapp.ui.MyTextView
             android:id="@+id/tvUnloadingCharge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="3dp"
-            android:text="@string/row_loading_charge" />
+            android:text="@string/row_loading_charge"
+            android:textSize="14sp" />
 
     </LinearLayout>
 

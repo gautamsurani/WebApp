@@ -76,6 +76,14 @@ public class OutwardListAdapter extends RecyclerView.Adapter<OutwardListAdapter.
         });
 
         outwardProductAdapter = new OutwardProductAdapter(context);
+        outwardProductAdapter.setOnItemClickListener(new OutwardProductAdapter.OnClickListener() {
+            @Override
+            public void onClick(int i, int witch) {
+                if (onClickListener != null) {
+                    onClickListener.onClick(position, 0);
+                }
+            }
+        });
         viewHolder.rec_view.setLayoutManager(new LinearLayoutManager(context));
         viewHolder.rec_view.setHasFixedSize(true);
         outwardProductAdapter.setList(outWardList.get(position).getOutwardItems());

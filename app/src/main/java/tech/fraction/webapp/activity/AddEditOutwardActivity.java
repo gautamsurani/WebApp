@@ -1,21 +1,25 @@
 package tech.fraction.webapp.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.Random;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,7 +27,6 @@ import retrofit2.Retrofit;
 import tech.fraction.webapp.R;
 import tech.fraction.webapp.adapter.OutwardDetailListAdapter;
 import tech.fraction.webapp.model.Account;
-import tech.fraction.webapp.model.InwardVehicleDetail;
 import tech.fraction.webapp.model.OutwardDetails;
 import tech.fraction.webapp.model.SearchTextViewModel;
 import tech.fraction.webapp.model.Transporter;
@@ -50,17 +53,19 @@ public class AddEditOutwardActivity extends AppCompatActivity {
     EditText edt_vehicleNo, edt_transporter, edt_driverName, edt_driverNo, edt_remark;
     TextView txtSave, txtAddItem, tvTitle, tvOutwardNo, tvDate, tvParty;
     String vehicleNo, transporterName, driverName, driverNo, remark;
-    RelativeLayout scrollView, rlAddEditOutward;
+    RelativeLayout scrollView;
     SaveOutwardRequestModel saveOutwardRequestModel;
     int outwardId;
-    String mode="";
+    String mode = "";
     Transporter transporter;
-    DetailOutwardResponseModel detailOutwardResponseModel=new DetailOutwardResponseModel();
+    DetailOutwardResponseModel detailOutwardResponseModel = new DetailOutwardResponseModel();
     public static ArrayList<OutwardDetails> outwardItemsList = new ArrayList<>();
 
     ArrayList<Account> lstAccount = new ArrayList<>();
-    private static Account selectedAccount=new Account();
+    private static Account selectedAccount = new Account();
     private static String outwardNumber = "", outwardDate = "";
+
+    RelativeLayout rlProgress, rlMain;
 
     @Override
     protected void onResume() {
@@ -70,14 +75,13 @@ public class AddEditOutwardActivity extends AppCompatActivity {
     }
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_outward_detail);
 
         initComp();
-
-        initCache();
 
         initItemRecyclerView();
 
@@ -86,11 +90,12 @@ public class AddEditOutwardActivity extends AppCompatActivity {
 
         getData();
 
+        initCache();
+
         context = this;
 
         retrofit = RetrofitInstance.getClient();
         apiInterface = retrofit.create(ApiInterface.class);
-
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -98,24 +103,23 @@ public class AddEditOutwardActivity extends AppCompatActivity {
             outwardId = bundle.getInt("outwardId", -1);
         }
 
-        CallGetOutwardItemDetailApi(outwardId, Utils.getPersonalInfo(context).getAccountId());
         if (mode.equals("add")) {
             tvTitle.setText("Add Outward");
+            if (lstAccount.size() == 0) {
+                pbParty.setVisibility(View.VISIBLE);
+                AccountApiCall sampleClass = new AccountApiCall();
+                sampleClass.setOnDataListener(new AccountApiCall.DataInterface() {
+                    @Override
+                    public void responseData(AccountResponseModel accountResponseModel) {
+                        lstAccount = accountResponseModel.getAccount();
+                        pbParty.setVisibility(View.INVISIBLE);
+                    }
+                });
+                sampleClass.CallAccountApi();
+            }
         } else {
             tvTitle.setText("Edit Outward");
-        }
-
-        if (lstAccount.size() == 0) {
-            pbParty.setVisibility(View.VISIBLE);
-            AccountApiCall sampleClass = new AccountApiCall();
-            sampleClass.setOnDataListener(new AccountApiCall.DataInterface() {
-                @Override
-                public void responseData(AccountResponseModel accountResponseModel) {
-                    lstAccount = accountResponseModel.getAccount();
-                    pbParty.setVisibility(View.INVISIBLE);
-                }
-            });
-            sampleClass.CallAccountApi();
+            CallGetOutwardItemDetailApi(outwardId, Utils.getPersonalInfo(context).getAccountId());
         }
 
         tvParty.setOnClickListener(new View.OnClickListener() {
@@ -143,51 +147,57 @@ public class AddEditOutwardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getData();
-                AddDataInRequestModel();
-                // validateField(vehicleNo, transporterName, driverName, driverNo, remark);
-                CallSaveOutwardApi();
-                Utils.hideKeyboard(AddEditOutwardActivity.this);
+                if (selectedAccount.getName() == null) {
+                    Utils.ShowSnakBar("Please select party ", rlMain, AddEditOutwardActivity.this);
+                } else if (outwardItemsList.size() == 0) {
+                    Utils.ShowSnakBar("Please Enter Item ", rlMain, AddEditOutwardActivity.this);
+                } else {
+                    AddDataInRequestModel();
+                    Utils.hideKeyboard(AddEditOutwardActivity.this);
+                    CallSaveOutwardApi();
+                }
             }
         });
 
         txtAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selectedAccount == null) {
-                    Utils.ShowSnakBar("Select Party", rlAddEditOutward, context);
+                if (selectedAccount.getName() == null) {
+                    Utils.ShowSnakBar("Select Party", rlMain, context);
                 } else {
                     Intent intent = new Intent(AddEditOutwardActivity.this, SelectedOutwardActivity.class);
                     intent.putExtra("mode", mode);
                     intent.putExtra("accountId", selectedAccount.getId());
                     intent.putExtra("outwardItemsList", outwardItemsList);
-
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
             }
         });
-
     }
 
     private void CallGetOutwardItemDetailApi(int outwardId, int accountId) {
-        Call<DetailOutwardResponseModel> call=apiInterface.getOutwardItemDetail(outwardId,accountId);
-
+        rlProgress.setVisibility(View.VISIBLE);
+        Call<DetailOutwardResponseModel> call = apiInterface.getOutwardItemDetail(outwardId, accountId);
         call.enqueue(new Callback<DetailOutwardResponseModel>() {
             @Override
-            public void onResponse(Call<DetailOutwardResponseModel> call, Response<DetailOutwardResponseModel> response) {
-                detailOutwardResponseModel=response.body();
-                saveOutwardRequestModel=detailOutwardResponseModel.getData().getInwardDetails();
+            public void onResponse(@NonNull Call<DetailOutwardResponseModel> call, @NonNull Response<DetailOutwardResponseModel> response) {
+                rlProgress.setVisibility(View.GONE);
+                detailOutwardResponseModel = response.body();
+                assert detailOutwardResponseModel != null;
+                saveOutwardRequestModel = detailOutwardResponseModel.getData().getInwardDetails();
                 setData();
             }
 
             @Override
-            public void onFailure(Call<DetailOutwardResponseModel> call, Throwable t) {
-
-                Log.d("","");
+            public void onFailure(@NonNull Call<DetailOutwardResponseModel> call, @NonNull Throwable t) {
+                rlProgress.setVisibility(View.GONE);
             }
         });
 
     }
+
+    @SuppressLint("SetTextI18n")
     private void setData() {
         if (mode.equals("add")) {
             tvTitle.setText("Add Outward");
@@ -220,25 +230,26 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         }
 
         initCache();
-
-
     }
 
 
     private void CallSaveOutwardApi() {
-
-        Call<SaveOutwardResponseModel> call=apiInterface.saveOutwardItems(saveOutwardRequestModel);
+        rlProgress.setVisibility(View.VISIBLE);
+        Call<SaveOutwardResponseModel> call = apiInterface.saveOutwardItems(saveOutwardRequestModel);
         call.enqueue(new Callback<SaveOutwardResponseModel>() {
             @Override
             public void onResponse(Call<SaveOutwardResponseModel> call, Response<SaveOutwardResponseModel> response) {
+                rlProgress.setVisibility(View.GONE);
                 SaveOutwardResponseModel saveOutwardResponseModel = new SaveOutwardResponseModel();
                 saveOutwardResponseModel = response.body();
+                if (saveOutwardResponseModel.isValid()) {
+                    Utils.ShowSnakBar(saveOutwardResponseModel.getMessage(), rlMain, context);
+                }
             }
 
             @Override
             public void onFailure(Call<SaveOutwardResponseModel> call, Throwable t) {
-                Log.d("Failure", "======>");
-
+                rlProgress.setVisibility(View.GONE);
             }
         });
 
@@ -255,8 +266,6 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         saveOutwardRequestModel = new SaveOutwardRequestModel(outwardItemsList, selectedAccount.getId(), selectedAccount.getName(),
                 null, false, 0, tvOutwardNo.getText().toString(), 0.0, transporter,
                 "02-15-2019", 0.0);
-
-
     }
 
     private void initItemRecyclerView() {
@@ -264,7 +273,6 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         rec_view.setHasFixedSize(true);
         outwardDetailListAdapter = new OutwardDetailListAdapter(AddEditOutwardActivity.this, true);
         rec_view.setAdapter(outwardDetailListAdapter);
-
     }
 
     @Override
@@ -289,14 +297,13 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         }
     }
 
-
     private void initCache() {
         GenerateInwardNumber();
         if (outwardDate.isEmpty()) {
             outwardDate = Utils.getTodayDate();
         }
         tvDate.setText(outwardDate);
-        if (selectedAccount != null) {
+        if (selectedAccount.getName() != null) {
             tvParty.setText(selectedAccount.getName());
         }
     }
@@ -315,8 +322,6 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         driverName = edt_driverName.getText().toString();
         driverNo = edt_driverNo.getText().toString();
         remark = edt_remark.getText().toString();
-
-
     }
 
     private boolean validateField(String vehicleNo, String transporterName, String driverName, String driverNo, String remark) {
@@ -369,11 +374,12 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         edt_remark = findViewById(R.id.edt_remark);
         txtSave = findViewById(R.id.txt_save);
         txtAddItem = findViewById(R.id.txt_additem);
-        rlAddEditOutward = findViewById(R.id.rlAddEditOutward);
+        rlMain = findViewById(R.id.rlMain);
         tvTitle = findViewById(R.id.tvTitle);
         pbParty = findViewById(R.id.pbParty);
         tvOutwardNo = findViewById(R.id.tvOutwardNo);
         tvDate = findViewById(R.id.tvDate);
         tvParty = findViewById(R.id.tvParty);
+        rlProgress = findViewById(R.id.rlProgress);
     }
 }

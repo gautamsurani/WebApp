@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
 
     BottomSheetBehavior sheetBehaviorInvoice;
 
-
     ImageView ivFilter, ivClose, ivCloseCustomer, ivCloseOutward, ivCloseInvoice;
 
     Spinner spInwardOn, spInvoiceGenerationDue, spInvoiceGeneratedPeriod, spPaidStatus, spPaidOn;
@@ -130,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
     RadioButton rbDefaultShortBy, rbDefaultSortByExpression;
 
     TextView tvBrokerInvoice, tvInvoiceFilterReset, tvInvoiceFilterApply;
+
     Spinner spnMon, spYear, spInvReceiptType, spInvoiceGeneratedPeriodInv, spPaidStatusInv, spPaidOnInv;
 
     ProgressBar pbBrokerInvoice;
@@ -142,6 +142,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         context = this;
+
+        AppConstant.canResume = true;
 
         sqLiteHelperFunctions = new SqLiteHelperFunctions(context);
 
@@ -200,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
                 sheetBehaviorOutward.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
         });
+
         ivCloseInvoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

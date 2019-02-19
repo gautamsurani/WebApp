@@ -66,14 +66,15 @@ public class OutwardDetailListAdapter extends RecyclerView.Adapter<OutwardDetail
         holder.tvName.setText(items.getItemName());
 
         String location = "";
-        for (int i = 0; i < items.getInwardItemLocationPoco().size(); i++) {
-            if (location.isEmpty()) {
-                location = items.getInwardItemLocationPoco().get(i).getRackName();
-            } else {
-                location = location + ", " + items.getInwardItemLocationPoco().get(i).getRackName();
+        if (items.getInwardItemLocationPoco() != null) {
+            for (int i = 0; i < items.getInwardItemLocationPoco().size(); i++) {
+                if (location.isEmpty()) {
+                    location = items.getInwardItemLocationPoco().get(i).getRackName();
+                } else {
+                    location = location + ", " + items.getInwardItemLocationPoco().get(i).getRackName();
+                }
             }
         }
-
         holder.tvLocation.setText(location);
 
         holder.tv_unloadingCharges.setText(items.getLoadingCharges() + "");
@@ -118,7 +119,7 @@ public class OutwardDetailListAdapter extends RecyclerView.Adapter<OutwardDetail
         return outwardItems.size();
     }
 
-     class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvName, tvLocation, tv_unloadingCharges, tv_value;
         RelativeLayout rlMain;
         ImageView edit, delete;

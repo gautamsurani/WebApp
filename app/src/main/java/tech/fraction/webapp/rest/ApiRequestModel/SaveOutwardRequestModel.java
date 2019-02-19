@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import tech.fraction.webapp.model.Invoices;
 import tech.fraction.webapp.model.OutwardDetails;
 import tech.fraction.webapp.model.Transporter;
 
@@ -15,7 +16,7 @@ public class SaveOutwardRequestModel implements Serializable {
 
     private String Broker;
 
-    private String CurrentInvoices;
+    private ArrayList<Invoices> CurrentInvoices;
 
     private boolean IsModified;
 
@@ -34,7 +35,7 @@ public class SaveOutwardRequestModel implements Serializable {
     public SaveOutwardRequestModel() {
     }
 
-    public SaveOutwardRequestModel(ArrayList<OutwardDetails> outwardsInwardItems, int accountId, String broker, String currentInvoices, boolean isModified, int id,
+    public SaveOutwardRequestModel(ArrayList<OutwardDetails> outwardsInwardItems, int accountId, String broker, ArrayList<Invoices> currentInvoices, boolean isModified, int id,
                                    String outwardNo, Double totalLoadingCharges, tech.fraction.webapp.model.Transporter transporter, String outwardOn,
                                    Double totalOtherCharges) {
         OutwardsInwardItems = outwardsInwardItems;
@@ -74,11 +75,11 @@ public class SaveOutwardRequestModel implements Serializable {
         Broker = broker;
     }
 
-    public String getCurrentInvoices() {
+    public ArrayList<Invoices> getCurrentInvoices() {
         return CurrentInvoices;
     }
 
-    public void setCurrentInvoices(String currentInvoices) {
+    public void setCurrentInvoices(ArrayList<Invoices> currentInvoices) {
         CurrentInvoices = currentInvoices;
     }
 

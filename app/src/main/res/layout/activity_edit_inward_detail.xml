@@ -40,12 +40,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_below="@id/rec_view"
-                        android:background="@color/colorAccent"
+                        android:background="@color/test"
                         android:gravity="center_vertical"
                         android:paddingLeft="10dp"
-                        android:text="Inward Detail"
+                        android:text="Inward Information"
                         android:textColor="@color/white" />
-
 
 
                     <TextView
@@ -56,8 +55,8 @@
                         android:layout_marginTop="15dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="2dp"
-                        android:text="Inward No."
-                        android:textColor="@android:color/black" />
+                        android:textSize="@dimen/label_text"
+                        android:text="Inward No." />
 
                     <LinearLayout
                         android:id="@+id/ll"
@@ -102,8 +101,8 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="2dp"
-                        android:text="Party Name"
-                        android:textColor="@android:color/black" />
+                        android:textSize="@dimen/label_text"
+                        android:text="Party Name" />
 
                     <RelativeLayout
                         android:id="@+id/rl_p"
@@ -161,10 +160,10 @@
                             android:layout_height="match_parent"
                             android:layout_below="@id/rec_view"
                             android:layout_weight="1"
-                            android:background="@color/colorAccent"
+                            android:background="@color/test"
                             android:gravity="center_vertical"
                             android:paddingLeft="10dp"
-                            android:text="Item List"
+                            android:text="Items"
                             android:textColor="@color/white" />
 
                         <ImageView
@@ -206,10 +205,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_below="@id/rec_view"
-                        android:background="@color/colorAccent"
+                        android:background="@color/test"
                         android:gravity="center_vertical"
                         android:paddingLeft="10dp"
-                        android:text="Transport Detail"
+                        android:text="Transport Information"
                         android:textColor="@color/white" />
 
                     <tech.fraction.webapp.ui.MyTextView
@@ -220,7 +219,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="2dp"
                         android:text="Vehicle No."
-                        android:textColor="@android:color/black" />
+                        android:textSize="@dimen/label_text" />
 
                     <tech.fraction.webapp.ui.MyEditText
                         android:id="@+id/etVehicleNo"
@@ -231,7 +230,7 @@
                         android:layout_marginRight="10dp"
                         android:background="@drawable/border_edittext"
                         android:paddingLeft="10dp"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                     <tech.fraction.webapp.ui.MyTextView
                         android:layout_width="match_parent"
@@ -241,7 +240,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="2dp"
                         android:text="Tranporter"
-                        android:textColor="@android:color/black" />
+                        android:textSize="@dimen/label_text" />
 
                     <tech.fraction.webapp.ui.MyEditText
                         android:id="@+id/etTransporter"
@@ -252,7 +251,7 @@
                         android:layout_marginRight="10dp"
                         android:background="@drawable/border_edittext"
                         android:paddingLeft="10dp"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                     <tech.fraction.webapp.ui.MyTextView
                         android:layout_width="match_parent"
@@ -262,7 +261,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="2dp"
                         android:text="Driver Name"
-                        android:textColor="@android:color/black" />
+                        android:textSize="@dimen/label_text" />
 
                     <tech.fraction.webapp.ui.MyEditText
                         android:id="@+id/etDriverName"
@@ -273,7 +272,7 @@
                         android:layout_marginRight="10dp"
                         android:background="@drawable/border_edittext"
                         android:paddingLeft="10dp"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                     <tech.fraction.webapp.ui.MyTextView
                         android:layout_width="match_parent"
@@ -283,7 +282,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="2dp"
                         android:text="Driver Contact No."
-                        android:textColor="@android:color/black" />
+                        android:textSize="@dimen/label_text" />
 
                     <tech.fraction.webapp.ui.MyEditText
                         android:id="@+id/etDriverNo"
@@ -294,7 +293,7 @@
                         android:layout_marginRight="10dp"
                         android:background="@drawable/border_edittext"
                         android:paddingLeft="10dp"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                     <tech.fraction.webapp.ui.MyTextView
                         android:layout_width="match_parent"
@@ -304,7 +303,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="2dp"
                         android:text="Remark"
-                        android:textColor="@android:color/black" />
+                        android:textSize="@dimen/label_text"/>
 
                     <tech.fraction.webapp.ui.MyEditText
                         android:id="@+id/etRemark"
@@ -317,7 +316,7 @@
                         android:gravity="top"
                         android:lines="3"
                         android:padding="10dp"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -330,7 +329,7 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
+        android:background="@color/test"
         android:gravity="center"
         android:text="Save"
         android:textColor="@android:color/white" />

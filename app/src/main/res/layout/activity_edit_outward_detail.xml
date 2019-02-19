@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rlAddEditOutward"
+    android:id="@+id/rlMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -27,7 +24,6 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="15dp"
-
                 android:layout_marginBottom="2dp"
                 android:text="@string/Outward_No"
                 android:textColor="@android:color/black" />
@@ -48,7 +44,7 @@
                     android:id="@+id/tvOutwardNo"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_margin="1dp"
+                    android:layout_margin=".7dp"
                     android:layout_weight="1"
                     android:background="#E6E7E7"
                     android:gravity="center_vertical"
@@ -91,7 +87,6 @@
                     android:id="@+id/tvParty"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-
                     android:background="@drawable/border_edittext"
                     android:gravity="center_vertical"
                     android:hint="@string/Enter_Party_Name"
@@ -114,9 +109,7 @@
                 android:layout_below="@+id/rl_p"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:nestedScrollingEnabled="false">
-
-            </android.support.v7.widget.RecyclerView>
+                android:nestedScrollingEnabled="false" />
 
             <TextView
                 android:id="@+id/txt_additem"
@@ -154,8 +147,7 @@
                     android:layout_gravity="center_vertical"
 
                     android:background="@drawable/border_edittext"
-                    android:paddingLeft="10dp"
-                   />
+                    android:paddingLeft="10dp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -174,8 +166,7 @@
                     android:layout_gravity="center_vertical"
 
                     android:background="@drawable/border_edittext"
-                    android:paddingLeft="10dp"
-                    />
+                    android:paddingLeft="10dp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -196,7 +187,7 @@
                     android:background="@drawable/border_edittext"
                     android:paddingLeft="10dp"
 
-                     />
+                    />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -215,8 +206,7 @@
                     android:layout_gravity="center_vertical"
 
                     android:background="@drawable/border_edittext"
-                    android:paddingLeft="10dp"
-                 />
+                    android:paddingLeft="10dp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -236,8 +226,7 @@
                     android:background="@drawable/border_edittext"
                     android:gravity="top"
                     android:lines="3"
-                    android:padding="10dp"
-                  />
+                    android:padding="10dp" />
 
                 <TextView
                     android:id="@+id/txt_save"
@@ -254,5 +243,21 @@
             </LinearLayout>
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
+
+    <RelativeLayout
+        android:id="@+id/rlProgress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_custom"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

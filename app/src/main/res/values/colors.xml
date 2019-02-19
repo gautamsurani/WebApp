@@ -12,8 +12,10 @@
 
     <color name="black">#111111</color>
 
-    <color name="light_black">#292929</color>
+    <color name="light_black">#383838</color>
 
     <color name="red">#ba0d0d</color>
+
+    <color name="test">#3E77A3</color>
 
 </resources>

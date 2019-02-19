@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -48,7 +49,7 @@ public class OutwordListFragment extends BaseFragment {
 
     RecyclerView rvOutwords;
     Activity context;
-    TextView tvTitle, tvAddOutward;
+    TextView tvTitle;
     Retrofit retrofit;
     ApiInterface apiInterface;
     ProgressBar progress_circular;
@@ -68,9 +69,12 @@ public class OutwordListFragment extends BaseFragment {
     LinearLayout linearShowToastMsg;
 
     TextView txtToastCountMsg;
+
     ArrayList<InventoryDetailOutward> outWardList;
 
     int totalRecord;
+
+    FloatingActionButton tvAddOutward;
 
     public OutwordListFragment() {
         // Required empty public constructor
@@ -95,6 +99,7 @@ public class OutwordListFragment extends BaseFragment {
         outwardListAdapter = new OutwardListAdapter(context);
         rvOutwords.setLayoutManager(linearLayoutManager);
         rvOutwords.setHasFixedSize(true);
+
         outwardListAdapter.setOnItemClickListener(new OutwardListAdapter.OnClickListener() {
             @Override
             public void onClick(int position, int witch) {
@@ -218,7 +223,6 @@ public class OutwordListFragment extends BaseFragment {
                 outwardListAdapter.setList(outWardList);
                 outwardListAdapter.notifyDataSetChanged();
             }
-
 
             @Override
             public void onFailure(@NonNull Call<OutwardResoinseModel> call, @NonNull Throwable t) {

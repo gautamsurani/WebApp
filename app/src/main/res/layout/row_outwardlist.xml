@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardRowOutword"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
-    android:id="@+id/cardRowOutword">
+    android:layout_marginTop="8dp"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="2dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="7dp">
+
         <ImageView
             android:id="@+id/img_truck"
             android:layout_width="50dp"
             android:layout_height="35dp"
-            android:padding="5dp"
             android:gravity="center"
-            android:src="@drawable/inward_icon"
+            android:padding="5dp"
+            android:src="@drawable/inward_icon" />
 
-            />
-
-        <TextView
+        <tech.fraction.webapp.ui.MyBoldTextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/img_truck"
-            android:paddingLeft="10dp"
             android:layout_marginTop="5dp"
-            android:text="@string/row_name"
+            android:layout_toRightOf="@+id/img_truck"
             android:gravity="center"
+            android:paddingLeft="10dp"
+            android:text="@string/row_name"
             android:textColor="@color/light_black"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -43,7 +45,7 @@
             android:orientation="horizontal"
             android:padding="5dp">
 
-            <TextView
+            <tech.fraction.webapp.ui.MyTextView
                 android:id="@+id/tvOutNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,8 +53,8 @@
                 android:background="@drawable/border"
                 android:padding="5dp"
                 android:text="INV18558"
-                android:textStyle="bold"
-                android:textColor="@color/light_black" />
+                android:textColor="@color/light_black"
+                android:textStyle="bold" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -61,7 +63,7 @@
                 android:layout_marginLeft="25dp"
                 android:src="@drawable/calender" />
 
-            <TextView
+            <tech.fraction.webapp.ui.MyTextView
                 android:id="@+id/tv0utDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,28 +75,26 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rec_view"
-            android:layout_marginTop="7dp"
-            android:clickable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layout_view"
-            android:background="#F0EEEE">
+            android:layout_marginTop="7dp"
+            android:background="#F0EEEE"
+            android:clickable="true">
 
         </android.support.v7.widget.RecyclerView>
 
 
         <LinearLayout
-            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rec_view"
             android:background="#F7F3F3"
             android:orientation="horizontal"
-            android:padding="10dp"
+            android:visibility="visible"
             android:weightSum="3">
 
-            <TextView
-                android:visibility="gone"
+            <tech.fraction.webapp.ui.MyTextView
                 android:id="@+id/tvPayNow"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -105,10 +105,11 @@
                 android:padding="10dp"
                 android:src="@drawable/arrow"
                 android:text="Invoice"
+                android:textColor="@color/white"
                 android:textSize="16sp"
-                android:textColor="@color/white" />
+                android:visibility="gone" />
 
-            <TextView
+            <tech.fraction.webapp.ui.MyTextView
                 android:id="@+id/tvPaidAmount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -116,12 +117,12 @@
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="PA:403.56"
-                android:textStyle="bold"
+                android:textColor="@color/light_black"
                 android:textSize="16sp"
-                android:visibility="gone"
-                android:textColor="@color/light_black" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
-            <TextView
+            <tech.fraction.webapp.ui.MyTextView
                 android:id="@+id/tvTotalAmount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -129,10 +130,10 @@
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="TA:403.56"
-                android:textStyle="bold"
-                android:visibility="gone"
+                android:textColor="@color/light_black"
                 android:textSize="16sp"
-                android:textColor="@color/light_black" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
 
         </LinearLayout>
