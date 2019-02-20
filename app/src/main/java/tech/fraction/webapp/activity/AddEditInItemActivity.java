@@ -48,7 +48,7 @@ public class AddEditInItemActivity extends AppCompatActivity {
 
     RacksAdapter racksAdapter;
 
-    TextView tvHeading, spnItem, spnUnit, spnLocation, tvUpdate;
+    TextView tvHeading, spnItem, spnUnit, spnLocation, tvUpdate,tvCancel;
     ImageView ivBack;
 
     ApiInterface apiInterface;
@@ -196,6 +196,12 @@ public class AddEditInItemActivity extends AppCompatActivity {
                 i.putExtra("itemsList", searchTextViewModels);
                 i.putExtra("type", "location");
                 startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
+            }
+        });
+        tvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
 
@@ -403,6 +409,7 @@ public class AddEditInItemActivity extends AppCompatActivity {
         etQuantity = findViewById(R.id.etQuantity);
         etMarko = findViewById(R.id.etMarko);
         etUnloadingCharge = findViewById(R.id.etUnloadingCharge);
+        tvCancel = findViewById(R.id.tvCancel);
         ImageView ivBack = findViewById(R.id.ivBack);
     }
 

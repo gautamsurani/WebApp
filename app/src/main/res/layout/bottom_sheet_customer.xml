@@ -25,7 +25,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/Refine_Result"
+            android:text="@string/refine_result"
             android:textColor="@color/white"
             android:textSize="18dp" />
 
@@ -43,14 +43,14 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp">
 
-        <EditText
+        <tech.fraction.webapp.ui.MyEditText
             android:id="@+id/edt_search"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/border_edittext"
             android:drawableLeft="@drawable/search"
             android:drawablePadding="5dp"
-            android:hint="@string/Search_By_Party_Name"
+            android:hint="@string/search_by_party_name"
             android:paddingLeft="10dp"
             android:paddingRight="10dp" />
 
@@ -73,7 +73,7 @@
                 android:gravity="center_vertical"
                 android:background="@drawable/border_edittext"
                 android:drawableRight="@drawable/calender"
-                android:hint="@string/From_Date"
+                android:hint="@string/from_date"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp" />
 
@@ -84,7 +84,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/border_edittext"
                 android:drawableRight="@drawable/calender"
-                android:hint="@string/To_Date"
+                android:hint="@string/to_date"
                 android:textSize="16sp"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
@@ -102,7 +102,7 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/mybutton"
             android:gravity="center"
-            android:text="@string/Apply_Filter"
+            android:text="@string/apply_filter"
             android:textColor="@android:color/white"
             android:textSize="16sp" />
 
@@ -114,7 +114,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/Reset_Filters"
+            android:text="@string/reset_filters"
             android:background="@drawable/textview_underline"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp" />

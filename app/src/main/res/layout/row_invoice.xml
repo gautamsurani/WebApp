@@ -20,7 +20,7 @@
 
             />
 
-        <TextView
+        <tech.fraction.webapp.ui.MyTextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
             android:orientation="horizontal"
             android:padding="5dp">
 
-            <TextView
+            <tech.fraction.webapp.ui.MyTextView
                 android:id="@+id/tvInvNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                 android:layout_marginLeft="25dp"
                 android:src="@drawable/calender" />
 
-            <TextView
+            <tech.fraction.webapp.ui.MyTextView
                 android:id="@+id/tvInvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
             android:paddingRight="10dp"
             android:paddingBottom="15dp">
 
-            <TextView
+            <tech.fraction.webapp.ui.MyTextView
                 android:id="@+id/tvPayNow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
-            <TextView
+            <tech.fraction.webapp.ui.MyTextView
                 android:id="@+id/tvPaidAmount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <TextView
+            <tech.fraction.webapp.ui.MyTextView
                 android:id="@+id/tvTotalAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -41,6 +41,7 @@ import com.google.gson.JsonParser;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -224,6 +225,57 @@ public class MainActivity extends AppCompatActivity {
                     case BottomSheetBehavior.STATE_DRAGGING:
                         break;
                     case BottomSheetBehavior.STATE_SETTLING:
+
+                        break;
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
+
+        sheetBehaviorOutward.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                switch (newState) {
+                    case BottomSheetBehavior.STATE_HIDDEN:
+                        break;
+                    case BottomSheetBehavior.STATE_EXPANDED:
+                        break;
+                    case BottomSheetBehavior.STATE_COLLAPSED:
+                        Utils.hideKeyboard(context);
+                        break;
+                    case BottomSheetBehavior.STATE_DRAGGING:
+                        break;
+                    case BottomSheetBehavior.STATE_SETTLING:
+
+                        break;
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
+
+        sheetBehaviorInvoice.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                switch (newState) {
+                    case BottomSheetBehavior.STATE_HIDDEN:
+                        break;
+                    case BottomSheetBehavior.STATE_EXPANDED:
+                        break;
+                    case BottomSheetBehavior.STATE_COLLAPSED:
+                        Utils.hideKeyboard(context);
+                        break;
+                    case BottomSheetBehavior.STATE_DRAGGING:
+                        break;
+                    case BottomSheetBehavior.STATE_SETTLING:
+
                         break;
                 }
             }
@@ -376,6 +428,7 @@ public class MainActivity extends AppCompatActivity {
                 setOutwardFilter();
             }
         });
+
         tvInvoiceFilterReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -458,11 +511,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setInvoiceFilter() {
-        Utils.hideKeyboard(context);
+
 
         if (onClickListenerInvoice != null) {
-            sheetBehaviorInvoice.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            String broker = "", invoiceNo, inwardNo, outwardNo,
+
+
+            String broker = "", invoiceNo = "", inwardNo = "", outwardNo = "",
                     receiptType = "", paidStatus = "", month = "", year = "";
             int paidOn = -1, invoiceGeneratedPeriod = -1;
             if (selectedAccount != null) {
@@ -606,6 +660,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             onClickListenerInvoice.onFilterInvoiceApplyClick(broker, invoiceNo, inwardNo, outwardNo, month, year, receiptType, invoiceGeneratedPeriod, paidStatus, paidOn);
+            sheetBehaviorInvoice.setState(BottomSheetBehavior.STATE_COLLAPSED);
         }
 
     }
@@ -630,7 +685,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setOutwardFilter() {
 
-        Utils.hideKeyboard(context);
+
         if (onClickListenerOutward != null) {
             sheetBehaviorOutward.setState(BottomSheetBehavior.STATE_COLLAPSED);
             String broker = "", outwardNo, inwardNo, item = "", unit, location, outwardedOn = "", invoiceStatus = "", paidStatus = "";
@@ -745,6 +800,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setInwardFilter() {
+
         if (onClickListener != null) {
             String broker = "", item = "", inwardedOn = "", sortBy = "", sortByExpression = "", paidStatus = "";
             int invoiceGenerationDue = -1, invoiceGeneratedPeriod = -1, paidOn = -1;
@@ -910,6 +966,7 @@ public class MainActivity extends AppCompatActivity {
         spInvoiceGeneratedPeriod.setSelection(0);
         spPaidStatus.setSelection(0);
         spPaidOn.setSelection(0);
+        sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         setInwardFilter();
     }
 
@@ -1253,6 +1310,7 @@ public class MainActivity extends AppCompatActivity {
         spnPaidStatus.setAdapter(dataAdapter);
     }
 
+
     private void setPaidOnCommonn(Spinner spPaid) {
         List<String> categories = new ArrayList<>();
         categories.add("All");
@@ -1261,13 +1319,17 @@ public class MainActivity extends AppCompatActivity {
         categories.add("Within 1 Week");
         categories.add("Within 15 Days");
         categories.add("Within 30 Days");
+
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
+
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         // attaching data adapter to spinner
         spPaid.setAdapter(dataAdapter);
     }
+
 
     private void initComp() {
         mainView = findViewById(R.id.mainView);
@@ -1315,10 +1377,12 @@ public class MainActivity extends AppCompatActivity {
         rbDefaultSortByExpression = findViewById(R.id.rbDefaultSortByExpression);
         tvBroker = findViewById(R.id.tvBroker);
 
+
         spnOutwardedOn = findViewById(R.id.spnOutwardedOn);
         spInvoiceStatus = findViewById(R.id.spInvoiceStatus);
         spPaidStatusOut = findViewById(R.id.spPaidStatusOut);
         spPaidOnOut = findViewById(R.id.spPaidOnOut);
+
 
         tvOutwardFilterReset = findViewById(R.id.tvOutwardFilterReset);
         tvOutwardFilterApply = findViewById(R.id.tvOutwardFilterApply);
@@ -1335,11 +1399,15 @@ public class MainActivity extends AppCompatActivity {
         spPaidOnInv = findViewById(R.id.spPaidOnInv);
         pbBrokerInvoice = findViewById(R.id.pbBrokerInvoice);
 
+
         tvInvoiceFilterReset = findViewById(R.id.tvInvoiceFilterReset);
         tvInvoiceFilterApply = findViewById(R.id.tvInvoiceFilterApply);
+
+
     }
 
     List<Menu> menus;
+
 
     @SuppressLint("SetTextI18n")
     private void setNavBar() {
@@ -1397,11 +1465,12 @@ public class MainActivity extends AppCompatActivity {
         menuAdapter.setOnItemClickListener(new MenuAdapter.OnClickListener() {
             @Override
             public void onClick(int menuPosition, int subMenuPosition, int subSubMenuPosition) {
+
                 String menuName = getMenuName(menuPosition, subMenuPosition, subSubMenuPosition);
+
                 if (menuName.endsWith("Inwards")) {
                     mDrawerLayout.closeDrawers();
                     if (!tvTitle.getText().equals(getResources().getString(R.string.inword_list_title))) {
-                        AppConstant.canResume = true;
                         openHomeFragment(new InwardsListFragment());
                     }
                 } else if (menuName.equals("Outwards")) {

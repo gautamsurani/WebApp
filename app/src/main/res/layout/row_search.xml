@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
 
-    <TextView
+    <tech.fraction.webapp.ui.MyTextView
         android:id="@+id/txt_search"
         android:layout_width="match_parent"
         android:layout_height="50dp"

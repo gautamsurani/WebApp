@@ -1,5 +1,6 @@
 package tech.fraction.webapp.fragment;
 
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -35,7 +36,7 @@ import tech.fraction.webapp.model.InventoryDetailOutward;
 import tech.fraction.webapp.model.PersonInformation;
 import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
 import tech.fraction.webapp.rest.ApiRequestModel.OutwardRequestModel;
-import tech.fraction.webapp.rest.ApiResponseModel.OutwardResoinseModel;
+import tech.fraction.webapp.rest.ApiResponseModel.OutwardResponseModel;
 import tech.fraction.webapp.rest.RetrofitInstance;
 import tech.fraction.webapp.util.Utils;
 
@@ -187,6 +188,7 @@ public class OutwardListFragment extends BaseFragment {
             callGetOutwardAPI();
         }
 
+
         MainActivity.setOnFilterOutwardApplyClickListener(new MainActivity.OnFilterOutwardListener() {
             @Override
             public void onFilterApplyClickOutward(String broker, String outwardNo, String inwardNo, String item, String unit, String location,
@@ -207,6 +209,7 @@ public class OutwardListFragment extends BaseFragment {
                 } else {
                     callGetOutwardAPI();
                 }
+
             }
         });
         return view;
@@ -214,29 +217,31 @@ public class OutwardListFragment extends BaseFragment {
 
     private void callGetOutwardAPI() {
         progress_circular.setVisibility(View.VISIBLE);
-        Call<OutwardResoinseModel> call = apiInterface.getAllOurward(outwardRequestModel);
-        call.enqueue(new Callback<OutwardResoinseModel>() {
+        Call<OutwardResponseModel> call = apiInterface.getAllOutward(outwardRequestModel);
+        call.enqueue(new Callback<OutwardResponseModel>() {
             @Override
-            public void onResponse(@NonNull Call<OutwardResoinseModel> call, @NonNull Response<OutwardResoinseModel> response) {
+            public void onResponse(@NonNull Call<OutwardResponseModel> call, @NonNull Response<OutwardResponseModel> response) {
                 IsLAstLoading = true;
                 progress_circular.setVisibility(View.GONE);
-                OutwardResoinseModel outwardResoinseModel = response.body();
-                assert outwardResoinseModel != null;
-                if (outwardResoinseModel.isValid()) {
-                    totalRecord = outwardResoinseModel.getData().getPaging().getTotalRecords();
-                    outWardList.addAll(outwardResoinseModel.getData().getResponse());
+                OutwardResponseModel outwardResponseModel = response.body();
+                assert outwardResponseModel != null;
+                if (outwardResponseModel.isValid()) {
+                    totalRecord = outwardResponseModel.getData().getPaging().getTotalRecords();
+                    outWardList.addAll(outwardResponseModel.getData().getResponse());
                 } else {
-                    Utils.ShowSnakBar(outwardResoinseModel.getMessage(), rlMain, context);
+                    Utils.ShowSnakBar(outwardResponseModel.getMessage(), rlMain, context);
                     outWardList.clear();
                 }
+
                 outwardListAdapter.setList(outWardList);
                 outwardListAdapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(@NonNull Call<OutwardResoinseModel> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<OutwardResponseModel> call, @NonNull Throwable t) {
                 progress_circular.setVisibility(View.GONE);
                 Utils.ShowSnakBar("Failure", rlMain, context);
+
             }
         });
     }

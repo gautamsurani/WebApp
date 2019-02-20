@@ -13,9 +13,9 @@
         android:textColor="@color/light_black"
         android:layout_marginBottom="10dp"
         android:textStyle="bold"
-        android:text="@string/Confirmation"/>
+        android:text="@string/confirmation"/>
 
-    <TextView
+    <tech.fraction.webapp.ui.MyTextView
         android:id="@+id/txt_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
             android:layout_weight="1"
             android:background="@drawable/mybutton"
             android:gravity="center"
-            android:text="@string/OK"
+            android:text="@string/ok"
             android:textColor="@android:color/white" />
 
         <tech.fraction.webapp.ui.MyTextView
@@ -53,7 +53,7 @@
             android:padding="1dp"
             android:background="@drawable/border_edittext"
             android:gravity="center"
-            android:text="@string/Cancel" />
+            android:text="@string/cancel" />
 
 
     </LinearLayout>

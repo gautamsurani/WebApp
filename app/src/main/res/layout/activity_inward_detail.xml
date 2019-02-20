@@ -55,7 +55,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="2dp"
-                android:text="@string/Tranporter"
+                android:text="@string/tranporter"
                 android:textColor="@android:color/black" />
 
             <tech.fraction.webapp.ui.MyEditText
@@ -76,7 +76,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="2dp"
-                android:text="@string/Driver_Name"
+                android:text="@string/driver_name"
                 android:textColor="@android:color/black" />
 
             <tech.fraction.webapp.ui.MyEditText
@@ -97,7 +97,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="2dp"
-                android:text="@string/Driver_Contact_No"
+                android:text="@string/driver_contact_no"
                 android:textColor="@android:color/black" />
 
             <tech.fraction.webapp.ui.MyEditText
@@ -118,7 +118,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="2dp"
-                android:text="@string/Remark"
+                android:text="@string/remark"
                 android:textColor="@android:color/black" />
 
             <tech.fraction.webapp.ui.MyEditText
@@ -143,7 +143,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/mybutton_one"
                 android:gravity="center"
-                android:text="@string/Save"
+                android:text="@string/save"
                 android:textColor="@android:color/white" />
 
             <tech.fraction.webapp.ui.MyTextView
@@ -155,7 +155,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/mybutton"
                 android:gravity="center"
-                android:text="@string/Print"
+                android:text="@string/print"
                 android:textColor="@android:color/white" />
 
             <tech.fraction.webapp.ui.MyTextView
@@ -167,7 +167,7 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/border_edittext"
                 android:gravity="center"
-                android:text="@string/Close"
+                android:text="@string/close"
                 android:textColor="@color/light_black" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
