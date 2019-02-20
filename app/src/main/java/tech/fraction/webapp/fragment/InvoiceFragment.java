@@ -59,6 +59,7 @@ public class InvoiceFragment extends BaseFragment {
     PartyWiseInvoicePaging partyWiseInvoicePaging;
     InvoiceRequestModel invoiceRequestModel;
     LinearLayoutManager linearLayoutManager;
+    InvoiceResponseModel invoiceResponseModel;
     LinearLayout linearShowToastMsg;
     int this_visible_item_count = 0;
 
@@ -241,7 +242,7 @@ public class InvoiceFragment extends BaseFragment {
         return view;
     }
 
-    InvoiceResponseModel invoiceResponseModel;
+
 
     private void CallInvoiceApi() {
         progress_circular.setVisibility(View.VISIBLE);

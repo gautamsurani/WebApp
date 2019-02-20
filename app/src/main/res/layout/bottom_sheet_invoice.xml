@@ -27,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/Refine_Result"
+            android:text="@string/refine_result"
             android:textColor="@color/white"
             android:textSize="18dp" />
 
@@ -55,7 +55,7 @@
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
                 android:paddingRight="20dp"
-                android:text="@string/Broker"
+                android:text="@string/broker"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
 
@@ -69,14 +69,14 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/search_bg">
 
-                <TextView
+                <tech.fraction.webapp.ui.MyTextView
                     android:id="@+id/tvBrokerInvoice"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:gravity="center_vertical"
-                    android:hint="@string/Select_Broker_Name"
+                    android:hint="@string/select_broker_name"
                     android:textColor="@color/light_black"
                     android:textSize="16sp" />
 
@@ -95,11 +95,11 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="@string/Invoice_No"
+                android:text="@string/invoice_no"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
 
-            <EditText
+            <tech.fraction.webapp.ui.MyEditText
                 android:id="@+id/etInvoiceNo"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -118,11 +118,11 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="@string/Inward_Number"
+                android:text="@string/inward_number"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
 
-            <EditText
+            <tech.fraction.webapp.ui.MyEditText
                 android:id="@+id/etInwardNoInv"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -132,7 +132,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/search_bg"
                 android:gravity="center_vertical"
-                android:hint="@string/Enter_Inward_Number"
+                android:hint="@string/enter_inward_number"
                 android:paddingLeft="10dp"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
@@ -145,7 +145,7 @@
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
 
-            <EditText
+            <tech.fraction.webapp.ui.MyEditText
                 android:id="@+id/etOutwardNoInv"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -167,7 +167,7 @@
                 android:layout_marginTop="10dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="@string/Month"
+                android:text="@string/month"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
 
@@ -204,7 +204,7 @@
                 android:layout_marginTop="10dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="@string/Year"
+                android:text="@string/year"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
 
@@ -278,7 +278,7 @@
                 android:layout_marginTop="10dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="@string/Invoice_Generated_Period"
+                android:text="@string/invoice_generated_period"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
 
@@ -315,7 +315,7 @@
                 android:layout_marginTop="10dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="@string/Paid_Status"
+                android:text="@string/paid_status"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
 
@@ -352,7 +352,7 @@
                 android:layout_marginTop="10dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="@string/Paid_On"
+                android:text="@string/paid_on"
                 android:textColor="@color/light_black"
                 android:textSize="16sp" />
 
@@ -407,11 +407,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/Reset_Filters"
+            android:text="@string/reset_filters"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp" />
 
-        <TextView
+        <tech.fraction.webapp.ui.MyTextView
             android:id="@+id/tvInvoiceFilterApply"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -420,7 +420,7 @@
             android:background="@color/colorPrimary"
             android:clickable="true"
             android:gravity="center"
-            android:text="@string/Apply_Filter"
+            android:text="@string/apply_filter"
             android:textColor="@android:color/white"
             android:textSize="16sp" />
 

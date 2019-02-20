@@ -428,6 +428,7 @@ public class MainActivity extends AppCompatActivity {
                 setOutwardFilter();
             }
         });
+
         tvInvoiceFilterReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -659,6 +660,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             onClickListenerInvoice.onFilterInvoiceApplyClick(broker, invoiceNo, inwardNo, outwardNo, month, year, receiptType, invoiceGeneratedPeriod, paidStatus, paidOn);
+            sheetBehaviorInvoice.setState(BottomSheetBehavior.STATE_COLLAPSED);
         }
 
     }
@@ -1376,17 +1378,12 @@ public class MainActivity extends AppCompatActivity {
         rbDefaultShortBy = findViewById(R.id.rbDefaultShortBy);
         rbDefaultSortByExpression = findViewById(R.id.rbDefaultSortByExpression);
         tvBroker = findViewById(R.id.tvBroker);
-
-
         spnOutwardedOn = findViewById(R.id.spnOutwardedOn);
         spInvoiceStatus = findViewById(R.id.spInvoiceStatus);
         spPaidStatusOut = findViewById(R.id.spPaidStatusOut);
         spPaidOnOut = findViewById(R.id.spPaidOnOut);
-
-
         tvOutwardFilterReset = findViewById(R.id.tvOutwardFilterReset);
         tvOutwardFilterApply = findViewById(R.id.tvOutwardFilterApply);
-
         tvBrokerInvoice = findViewById(R.id.tvBrokerInvoice);
         spnMon = findViewById(R.id.spnMon);
         spYear = findViewById(R.id.spYear);
@@ -1398,8 +1395,6 @@ public class MainActivity extends AppCompatActivity {
         spPaidStatusInv = findViewById(R.id.spPaidStatusInv);
         spPaidOnInv = findViewById(R.id.spPaidOnInv);
         pbBrokerInvoice = findViewById(R.id.pbBrokerInvoice);
-
-
         tvInvoiceFilterReset = findViewById(R.id.tvInvoiceFilterReset);
         tvInvoiceFilterApply = findViewById(R.id.tvInvoiceFilterApply);
 
@@ -1471,6 +1466,7 @@ public class MainActivity extends AppCompatActivity {
                 if (menuName.endsWith("Inwards")) {
                     mDrawerLayout.closeDrawers();
                     if (!tvTitle.getText().equals(getResources().getString(R.string.inword_list_title))) {
+                        AppConstant.canResume = true;
                         openHomeFragment(new InwardsListFragment());
                     }
                 } else if (menuName.equals("Outwards")) {
@@ -1561,6 +1557,8 @@ public class MainActivity extends AppCompatActivity {
                 tvTitle.getResources().getString(R.string.customer_list_title);
             } else if (currentFragment instanceof OutwordListFragment) {
                 tvTitle.getResources().getString(R.string.outword_list_title);
+            } else if (currentFragment instanceof InvoiceFragment) {
+                tvTitle.getResources().getString(R.string.invoice_list_title);
             }
         }
     }

@@ -24,7 +24,7 @@
             android:tint="@color/light_black" />
     </LinearLayout>
 
-    <EditText
+    <tech.fraction.webapp.ui.MyEditText
         android:id="@+id/edt_search"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -35,7 +35,7 @@
         android:background="@drawable/border_edittext"
         android:drawableLeft="@drawable/search"
         android:drawablePadding="5dp"
-        android:hint="@string/Search_By_Item_Name"
+        android:hint="@string/search_by_item_name"
         android:paddingLeft="10dp"
         android:paddingRight="10dp" />
 
@@ -49,13 +49,13 @@
 
     </android.support.v7.widget.RecyclerView>
 
-    <TextView
+    <tech.fraction.webapp.ui.MyTextView
         android:id="@+id/tv_no_found"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rec_view"
         android:gravity="center"
-        android:text="@string/No_Reocrd_Found"
+        android:text="@string/no_reocrd_found"
         android:visibility="gone" />
 
 </RelativeLayout>

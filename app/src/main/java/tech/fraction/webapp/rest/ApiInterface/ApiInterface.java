@@ -1,7 +1,5 @@
 package tech.fraction.webapp.rest.ApiInterface;
 
-import com.google.gson.JsonObject;
-
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -23,7 +21,7 @@ import tech.fraction.webapp.rest.ApiResponseModel.InwardResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.ItemResoponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.LoginResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.OutwardItemRespondModel;
-import tech.fraction.webapp.rest.ApiResponseModel.OutwardResoinseModel;
+import tech.fraction.webapp.rest.ApiResponseModel.OutwardResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.RackResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.RentResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.SaveInwardResponseModel;
@@ -67,7 +65,7 @@ public interface ApiInterface {
     Call<RackResponseModel> getAllRacks();
 
     @POST("master/OutwardsWithPaging")
-    Call<OutwardResoinseModel> getAllOurward(@Body OutwardRequestModel outwardRequestModel);
+    Call<OutwardResponseModel> getAllOutward(@Body OutwardRequestModel outwardRequestModel);
 
     @POST("master/SaveInwardDetail")
     Call<SaveInwardResponseModel> saveInward(@Body SaveInwardRequestModel saveInwardRequestModel);

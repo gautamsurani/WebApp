@@ -85,6 +85,7 @@ public class SelectedOutwardActivity extends AppCompatActivity {
                 AddEditOutwardActivity.outwardItemsList.clear();
                 String message = "";
 
+
                 for (int i = 0; i < outwardDetails.size(); i++) {
                     if (outwardDetails.get(i).getOutwardQuantity() == 0)
                         if (message.isEmpty()) {
@@ -114,9 +115,29 @@ public class SelectedOutwardActivity extends AppCompatActivity {
                     openDialog.show();
 
                 } else {
-                    AddEditOutwardActivity.outwardItemsList.addAll(outwardDetails);
 
-                    finish();
+                    AddEditOutwardActivity.outwardItemsList.addAll(outwardDetails);
+                    if (AddEditOutwardActivity.outwardItemsList.size() == 0) {
+                        final Dialog openDialog = new Dialog(context);
+                        openDialog.setContentView(R.layout.customdialog_layout);
+                        Window window = openDialog.getWindow();
+                        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                        openDialog.setTitle("Custom Dialog Box");
+                        TextView tvOkay = (TextView) openDialog.findViewById(R.id.tvOkay);
+                        TextView tvMessage = (TextView) openDialog.findViewById(R.id.tvMessage);
+                        tvMessage.setText("Please Add Outward Item or click on Close");
+                        tvOkay.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                openDialog.dismiss();
+                            }
+                        });
+                        openDialog.show();
+
+                    } else {
+                        onBackPressed();
+                    }
                 }
 
             }
@@ -131,7 +152,7 @@ public class SelectedOutwardActivity extends AppCompatActivity {
         tvClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                onBackPressed();
             }
         });
     }

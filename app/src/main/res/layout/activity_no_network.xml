@@ -30,7 +30,7 @@
             android:layout_below="@+id/ivNoICon"
             android:layout_marginTop="25dp"
             android:gravity="center"
-            android:text="@string/No_Connection"
+            android:text="@string/no_connection"
             android:textColor="@color/white"
             android:textSize="24sp"
             tools:ignore="HardcodedText" />
@@ -51,7 +51,7 @@
     </LinearLayout>
 
 
-    <TextView
+    <tech.fraction.webapp.ui.MyTextView
         android:id="@+id/tvRefresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
         android:gravity="center"
         android:paddingTop="14dp"
         android:paddingBottom="14dp"
-        android:text="@string/REFRESH"
+        android:text="@string/referesh"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         android:textStyle="bold"

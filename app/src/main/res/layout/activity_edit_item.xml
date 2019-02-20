@@ -49,14 +49,14 @@
                     android:orientation="horizontal"
                     android:padding="1dp">
 
-                    <TextView
+                    <tech.fraction.webapp.ui.MyTextView
                         android:id="@+id/spn_item"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="7"
                         android:gravity="center_vertical"
-                        android:hint="@string/Select_Item"
+                        android:hint="@string/select_item"
                         android:paddingLeft="10dp"
                         android:textColor="@color/light_black" />
 
@@ -77,7 +77,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="2dp"
-                    android:text="@string/Unit"
+                    android:text="@string/unit"
                     android:textColor="@android:color/black" />
 
                 <LinearLayout
@@ -90,14 +90,14 @@
                     android:orientation="horizontal"
                     android:padding="1dp">
 
-                    <TextView
+                    <tech.fraction.webapp.ui.MyTextView
                         android:id="@+id/spn_unit"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="7"
                         android:gravity="center_vertical"
-                        android:hint="@string/Select_Unit"
+                        android:hint="@string/select_unit"
                         android:paddingLeft="10dp"
                         android:textColor="@color/light_black" />
 
@@ -110,7 +110,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="2dp"
-                    android:text="@string/Rent_Month"
+                    android:text="@string/rent_month"
                     android:textColor="@android:color/black" />
 
                 <tech.fraction.webapp.ui.MyEditText
@@ -133,7 +133,7 @@
                     android:layout_marginRight="10dp"
 
                     android:layout_marginBottom="2dp"
-                    android:text="@string/Inward_Quantity"
+                    android:text="@string/inward_quantity"
                     android:textColor="@android:color/black" />
 
                 <tech.fraction.webapp.ui.MyEditText
@@ -155,7 +155,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="2dp"
-                    android:text="@string/Marko"
+                    android:text="@string/marko"
                     android:textColor="@android:color/black" />
 
                 <tech.fraction.webapp.ui.MyEditText
@@ -175,7 +175,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="2dp"
-                    android:text="@string/Unloading_Charges"
+                    android:text="@string/unloading_charges"
                     android:textColor="@android:color/black" />
 
                 <tech.fraction.webapp.ui.MyEditText
@@ -196,7 +196,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="2dp"
-                    android:text="@string/Location"
+                    android:text="@string/location"
                     android:textColor="@android:color/black" />
 
                 <LinearLayout
@@ -209,14 +209,14 @@
                     android:orientation="horizontal"
                     android:padding="1dp">
 
-                    <TextView
+                    <tech.fraction.webapp.ui.MyTextView
                         android:id="@+id/spn_location"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="7"
                         android:gravity="center_vertical"
-                        android:hint="@string/Select_Location"
+                        android:hint="@string/select_location"
                         android:paddingLeft="10dp"
                         android:textColor="@color/light_black" />
 
@@ -263,7 +263,7 @@
             android:layout_weight="1"
             android:background="@drawable/mybutton"
             android:gravity="center"
-            android:text="@string/Update"
+            android:text="@string/update"
             android:textColor="@android:color/white" />
 
         <tech.fraction.webapp.ui.MyTextView
@@ -274,7 +274,7 @@
             android:layout_weight="1"
             android:background="@drawable/border_edittext"
             android:gravity="center"
-            android:text="@string/Cancel" />
+            android:text="@string/cancel" />
 
     </LinearLayout>
 

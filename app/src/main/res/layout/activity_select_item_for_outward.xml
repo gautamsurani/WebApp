@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginRight="20dp"
-                    android:text="@string/DONE"
+                    android:text="@string/done"
                     android:textColor="@android:color/white"
                     android:textSize="18sp" />
 
@@ -89,7 +89,7 @@
                 android:layout_height="13dp"
                 android:src="@drawable/top_arrow" />
 
-            <TextView
+            <tech.fraction.webapp.ui.MyTextView
                 android:id="@+id/txtToastCountMsg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
