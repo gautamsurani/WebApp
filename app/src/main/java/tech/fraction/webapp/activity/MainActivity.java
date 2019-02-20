@@ -53,7 +53,7 @@ import tech.fraction.webapp.fragment.CustomerListFragment;
 import tech.fraction.webapp.fragment.InvoiceFragment;
 import tech.fraction.webapp.fragment.InwardsListFragment;
 import tech.fraction.webapp.R;
-import tech.fraction.webapp.fragment.OutwordListFragment;
+import tech.fraction.webapp.fragment.OutwardListFragment;
 import tech.fraction.webapp.model.Account;
 import tech.fraction.webapp.model.Codebeautify;
 import tech.fraction.webapp.model.Menu;
@@ -1407,7 +1407,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (menuName.equals("Outwards")) {
                     mDrawerLayout.closeDrawers();
                     if (!tvTitle.getText().equals(getResources().getString(R.string.outword_list_title))) {
-                        openFragment(new OutwordListFragment());
+                        openFragment(new OutwardListFragment());
                     }
                 } else if (menuName.equals("Customers")) {
                     mDrawerLayout.closeDrawers();
@@ -1490,7 +1490,7 @@ public class MainActivity extends AppCompatActivity {
                 tvTitle.setText(getResources().getString(R.string.inword_list_title));
             } else if (currentFragment instanceof CustomerListFragment) {
                 tvTitle.getResources().getString(R.string.customer_list_title);
-            } else if (currentFragment instanceof OutwordListFragment) {
+            } else if (currentFragment instanceof OutwardListFragment) {
                 tvTitle.getResources().getString(R.string.outword_list_title);
             }
         }

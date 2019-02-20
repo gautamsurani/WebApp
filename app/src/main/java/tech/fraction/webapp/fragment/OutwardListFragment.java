@@ -44,15 +44,22 @@ import static tech.fraction.webapp.util.AppConstant.NO_NETWORK_REQUEST_CODE;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class OutwordListFragment extends BaseFragment {
+public class OutwardListFragment extends BaseFragment {
 
-    RecyclerView rvOutwords;
+    RecyclerView rvOutwards;
+
     Activity context;
+
     TextView tvTitle;
+
     Retrofit retrofit;
+
     ApiInterface apiInterface;
+
     ProgressBar progress_circular;
+
     RelativeLayout rlMain;
+
     OutwardListAdapter outwardListAdapter;
 
     int this_visible_item_count = 0;
@@ -75,7 +82,7 @@ public class OutwordListFragment extends BaseFragment {
 
     FloatingActionButton tvAddOutward;
 
-    public OutwordListFragment() {
+    public OutwardListFragment() {
         // Required empty public constructor
     }
 
@@ -96,8 +103,8 @@ public class OutwordListFragment extends BaseFragment {
         linearLayoutManager = new LinearLayoutManager(context);
 
         outwardListAdapter = new OutwardListAdapter(context);
-        rvOutwords.setLayoutManager(linearLayoutManager);
-        rvOutwords.setHasFixedSize(true);
+        rvOutwards.setLayoutManager(linearLayoutManager);
+        rvOutwards.setHasFixedSize(true);
 
         outwardListAdapter.setOnItemClickListener(new OutwardListAdapter.OnClickListener() {
             @Override
@@ -110,8 +117,8 @@ public class OutwordListFragment extends BaseFragment {
             }
         });
 
-        rvOutwords.setAdapter(outwardListAdapter);
-        rvOutwords.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        rvOutwards.setAdapter(outwardListAdapter);
+        rvOutwards.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             CountDownTimer timer = null;
 
@@ -264,7 +271,7 @@ public class OutwordListFragment extends BaseFragment {
     }
 
     private void initComp(View view) {
-        rvOutwords = view.findViewById(R.id.rvOutwords);
+        rvOutwards = view.findViewById(R.id.rvOutwords);
         tvTitle = context.findViewById(R.id.tvTitle);
         tvAddOutward = view.findViewById(R.id.tvAddOutward);
         progress_circular = view.findViewById(R.id.progress_circular);
