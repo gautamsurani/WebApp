@@ -1,6 +1,5 @@
 package tech.fraction.webapp.fragment;
 
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -181,7 +180,6 @@ public class OutwordListFragment extends BaseFragment {
             callGetOutwardAPI();
         }
 
-
         MainActivity.setOnFilterOutwardApplyClickListener(new MainActivity.OnFilterOutwardListener() {
             @Override
             public void onFilterApplyClickOutward(String broker, String outwardNo, String inwardNo, String item, String unit, String location,
@@ -202,7 +200,6 @@ public class OutwordListFragment extends BaseFragment {
                 } else {
                     callGetOutwardAPI();
                 }
-
             }
         });
         return view;
@@ -218,8 +215,13 @@ public class OutwordListFragment extends BaseFragment {
                 progress_circular.setVisibility(View.GONE);
                 OutwardResoinseModel outwardResoinseModel = response.body();
                 assert outwardResoinseModel != null;
-                totalRecord = outwardResoinseModel.getData().getPaging().getTotalRecords();
-                outWardList.addAll(outwardResoinseModel.getData().getResponse());
+                if (outwardResoinseModel.isValid()) {
+                    totalRecord = outwardResoinseModel.getData().getPaging().getTotalRecords();
+                    outWardList.addAll(outwardResoinseModel.getData().getResponse());
+                } else {
+                    Utils.ShowSnakBar(outwardResoinseModel.getMessage(), rlMain, context);
+                    outWardList.clear();
+                }
                 outwardListAdapter.setList(outWardList);
                 outwardListAdapter.notifyDataSetChanged();
             }
@@ -228,7 +230,6 @@ public class OutwordListFragment extends BaseFragment {
             public void onFailure(@NonNull Call<OutwardResoinseModel> call, @NonNull Throwable t) {
                 progress_circular.setVisibility(View.GONE);
                 Utils.ShowSnakBar("Failure", rlMain, context);
-
             }
         });
     }

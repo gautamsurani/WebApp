@@ -462,7 +462,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (onClickListenerInvoice != null) {
             sheetBehaviorInvoice.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            String broker = "", invoiceNo = "", inwardNo = "", outwardNo = "",
+            String broker = "", invoiceNo, inwardNo, outwardNo,
                     receiptType = "", paidStatus = "", month = "", year = "";
             int paidOn = -1, invoiceGeneratedPeriod = -1;
             if (selectedAccount != null) {
@@ -633,7 +633,7 @@ public class MainActivity extends AppCompatActivity {
         Utils.hideKeyboard(context);
         if (onClickListenerOutward != null) {
             sheetBehaviorOutward.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            String broker = "", outwardNo = "", inwardNo = "", item = "", unit = "", location = "", outwardedOn = "", invoiceStatus = "", paidStatus = "";
+            String broker = "", outwardNo, inwardNo, item = "", unit, location, outwardedOn = "", invoiceStatus = "", paidStatus = "";
             int paidOnOut = -1;
             if (selectedAccount != null) {
                 if (selectedAccount.getName() != null) {
@@ -1179,7 +1179,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-
     private void setInwardedOutwardedOn(Spinner spnInOut) {
         List<String> categories = new ArrayList<>();
         categories.add("All");
@@ -1205,7 +1204,6 @@ public class MainActivity extends AppCompatActivity {
         categories.add("All");
         categories.add("Invoice Generated");
         categories.add("Invoice Not Generated");
-
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);

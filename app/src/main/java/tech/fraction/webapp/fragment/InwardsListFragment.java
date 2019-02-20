@@ -139,6 +139,7 @@ public class InwardsListFragment extends BaseFragment {
                 if (timer != null) {
                     timer.cancel();
                 }
+
                 timer = new CountDownTimer(3000, 1000) {
                     public void onTick(long millisUntilFinished) {
                     }
