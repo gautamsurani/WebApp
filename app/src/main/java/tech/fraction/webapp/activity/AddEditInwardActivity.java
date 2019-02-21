@@ -30,14 +30,12 @@ import java.util.Random;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 import tech.fraction.webapp.R;
 import tech.fraction.webapp.adapter.InwardItemAdapter;
 import tech.fraction.webapp.model.Account;
 import tech.fraction.webapp.model.InwardItems;
 import tech.fraction.webapp.model.InwardVehicleDetail;
 import tech.fraction.webapp.model.SearchTextViewModel;
-import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
 import tech.fraction.webapp.rest.ApiRequestModel.SaveInwardRequestModel;
 import tech.fraction.webapp.rest.ApiResponseModel.AccountResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.DetailInwardResponseModel;
@@ -141,12 +139,10 @@ public class AddEditInwardActivity extends AppCompatActivity implements View.OnC
 
         tvParty.setOnClickListener(this);
 
-
         tvDate.setOnClickListener(this);
 
         ivBack.setOnClickListener(this);
     }
-
 
     public void onClick(View v) {
         int id = v.getId();
@@ -195,7 +191,6 @@ public class AddEditInwardActivity extends AppCompatActivity implements View.OnC
                             selectedAccount.getName(), saveInwardRequestModel.getInwardedOn(), null, inwardVehicleDetail, null, true,
                             null, null, inwardNumber, saveInwardRequestModel.getLastInvoiceGeneratedOn(), saveInwardRequestModel.getTotalPaidAmount(),
                             inwardDetailId, null, Utils.getPersonalInfo(context).getPersonId());
-
                 }
 
                 CallAddInwardApi();
@@ -441,7 +436,6 @@ public class AddEditInwardActivity extends AppCompatActivity implements View.OnC
         rlProgress = findViewById(R.id.rlProgress);
         Toolbar tb = findViewById(R.id.toolbar);
         setSupportActionBar(tb);
-        ImageView ivBack = findViewById(R.id.ivBack);
     }
 
     @Override

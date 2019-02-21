@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-
 import tech.fraction.webapp.R;
 import tech.fraction.webapp.adapter.SearchActivityAdapter;
 import tech.fraction.webapp.model.SearchTextViewModel;
@@ -41,7 +40,6 @@ public class SearchTextViewActivity extends AppCompatActivity {
 
         context = this;
 
-
         rec_view = findViewById(R.id.rec_view);
         tvNoFound = findViewById(R.id.tv_no_found);
         edtSearch = findViewById(R.id.edt_search);
@@ -53,6 +51,7 @@ public class SearchTextViewActivity extends AppCompatActivity {
 
         searchActivityAdapter = new SearchActivityAdapter(SearchTextViewActivity.this);
         rec_view.setLayoutManager(new LinearLayoutManager(this));
+
         rec_view.setHasFixedSize(true);
         searchActivityAdapter.setList(itemList);
         searchActivityAdapter.setOnItemClickListener(new SearchActivityAdapter.OnClickListener() {
@@ -127,7 +126,3 @@ public class SearchTextViewActivity extends AppCompatActivity {
         });
     }
 }
-
-
-
-

@@ -31,7 +31,6 @@ public class RetrofitInstance {
                     .addInterceptor(interceptor)
                     .build();
 
-
             Gson gson = new GsonBuilder()
                     .setLenient()
                     .create();

@@ -120,8 +120,6 @@ public class OutwardListFragment extends BaseFragment {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
 
-                linearShowToastMsg.setVisibility(View.VISIBLE);
-
                 this_visible_item_count = linearLayoutManager.findFirstCompletelyVisibleItemPosition();
 
                 if (this_visible_item_count != -1) {
@@ -130,6 +128,10 @@ public class OutwardListFragment extends BaseFragment {
 
                 if (timer != null) {
                     timer.cancel();
+                }
+
+                if (linearShowToastMsg.getVisibility() == View.GONE) {
+                    linearShowToastMsg.setVisibility(View.VISIBLE);
                 }
 
                 timer = new CountDownTimer(3000, 1000) {
