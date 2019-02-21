@@ -1,7 +1,6 @@
 package tech.fraction.webapp.rest.ApiResponseModel;
 
 
-
 import java.io.Serializable;
 import java.util.ArrayList;
 

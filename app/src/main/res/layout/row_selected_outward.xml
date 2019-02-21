@@ -29,7 +29,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:paddingLeft="5dp"
-                android:text="Marcha Aakha"
+                android:text="@string/row_se_item_name"
                 android:textColor="@color/light_black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="1dp"
                 android:padding="5dp"
-                android:text="Reshma Pato-MOTA BORA-30KG BAG"
+                android:text="@string/row_se_item_unit"
                 android:textSize="16sp" />
 
             <LinearLayout
@@ -63,7 +63,7 @@
                     android:paddingTop="3dp"
                     android:paddingRight="5dp"
                     android:paddingBottom="3dp"
-                    android:text="18558"
+                    android:text="@string/row_se_in_no"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="3dp"
-                    android:text="20-02-2019"
+                    android:text="@string/row_date"
                     android:textSize="16sp" />
 
 
@@ -97,7 +97,7 @@
                 android:layout_marginBottom="5dp"
                 android:gravity="center_vertical"
                 android:padding="5dp"
-                android:text="Location: A104,A135,A124"
+                android:text="@string/row_se_in_lo"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -126,7 +126,7 @@
                 android:layout_gravity="center_vertical"
 
                 android:layout_marginBottom="10dp"
-                android:text="Stock: 100/200"
+                android:text="@string/row_se_in_stock"
                 android:textColor="@color/light_black" />
 
             <LinearLayout
@@ -141,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="5dp"
-                    android:text="Qty"
+                    android:text="@string/row_se_in_qty"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp" />
 
@@ -168,7 +168,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="L.C"
+                    android:text="@string/row_se_in_lc"
                     android:textColor="@color/colorPrimary"
 
                     android:textSize="14sp" />
@@ -197,7 +197,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="O.C"
+                    android:text="@string/row_se_in_oc"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp" />
 

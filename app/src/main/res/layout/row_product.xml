@@ -32,7 +32,7 @@
             android:layout_weight="1"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:text="MarchPowder[ IPL 35]"
+            android:text="@string/row_un_item"
             android:textColor="@android:color/black"
             android:textSize="15sp" />
 
@@ -40,7 +40,7 @@
             android:id="@+id/tvCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="100/200"
+            android:text="@string/row_detail_value"
             android:textColor="@android:color/black"
             android:textSize="14sp" />
 
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:text="Unloading Charge: 1500"
+        android:text="@string/row_un_char"
         android:textSize="14sp" />
 
 

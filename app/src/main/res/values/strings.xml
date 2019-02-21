@@ -115,6 +115,24 @@
     <string name="row_name_item">Dhani Akhi[Locale Bardhan]</string>
     <string name="row_from_to_date">20-02-2019 to 24-02-2019</string>
     <string name="row_loading_charge">Loading Charge </string>
+    <string name="toolbar_text">817624-27/09/2017</string>
+
+
+    <string name="row_se_item_name">Marcha Aakha</string>
+    <string name="row_se_item_unit">Reshma Pato-MOTA BORA-30KG BAG</string>
+    <string name="row_se_in_no">18558</string>
+    <string name="row_se_in_lo">Location: A104,A135,A124</string>
+    <string name="row_se_in_stock">Stock: 100/200</string>
+    <string name="row_se_in_lc">L.C</string>
+    <string name="row_se_in_qty">Qty</string>
+    <string name="row_se_in_oc">O.C</string>
+    <string name="row_se_item_n">Apple - Nana box - AJ45 - 30kg</string>
+    <string name="row_un_char">Unloading Charge: 1500</string>
+    <string name="row_un_item">MarchPowder[ IPL 35]</string>
+    <string name="row_search">gfdggfg</string>
+
+
+
 
 
 </resources>
