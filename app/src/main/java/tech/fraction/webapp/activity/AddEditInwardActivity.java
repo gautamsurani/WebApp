@@ -46,7 +46,7 @@ import tech.fraction.webapp.rest.RetrofitInstance;
 import tech.fraction.webapp.util.AppConstant;
 import tech.fraction.webapp.util.Utils;
 
-public class AddEditInwardActivity extends AppCompatActivity {
+public class AddEditInwardActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView rec_view;
 
@@ -124,21 +124,7 @@ public class AddEditInwardActivity extends AppCompatActivity {
             CallGetInwardItemDetailApi(inwardDetailId, Utils.getPersonalInfo(context).getAccountId());
         }
 
-        tvAddItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, AddEditInItemActivity.class);
-                intent.putExtra("mode", "add");
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
-        });
-        ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        tvAddItem.setOnClickListener(this);
 
         inwardItemAdapter.setOnItemClickListener(new InwardItemAdapter.OnClickListener() {
             @Override
@@ -158,10 +144,29 @@ public class AddEditInwardActivity extends AppCompatActivity {
             }
         });
 
-        tvSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        tvSave.setOnClickListener(this);
 
+        tvParty.setOnClickListener(this);
+
+
+        tvDate.setOnClickListener(this);
+
+        ivBack.setOnClickListener(this);
+    }
+
+
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id) {
+
+            case R.id.tvAddItem:
+                Intent intent = new Intent(context, AddEditInItemActivity.class);
+                intent.putExtra("mode", "add");
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                break;
+
+            case R.id.tvSave:
                 if (selectedAccount.getName() == null) {
                     Utils.ShowSnakBar("Please select party name", rl_editInward, context);
                     return;
@@ -201,12 +206,8 @@ public class AddEditInwardActivity extends AppCompatActivity {
                 }
 
                 CallAddInwardApi();
-            }
-        });
-
-        tvParty.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.tvParty:
                 ArrayList<SearchTextViewModel> itemsList = new ArrayList<>();
                 for (int i = 0; i < accounts.size(); i++) {
                     itemsList.add(new SearchTextViewModel(accounts.get(i).getId(), accounts.get(i).getName()));
@@ -215,23 +216,16 @@ public class AddEditInwardActivity extends AppCompatActivity {
                 i.putExtra("itemsList", itemsList);
                 i.putExtra("type", "party");
                 startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
-            }
-        });
-
-
-        tvDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.tvDate:
                 setDate(tvDate);
-            }
-        });
-
-        ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.ivBack:
                 onBackPressed();
-            }
-        });
+                break;
+            default:
+                break;
+        }
     }
 
     private void CallGetInwardItemDetailApi(int inwardDetailId, int accountId) {
@@ -389,6 +383,11 @@ public class AddEditInwardActivity extends AppCompatActivity {
                 return;
             }
         }
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 
     private class AccountAsync extends AsyncTask<String, String, String> {

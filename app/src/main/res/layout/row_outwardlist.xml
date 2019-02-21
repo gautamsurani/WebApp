@@ -52,7 +52,7 @@
                 android:layout_marginLeft="50dp"
                 android:background="@drawable/border"
                 android:padding="5dp"
-                android:text="INV18558"
+                android:text="@string/row_invoice_no"
                 android:textColor="@color/light_black"
                 android:textStyle="bold" />
 
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
-                android:text="20-02-2019" />
+                android:text="@string/row_date" />
 
 
         </LinearLayout>

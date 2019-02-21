@@ -68,7 +68,7 @@ import tech.fraction.webapp.rest.RetrofitInstance;
 import tech.fraction.webapp.util.AppConstant;
 import tech.fraction.webapp.util.Utils;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Toolbar toolbar;
 
@@ -152,64 +152,15 @@ public class MainActivity extends AppCompatActivity {
 
         setNavBar();
 
-        ivFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (tvTitle.getText().equals(getResources().getString(R.string.inword_list_title))) {
-                    if (sheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
-                        sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                    } else {
-                        sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    }
-                } else if (tvTitle.getText().equals(getResources().getString(R.string.outword_list_title))) {
-                    if (sheetBehaviorOutward.getState() != BottomSheetBehavior.STATE_EXPANDED) {
-                        sheetBehaviorOutward.setState(BottomSheetBehavior.STATE_EXPANDED);
-                    } else {
-                        sheetBehaviorOutward.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    }
-                } else if (tvTitle.getText().equals(getResources().getString(R.string.customer_list_title))) {
-                    if (sheetBehaviorCustomer.getState() != BottomSheetBehavior.STATE_EXPANDED) {
-                        sheetBehaviorCustomer.setState(BottomSheetBehavior.STATE_EXPANDED);
-                    } else {
-                        sheetBehaviorCustomer.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    }
-                } else if (tvTitle.getText().equals(getResources().getString(R.string.invoice_list_title))) {
-                    if (sheetBehaviorInvoice.getState() != BottomSheetBehavior.STATE_EXPANDED) {
-                        sheetBehaviorInvoice.setState(BottomSheetBehavior.STATE_EXPANDED);
-                    } else {
-                        sheetBehaviorInvoice.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    }
-                }
-            }
-        });
+        ivFilter.setOnClickListener(this);
 
-        ivClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            }
-        });
+        ivClose.setOnClickListener(this);
 
-        ivCloseCustomer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sheetBehaviorCustomer.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            }
-        });
+        ivCloseCustomer.setOnClickListener(this);
 
-        ivCloseOutward.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sheetBehaviorOutward.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            }
-        });
+        ivCloseOutward.setOnClickListener(this);
 
-        ivCloseInvoice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sheetBehaviorInvoice.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            }
-        });
+        ivCloseInvoice.setOnClickListener(this);
 
         sheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
@@ -306,19 +257,9 @@ public class MainActivity extends AppCompatActivity {
         setspInvoiceStatus();
 
 
-        tvFromDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Utils.setDate(tvFromDate, context);
-            }
-        });
+        tvFromDate.setOnClickListener(this);
 
-        tvToDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Utils.setDate(tvToDate, context);
-            }
-        });
+        tvToDate.setOnClickListener(this);
 
         openHomeFragment(new InwardsListFragment());
 
@@ -332,118 +273,154 @@ public class MainActivity extends AppCompatActivity {
             new AccountAsync().execute();
         }
 
-        tvParty.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ArrayList<SearchTextViewModel> itemsList = new ArrayList<>();
-                for (int i = 0; i < accounts.size(); i++) {
-                    itemsList.add(new SearchTextViewModel(accounts.get(i).getId(), accounts.get(i).getName()));
-                }
-                Intent i = new Intent(context, SearchTextViewActivity.class);
-                i.putExtra("itemsList", itemsList);
-                i.putExtra("type", "party");
-                startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
-            }
-        });
-        tvBroker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ArrayList<SearchTextViewModel> itemsList = new ArrayList<>();
-                for (int i = 0; i < accounts.size(); i++) {
-                    itemsList.add(new SearchTextViewModel(accounts.get(i).getId(), accounts.get(i).getName()));
-                }
-                Intent i = new Intent(context, SearchTextViewActivity.class);
-                i.putExtra("itemsList", itemsList);
-                i.putExtra("type", "party");
-                startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
-            }
-        });
-        tvBrokerInvoice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ArrayList<SearchTextViewModel> itemsList = new ArrayList<>();
-                for (int i = 0; i < accounts.size(); i++) {
-                    itemsList.add(new SearchTextViewModel(accounts.get(i).getId(), accounts.get(i).getName()));
-                }
-                Intent i = new Intent(context, SearchTextViewActivity.class);
-                i.putExtra("itemsList", itemsList);
-                i.putExtra("type", "party");
-                startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
-            }
-        });
+        tvParty.setOnClickListener(this);
+        tvBroker.setOnClickListener(this);
+        tvBrokerInvoice.setOnClickListener(this);
 
-        tvItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ArrayList<SearchTextViewModel> searchTextViewModels = new ArrayList<>();
-                items = sqLiteHelperFunctions.getAllItems();
-                for (int i = 0; i < items.size(); i++) {
-                    searchTextViewModels.add(new SearchTextViewModel(items.get(i).getId(), items.get(i).getName()));
-                }
-                Intent i = new Intent(context, SearchTextViewActivity.class);
-                i.putExtra("itemsList", searchTextViewModels);
-                i.putExtra("type", "item");
-                startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
-            }
-        });
-        tvItemOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ArrayList<SearchTextViewModel> searchTextViewModels = new ArrayList<>();
-                items = sqLiteHelperFunctions.getAllItems();
-                for (int i = 0; i < items.size(); i++) {
-                    searchTextViewModels.add(new SearchTextViewModel(items.get(i).getId(), items.get(i).getName()));
-                }
-                Intent i = new Intent(context, SearchTextViewActivity.class);
-                i.putExtra("itemsList", searchTextViewModels);
-                i.putExtra("type", "item");
-                startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
-            }
-        });
+        tvItem.setOnClickListener(this);
+        tvItemOut.setOnClickListener(this);
 
-        tvInwardFilterReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resetInwardFilter();
-            }
-        });
+        tvInwardFilterReset.setOnClickListener(this);
 
-        tvInwardFilterApply.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setInwardFilter();
-            }
-        });
+        tvInwardFilterApply.setOnClickListener(this);
 
-        tvOutwardFilterReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resetOutwardFilter();
-            }
-        });
+        tvOutwardFilterReset.setOnClickListener(this);
 
-        tvOutwardFilterApply.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setOutwardFilter();
-            }
-        });
+        tvOutwardFilterApply.setOnClickListener(this);
 
-        tvInvoiceFilterReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resetInvoiceFilter();
-            }
-        });
+        tvInvoiceFilterReset.setOnClickListener(this);
 
-        tvInvoiceFilterApply.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setInvoiceFilter();
-            }
-        });
+        tvInvoiceFilterApply.setOnClickListener(this);
 
         new ItemAsync().execute();
+    }
+
+
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id) {
+            case R.id.ivFilter:
+                if (tvTitle.getText().equals(getResources().getString(R.string.inword_list_title))) {
+                    if (sheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                        sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    } else {
+                        sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    }
+                } else if (tvTitle.getText().equals(getResources().getString(R.string.outword_list_title))) {
+                    if (sheetBehaviorOutward.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                        sheetBehaviorOutward.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    } else {
+                        sheetBehaviorOutward.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    }
+                } else if (tvTitle.getText().equals(getResources().getString(R.string.customer_list_title))) {
+                    if (sheetBehaviorCustomer.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                        sheetBehaviorCustomer.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    } else {
+                        sheetBehaviorCustomer.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    }
+                } else if (tvTitle.getText().equals(getResources().getString(R.string.invoice_list_title))) {
+                    if (sheetBehaviorInvoice.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                        sheetBehaviorInvoice.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    } else {
+                        sheetBehaviorInvoice.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    }
+                }
+                break;
+            case R.id.ivClose:
+                sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                break;
+            case R.id.ivCloseCustomer:
+                sheetBehaviorCustomer.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                break;
+            case R.id.ivCloseOutward:
+                sheetBehaviorOutward.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                break;
+            case R.id.ivCloseInvoice:
+                sheetBehaviorInvoice.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                break;
+            case R.id.tvToDate:
+                Utils.setDate(tvToDate, context);
+                break;
+            case R.id.tvParty: {
+                ArrayList<SearchTextViewModel> itemsList = new ArrayList<>();
+                for (int i = 0; i < accounts.size(); i++) {
+                    itemsList.add(new SearchTextViewModel(accounts.get(i).getId(), accounts.get(i).getName()));
+                }
+                Intent i = new Intent(context, SearchTextViewActivity.class);
+                i.putExtra("itemsList", itemsList);
+                i.putExtra("type", "party");
+                startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
+            }
+            break;
+            case R.id.tvBroker: {
+                ArrayList<SearchTextViewModel> itemsList = new ArrayList<>();
+                for (int i = 0; i < accounts.size(); i++) {
+                    itemsList.add(new SearchTextViewModel(accounts.get(i).getId(), accounts.get(i).getName()));
+                }
+                Intent i = new Intent(context, SearchTextViewActivity.class);
+                i.putExtra("itemsList", itemsList);
+                i.putExtra("type", "party");
+                startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
+            }
+            break;
+
+            case R.id.tvBrokerInvoice: {
+                ArrayList<SearchTextViewModel> itemsList = new ArrayList<>();
+                for (int i = 0; i < accounts.size(); i++) {
+                    itemsList.add(new SearchTextViewModel(accounts.get(i).getId(), accounts.get(i).getName()));
+                }
+                Intent i = new Intent(context, SearchTextViewActivity.class);
+                i.putExtra("itemsList", itemsList);
+                i.putExtra("type", "party");
+                startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
+            }
+            break;
+
+            case R.id.tvItem: {
+                ArrayList<SearchTextViewModel> searchTextViewModels = new ArrayList<>();
+                items = sqLiteHelperFunctions.getAllItems();
+                for (int i = 0; i < items.size(); i++) {
+                    searchTextViewModels.add(new SearchTextViewModel(items.get(i).getId(), items.get(i).getName()));
+                }
+                Intent i = new Intent(context, SearchTextViewActivity.class);
+                i.putExtra("itemsList", searchTextViewModels);
+                i.putExtra("type", "item");
+                startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
+            }
+            break;
+            case R.id.tvItemOut: {
+                ArrayList<SearchTextViewModel> searchTextViewModels = new ArrayList<>();
+                items = sqLiteHelperFunctions.getAllItems();
+                for (int i = 0; i < items.size(); i++) {
+                    searchTextViewModels.add(new SearchTextViewModel(items.get(i).getId(), items.get(i).getName()));
+                }
+                Intent i = new Intent(context, SearchTextViewActivity.class);
+                i.putExtra("itemsList", searchTextViewModels);
+                i.putExtra("type", "item");
+                startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
+            }
+            break;
+            case R.id.tvInwardFilterApply:
+                setInwardFilter();
+                break;
+            case R.id.tvOutwardFilterApply:
+                setOutwardFilter();
+                break;
+            case R.id.tvInvoiceFilterApply:
+                setInvoiceFilter();
+                break;
+            case R.id.tvInwardFilterReset:
+                resetInwardFilter();
+                break;
+            case R.id.tvOutwardFilterReset:
+                resetOutwardFilter();
+                break;
+            case R.id.tvInvoiceFilterReset:
+                resetInvoiceFilter();
+                break;
+            default:
+                //do ur code;
+        }
     }
 
     private void setSpReceiptType() {
@@ -975,6 +952,7 @@ public class MainActivity extends AppCompatActivity {
     public static void setOnFilterApplyClickListener(OnFilterListener onClick) {
         onClickListener = onClick;
     }
+
 
     public interface OnFilterListener {
         void onFilterApplyClick(String broker, String inwardNo, String item, String unit, String marko

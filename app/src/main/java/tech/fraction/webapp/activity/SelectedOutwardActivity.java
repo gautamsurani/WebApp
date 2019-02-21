@@ -23,7 +23,7 @@ import tech.fraction.webapp.adapter.SelectedOutwardAdapter;
 import tech.fraction.webapp.model.OutwardDetails;
 import tech.fraction.webapp.util.AppConstant;
 
-public class SelectedOutwardActivity extends AppCompatActivity {
+public class SelectedOutwardActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView rvSelectedOutward;
     FloatingActionButton btnFloatAddItem;
@@ -68,20 +68,26 @@ public class SelectedOutwardActivity extends AppCompatActivity {
 
         initRecyclerView();
 
-        btnFloatAddItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnFloatAddItem.setOnClickListener(this);
+
+        tvSave.setOnClickListener(this);
+        ivBack.setOnClickListener(this);
+
+        tvClose.setOnClickListener(this);
+    }
+
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id) {
+            case R.id.btnFloatAddItem: {
+
                 Intent i = new Intent(context, SelectItemForOutwardActivity.class);
                 i.putExtra("outwardDetails", outwardDetails);
                 i.putExtra("accountId", accountId);
                 startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
             }
-        });
-
-        tvSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
+            break;
+            case R.id.tvSave: {
                 AddEditOutwardActivity.outwardItemsList.clear();
                 String message = "";
 
@@ -139,22 +145,17 @@ public class SelectedOutwardActivity extends AppCompatActivity {
                         onBackPressed();
                     }
                 }
-
             }
-        });
-        ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            break;
+            case R.id.ivBack:
                 onBackPressed();
-            }
-        });
-
-        tvClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.tvClose:
                 onBackPressed();
-            }
-        });
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -200,4 +201,6 @@ public class SelectedOutwardActivity extends AppCompatActivity {
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
+
+
 }

@@ -42,13 +42,13 @@ import tech.fraction.webapp.rest.RetrofitInstance;
 import tech.fraction.webapp.util.AppConstant;
 import tech.fraction.webapp.util.Utils;
 
-public class AddEditInItemActivity extends AppCompatActivity {
+public class AddEditInItemActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView rec_view;
 
     RacksAdapter racksAdapter;
 
-    TextView tvHeading, spnItem, spnUnit, spnLocation, tvUpdate,tvCancel;
+    TextView tvHeading, spnItem, spnUnit, spnLocation, tvUpdate, tvCancel;
     ImageView ivBack;
 
     ApiInterface apiInterface;
@@ -131,16 +131,28 @@ public class AddEditInItemActivity extends AppCompatActivity {
             selectedItemRent.setRent(item.getRentPerUnit());
         }
 
-        ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        ivBack.setOnClickListener(this);
 
-        spnItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        spnItem.setOnClickListener(this);
+
+        spnUnit.setOnClickListener(this);
+
+        spnLocation.setOnClickListener(this);
+        tvCancel.setOnClickListener(this);
+        tvUpdate.setOnClickListener(this);
+
+        new ItemAsync().execute();
+    }
+
+
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+
+            case R.id.ivBack:
+                onBackPressed();
+                break;
+            case R.id.spn_item: {
                 ArrayList<SearchTextViewModel> searchTextViewModels = new ArrayList<>();
                 items = sqLiteHelperFunctions.getAllItems();
                 for (int i = 0; i < items.size(); i++) {
@@ -151,11 +163,9 @@ public class AddEditInItemActivity extends AppCompatActivity {
                 i.putExtra("type", "item");
                 startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
             }
-        });
+            break;
 
-        spnUnit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            case R.id.spn_unit: {
                 if (selectedItems.getName() == null) {
                     Utils.ShowSnakBar("Please Select Item", rlMain, context);
                 } else {
@@ -170,11 +180,9 @@ public class AddEditInItemActivity extends AppCompatActivity {
                     startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
                 }
             }
-        });
+            break;
 
-        spnLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            case R.id.spn_location:
                 ArrayList<SearchTextViewModel> searchTextViewModels = new ArrayList<>();
                 List<Racks> racks = sqLiteHelperFunctions.getAllRacks();
                 itemRacks.clear();
@@ -196,18 +204,13 @@ public class AddEditInItemActivity extends AppCompatActivity {
                 i.putExtra("itemsList", searchTextViewModels);
                 i.putExtra("type", "location");
                 startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
-            }
-        });
-        tvCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+                break;
 
-        tvUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            case R.id.tvCancel:
+                onBackPressed();
+                break;
+
+            case R.id.tvUpdate:
                 quantity = etQuantity.getText().toString();
                 marko = etMarko.getText().toString();
                 unloadingCharge = etUnloadingCharge.getText().toString();
@@ -288,10 +291,12 @@ public class AddEditInItemActivity extends AppCompatActivity {
                     AddEditInwardActivity.inwardItems.get(selectedPosition).setInwardItemLocationPoco(selectedRacksList);
                 }
                 onBackPressed();
-            }
-        });
+                break;
 
-        new ItemAsync().execute();
+            default:
+                break;
+        }
+
     }
 
     private void getData() {
@@ -413,6 +418,11 @@ public class AddEditInItemActivity extends AppCompatActivity {
         ImageView ivBack = findViewById(R.id.ivBack);
     }
 
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
+
     @SuppressLint("StaticFieldLeak")
     private class ItemAsync extends AsyncTask<String, String, String> {
         boolean isItemFinished = true;
@@ -469,37 +479,6 @@ public class AddEditInItemActivity extends AppCompatActivity {
                 });
             }
 
-            /*if (!sqLiteHelperFunctions.getTableRecordCount(DbConstants.TABLE_UNITS_NAME)) {
-                isUnitsFinished = false;
-                Call<UnitResponseModel> call = apiInterface.getAllUnits();
-                call.enqueue(new Callback<UnitResponseModel>() {
-                    @Override
-                    public void onResponse(@NonNull Call<UnitResponseModel> call, @NonNull Response<UnitResponseModel> response) {
-                        isUnitsFinished = true;
-                        isAllFinish();
-                        UnitResponseModel unitResponseModel = new UnitResponseModel();
-                        unitResponseModel = response.body();
-                        Units units = new Units();
-                        assert unitResponseModel != null;
-                        for (int i = 0; i < unitResponseModel.getLstUnit().size(); i++) {
-                            units.setId(unitResponseModel.getLstUnit().get(i).getId());
-                            units.setName(unitResponseModel.getLstUnit().get(i).getName());
-                            units.setWeight(unitResponseModel.getLstUnit().get(i).getWeight());
-                            units.setWeightUnit(unitResponseModel.getLstUnit().get(i).getWeightUnit());
-                            boolean insert = sqLiteHelperFunctions.insertUnits(units);
-                            Log.d("fsd", "insert units ====>" + insert + units.getId());
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull Call<UnitResponseModel> call, @NonNull Throwable t) {
-                        isUnitsFinished = true;
-                        isAllFinish();
-                        Log.d("fsd", "fail");
-
-                    }
-                });
-            }*/
 
             if (!sqLiteHelperFunctions.getTableRecordCount(DbConstants.TABLE_RACKS_NAME)) {
                 isRacksFinished = false;

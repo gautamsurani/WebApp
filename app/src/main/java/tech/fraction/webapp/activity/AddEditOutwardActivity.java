@@ -41,7 +41,7 @@ import tech.fraction.webapp.util.AppConstant;
 import tech.fraction.webapp.util.Utils;
 import tech.fraction.webapp.util.ValidationUtil;
 
-public class AddEditOutwardActivity extends AppCompatActivity {
+public class AddEditOutwardActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView rec_view;
     OutwardDetailListAdapter outwardDetailListAdapter;
@@ -122,9 +122,19 @@ public class AddEditOutwardActivity extends AppCompatActivity {
             CallGetOutwardItemDetailApi(outwardId, Utils.getPersonalInfo(context).getAccountId());
         }
 
-        tvParty.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        tvParty.setOnClickListener(this);
+
+        ivBack.setOnClickListener(this);
+
+        txtSave.setOnClickListener(this);
+
+        txtAddItem.setOnClickListener(this);
+    }
+
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+            case R.id.tvParty:
                 ArrayList<SearchTextViewModel> itemsList = new ArrayList<>();
                 for (int i = 0; i < lstAccount.size(); i++) {
                     itemsList.add(new SearchTextViewModel(lstAccount.get(i).getId(), lstAccount.get(i).getName()));
@@ -133,19 +143,11 @@ public class AddEditOutwardActivity extends AppCompatActivity {
                 i.putExtra("itemsList", itemsList);
                 i.putExtra("type", "party");
                 startActivityForResult(i, AppConstant.SEARCH_ACTIVITY_REQUEST_CODE);
-            }
-        });
-
-        ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.ivBack:
                 onBackPressed();
-            }
-        });
-
-        txtSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.txt_save:
                 getData();
                 if (selectedAccount.getName() == null) {
                     Utils.ShowSnakBar("Please select party ", rlMain, AddEditOutwardActivity.this);
@@ -156,12 +158,8 @@ public class AddEditOutwardActivity extends AppCompatActivity {
                     Utils.hideKeyboard(AddEditOutwardActivity.this);
                     CallSaveOutwardApi();
                 }
-            }
-        });
-
-        txtAddItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.txt_additem: {
                 if (selectedAccount.getName() == null) {
                     Utils.ShowSnakBar("Select Party", rlMain, context);
                 } else {
@@ -173,9 +171,11 @@ public class AddEditOutwardActivity extends AppCompatActivity {
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
             }
-        });
+                break;
+            default:
+                //do ur code;
+        }
     }
-
     private void CallGetOutwardItemDetailApi(int outwardId, int accountId) {
         rlProgress.setVisibility(View.VISIBLE);
         Call<DetailOutwardResponseModel> call = apiInterface.getOutwardItemDetail(outwardId, accountId);
@@ -381,5 +381,10 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         tvDate = findViewById(R.id.tvDate);
         tvParty = findViewById(R.id.tvParty);
         rlProgress = findViewById(R.id.rlProgress);
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }

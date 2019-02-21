@@ -7,7 +7,7 @@ import android.widget.ImageView;
 
 import tech.fraction.webapp.R;
 
-public class AddOutwardItem extends AppCompatActivity {
+public class AddOutwardItem extends AppCompatActivity implements View.OnClickListener {
 
     ImageView ivBack;
     @Override
@@ -16,11 +16,21 @@ public class AddOutwardItem extends AppCompatActivity {
         setContentView(R.layout.activity_add_outward_item);
         ivBack=findViewById(R.id.ivBack);
 
-        ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        ivBack.setOnClickListener(this);
     }
+
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+            case R.id.ivBack:
+
+                onBackPressed();
+
+
+            default:
+
+        }
+    }
+
+
 }
