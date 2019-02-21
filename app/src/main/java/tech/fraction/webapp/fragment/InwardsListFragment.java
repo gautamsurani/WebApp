@@ -24,7 +24,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 import tech.fraction.webapp.R;
 import tech.fraction.webapp.activity.AddEditInwardActivity;
 import tech.fraction.webapp.activity.MainActivity;
@@ -33,7 +32,6 @@ import tech.fraction.webapp.base.BaseFragment;
 import tech.fraction.webapp.base.NoNetworkActivity;
 import tech.fraction.webapp.model.InventoryDetail;
 import tech.fraction.webapp.model.PersonInformation;
-import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
 import tech.fraction.webapp.rest.ApiRequestModel.InwardRequestModel;
 import tech.fraction.webapp.rest.ApiResponseModel.InwardResponseModel;
 import tech.fraction.webapp.rest.RetrofitInstance;
@@ -47,17 +45,13 @@ import static tech.fraction.webapp.util.AppConstant.NO_NETWORK_REQUEST_CODE;
  */
 public class InwardsListFragment extends BaseFragment {
 
-    RecyclerView rvInwords;
+    RecyclerView rvInwards;
 
     Activity context;
 
     InwordsAdapter inwordsAdapter;
 
     TextView tvTitle;
-
-    Retrofit retrofit;
-
-    ApiInterface apiInterface;
 
     ProgressBar progress_circular;
 
@@ -67,7 +61,7 @@ public class InwardsListFragment extends BaseFragment {
 
     int visibleItemCount, totalItemCount, pastVisibleItems;
 
-    boolean IsLAstLoading = true;
+    boolean IsLastLoading = true;
 
     LinearLayoutManager linearLayoutManager;
 
@@ -96,19 +90,15 @@ public class InwardsListFragment extends BaseFragment {
 
         initComp(view);
 
-        retrofit = RetrofitInstance.getClient();
-
-        apiInterface = retrofit.create(ApiInterface.class);
-
         linearLayoutManager = new LinearLayoutManager(context);
 
         personInformation = Utils.getPersonalInfo(context);
 
         inwordsAdapter = new InwordsAdapter(context);
 
-        rvInwords.setLayoutManager(linearLayoutManager);
+        rvInwards.setLayoutManager(linearLayoutManager);
 
-        rvInwords.setAdapter(inwordsAdapter);
+        rvInwards.setAdapter(inwordsAdapter);
 
         inwordsAdapter.setOnItemClickListener(new InwordsAdapter.OnClickListener() {
             @Override
@@ -121,7 +111,7 @@ public class InwardsListFragment extends BaseFragment {
             }
         });
 
-        rvInwords.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        rvInwards.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             CountDownTimer timer = null;
 
@@ -154,10 +144,10 @@ public class InwardsListFragment extends BaseFragment {
                     totalItemCount = linearLayoutManager.getItemCount();
                     pastVisibleItems = linearLayoutManager.findFirstVisibleItemPosition();
 
-                    if (IsLAstLoading) {
+                    if (IsLastLoading) {
                         if ((visibleItemCount + pastVisibleItems) >= totalItemCount &&
                                 recyclerView.getChildAt(recyclerView.getChildCount() - 1).getBottom() <= recyclerView.getHeight()) {
-                            IsLAstLoading = false;
+                            IsLastLoading = false;
                             int i = inwardRequestModel.getPageIndex();
                             inwardRequestModel.setPageIndex(i + 1);
                             callGetInwardAPI();
@@ -222,12 +212,12 @@ public class InwardsListFragment extends BaseFragment {
 
         progress_circular.setVisibility(View.VISIBLE);
 
-        Call<InwardResponseModel> call = apiInterface.getInward(inwardRequestModel);
+        Call<InwardResponseModel> call = RetrofitInstance.getApiInterface().getInward(inwardRequestModel);
 
         call.enqueue(new Callback<InwardResponseModel>() {
             @Override
             public void onResponse(@NonNull Call<InwardResponseModel> call, @NonNull Response<InwardResponseModel> response) {
-                IsLAstLoading = true;
+                IsLastLoading = true;
                 progress_circular.setVisibility(View.GONE);
                 InwardResponseModel inwardResponseModels = response.body();
                 assert inwardResponseModels != null;
@@ -290,7 +280,7 @@ public class InwardsListFragment extends BaseFragment {
     }
 
     private void initComp(View view) {
-        rvInwords = view.findViewById(R.id.rvInwords);
+        rvInwards = view.findViewById(R.id.rvInwords);
         progress_circular = view.findViewById(R.id.progress_circular);
         rlMain = view.findViewById(R.id.rlMain);
         linearShowToastMsg = view.findViewById(R.id.linearShowToastMsg);

@@ -51,10 +51,6 @@ public class AddEditInItemActivity extends AppCompatActivity {
     TextView tvHeading, spnItem, spnUnit, spnLocation, tvUpdate,tvCancel;
     ImageView ivBack;
 
-    ApiInterface apiInterface;
-
-    Retrofit retrofit;
-
     RelativeLayout rlProgress, rlMain;
 
     Activity context;
@@ -97,9 +93,6 @@ public class AddEditInItemActivity extends AppCompatActivity {
         initComp();
 
         getData();
-
-        retrofit = RetrofitInstance.getClient();
-        apiInterface = retrofit.create(ApiInterface.class);
 
         initRecyclerView();
 
@@ -437,7 +430,7 @@ public class AddEditInItemActivity extends AppCompatActivity {
 
             if (!sqLiteHelperFunctions.getTableRecordCount(DbConstants.TABLE_ITEMS_NAME)) {
                 isItemFinished = false;
-                Call<ItemResoponseModel> call = apiInterface.getAllItems();
+                Call<ItemResoponseModel> call = RetrofitInstance.getApiInterface().getAllItems();
                 call.enqueue(new Callback<ItemResoponseModel>() {
                     @Override
                     public void onResponse(@NonNull Call<ItemResoponseModel> call, @NonNull Response<ItemResoponseModel> response) {
@@ -503,7 +496,7 @@ public class AddEditInItemActivity extends AppCompatActivity {
 
             if (!sqLiteHelperFunctions.getTableRecordCount(DbConstants.TABLE_RACKS_NAME)) {
                 isRacksFinished = false;
-                Call<RackResponseModel> call = apiInterface.getAllRacks();
+                Call<RackResponseModel> call = RetrofitInstance.getApiInterface().getAllRacks();
                 call.enqueue(new Callback<RackResponseModel>() {
                     @Override
                     public void onResponse(Call<RackResponseModel> call, Response<RackResponseModel> response) {
@@ -536,7 +529,7 @@ public class AddEditInItemActivity extends AppCompatActivity {
 
             if (!sqLiteHelperFunctions.getTableRecordCount(DbConstants.TABLE_RENT_NAME)) {
                 isRantFinished = false;
-                Call<RentResponseModel> call = apiInterface.getAllItemRents();
+                Call<RentResponseModel> call = RetrofitInstance.getApiInterface().getAllItemRents();
                 call.enqueue(new Callback<RentResponseModel>() {
                     @Override
                     public void onResponse(@NonNull Call<RentResponseModel> call, @NonNull Response<RentResponseModel> response) {

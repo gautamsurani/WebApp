@@ -51,8 +51,6 @@ public class InvoiceFragment extends BaseFragment {
     ProgressBar progress_circular;
     Activity context;
     RelativeLayout rlMain;
-    Retrofit retrofit;
-    ApiInterface apiInterface;
     InvoiceAdapter invoiceAdapter;
     ArrayList<PartyWiseInvoicePaging> lstpartyWiseInvoicePagings;
     ArrayList<Invoices> lstInvoice;
@@ -79,10 +77,8 @@ public class InvoiceFragment extends BaseFragment {
         view = inflater.inflate(R.layout.fragment_invoice, container, false);
         context = getActivity();
         initComp();
-        retrofit = RetrofitInstance.getClient();
         lstpartyWiseInvoicePagings = new ArrayList<>();
         lstInvoice = new ArrayList<>();
-        apiInterface = retrofit.create(ApiInterface.class);
         tvPartyInvoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -246,7 +242,7 @@ public class InvoiceFragment extends BaseFragment {
 
     private void CallInvoiceApi() {
         progress_circular.setVisibility(View.VISIBLE);
-        Call<InvoiceResponseModel> call = apiInterface.getAllInvoice(invoiceRequestModel);
+        Call<InvoiceResponseModel> call = RetrofitInstance.getApiInterface().getAllInvoice(invoiceRequestModel);
         call.enqueue(new Callback<InvoiceResponseModel>() {
             @Override
             public void onResponse(Call<InvoiceResponseModel> call, Response<InvoiceResponseModel> response) {

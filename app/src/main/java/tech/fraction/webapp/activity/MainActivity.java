@@ -108,10 +108,6 @@ public class MainActivity extends AppCompatActivity {
 
     MenuAdapter menuAdapter;
 
-    Retrofit retrofit;
-
-    ApiInterface apiInterface;
-
     ArrayList<Account> accounts = new ArrayList<>();
 
     ProgressBar pbParty, pbBroker, pbItemOut;
@@ -322,10 +318,6 @@ public class MainActivity extends AppCompatActivity {
 
         openHomeFragment(new InwardsListFragment());
 
-        retrofit = RetrofitInstance.getClient();
-
-        apiInterface = retrofit.create(ApiInterface.class);
-
         //callTestAPI();
 
         if (accounts.size() == 0) {
@@ -511,12 +503,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setInvoiceFilter() {
-
-
         if (onClickListenerInvoice != null) {
-
-
-            String broker = "", invoiceNo = "", inwardNo = "", outwardNo = "",
+            String broker = "", invoiceNo, inwardNo, outwardNo,
                     receiptType = "", paidStatus = "", month = "", year = "";
             int paidOn = -1, invoiceGeneratedPeriod = -1;
             if (selectedAccount != null) {
@@ -527,7 +515,6 @@ public class MainActivity extends AppCompatActivity {
             invoiceNo = etInvoiceNo.getText().toString();
             inwardNo = etInwardNoInv.getText().toString();
             outwardNo = etOutwardNoInv.getText().toString();
-
             switch (spnMon.getSelectedItem().toString()) {
                 case "All":
                     month = "0";
@@ -569,7 +556,6 @@ public class MainActivity extends AppCompatActivity {
                     month = "12";
                     break;
             }
-
             switch (spYear.getSelectedItem().toString()) {
                 case "All":
                     year = "0";
@@ -597,7 +583,6 @@ public class MainActivity extends AppCompatActivity {
                 case "Outward":
                     receiptType = "O";
                     break;
-
             }
             switch (spInvoiceGeneratedPeriodInv.getSelectedItem().toString()) {
                 case "All":
@@ -619,7 +604,6 @@ public class MainActivity extends AppCompatActivity {
                     invoiceGeneratedPeriod = 30;
                     break;
             }
-
             switch (spPaidStatusInv.getSelectedItem().toString()) {
                 case "All":
                     paidStatus = "";
@@ -657,12 +641,9 @@ public class MainActivity extends AppCompatActivity {
                     paidOn = 30;
                     break;
             }
-
-
             onClickListenerInvoice.onFilterInvoiceApplyClick(broker, invoiceNo, inwardNo, outwardNo, month, year, receiptType, invoiceGeneratedPeriod, paidStatus, paidOn);
             sheetBehaviorInvoice.setState(BottomSheetBehavior.STATE_COLLAPSED);
         }
-
     }
 
     private void resetInvoiceFilter() {
@@ -679,13 +660,9 @@ public class MainActivity extends AppCompatActivity {
         spPaidOnInv.setSelection(0);
         sheetBehaviorInvoice.setState(BottomSheetBehavior.STATE_COLLAPSED);
         setInvoiceFilter();
-
-
     }
 
     private void setOutwardFilter() {
-
-
         if (onClickListenerOutward != null) {
             sheetBehaviorOutward.setState(BottomSheetBehavior.STATE_COLLAPSED);
             String broker = "", outwardNo, inwardNo, item = "", unit, location, outwardedOn = "", invoiceStatus = "", paidStatus = "";
@@ -1026,7 +1003,7 @@ public class MainActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             if (!sqLiteHelperFunctions.getTableRecordCount(DbConstants.TABLE_ITEMS_NAME)) {
                 isItemFinished = false;
-                Call<ItemResoponseModel> call = apiInterface.getAllItems();
+                Call<ItemResoponseModel> call = RetrofitInstance.getApiInterface().getAllItems();
                 call.enqueue(new Callback<ItemResoponseModel>() {
                     @Override
                     public void onResponse(@NonNull Call<ItemResoponseModel> call, @NonNull Response<ItemResoponseModel> response) {
@@ -1068,6 +1045,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == AppConstant.SEARCH_ACTIVITY_REQUEST_CODE)
             if (resultCode == Activity.RESULT_OK) {
                 String type = data.getStringExtra("type");
@@ -1127,7 +1105,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
 
-            Call<AccountResponseModel> call = apiInterface.getAllAccount();
+            Call<AccountResponseModel> call = RetrofitInstance.getApiInterface().getAllAccount();
             call.enqueue(new Callback<AccountResponseModel>() {
                 @Override
                 public void onResponse(@NonNull Call<AccountResponseModel> call, @NonNull Response<AccountResponseModel> response) {
@@ -1189,7 +1167,7 @@ public class MainActivity extends AppCompatActivity {
         codebeautify.setPaging(paging);
         codebeautify.setSearchField(searchField);
 
-        Call<String> call = apiInterface.getTestApi(codebeautify);
+        Call<String> call = RetrofitInstance.getApiInterface().getTestApi(codebeautify);
 
         call.enqueue(new Callback<String>() {
             @Override
@@ -1228,6 +1206,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openHomeFragment(Fragment fragment) {
+        AppConstant.canResume = true;
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

@@ -62,10 +62,6 @@ public class AddEditInwardActivity extends AppCompatActivity {
 
     ProgressBar pbParty;
 
-    ApiInterface apiInterface;
-
-    Retrofit retrofit;
-
     EditText etVehicleNo, etTransporter, etDriverName, etDriverNo, etRemark;
 
     public static List<InwardItems> inwardItems = new ArrayList<>();
@@ -99,9 +95,6 @@ public class AddEditInwardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_inward_detail);
 
         context = this;
-
-        retrofit = RetrofitInstance.getClient();
-        apiInterface = retrofit.create(ApiInterface.class);
 
         initComp();
 
@@ -236,7 +229,7 @@ public class AddEditInwardActivity extends AppCompatActivity {
 
     private void CallGetInwardItemDetailApi(int inwardDetailId, int accountId) {
         rlProgress.setVisibility(View.VISIBLE);
-        Call<DetailInwardResponseModel> call = apiInterface.getInwardItemDetail(inwardDetailId, accountId);
+        Call<DetailInwardResponseModel> call = RetrofitInstance.getApiInterface().getInwardItemDetail(inwardDetailId, accountId);
         call.enqueue(new Callback<DetailInwardResponseModel>() {
             @Override
             public void onResponse(@NonNull Call<DetailInwardResponseModel> call, @NonNull Response<DetailInwardResponseModel> response) {
@@ -287,7 +280,7 @@ public class AddEditInwardActivity extends AppCompatActivity {
     private void CallAddInwardApi() {
         rlProgress.setVisibility(View.VISIBLE);
 
-        Call<SaveInwardResponseModel> call = apiInterface.saveInward(saveInwardRequestModel);
+        Call<SaveInwardResponseModel> call = RetrofitInstance.getApiInterface().saveInward(saveInwardRequestModel);
 
         call.enqueue(new Callback<SaveInwardResponseModel>() {
             @Override
@@ -403,7 +396,7 @@ public class AddEditInwardActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
 
-            Call<AccountResponseModel> call = apiInterface.getAllAccount();
+            Call<AccountResponseModel> call = RetrofitInstance.getApiInterface().getAllAccount();
             call.enqueue(new Callback<AccountResponseModel>() {
                 @Override
                 public void onResponse(@NonNull Call<AccountResponseModel> call, @NonNull Response<AccountResponseModel> response) {

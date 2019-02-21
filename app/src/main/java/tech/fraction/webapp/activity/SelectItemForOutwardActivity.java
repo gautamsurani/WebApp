@@ -44,17 +44,11 @@ public class SelectItemForOutwardActivity extends BaseActivity {
     Activity context;
     boolean IsLAstLoading = true;
 
-    Retrofit retrofit;
-    ApiInterface apiInterface;
     ProgressBar progress_circular;
     RelativeLayout rlMain;
 
     ImageView ivBack;
     TextView tvTitle, tvDone;
-
-    LinearLayoutManager linearLayoutManager;
-
-    InwardRequestModel inwardRequestModel;
 
     LinearLayout linearShowToastMsg;
 
@@ -81,10 +75,6 @@ public class SelectItemForOutwardActivity extends BaseActivity {
         if (bundle != null) {
             accountId = bundle.getInt("accountId", -1);
         }
-
-        retrofit = RetrofitInstance.getClient();
-
-        apiInterface = retrofit.create(ApiInterface.class);
 
         selectItemForOutwardAdapter = new SelectItemForOutwardAdapter(context);
         rvItems.setLayoutManager(new LinearLayoutManager(context));
@@ -136,7 +126,7 @@ public class SelectItemForOutwardActivity extends BaseActivity {
         progress_circular.setVisibility(View.VISIBLE);
 
 
-        Call<OutwardItemRespondModel> call = apiInterface.getOutwardItem(accountId);
+        Call<OutwardItemRespondModel> call = RetrofitInstance.getApiInterface().getOutwardItem(accountId);
 
         call.enqueue(new Callback<OutwardItemRespondModel>() {
             @Override

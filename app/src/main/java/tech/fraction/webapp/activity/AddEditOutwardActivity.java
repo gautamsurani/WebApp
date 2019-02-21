@@ -47,9 +47,7 @@ public class AddEditOutwardActivity extends AppCompatActivity {
     OutwardDetailListAdapter outwardDetailListAdapter;
     ImageView ivBack;
     Activity context;
-    Retrofit retrofit;
     ProgressBar pbParty;
-    ApiInterface apiInterface;
     EditText edt_vehicleNo, edt_transporter, edt_driverName, edt_driverNo, edt_remark;
     TextView txtSave, txtAddItem, tvTitle, tvOutwardNo, tvDate, tvParty;
     String vehicleNo, transporterName, driverName, driverNo, remark;
@@ -93,9 +91,6 @@ public class AddEditOutwardActivity extends AppCompatActivity {
         initCache();
 
         context = this;
-
-        retrofit = RetrofitInstance.getClient();
-        apiInterface = retrofit.create(ApiInterface.class);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -178,7 +173,7 @@ public class AddEditOutwardActivity extends AppCompatActivity {
 
     private void CallGetOutwardItemDetailApi(int outwardId, int accountId) {
         rlProgress.setVisibility(View.VISIBLE);
-        Call<DetailOutwardResponseModel> call = apiInterface.getOutwardItemDetail(outwardId, accountId);
+        Call<DetailOutwardResponseModel> call = RetrofitInstance.getApiInterface().getOutwardItemDetail(outwardId, accountId);
         call.enqueue(new Callback<DetailOutwardResponseModel>() {
             @Override
             public void onResponse(@NonNull Call<DetailOutwardResponseModel> call, @NonNull Response<DetailOutwardResponseModel> response) {
@@ -235,7 +230,7 @@ public class AddEditOutwardActivity extends AppCompatActivity {
 
     private void CallSaveOutwardApi() {
         rlProgress.setVisibility(View.VISIBLE);
-        Call<SaveOutwardResponseModel> call = apiInterface.saveOutwardItems(saveOutwardRequestModel);
+        Call<SaveOutwardResponseModel> call = RetrofitInstance.getApiInterface().saveOutwardItems(saveOutwardRequestModel);
         call.enqueue(new Callback<SaveOutwardResponseModel>() {
             @Override
             public void onResponse(Call<SaveOutwardResponseModel> call, Response<SaveOutwardResponseModel> response) {

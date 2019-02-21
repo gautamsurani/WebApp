@@ -53,10 +53,6 @@ public class OutwardListFragment extends BaseFragment {
 
     TextView tvTitle;
 
-    Retrofit retrofit;
-
-    ApiInterface apiInterface;
-
     ProgressBar progress_circular;
 
     RelativeLayout rlMain;
@@ -92,13 +88,10 @@ public class OutwardListFragment extends BaseFragment {
 
         View view = inflater.inflate(R.layout.fragment_outword_list, container, false);
 
-        retrofit = RetrofitInstance.getClient();
-
         context = getActivity();
 
         initComp(view);
 
-        apiInterface = retrofit.create(ApiInterface.class);
         outWardList = new ArrayList<>();
 
         linearLayoutManager = new LinearLayoutManager(context);
@@ -217,7 +210,7 @@ public class OutwardListFragment extends BaseFragment {
 
     private void callGetOutwardAPI() {
         progress_circular.setVisibility(View.VISIBLE);
-        Call<OutwardResponseModel> call = apiInterface.getAllOutward(outwardRequestModel);
+        Call<OutwardResponseModel> call = RetrofitInstance.getApiInterface().getAllOutward(outwardRequestModel);
         call.enqueue(new Callback<OutwardResponseModel>() {
             @Override
             public void onResponse(@NonNull Call<OutwardResponseModel> call, @NonNull Response<OutwardResponseModel> response) {
@@ -241,7 +234,6 @@ public class OutwardListFragment extends BaseFragment {
             public void onFailure(@NonNull Call<OutwardResponseModel> call, @NonNull Throwable t) {
                 progress_circular.setVisibility(View.GONE);
                 Utils.ShowSnakBar("Failure", rlMain, context);
-
             }
         });
     }

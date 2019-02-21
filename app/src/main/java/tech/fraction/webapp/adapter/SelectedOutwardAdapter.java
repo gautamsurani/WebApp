@@ -12,20 +12,17 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import tech.fraction.webapp.R;
-import tech.fraction.webapp.model.InvoiceDetails;
 import tech.fraction.webapp.model.OutwardDetails;
 import tech.fraction.webapp.util.Utils;
 
 
 public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutwardAdapter.ViewHolder> {
-
 
     private LayoutInflater inflater;
     private List<OutwardDetails> outwardDetails = new ArrayList<>();
@@ -34,12 +31,11 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
     public SelectedOutwardAdapter(Context context) {
         inflater = LayoutInflater.from(context);
         this.context = context;
-
     }
 
-    private SelectedOutwardAdapter.OnClickListener onClickListener;
+    private OnClickListener onClickListener;
 
-    public void setOnItemClickListener(SelectedOutwardAdapter.OnClickListener onClickListener) {
+    public void setOnItemClickListener(OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
     }
 
@@ -53,16 +49,16 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
 
     @NonNull
     @Override
-    public SelectedOutwardAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         View view;
 
         view = inflater.inflate(R.layout.row_selected_outward, parent, false);
 
-        return new SelectedOutwardAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final SelectedOutwardAdapter.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int position) {
         viewHolder.tvItemName.setText(outwardDetails.get(position).getItemName());
 
         String location = "";
@@ -100,16 +96,14 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
             }
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                 qty = s.toString();
                 if (!qty.isEmpty()) {
-
                     if (Integer.parseInt(qty) > outwardDetails.get(position).getStock()) {
                         final Dialog openDialog = new Dialog(context);
                         openDialog.setContentView(R.layout.customdialog_layout);
                         Window window = openDialog.getWindow();
+                        assert window != null;
                         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
                         openDialog.setTitle("Custom Dialog Box");
                         TextView tvOkay = openDialog.findViewById(R.id.tvOkay);
                         TextView tvMessage = openDialog.findViewById(R.id.tvMessage);
@@ -120,15 +114,12 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
                             public void onClick(View v) {
                                 openDialog.dismiss();
                                 viewHolder.etQty.setText("");
-
                             }
                         });
                         openDialog.show();
                     }
                 }
-
             }
-
         });
 
         viewHolder.imgDelete.setOnClickListener(new View.OnClickListener() {
@@ -138,7 +129,6 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
             }
         });
     }
-
 
     @Override
     public int getItemCount() {
@@ -167,4 +157,3 @@ public class SelectedOutwardAdapter extends RecyclerView.Adapter<SelectedOutward
         }
     }
 }
- 

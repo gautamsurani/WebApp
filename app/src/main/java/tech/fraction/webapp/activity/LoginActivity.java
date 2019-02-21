@@ -32,9 +32,7 @@ public class LoginActivity extends BaseActivity {
     Activity context;
     EditText edtEmail, edtPassword;
     RelativeLayout rlLogin;
-    Retrofit retrofit;
     String emailId, password;
-    ApiInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +49,6 @@ public class LoginActivity extends BaseActivity {
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             finish();
         }
-
-        retrofit = RetrofitInstance.getClient();
-
-        apiInterface = retrofit.create(ApiInterface.class);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
 
@@ -84,7 +78,7 @@ public class LoginActivity extends BaseActivity {
 
     private void callDoLoginAPI() {
         startProgressDialog();
-        Call<LoginResponseModel> call = apiInterface.doLogin(emailId, password);
+        Call<LoginResponseModel> call = RetrofitInstance.getApiInterface().doLogin(emailId, password);
 
         call.enqueue(new Callback<LoginResponseModel>() {
             @Override
