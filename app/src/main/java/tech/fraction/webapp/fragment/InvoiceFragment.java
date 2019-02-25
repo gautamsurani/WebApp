@@ -100,8 +100,13 @@ public class InvoiceFragment extends BaseFragment {
                             1,
                             "I", Utils.getPersonalInfo(context).getPersonId());
 
+                    if (!global.isNetworkAvailable()) {
+                        retryInternet("CallInvoiceApi");
+                        return;
+                    }else {
 
-                    CallInvoiceApi();
+                        CallInvoiceApi();
+                    }
 
 
                 } else {
@@ -136,7 +141,14 @@ public class InvoiceFragment extends BaseFragment {
                             50, "0",
                             0,
                             "P", Utils.getPersonalInfo(context).getPersonId());
-                    CallInvoiceApi();
+                    if (!global.isNetworkAvailable()) {
+                        retryInternet("CallInvoiceApi");
+                        return;
+                    }else {
+
+                        CallInvoiceApi();
+                    }
+
                 }
             }
         });
@@ -152,7 +164,7 @@ public class InvoiceFragment extends BaseFragment {
                 "I", Utils.getPersonalInfo(context).getPersonId());
 
         if (!global.isNetworkAvailable()) {
-            retryInternet("getInward");
+            retryInternet("CallInvoiceApi");
         } else {
             CallInvoiceApi();
         }
@@ -175,7 +187,7 @@ public class InvoiceFragment extends BaseFragment {
 
 
                 if (!global.isNetworkAvailable()) {
-                    retryInternet("getInward");
+                    retryInternet("CallInvoiceApi");
                 } else {
                     CallInvoiceApi();
                 }
@@ -267,6 +279,19 @@ public class InvoiceFragment extends BaseFragment {
         Intent i = new Intent(context, NoNetworkActivity.class);
         i.putExtra("extraValue", extraValue);
         startActivityForResult(i, NO_NETWORK_REQUEST_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == NO_NETWORK_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                String extraValue = data.getStringExtra("extraValue");
+                if (extraValue.equalsIgnoreCase("CallInvoiceApi")) {
+                    CallInvoiceApi();
+                }
+            }
+        }
     }
 
     private void initComp() {

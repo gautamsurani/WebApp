@@ -45,11 +45,11 @@ public class AddEditOutwardActivity extends AppCompatActivity implements View.On
 
     RecyclerView rec_view;
     OutwardDetailListAdapter outwardDetailListAdapter;
-    ImageView ivBack;
+    ImageView ivBack, tvAddItem;
     Activity context;
     ProgressBar pbParty;
-    EditText edt_vehicleNo, edt_transporter, edt_driverName, edt_driverNo, edt_remark;
-    TextView txtSave, txtAddItem, tvTitle, tvOutwardNo, tvDate, tvParty;
+    EditText etVehicleNo, etTransporter, etDriverName, etDriverNo, etRemark;
+    TextView txtSave, tvTitle, tvOutwardNo, tvDate, tvParty;
     String vehicleNo, transporterName, driverName, driverNo, remark;
     RelativeLayout scrollView;
     SaveOutwardRequestModel saveOutwardRequestModel;
@@ -123,12 +123,12 @@ public class AddEditOutwardActivity extends AppCompatActivity implements View.On
 
         txtSave.setOnClickListener(this);
 
-        txtAddItem.setOnClickListener(this);
+        tvAddItem.setOnClickListener(this);
     }
 
     public void onClick(View v) {
         int id = v.getId();
-        switch (id){
+        switch (id) {
             case R.id.tvParty:
                 ArrayList<SearchTextViewModel> itemsList = new ArrayList<>();
                 for (int i = 0; i < lstAccount.size(); i++) {
@@ -154,7 +154,7 @@ public class AddEditOutwardActivity extends AppCompatActivity implements View.On
                     CallSaveOutwardApi();
                 }
                 break;
-            case R.id.txt_additem: {
+            case R.id.tvAddItem: {
                 if (selectedAccount.getName() == null) {
                     Utils.ShowSnakBar("Select Party", rlMain, context);
                 } else {
@@ -166,11 +166,12 @@ public class AddEditOutwardActivity extends AppCompatActivity implements View.On
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
             }
-                break;
+            break;
             default:
                 //do ur code;
         }
     }
+
     private void CallGetOutwardItemDetailApi(int outwardId, int accountId) {
         rlProgress.setVisibility(View.VISIBLE);
         Call<DetailOutwardResponseModel> call = RetrofitInstance.getApiInterface().getOutwardItemDetail(outwardId, accountId);
@@ -214,11 +215,11 @@ public class AddEditOutwardActivity extends AppCompatActivity implements View.On
             outwardDetailListAdapter.notifyDataSetChanged();
             transporter = saveOutwardRequestModel.getTransporter();
             if (transporter != null) {
-                edt_vehicleNo.setText(Utils.ifIsStringNull(transporter.getVehicleNo()));
-                edt_driverName.setText(Utils.ifIsStringNull(transporter.getDriverName()));
-                edt_driverNo.setText(Utils.ifIsStringNull(transporter.getDriverContactNumber()));
-                edt_transporter.setText(Utils.ifIsStringNull(transporter.getTransporterDetail()));
-                edt_remark.setText(Utils.ifIsStringNull(transporter.getRemarks()));
+                etVehicleNo.setText(Utils.ifIsStringNull(transporter.getVehicleNo()));
+                etDriverName.setText(Utils.ifIsStringNull(transporter.getDriverName()));
+                etDriverNo.setText(Utils.ifIsStringNull(transporter.getDriverContactNumber()));
+                etTransporter.setText(Utils.ifIsStringNull(transporter.getTransporterDetail()));
+                etRemark.setText(Utils.ifIsStringNull(transporter.getRemarks()));
             } else {
                 transporter = new Transporter();
             }
@@ -253,15 +254,16 @@ public class AddEditOutwardActivity extends AppCompatActivity implements View.On
 
     private void AddDataInRequestModel() {
         Transporter transporter = new Transporter();
-        transporter.setDriverContactNumber(edt_driverNo.getText().toString());
-        transporter.setTransporterDetail(edt_transporter.getText().toString());
-        transporter.setDriverName(edt_driverName.getText().toString());
-        transporter.setRemarks(edt_remark.getText().toString());
-        transporter.setVehicleNo(edt_vehicleNo.getText().toString());
+        transporter.setDriverContactNumber(etDriverNo.getText().toString());
+        transporter.setTransporterDetail(etTransporter.getText().toString());
+        transporter.setDriverName(etDriverName.getText().toString());
+        transporter.setRemarks(etRemark.getText().toString());
+        transporter.setVehicleNo(etVehicleNo.getText().toString());
         saveOutwardRequestModel = new SaveOutwardRequestModel(outwardItemsList, selectedAccount.getId(), selectedAccount.getName(),
                 null, false, 0, tvOutwardNo.getText().toString(), 0.0, transporter,
                 "02-15-2019", 0.0);
     }
+
 
     private void initItemRecyclerView() {
         rec_view.setLayoutManager(new LinearLayoutManager(this));
@@ -312,11 +314,11 @@ public class AddEditOutwardActivity extends AppCompatActivity implements View.On
     }
 
     private void getData() {
-        vehicleNo = edt_vehicleNo.getText().toString();
-        transporterName = edt_transporter.getText().toString();
-        driverName = edt_driverName.getText().toString();
-        driverNo = edt_driverNo.getText().toString();
-        remark = edt_remark.getText().toString();
+        vehicleNo = etVehicleNo.getText().toString();
+        transporterName = etTransporter.getText().toString();
+        driverName = etDriverName.getText().toString();
+        driverNo = etDriverNo.getText().toString();
+        remark = etRemark.getText().toString();
     }
 
     private boolean validateField(String vehicleNo, String transporterName, String driverName, String driverNo, String remark) {
@@ -362,13 +364,13 @@ public class AddEditOutwardActivity extends AppCompatActivity implements View.On
     private void initComp() {
         rec_view = findViewById(R.id.rec_view);
         ivBack = findViewById(R.id.ivBack);
-        edt_vehicleNo = findViewById(R.id.edt_vehicleNo);
-        edt_transporter = findViewById(R.id.edt_transporter);
-        edt_driverName = findViewById(R.id.edt_driverName);
-        edt_driverNo = findViewById(R.id.edt_driverNo);
-        edt_remark = findViewById(R.id.edt_remark);
-        txtSave = findViewById(R.id.txt_save);
-        txtAddItem = findViewById(R.id.txt_additem);
+        etVehicleNo = findViewById(R.id.etVehicleNo);
+        etTransporter = findViewById(R.id.etTransporter);
+        etDriverName = findViewById(R.id.etDriverName);
+        etDriverNo = findViewById(R.id.etDriverNo);
+        etRemark = findViewById(R.id.etRemark);
+        txtSave = findViewById(R.id.tvSave);
+        tvAddItem = findViewById(R.id.tvAddItem);
         rlMain = findViewById(R.id.rlMain);
         tvTitle = findViewById(R.id.tvTitle);
         pbParty = findViewById(R.id.pbParty);
@@ -376,10 +378,6 @@ public class AddEditOutwardActivity extends AppCompatActivity implements View.On
         tvDate = findViewById(R.id.tvDate);
         tvParty = findViewById(R.id.tvParty);
         rlProgress = findViewById(R.id.rlProgress);
-    }
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
 }

@@ -33,7 +33,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import tech.fraction.webapp.R;
 import tech.fraction.webapp.adapter.InwardItemAdapter;
+import tech.fraction.webapp.base.BaseActivity;
+import tech.fraction.webapp.base.NoNetworkActivity;
 import tech.fraction.webapp.model.Account;
+import tech.fraction.webapp.model.InwardDetailsModel;
 import tech.fraction.webapp.model.InwardItems;
 import tech.fraction.webapp.model.InwardVehicleDetail;
 import tech.fraction.webapp.model.SearchTextViewModel;
@@ -46,7 +49,9 @@ import tech.fraction.webapp.rest.RetrofitInstance;
 import tech.fraction.webapp.util.AppConstant;
 import tech.fraction.webapp.util.Utils;
 
-public class AddEditInwardActivity extends AppCompatActivity implements View.OnClickListener {
+import static tech.fraction.webapp.util.AppConstant.NO_NETWORK_REQUEST_CODE;
+
+public class AddEditInwardActivity extends BaseActivity implements View.OnClickListener {
 
     RecyclerView rec_view;
 
@@ -68,6 +73,8 @@ public class AddEditInwardActivity extends AppCompatActivity implements View.OnC
 
     SaveInwardRequestModel saveInwardRequestModel;
 
+    InwardDetailsModel inwardDetailsModel;
+
     ArrayList<Account> accounts = new ArrayList<>();
 
     private static Account selectedAccount = new Account();
@@ -81,6 +88,8 @@ public class AddEditInwardActivity extends AppCompatActivity implements View.OnC
     int inwardDetailId;
 
     DetailInwardResponseModel detailInwardResponseModel = new DetailInwardResponseModel();
+
+    int inwardVehicalId = 0, inwardDetailId1 = 0;
 
     @Override
     protected void onResume() {
@@ -175,27 +184,31 @@ public class AddEditInwardActivity extends AppCompatActivity implements View.OnC
                             etTransporter.getText().toString(), etRemark.getText().toString(), etDriverNo.getText().toString(),
                             etDriverName.getText().toString(), 0, 0);
 
-                    saveInwardRequestModel = new SaveInwardRequestModel(null, false, inwardItems,
-                            selectedAccount.getId(), selectedAccount.getName(), "12-02-2019", null, inwardVehicleDetail, null,
-                            false, null, null, inwardNumber, null, null,
-                            0, null, Utils.getPersonalInfo(context).getPersonId());
+                    saveInwardRequestModel = new SaveInwardRequestModel(inwardNumber, selectedAccount.getId()
+                            , inwardVehicleDetail
+                            , tvDate.getText().toString()
+                            , Utils.getPersonalInfo(context).getPersonId()
+                            , inwardItems
+                            , Utils.getPersonalInfo(context).getAccountId());
                 } else {
 
-                    int inwardVehicalId = 0, inwardDetailId1 = 0;
-
-                    if (saveInwardRequestModel.getInwardVehicleDetail() != null) {
-                        inwardVehicalId = saveInwardRequestModel.getInwardVehicleDetail().getId();
-                        inwardDetailId1 = saveInwardRequestModel.getInwardVehicleDetail().getInwardDetailId();
-                    }
                     InwardVehicleDetail inwardVehicleDetail = new InwardVehicleDetail("", etVehicleNo.getText().toString(), etTransporter.getText().toString()
                             , etRemark.getText().toString(), etDriverNo.getText().toString(), etDriverName.getText().toString(), inwardVehicalId,
                             inwardDetailId1);
 
-                    saveInwardRequestModel = new SaveInwardRequestModel(saveInwardRequestModel.getPaidStatus(), false, inwardItems, selectedAccount.getId(),
-                            selectedAccount.getName(), saveInwardRequestModel.getInwardedOn(), null, inwardVehicleDetail, null, true,
-                            null, null, inwardNumber, saveInwardRequestModel.getLastInvoiceGeneratedOn(), saveInwardRequestModel.getTotalPaidAmount(),
-                            inwardDetailId, null, Utils.getPersonalInfo(context).getPersonId());
+                    saveInwardRequestModel = new SaveInwardRequestModel(inwardNumber,
+                            selectedAccount.getId(),
+                            inwardVehicleDetail,
+                            tvDate.getText().toString(),
+                            Utils.getPersonalInfo(context).getPersonId(),
+                            inwardItems,
+                            Utils.getPersonalInfo(context).getAccountId());
 
+
+                }
+                if (!global.isNetworkAvailable()) {
+                    retryInternet("CallAddInwardApi");
+                    return;
                 }
 
                 CallAddInwardApi();
@@ -221,6 +234,12 @@ public class AddEditInwardActivity extends AppCompatActivity implements View.OnC
         }
     }
 
+    public void retryInternet(String extraValue) {
+        Intent i = new Intent(context, NoNetworkActivity.class);
+        i.putExtra("extraValue", extraValue);
+        startActivityForResult(i, NO_NETWORK_REQUEST_CODE);
+    }
+
     private void CallGetInwardItemDetailApi(int inwardDetailId, int accountId) {
         rlProgress.setVisibility(View.VISIBLE);
         Call<DetailInwardResponseModel> call = RetrofitInstance.getApiInterface().getInwardItemDetail(inwardDetailId, accountId);
@@ -230,7 +249,8 @@ public class AddEditInwardActivity extends AppCompatActivity implements View.OnC
                 rlProgress.setVisibility(View.GONE);
                 detailInwardResponseModel = response.body();
                 if (detailInwardResponseModel != null) {
-                    saveInwardRequestModel = detailInwardResponseModel.getData().getInwardDetails();
+                    inwardDetailsModel = new InwardDetailsModel();
+                    inwardDetailsModel = detailInwardResponseModel.getData().getInwardDetails();
                     setData();
                 }
             }
@@ -248,24 +268,27 @@ public class AddEditInwardActivity extends AppCompatActivity implements View.OnC
         tvDate.setEnabled(false);
         tvParty.setEnabled(false);
 
-        selectedAccount.setId(saveInwardRequestModel.getAccountId());
-        selectedAccount.setName(saveInwardRequestModel.getBroker());
+        selectedAccount.setId(inwardDetailsModel.getAccountId());
+        selectedAccount.setName(inwardDetailsModel.getBroker());
         selectedAccount.setPersonId(Utils.getPersonalInfo(context).getPersonId());
-        inwardNumber = saveInwardRequestModel.getNumber();
-        inwardDate = saveInwardRequestModel.getInwardedOn();
-        inwardItems = saveInwardRequestModel.getInwardItemDetailPoco();
+        inwardNumber = inwardDetailsModel.getNumber();
+        inwardDate = inwardDetailsModel.getInwardedOn();
+        inwardItems = inwardDetailsModel.getInwardItemDetailPoco();
         inwardItemAdapter.setList(inwardItems);
         inwardItemAdapter.notifyDataSetChanged();
-        inwardVehicleDetail = saveInwardRequestModel.getInwardVehicleDetail();
+        inwardVehicleDetail = inwardDetailsModel.getInwardVehicleDetail();
         if (inwardVehicleDetail != null) {
             etVehicleNo.setText(Utils.ifIsStringNull(inwardVehicleDetail.getVehicleNo()));
             etDriverName.setText(Utils.ifIsStringNull(inwardVehicleDetail.getDriverName()));
             etDriverNo.setText(Utils.ifIsStringNull(inwardVehicleDetail.getDriverContactNumber()));
-            etTransporter.setText(Utils.ifIsStringNull(inwardVehicleDetail.getTransporterDetail()));
+            etTransporter.setText(Utils.ifIsStringNull(inwardVehicleDetail.getTransporterName()));
             etRemark.setText(Utils.ifIsStringNull(inwardVehicleDetail.getRemarks()));
         } else {
             inwardVehicleDetail = new InwardVehicleDetail();
         }
+
+        inwardVehicalId = inwardVehicleDetail.getId();
+        inwardDetailId1 = inwardVehicleDetail.getInwardDetailId();
 
         initCache();
     }
@@ -364,6 +387,13 @@ public class AddEditInwardActivity extends AppCompatActivity implements View.OnC
                 if (type.equals("party")) {
                     SearchTextViewModel searchTextViewModel = (SearchTextViewModel) data.getSerializableExtra("search");
                     setParty(searchTextViewModel);
+                }
+            } else if (requestCode == NO_NETWORK_REQUEST_CODE) {
+                if (resultCode == Activity.RESULT_OK) {
+                    String extraValue = data.getStringExtra("extraValue");
+                    if (extraValue.equalsIgnoreCase("CallAddInwardApi")) {
+                        CallAddInwardApi();
+                    }
                 }
             }
     }

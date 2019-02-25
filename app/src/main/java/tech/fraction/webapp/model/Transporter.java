@@ -18,7 +18,7 @@ public class Transporter implements Serializable {
     private int Id;
 
     private int outwardId;
-    private  String outward;
+    private String outward;
 
     public int getOutwardId() {
         return outwardId;

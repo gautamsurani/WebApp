@@ -4,65 +4,43 @@ import java.io.Serializable;
 import java.util.List;
 
 public class InventoryDetail implements Serializable {
-    private String LastName;
-
-    private int InwardDetailId;
-
-    private int TotalRecords;
-
-    private String InvoicePaidOn;
-
-    private String AccountName;
-
-    private String Mobile1;
-
-    private String InvoiceGenerationDuePeriod;
 
     private String PaidStatus;
 
-    private String InwardedOn;
-
-    private String Mobile2;
-
-    private String CanDeleteInward;
-
-    private boolean IsInvoicePaid;
-
-    private int UnloadingCharges;
-
-    private String Address;
-
-    private String ReceiptType;
+    private int UniqRecordId;
 
     private String InwardNo;
 
-    private String TransactionOn;
+    private String CanDeleteInward;
 
-    private String LastInvoiceGeneratedOn;
+    private String Address;
 
-    private int UniqRecordId;
+    private String Color;
 
-    private int AccountId;
-
-    private String FirstName;
-
-    private Transporter Transporter;
-
-    private InwardPaidDetail InwardPaidDetail;
-
-    private String MiddleName;
-
-    private List<InwardItems> InwardItems;
+    private Transporter VehicleDetailModel;
 
     private String PaidAmount;
 
-    public String getLastName() {
-        return LastName;
-    }
+    private String InwardDateinDDMMYYYY;
 
-    public void setLastName(String lastName) {
-        LastName = lastName;
-    }
+    private String ReceiptType;
+
+    private List<InwardItems> InwardItems;
+
+    private int TotalRecords;
+
+    private int InwardDetailId;
+
+    private String InvoiceGenerationDuePeriod;
+
+    private String InvoiceMessage;
+
+
+    private String AccountName;
+
+
+    private boolean IsInvoicePaid;
+
 
     public int getInwardDetailId() {
         return InwardDetailId;
@@ -80,28 +58,12 @@ public class InventoryDetail implements Serializable {
         TotalRecords = totalRecords;
     }
 
-    public String getInvoicePaidOn() {
-        return InvoicePaidOn;
-    }
-
-    public void setInvoicePaidOn(String invoicePaidOn) {
-        InvoicePaidOn = invoicePaidOn;
-    }
-
     public String getAccountName() {
         return AccountName;
     }
 
     public void setAccountName(String accountName) {
         AccountName = accountName;
-    }
-
-    public String getMobile1() {
-        return Mobile1;
-    }
-
-    public void setMobile1(String mobile1) {
-        Mobile1 = mobile1;
     }
 
     public String getInvoiceGenerationDuePeriod() {
@@ -120,22 +82,6 @@ public class InventoryDetail implements Serializable {
         PaidStatus = paidStatus;
     }
 
-    public String getInwardedOn() {
-        return InwardedOn;
-    }
-
-    public void setInwardedOn(String inwardedOn) {
-        InwardedOn = inwardedOn;
-    }
-
-    public String getMobile2() {
-        return Mobile2;
-    }
-
-    public void setMobile2(String mobile2) {
-        Mobile2 = mobile2;
-    }
-
     public String getCanDeleteInward() {
         return CanDeleteInward;
     }
@@ -152,13 +98,6 @@ public class InventoryDetail implements Serializable {
         IsInvoicePaid = invoicePaid;
     }
 
-    public int getUnloadingCharges() {
-        return UnloadingCharges;
-    }
-
-    public void setUnloadingCharges(int unloadingCharges) {
-        UnloadingCharges = unloadingCharges;
-    }
 
     public String getAddress() {
         return Address;
@@ -184,22 +123,6 @@ public class InventoryDetail implements Serializable {
         InwardNo = inwardNo;
     }
 
-    public String getTransactionOn() {
-        return TransactionOn;
-    }
-
-    public void setTransactionOn(String transactionOn) {
-        TransactionOn = transactionOn;
-    }
-
-    public String getLastInvoiceGeneratedOn() {
-        return LastInvoiceGeneratedOn;
-    }
-
-    public void setLastInvoiceGeneratedOn(String lastInvoiceGeneratedOn) {
-        LastInvoiceGeneratedOn = lastInvoiceGeneratedOn;
-    }
-
     public int getUniqRecordId() {
         return UniqRecordId;
     }
@@ -208,44 +131,20 @@ public class InventoryDetail implements Serializable {
         UniqRecordId = uniqRecordId;
     }
 
-    public int getAccountId() {
-        return AccountId;
+    public String getInwardDateinDDMMYYYY() {
+        return InwardDateinDDMMYYYY;
     }
 
-    public void setAccountId(int accountId) {
-        AccountId = accountId;
+    public void setInwardDateinDDMMYYYY(String inwardDateinDDMMYYYY) {
+        InwardDateinDDMMYYYY = inwardDateinDDMMYYYY;
     }
 
-    public String getFirstName() {
-        return FirstName;
+    public String getPaidAmount() {
+        return PaidAmount;
     }
 
-    public void setFirstName(String firstName) {
-        FirstName = firstName;
-    }
-
-    public tech.fraction.webapp.model.Transporter getTransporter() {
-        return Transporter;
-    }
-
-    public void setTransporter(tech.fraction.webapp.model.Transporter transporter) {
-        Transporter = transporter;
-    }
-
-    public tech.fraction.webapp.model.InwardPaidDetail getInwardPaidDetail() {
-        return InwardPaidDetail;
-    }
-
-    public void setInwardPaidDetail(tech.fraction.webapp.model.InwardPaidDetail inwardPaidDetail) {
-        InwardPaidDetail = inwardPaidDetail;
-    }
-
-    public String getMiddleName() {
-        return MiddleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        MiddleName = middleName;
+    public void setPaidAmount(String paidAmount) {
+        PaidAmount = paidAmount;
     }
 
     public List<tech.fraction.webapp.model.InwardItems> getInwardItems() {
@@ -256,11 +155,27 @@ public class InventoryDetail implements Serializable {
         InwardItems = inwardItems;
     }
 
-    public String getPaidAmount() {
-        return PaidAmount;
+    public String getInvoiceMessage() {
+        return InvoiceMessage;
     }
 
-    public void setPaidAmount(String paidAmount) {
-        PaidAmount = paidAmount;
+    public void setInvoiceMessage(String invoiceMessage) {
+        InvoiceMessage = invoiceMessage;
+    }
+
+    public String getColor() {
+        return Color;
+    }
+
+    public void setColor(String color) {
+        Color = color;
+    }
+
+    public Transporter getVehicleDetailModel() {
+        return VehicleDetailModel;
+    }
+
+    public void setVehicleDetailModel(Transporter vehicleDetailModel) {
+        VehicleDetailModel = vehicleDetailModel;
     }
 }

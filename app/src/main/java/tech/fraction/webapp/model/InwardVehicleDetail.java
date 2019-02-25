@@ -7,7 +7,7 @@ public class InwardVehicleDetail implements Serializable {
 
     private String VehicleNo;
 
-    private String TransporterDetail;
+    private String TransporterName;
 
     private String Remarks;
 
@@ -22,11 +22,11 @@ public class InwardVehicleDetail implements Serializable {
     public InwardVehicleDetail() {
     }
 
-    public InwardVehicleDetail(String inwardDetail, String vehicleNo, String transporterDetail, String remarks,
-                               String driverContactNumber, String driverName, int id, int inwardDetailId) {
+    public InwardVehicleDetail(String inwardDetail, String vehicleNo, String transporterName, String remarks, String driverContactNumber,
+                               String driverName, int id, int inwardDetailId) {
         InwardDetail = inwardDetail;
         VehicleNo = vehicleNo;
-        TransporterDetail = transporterDetail;
+        TransporterName = transporterName;
         Remarks = remarks;
         DriverContactNumber = driverContactNumber;
         DriverName = driverName;
@@ -50,12 +50,12 @@ public class InwardVehicleDetail implements Serializable {
         VehicleNo = vehicleNo;
     }
 
-    public String getTransporterDetail() {
-        return TransporterDetail;
+    public String getTransporterName() {
+        return TransporterName;
     }
 
-    public void setTransporterDetail(String transporterDetail) {
-        TransporterDetail = transporterDetail;
+    public void setTransporterName(String transporterName) {
+        TransporterName = transporterName;
     }
 
     public String getRemarks() {

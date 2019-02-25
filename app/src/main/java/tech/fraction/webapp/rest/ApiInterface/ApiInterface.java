@@ -20,8 +20,10 @@ import tech.fraction.webapp.rest.ApiResponseModel.InvoiceResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.InwardResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.ItemResoponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.LoginResponseModel;
+import tech.fraction.webapp.rest.ApiResponseModel.MakeInvoiceAsPaidResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.OutwardItemRespondModel;
 import tech.fraction.webapp.rest.ApiResponseModel.OutwardResponseModel;
+import tech.fraction.webapp.rest.ApiResponseModel.PaymentHistoryResponsModel;
 import tech.fraction.webapp.rest.ApiResponseModel.RackResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.RentResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.SaveInwardResponseModel;
@@ -82,8 +84,21 @@ public interface ApiInterface {
     @POST("master/editoutwarddetail")
     Call<DetailOutwardResponseModel> getOutwardItemDetail(@Query("outwardId") int outwardId, @Query("accountId") int accountId);
 
+    @POST("master/paymenthistory")
+    Call<PaymentHistoryResponsModel> getPaymentHistory(@Query("referenceId") int referenceId, @Query("expanseReasonId") int expanseReasonId);
+
+    @POST("master/markinvoiceasunpaid")
+    Call<MakeInvoiceAsPaidResponseModel> getInvoiceAsUnpaid(@Query("referenceId") int referenceId, @Query("expanseReasonId") int expanseReasonId,
+                                                            @Query("transactionSettlementId") int transactionSettlementId);
+
     @POST("master/saveoutwarddetail")
     Call<SaveOutwardResponseModel> saveOutwardItems(@Body SaveOutwardRequestModel saveOutwardRequestModel);
+
+
+    @POST("master/markinvoiceaspaid")
+    Call<MakeInvoiceAsPaidResponseModel> getInvoiceAsPaid(@Query("referenceId") int referenceId, @Query("expanseReasonId") int expanseReasonId,
+                                                          @Query("amount") Double amount, @Query("isInvoicePartialPaid") boolean isInvoicePartialPaid,
+                                                          @Query("tarnsactionDate") String tarnsactionDate);
 
 
 }

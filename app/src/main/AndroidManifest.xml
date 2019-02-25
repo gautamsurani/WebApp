@@ -15,7 +15,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.ForgotPasswordActivity"></activity>
+        <activity android:name=".activity.PayNowActivity"></activity>
+        <activity android:name=".activity.PaymentHistoryActivity" />
+        <activity android:name=".activity.ForgotPasswordActivity" />
         <activity android:name=".activity.SelectItemForOutwardActivity" />
         <activity android:name=".activity.SelectedOutwardActivity" />
         <activity android:name=".activity.PartyWiseInvoiceActivity" />

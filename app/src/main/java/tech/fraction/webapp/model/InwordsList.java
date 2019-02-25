@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class InwordsList implements Serializable {
-    String name,id,date,charge;
+    String name, id, date, charge;
     List<ProductList> productLists;
 
     public String getName() {

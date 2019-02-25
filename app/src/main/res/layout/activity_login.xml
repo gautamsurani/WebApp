@@ -119,6 +119,7 @@
                         android:background="#00FFFFFF"
                         android:hint="@string/password"
                         android:lines="1"
+                        android:inputType="textPassword"
                         android:paddingLeft="5dp"
                         android:textColor="@color/white"
                         android:textColorHint="@color/hint_color"

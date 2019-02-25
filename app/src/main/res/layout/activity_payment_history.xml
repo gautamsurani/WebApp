@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F8F8"
+    tools:context=".fragment.InwardsListFragment">
+
+    <include
+        android:id="@+id/toolbar_custom"
+        layout="@layout/toolbar" />
+
+    <RelativeLayout
+        android:id="@+id/rl1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_custom">
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_customer"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="12dp"
+                android:padding="5dp"
+                android:src="@drawable/usericon">
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+            <tech.fraction.webapp.ui.MyTextView
+                android:id="@+id/tvPartyName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="13dp"
+                android:layout_toRightOf="@+id/img_customer"
+                android:text="@string/row_name"
+                android:textColor="@color/light_black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll">
+
+            <tech.fraction.webapp.ui.MyTextView
+                android:id="@+id/tvInvNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="65dp"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                android:text="@string/row_invoice_no"
+                android:textColor="@color/light_black"
+                android:textStyle="bold" />
+
+            <tech.fraction.webapp.ui.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="@string/paid_amt" />
+
+            <tech.fraction.webapp.ui.MyBoldTextView
+                android:id="@+id/tvAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/row_unloading_charge" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_one"
+            android:layout_marginTop="5dp">
+
+
+            <tech.fraction.webapp.ui.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="65dp"
+                android:text="Total Amt: " />
+
+            <tech.fraction.webapp.ui.MyBoldTextView
+                android:id="@+id/tvTotalAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/row_unloading_charge"
+                android:textColor="@color/light_black" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/crdView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <tech.fraction.webapp.ui.MyTextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/test"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="@string/payment_history"
+                android:textColor="@color/white" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvPaymentHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTitle"
+
+                />
+
+            <tech.fraction.webapp.ui.MyTextView
+                android:id="@+id/tvNoRecord"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/tvTitle"
+                android:gravity="center"
+                android:text="@string/no_record"
+
+                android:textColor="@color/light_black"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/gradientverlight"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+
+        android:padding="10dp">
+
+        <tech.fraction.webapp.ui.MyTextView
+            android:id="@+id/tvRemainingAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+
+            android:text="@string/total_amount"
+            android:textColor="@color/white" />
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"></View>
+
+        <tech.fraction.webapp.ui.MyTextView
+            android:id="@+id/tvPayNow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/row_pay_now"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="6dp"
+            android:src="@drawable/arrow_right" />
+
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+</RelativeLayout>

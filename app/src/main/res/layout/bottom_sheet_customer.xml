@@ -69,13 +69,13 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:textSize="16sp"
-                android:gravity="center_vertical"
                 android:background="@drawable/border_edittext"
                 android:drawableRight="@drawable/calender"
+                android:gravity="center_vertical"
                 android:hint="@string/from_date"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp" />
+                android:paddingRight="10dp"
+                android:textSize="16sp" />
 
             <tech.fraction.webapp.ui.MyTextView
                 android:id="@+id/tvToDate"
@@ -84,11 +84,11 @@
                 android:layout_weight="1"
                 android:background="@drawable/border_edittext"
                 android:drawableRight="@drawable/calender"
-                android:hint="@string/to_date"
-                android:textSize="16sp"
                 android:gravity="center_vertical"
+                android:hint="@string/to_date"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp" />
+                android:paddingRight="10dp"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -114,8 +114,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/reset_filters"
             android:background="@drawable/textview_underline"
+            android:text="@string/reset_filters"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp" />
 

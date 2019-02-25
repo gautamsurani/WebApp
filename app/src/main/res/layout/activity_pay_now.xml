@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.PayNowActivity">
+
+    <include
+        android:id="@+id/toolbar_custom"
+        layout="@layout/toolbar"></include>
+
+    <LinearLayout
+        android:id="@+id/ll_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_custom"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp">
+
+        <tech.fraction.webapp.ui.MyTextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/remaining_amount"
+            android:textColor="@color/light_black" />
+
+        <tech.fraction.webapp.ui.MyBoldTextView
+            android:id="@+id/tvRemainingAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/row_unloading_charge"
+            android:textColor="@color/light_black" />
+    </LinearLayout>
+
+    <tech.fraction.webapp.ui.MyTextView
+        android:id="@+id/tvFromDate"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/ll_two"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_weight="1"
+        android:background="@drawable/border_edittext"
+        android:drawableRight="@drawable/calender"
+        android:gravity="center_vertical"
+        android:hint="@string/from_date"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="16sp" />
+
+    <RadioGroup
+        android:id="@+id/rgPayment"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvFromDate">
+
+        <RadioButton
+            android:id="@+id/rbFullyPaid"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:button="@drawable/selecter_radio"
+            android:checked="true"
+            android:paddingLeft="7dp"
+            android:text="@string/fully_paid"
+            android:textColor="@color/light_black" />
+
+        <RadioButton
+            android:id="@+id/rbPartiallyPaid"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:button="@drawable/selecter_radio"
+            android:text="@string/partially_paid"
+            android:paddingLeft="7dp"
+            android:textColor="@color/light_black" />
+
+    </RadioGroup>
+
+    <tech.fraction.webapp.ui.MyEditText
+        android:id="@+id/etAmount"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/tvFromDate"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="40dp"
+        android:layout_toRightOf="@+id/rgPayment"
+        android:background="@drawable/border_edittext"
+        android:hint="@string/enter_amount"
+        android:inputType="number"
+        android:paddingLeft="5dp"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:id="@+id/llbtn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/etAmount"
+        android:layout_marginTop="15dp"
+        android:background="#F0EFEF"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <tech.fraction.webapp.ui.MyTextView
+            android:id="@+id/tvSave"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@drawable/mybutton_one"
+            android:gravity="center"
+            android:text="@string/save"
+            android:textColor="@android:color/white" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <tech.fraction.webapp.ui.MyTextView
+            android:id="@+id/tvClose"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+
+            android:background="@drawable/btn_bg_clrlight"
+            android:gravity="center"
+            android:text="@string/close"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+
+</RelativeLayout>

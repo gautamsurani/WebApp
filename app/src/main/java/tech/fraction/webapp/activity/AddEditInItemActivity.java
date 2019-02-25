@@ -31,6 +31,7 @@ import tech.fraction.webapp.SqliteDatabase.model.ItemRent;
 import tech.fraction.webapp.SqliteDatabase.model.Items;
 import tech.fraction.webapp.SqliteDatabase.model.Racks;
 import tech.fraction.webapp.adapter.RacksAdapter;
+import tech.fraction.webapp.base.BaseActivity;
 import tech.fraction.webapp.model.InwardItemLocationPoco;
 import tech.fraction.webapp.model.InwardItems;
 import tech.fraction.webapp.model.SearchTextViewModel;
@@ -42,7 +43,7 @@ import tech.fraction.webapp.rest.RetrofitInstance;
 import tech.fraction.webapp.util.AppConstant;
 import tech.fraction.webapp.util.Utils;
 
-public class AddEditInItemActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddEditInItemActivity extends BaseActivity implements View.OnClickListener {
 
     RecyclerView rec_view;
 
@@ -107,20 +108,23 @@ public class AddEditInItemActivity extends AppCompatActivity implements View.OnC
             selectedPosition = Integer.parseInt(getIntent().getStringExtra("position"));
 
             etQuantity.setText(item.getQuantity() + "");
-            etMarko.setText(item.getMarkoName());
+            // etMarko.setText(item.getMarkoName());
             etUnloadingCharge.setText(item.getUnloadingCharges() + "");
-            selectedRacksList = item.getInwardItemLocationPoco();
+            selectedRacksList = item.getInwardLocationModel();
+            if (selectedRacksList == null) {
+                selectedRacksList = new ArrayList<>();
+            }
             racksAdapter.setList(selectedRacksList);
             racksAdapter.notifyDataSetChanged();
 
-            selectedItems.setId(item.getItemId());
+            // selectedItems.setId(item.getItemId());
             selectedItems.setName(item.getItemName());
             spnItem.setText(item.getItemName());
 
             spnUnit.setText(item.getUnitName());
             etRent.setText(item.getRentPerUnit() + "");
             selectedItemRent.setUnit(item.getUnitName());
-            selectedItemRent.setUnitId(item.getUnitId());
+            // selectedItemRent.setUnitId(item.getUnitId());
             selectedItemRent.setRent(item.getRentPerUnit());
         }
 
@@ -181,16 +185,13 @@ public class AddEditInItemActivity extends AppCompatActivity implements View.OnC
                 itemRacks.clear();
                 for (int i = 0; i < racks.size(); i++) {
                     InwardItemLocationPoco inwardItemLocationPoco = new InwardItemLocationPoco();
-                    inwardItemLocationPoco.setId(racks.get(i).getId());
-                    inwardItemLocationPoco.setRackName(racks.get(i).getName());
                     inwardItemLocationPoco.setRackId(racks.get(i).getId());
-                    inwardItemLocationPoco.setChamberId(racks.get(i).getChamberId());
-                    inwardItemLocationPoco.setFloorId(racks.get(i).getFloorId());
+                    inwardItemLocationPoco.setRackName(racks.get(i).getName());
                     itemRacks.add(inwardItemLocationPoco);
                 }
 
                 for (int i = 0; i < itemRacks.size(); i++) {
-                    searchTextViewModels.add(new SearchTextViewModel(itemRacks.get(i).getId(), itemRacks.get(i).getRackName()));
+                    searchTextViewModels.add(new SearchTextViewModel(itemRacks.get(i).getRackId(), itemRacks.get(i).getRackName()));
                 }
 
                 Intent i = new Intent(AddEditInItemActivity.this, SearchTextViewActivity.class);
@@ -244,44 +245,36 @@ public class AddEditInItemActivity extends AppCompatActivity implements View.OnC
                         rawId = rawId + 1;
                         inwardItem.setRawId(rawId);
                     }
-                    inwardItem.setItemId(selectedItems.getId());
+
                     inwardItem.setItemName(selectedItems.getName());
-                    inwardItem.setUnitId(selectedItemRent.getUnitId());
                     inwardItem.setUnitName(selectedItemRent.getUnit());
                     inwardItem.setRentPerUnit(Double.parseDouble(rentPerUnit));
                     inwardItem.setQuantity(Integer.parseInt(quantity));
-                    inwardItem.setMarkoName(marko);
-                    inwardItem.setAccountId(0);
                     inwardItem.setUnloadingCharges(Integer.parseInt(unloadingCharge));
-                    inwardItem.setInwardItemLocationPoco(selectedRacksList);
-                    inwardItem.setOutwardId(0);
-                    inwardItem.setOutwardDetailId(0);
+                    inwardItem.setInwardLocationModel(selectedRacksList);
+                    inwardItem.setUnitId(selectedItemRent.getUnitId());
+                    inwardItem.setLabel(selectedItems.getName());
+
+
                     inwardItem.setInwardDetailId(0);
-                    inwardItem.setOtherCharges(0);
-                    inwardItem.setTotalOutwardQuantity(0);
-                    inwardItem.setLoadingCharges(0);
-                    inwardItem.setModified(false);
-                    inwardItem.setInwardedOn("12-02-2019");
+
+
                     inwardItem.setStock(0);
-                    inwardItem.setInwardDetail("Inwarded By Aashita");
-                    inwardItem.setInwardDetail(AddEditInwardActivity.inwardNumber);
-                    inwardItem.setWeight(12);
+
                     inwardItem.setLabel("aashu");
-                    inwardItem.setOutwardQuantity(0);
+
                     AddEditInwardActivity.inwardItems.add(inwardItem);
                 } else {
-                    AddEditInwardActivity.inwardItems.get(selectedPosition).setItemId(selectedItems.getId());
+
                     AddEditInwardActivity.inwardItems.get(selectedPosition).setItemName(selectedItems.getName());
-                    AddEditInwardActivity.inwardItems.get(selectedPosition).setUnitId(selectedItemRent.getUnitId());
+
                     AddEditInwardActivity.inwardItems.get(selectedPosition).setUnitName(selectedItemRent.getUnit());
                     AddEditInwardActivity.inwardItems.get(selectedPosition).setRentPerUnit(Double.parseDouble(rentPerUnit));
                     AddEditInwardActivity.inwardItems.get(selectedPosition).setQuantity(Integer.parseInt(quantity));
-                    AddEditInwardActivity.inwardItems.get(selectedPosition).setMarkoName(marko);
-                    if (AddEditInwardActivity.inwardItems.get(selectedPosition).getRawId() == 0) {
-                        AddEditInwardActivity.inwardItems.get(selectedPosition).setModified(true);
-                    }
+
+
                     AddEditInwardActivity.inwardItems.get(selectedPosition).setUnloadingCharges(Integer.parseInt(unloadingCharge));
-                    AddEditInwardActivity.inwardItems.get(selectedPosition).setInwardItemLocationPoco(selectedRacksList);
+                    AddEditInwardActivity.inwardItems.get(selectedPosition).setInwardLocationModel(selectedRacksList);
                 }
                 onBackPressed();
                 break;
@@ -365,7 +358,7 @@ public class AddEditInItemActivity extends AppCompatActivity implements View.OnC
     private void setLocation(SearchTextViewModel searchTextViewModel) {
 
         for (int i = 0; i < itemRacks.size(); i++) {
-            if (searchTextViewModel.getId() == itemRacks.get(i).getId()) {
+            if (searchTextViewModel.getId() == itemRacks.get(i).getRackId()) {
                 selectedRacks = itemRacks.get(i);
             }
         }
@@ -411,10 +404,6 @@ public class AddEditInItemActivity extends AppCompatActivity implements View.OnC
         ImageView ivBack = findViewById(R.id.ivBack);
     }
 
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
 
     @SuppressLint("StaticFieldLeak")
     private class ItemAsync extends AsyncTask<String, String, String> {
@@ -440,6 +429,8 @@ public class AddEditInItemActivity extends AppCompatActivity implements View.OnC
 
             if (!sqLiteHelperFunctions.getTableRecordCount(DbConstants.TABLE_ITEMS_NAME)) {
                 isItemFinished = false;
+
+
                 Call<ItemResoponseModel> call = RetrofitInstance.getApiInterface().getAllItems();
                 call.enqueue(new Callback<ItemResoponseModel>() {
                     @Override

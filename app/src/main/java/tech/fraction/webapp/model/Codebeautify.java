@@ -2,28 +2,29 @@ package tech.fraction.webapp.model;
 
 import java.io.Serializable;
 
-public class Codebeautify  implements Serializable {
- Paging PagingObject;
- SearchField SearchFieldObject;
+public class Codebeautify implements Serializable {
+    Paging PagingObject;
+
+    SearchField SearchFieldObject;
 
 
- // Getter Methods 
+    // Getter Methods
 
- public Paging getPaging() {
-  return PagingObject;
- }
+    public Paging getPaging() {
+        return PagingObject;
+    }
 
- public SearchField getSearchField() {
-  return SearchFieldObject;
- }
+    public SearchField getSearchField() {
+        return SearchFieldObject;
+    }
 
- // Setter Methods 
+    // Setter Methods
 
- public void setPaging(Paging pagingObject) {
-  this.PagingObject = pagingObject;
- }
+    public void setPaging(Paging pagingObject) {
+        this.PagingObject = pagingObject;
+    }
 
- public void setSearchField(SearchField searchFieldObject) {
-  this.SearchFieldObject = searchFieldObject;
- }
+    public void setSearchField(SearchField searchFieldObject) {
+        this.SearchFieldObject = searchFieldObject;
+    }
 }

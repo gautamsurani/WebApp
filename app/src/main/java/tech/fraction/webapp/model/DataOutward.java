@@ -17,11 +17,11 @@ public class DataOutward implements Serializable {
         Outwards = outwards;
     }
 
-    public tech.fraction.webapp.model.Paging getPaging() {
+    public Paging getPaging() {
         return Paging;
     }
 
-    public void setPaging(tech.fraction.webapp.model.Paging paging) {
+    public void setPaging(Paging paging) {
         Paging = paging;
     }
 }
