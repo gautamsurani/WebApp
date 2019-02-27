@@ -107,8 +107,8 @@ public class SelectedOutwardActivity extends AppCompatActivity implements View.O
                     window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
                     openDialog.setTitle("Custom Dialog Box");
-                    TextView tvOkay = (TextView) openDialog.findViewById(R.id.tvOkay);
-                    TextView tvMessage = (TextView) openDialog.findViewById(R.id.tvMessage);
+                    TextView tvOkay = openDialog.findViewById(R.id.tvOkay);
+                    TextView tvMessage = openDialog.findViewById(R.id.tvMessage);
                     tvMessage.setText(message + " outward Quantity is 0 " + "\n" + "Please add Outward Quantity or Delete the item");
                     tvOkay.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -130,8 +130,8 @@ public class SelectedOutwardActivity extends AppCompatActivity implements View.O
                         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
                         openDialog.setTitle("Custom Dialog Box");
-                        TextView tvOkay = (TextView) openDialog.findViewById(R.id.tvOkay);
-                        TextView tvMessage = (TextView) openDialog.findViewById(R.id.tvMessage);
+                        TextView tvOkay = openDialog.findViewById(R.id.tvOkay);
+                        TextView tvMessage = openDialog.findViewById(R.id.tvMessage);
                         tvMessage.setText("Please Add Outward Item or click on Close");
                         tvOkay.setOnClickListener(new View.OnClickListener() {
                             @Override

@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 import tech.fraction.webapp.R;
 import tech.fraction.webapp.activity.AddEditOutwardActivity;
 import tech.fraction.webapp.activity.MainActivity;
@@ -34,7 +33,6 @@ import tech.fraction.webapp.base.BaseFragment;
 import tech.fraction.webapp.base.NoNetworkActivity;
 import tech.fraction.webapp.model.InventoryDetailOutward;
 import tech.fraction.webapp.model.PersonInformation;
-import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
 import tech.fraction.webapp.rest.ApiRequestModel.OutwardRequestModel;
 import tech.fraction.webapp.rest.ApiResponseModel.OutwardResponseModel;
 import tech.fraction.webapp.rest.RetrofitInstance;
@@ -183,7 +181,6 @@ public class OutwardListFragment extends BaseFragment {
             callGetOutwardAPI();
         }
 
-
         MainActivity.setOnFilterOutwardApplyClickListener(new MainActivity.OnFilterOutwardListener() {
             @Override
             public void onFilterApplyClickOutward(String broker, String outwardNo, String inwardNo, String item, String unit, String location,
@@ -204,7 +201,6 @@ public class OutwardListFragment extends BaseFragment {
                 } else {
                     callGetOutwardAPI();
                 }
-
             }
         });
         return view;
