@@ -382,21 +382,22 @@ public class AddEditInwardActivity extends BaseActivity implements View.OnClickL
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == AppConstant.SEARCH_ACTIVITY_REQUEST_CODE)
+        if (requestCode == AppConstant.SEARCH_ACTIVITY_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 String type = data.getStringExtra("type");
                 if (type.equals("party")) {
                     SearchTextViewModel searchTextViewModel = (SearchTextViewModel) data.getSerializableExtra("search");
                     setParty(searchTextViewModel);
                 }
-            } else if (requestCode == NO_NETWORK_REQUEST_CODE) {
-                if (resultCode == Activity.RESULT_OK) {
-                    String extraValue = data.getStringExtra("extraValue");
-                    if (extraValue.equalsIgnoreCase("CallAddInwardApi")) {
-                        CallAddInwardApi();
-                    }
+            }
+        } else if (requestCode == NO_NETWORK_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                String extraValue = data.getStringExtra("extraValue");
+                if (extraValue.equalsIgnoreCase("CallAddInwardApi")) {
+                    CallAddInwardApi();
                 }
             }
+        }
     }
 
     private void setParty(SearchTextViewModel searchTextViewModel) {

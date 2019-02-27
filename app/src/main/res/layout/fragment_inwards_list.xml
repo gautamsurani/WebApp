@@ -63,10 +63,10 @@
         android:layout_marginBottom="25dp"
         android:background="@drawable/btn_login_bg"
         app:mrl_rippleColor="@color/ripple_btn"
-        app:mrl_rippleDimension="25dp"
+        app:mrl_rippleDimension="28dp"
         app:mrl_rippleDuration="700"
         app:mrl_rippleOverlay="true"
-        app:mrl_rippleRoundedCorners="25dp">
+        app:mrl_rippleRoundedCorners="28dp">
 
 
         <android.support.design.widget.FloatingActionButton

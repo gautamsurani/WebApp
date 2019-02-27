@@ -97,7 +97,10 @@ public class InwordsAdapter extends RecyclerView.Adapter<InwordsAdapter.ViewHold
         if (paidStatus.equalsIgnoreCase("f")) {
             holder.tvPayNow.setText("View Pay History");
             holder.tvPayNow.setVisibility(View.VISIBLE);
-        } else if (paidStatus.equalsIgnoreCase("p") || paidStatus.equalsIgnoreCase("z")) {
+        } else if (paidStatus.equalsIgnoreCase("p") ) {
+            holder.tvPayNow.setText("Patially Pay Now");
+            holder.tvPayNow.setVisibility(View.VISIBLE);
+        } else if ( paidStatus.equalsIgnoreCase("n")) {
             holder.tvPayNow.setText("Pay Now");
             holder.tvPayNow.setVisibility(View.VISIBLE);
 
