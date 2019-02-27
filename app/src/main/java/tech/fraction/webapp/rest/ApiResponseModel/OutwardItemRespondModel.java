@@ -5,6 +5,7 @@ import java.io.Serializable;
 import tech.fraction.webapp.model.DataOutwardItem;
 
 public class OutwardItemRespondModel implements Serializable {
+
     private String Message;
 
     private DataOutwardItem Data;

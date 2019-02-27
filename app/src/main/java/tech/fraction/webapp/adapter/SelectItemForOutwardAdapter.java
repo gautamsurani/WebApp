@@ -21,7 +21,9 @@ import tech.fraction.webapp.model.OutwardDetails;
 public class SelectItemForOutwardAdapter extends RecyclerView.Adapter<SelectItemForOutwardAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
+
     private List<OutwardDetails> outwardDetails = new ArrayList<>();
+
     private Context context;
 
     public SelectItemForOutwardAdapter(Context context) {

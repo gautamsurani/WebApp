@@ -22,7 +22,9 @@ public class InvoiceProductAdapter extends RecyclerView.Adapter<InvoiceProductAd
 
 
     private LayoutInflater inflater;
+
     private List<InvoiceDetails> invoiceProductList = new ArrayList<>();
+
     private Context context;
 
 
@@ -62,7 +64,8 @@ public class InvoiceProductAdapter extends RecyclerView.Adapter<InvoiceProductAd
 
         viewHolder.tvItemName.setText(invoiceProductList.get(position).getItemName() + invoiceProductList.get(position).getWeight());
         viewHolder.tvItemPrice.setText(String.format("%.2f", invoiceProductList.get(position).getTotalAmount()) + context.getResources().getString(R.string.rs));
-        viewHolder.tvDate.setText(Utils.FormatDate(invoiceProductList.get(position).getFromDate()) + " to " + Utils.FormatDate(invoiceProductList.get(position).getToDate()));
+        viewHolder.tvDate.setText(Utils.FormatDate(invoiceProductList.get(position).getFromDate()) + " to " +
+                Utils.FormatDate(invoiceProductList.get(position).getToDate()));
         viewHolder.recRowProductInvoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

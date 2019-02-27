@@ -58,6 +58,7 @@ public class SqLiteHelperFunctions extends SQLiteOpenHelper {
     }
 
     /* ============================================== method Country table=======================================================================================*/
+
     public boolean insertCountry(Country contry) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -95,6 +96,7 @@ public class SqLiteHelperFunctions extends SQLiteOpenHelper {
     }
 
     /* ==============================================common method=======================================================================================*/
+
     public boolean getTableRecordCount(String Table_Name) {
         SQLiteDatabase db = this.getReadableDatabase();
         String countQuery = "SELECT  * FROM " + Table_Name;
@@ -118,6 +120,7 @@ public class SqLiteHelperFunctions extends SQLiteOpenHelper {
     }
 
     /*=====================================================method of state table===============================================================*/
+
     public boolean insertState(State state) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -158,6 +161,7 @@ public class SqLiteHelperFunctions extends SQLiteOpenHelper {
     }
 
     /* ============================================== method of city table=======================================================================================*/
+
     public boolean insertCity(City city) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -201,6 +205,7 @@ public class SqLiteHelperFunctions extends SQLiteOpenHelper {
     }
 
     /* ============================================== method of unit table=======================================================================================*/
+
     public boolean insertUnits(Units units) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -233,6 +238,7 @@ public class SqLiteHelperFunctions extends SQLiteOpenHelper {
     }
 
     /* ============================================== method of racks table=======================================================================================*/
+
     public boolean insertRacks(Racks racks) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -272,6 +278,7 @@ public class SqLiteHelperFunctions extends SQLiteOpenHelper {
     }
 
     /* ============================================== method of chamber table=======================================================================================*/
+
     public boolean insertChamber(Chamber chamber) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -308,6 +315,7 @@ public class SqLiteHelperFunctions extends SQLiteOpenHelper {
     }
 
     /* ============================================== method of Item table=======================================================================================*/
+
     public boolean insertItems(Items items) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -345,6 +353,7 @@ public class SqLiteHelperFunctions extends SQLiteOpenHelper {
     }
 
     /* ============================================== method of chamber table=======================================================================================*/
+
     public boolean insertItemRent(ItemRent itemRent) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();

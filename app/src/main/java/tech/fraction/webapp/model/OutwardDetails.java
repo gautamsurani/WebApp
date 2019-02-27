@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OutwardDetails implements Serializable {
+
+
+  private int OutwardId;
+
+
     private ArrayList<InwardItemLocationPoco> InwardItemLocationPoco;
 
     private int AccountId;
@@ -17,7 +22,6 @@ public class OutwardDetails implements Serializable {
 
     private String OutwardDetails;
 
-    private int OutwardId;
 
     private int UnitId;
 

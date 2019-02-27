@@ -25,8 +25,11 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
 
 
     private LayoutInflater inflater;
+
     private List<Invoices> invoiceList = new ArrayList<Invoices>();
+
     private Context context;
+
     private InvoiceProductAdapter invoiceProductAdapter;
 
 

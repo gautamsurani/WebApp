@@ -2,10 +2,11 @@ package tech.fraction.webapp.model;
 
 import java.io.Serializable;
 
-public class SearchTextViewModel implements Serializable
-{
-    int id;
-    String name ;
+public class SearchTextViewModel implements Serializable {
+
+    private int id;
+
+    private String name;
 
     public SearchTextViewModel(int id, String name) {
         this.id = id;

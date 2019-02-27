@@ -2,6 +2,8 @@ package tech.fraction.webapp.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,12 +19,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tech.fraction.webapp.R;
+import tech.fraction.webapp.activity.PaymentHistoryActivity;
 import tech.fraction.webapp.model.InventoryDetail;
 
 public class InwordsAdapter extends RecyclerView.Adapter<InwordsAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
+
     private List<InventoryDetail> inventoryDetails = new ArrayList<>();
+
     private Context context;
 
     private OnClickListener onClickListener;
@@ -53,7 +58,7 @@ public class InwordsAdapter extends RecyclerView.Adapter<InwordsAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-        InventoryDetail inventoryDetail = inventoryDetails.get(position);
+        final InventoryDetail inventoryDetail = inventoryDetails.get(position);
 
         ProductAdapter productAdapter = new ProductAdapter(context);
         productAdapter.setList(inventoryDetail.getInwardItems());
@@ -78,14 +83,36 @@ public class InwordsAdapter extends RecyclerView.Adapter<InwordsAdapter.ViewHold
         String s = nf.format(d2);
 
         holder.tvAmount.setText(" " + context.getResources().getString(R.string.rs) + s);
-        holder.tvDate.setText(inventoryDetail.getInwardedOn().substring(0, inventoryDetail.getInwardedOn().indexOf("T")));
+        holder.tvDate.setText(inventoryDetail.getInwardDateinDDMMYYYY());
 
-        boolean paidStatus = inventoryDetail.isInvoicePaid();
-        if (paidStatus) {
-            holder.tvPayNow.setText("View Pay History");
+        if (!inventoryDetails.get(position).getInvoiceMessage().isEmpty() && !inventoryDetails.get(position).getColor().isEmpty()) {
+            holder.tvInvoiceDue.setTextColor(Color.parseColor(inventoryDetails.get(position).getColor()));
+            holder.tvInvoiceDue.setText(inventoryDetails.get(position).getInvoiceMessage());
+            holder.tvInvoiceDue.setVisibility(View.VISIBLE);
         } else {
-            holder.tvPayNow.setText("Pay Now");
+            holder.tvInvoiceDue.setVisibility(View.GONE);
         }
+        /*TO  DO change paynow  button according to paid status*/
+        String paidStatus = inventoryDetail.getPaidStatus();
+        if (paidStatus.equalsIgnoreCase("f")) {
+            holder.tvPayNow.setText("View Pay History");
+            holder.tvPayNow.setVisibility(View.VISIBLE);
+        } else if (paidStatus.equalsIgnoreCase("p") || paidStatus.equalsIgnoreCase("z")) {
+            holder.tvPayNow.setText("Pay Now");
+            holder.tvPayNow.setVisibility(View.VISIBLE);
+
+        } else {
+            holder.tvPayNow.setVisibility(View.GONE);
+        }
+
+        holder.tvPayNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PaymentHistoryActivity.class);
+                intent.putExtra("inwardId", inventoryDetail.getInwardDetailId());
+                context.startActivity(intent);
+            }
+        });
 
         holder.rlMain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,7 +135,7 @@ public class InwordsAdapter extends RecyclerView.Adapter<InwordsAdapter.ViewHold
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvName, tvInwardNo, tvDate, tvAmount, tvPayNow;
+        TextView tvName, tvInwardNo, tvDate, tvAmount, tvPayNow, tvInvoiceDue;
         RelativeLayout rlMain;
         RecyclerView rvProduct;
 
@@ -121,6 +148,7 @@ public class InwordsAdapter extends RecyclerView.Adapter<InwordsAdapter.ViewHold
             tvDate = item.findViewById(R.id.tvDate);
             tvAmount = item.findViewById(R.id.tvAmount);
             tvPayNow = item.findViewById(R.id.tvPayNow);
+            tvInvoiceDue = item.findViewById(R.id.tvInvoiceDue);
         }
     }
 }

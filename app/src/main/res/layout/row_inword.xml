@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -7,6 +8,17 @@
     android:layout_marginBottom="5dp"
     app:cardCornerRadius="0dp"
     app:cardElevation="2dp">
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/ripbtnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_two"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/btn_login_bg"
+        app:mrl_rippleColor="#111111"
+        app:mrl_rippleDuration="600"
+        app:mrl_rippleOverlay="true"
+       >
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/rlMain"
@@ -74,6 +86,7 @@
                 android:paddingRight="5dp" />
 
             <tech.fraction.webapp.ui.MyTextView
+                android:id="@+id/tvInvoiceDue"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:drawableLeft="@drawable/ic_time_black_24dp"
@@ -129,8 +142,8 @@
                 android:paddingTop="5dp"
                 android:paddingRight="10dp"
                 android:paddingBottom="5dp"
-                android:visibility="gone"
-                android:text="Pay Now"
+                android:visibility="visible"
+                android:text="@string/row_pay_now"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
@@ -139,4 +152,5 @@
 
 
     </RelativeLayout>
+    </com.balysv.materialripple.MaterialRippleLayout>
 </android.support.v7.widget.CardView>

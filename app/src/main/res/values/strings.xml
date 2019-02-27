@@ -132,6 +132,16 @@
     <string name="row_search">gfdggfg</string>
 
 
+    <string name="remaining_amount">Remaining Amount: </string>
+    <string name="fully_paid">Fully Paid</string>
+    <string name="partially_paid">Partially Paid</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="paid_amt">Paid Amt: </string>
+    <string name="total_amt">Total Amt: </string>
+    <string name="payment_history">Payment History</string>
+    <string name="no_record">No Record Found...!!</string>
+    <string name="total_amount">Total Amount: 2500</string>
+
 
 
 

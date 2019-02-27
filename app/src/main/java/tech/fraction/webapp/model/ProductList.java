@@ -3,7 +3,7 @@ package tech.fraction.webapp.model;
 import java.io.Serializable;
 
 public class ProductList implements Serializable {
-    String name,count;
+    String name, count;
 
     public ProductList() {
     }

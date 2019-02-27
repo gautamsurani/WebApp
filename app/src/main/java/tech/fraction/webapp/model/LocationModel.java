@@ -7,7 +7,7 @@ public class LocationModel implements Serializable {
     String id;
     String name;
 
-    public LocationModel(String id,String name) {
+    public LocationModel(String id, String name) {
         this.name = name;
     }
 

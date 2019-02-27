@@ -3,9 +3,13 @@ package tech.fraction.webapp.SqliteDatabase.model;
 import java.io.Serializable;
 
 public class Items implements Serializable {
+
     int id;
+
     String name;
+
     String billingType;
+
     String status;
 
     public int getId() {

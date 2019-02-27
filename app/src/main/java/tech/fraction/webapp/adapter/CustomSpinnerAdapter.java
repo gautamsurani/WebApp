@@ -13,8 +13,11 @@ import tech.fraction.webapp.R;
 import tech.fraction.webapp.model.LocationModel;
 
 public class CustomSpinnerAdapter extends BaseAdapter {
+
     Context context;
+
     LayoutInflater inflter;
+
     ArrayList<LocationModel> locationList;
 
     public CustomSpinnerAdapter(Context context, ArrayList<LocationModel> locationList) {

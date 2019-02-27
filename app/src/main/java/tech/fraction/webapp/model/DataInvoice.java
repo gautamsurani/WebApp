@@ -9,11 +9,11 @@ public class DataInvoice implements Serializable {
 
     private ArrayList<PersonInformationInvoice> PersonInformation;
 
-    public tech.fraction.webapp.model.Paging getPaging() {
+    public Paging getPaging() {
         return Paging;
     }
 
-    public void setPaging(tech.fraction.webapp.model.Paging paging) {
+    public void setPaging(Paging paging) {
         Paging = paging;
     }
 

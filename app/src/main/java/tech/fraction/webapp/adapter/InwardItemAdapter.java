@@ -21,9 +21,13 @@ import tech.fraction.webapp.model.InwardItems;
 public class InwardItemAdapter extends RecyclerView.Adapter<InwardItemAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
+
     private List<InwardItems> inwardItems = new ArrayList<>();
+
     private Context context;
+
     private boolean isEditable;
+
     private OnClickListener onClickListener;
 
     public void setOnItemClickListener(OnClickListener onClickListener) {
@@ -63,11 +67,13 @@ public class InwardItemAdapter extends RecyclerView.Adapter<InwardItemAdapter.Vi
         holder.tvName.setText(items.getItemName());
 
         String location = "";
-        for (int i = 0; i < items.getInwardItemLocationPoco().size(); i++) {
-            if (location.isEmpty()) {
-                location = " " + items.getInwardItemLocationPoco().get(i).getRackName();
-            } else {
-                location = location + ", " + items.getInwardItemLocationPoco().get(i).getRackName();
+        if (items.getInwardLocationModel() != null) {
+            for (int i = 0; i < items.getInwardLocationModel().size(); i++) {
+                if (location.isEmpty()) {
+                    location = " " + items.getInwardLocationModel().get(i).getRackName();
+                } else {
+                    location = location + ", " + items.getInwardLocationModel().get(i).getRackName();
+                }
             }
         }
 

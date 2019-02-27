@@ -20,8 +20,10 @@ import tech.fraction.webapp.rest.ApiResponseModel.InvoiceResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.InwardResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.ItemResoponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.LoginResponseModel;
+import tech.fraction.webapp.rest.ApiResponseModel.MakeInvoiceAsPaidResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.OutwardItemRespondModel;
 import tech.fraction.webapp.rest.ApiResponseModel.OutwardResponseModel;
+import tech.fraction.webapp.rest.ApiResponseModel.PaymentHistoryResponsModel;
 import tech.fraction.webapp.rest.ApiResponseModel.RackResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.RentResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.SaveInwardResponseModel;
@@ -34,7 +36,7 @@ public interface ApiInterface {
     @POST("master/login")
     Call<LoginResponseModel> doLogin(@Query("Email") String email, @Query("Password") String password);
 
-    @POST("master/InwradsWithPaging")
+    @POST("master/inwards")
     Call<InwardResponseModel> getInward(@Body InwardRequestModel inwardRequestModel);
 
     @POST("inwradswithpaging")
@@ -64,10 +66,10 @@ public interface ApiInterface {
     @GET("master/GetRacks")
     Call<RackResponseModel> getAllRacks();
 
-    @POST("master/OutwardsWithPaging")
+    @POST("master/outwards")
     Call<OutwardResponseModel> getAllOutward(@Body OutwardRequestModel outwardRequestModel);
 
-    @POST("master/SaveInwardDetail")
+    @POST("master/saveinwards")
     Call<SaveInwardResponseModel> saveInward(@Body SaveInwardRequestModel saveInwardRequestModel);
 
     @POST("master/invoiceswithpaging")
@@ -76,14 +78,27 @@ public interface ApiInterface {
     @POST("master/loadoutwarditemdetails")
     Call<OutwardItemRespondModel> getOutwardItem(@Query("accountId") int accountId);
 
-    @POST("master/editinwards")
+    @POST("master/inwarddetail")
     Call<DetailInwardResponseModel> getInwardItemDetail(@Query("inwardDetailId") int inwardDetailId, @Query("accountId") int accountId);
 
     @POST("master/editoutwarddetail")
     Call<DetailOutwardResponseModel> getOutwardItemDetail(@Query("outwardId") int outwardId, @Query("accountId") int accountId);
 
+    @POST("master/paymenthistory")
+    Call<PaymentHistoryResponsModel> getPaymentHistory(@Query("referenceId") int referenceId, @Query("expanseReasonId") int expanseReasonId);
+
+    @POST("master/markinvoiceasunpaid")
+    Call<MakeInvoiceAsPaidResponseModel> getInvoiceAsUnpaid(@Query("referenceId") int referenceId, @Query("expanseReasonId") int expanseReasonId,
+                                                            @Query("transactionSettlementId") int transactionSettlementId);
+
     @POST("master/saveoutwarddetail")
     Call<SaveOutwardResponseModel> saveOutwardItems(@Body SaveOutwardRequestModel saveOutwardRequestModel);
+
+
+    @POST("master/markinvoiceaspaid")
+    Call<MakeInvoiceAsPaidResponseModel> getInvoiceAsPaid(@Query("referenceId") int referenceId, @Query("expanseReasonId") int expanseReasonId,
+                                                          @Query("amount") Double amount, @Query("isInvoicePartialPaid") boolean isInvoicePartialPaid,
+                                                          @Query("tarnsactionDate") String tarnsactionDate);
 
 
 }

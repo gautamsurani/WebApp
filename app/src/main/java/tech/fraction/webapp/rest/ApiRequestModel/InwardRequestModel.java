@@ -3,6 +3,7 @@ package tech.fraction.webapp.rest.ApiRequestModel;
 import java.io.Serializable;
 
 public class InwardRequestModel implements Serializable {
+
     private int totalRecords;
 
     private int pageSize;

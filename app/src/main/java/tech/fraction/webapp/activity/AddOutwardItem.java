@@ -10,23 +10,20 @@ import tech.fraction.webapp.R;
 public class AddOutwardItem extends AppCompatActivity implements View.OnClickListener {
 
     ImageView ivBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_outward_item);
-        ivBack=findViewById(R.id.ivBack);
-
+        ivBack = findViewById(R.id.ivBack);
         ivBack.setOnClickListener(this);
     }
 
     public void onClick(View v) {
         int id = v.getId();
-        switch (id){
+        switch (id) {
             case R.id.ivBack:
-
                 onBackPressed();
-
-
             default:
 
         }

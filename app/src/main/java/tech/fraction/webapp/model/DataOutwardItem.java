@@ -5,13 +5,13 @@ import java.util.List;
 
 public class DataOutwardItem implements Serializable {
 
-    private List<OutwardDetails> OutwardDetails;
+    private List<OutwardDetails> Outwards;
 
     public List<OutwardDetails> getOutwardDetails() {
-        return OutwardDetails;
+        return Outwards;
     }
 
     public void setOutwardDetails(List<OutwardDetails> outwardDetails) {
-        OutwardDetails = outwardDetails;
+        Outwards = outwardDetails;
     }
 }

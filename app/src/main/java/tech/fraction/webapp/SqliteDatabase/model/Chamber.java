@@ -5,7 +5,9 @@ import java.io.Serializable;
 public class Chamber implements Serializable {
 
     int id;
+
     String name;
+
     String status;
 
     public int getId() {

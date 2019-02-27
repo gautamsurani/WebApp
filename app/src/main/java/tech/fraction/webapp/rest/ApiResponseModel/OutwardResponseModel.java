@@ -9,6 +9,7 @@ import tech.fraction.webapp.model.InventoryDetailOutward;
 import tech.fraction.webapp.model.Paging;
 
 public class OutwardResponseModel implements Serializable {
+
     private String Message;
 
     private DataOutward Data;

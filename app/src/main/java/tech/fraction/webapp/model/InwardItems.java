@@ -5,69 +5,178 @@ import java.util.List;
 
 
 public class InwardItems implements Serializable {
-    private int OutwardId;
 
-    private int InwardDetailId;
+    private int InwardItemDetailId;
 
-    private int OtherCharges;
+    private List<InwardItemLocationPoco> InwardLocationModel;
 
-    private int TotalOutwardQuantity;
+    private String RackName;
 
-    private int LoadingCharges;
+    private String Label;
 
     private String ItemName;
-
-    private boolean IsModified;
-
-    private int RawId;
-
-    private String InwardedOn;
-
-    private int UnitId;
-
-    private int Stock;
-
-    private int OutwardDetailId;
-
-    private int UnloadingCharges;
 
     private int Quantity;
 
     private String UnitName;
 
-    private String InwardDetail;
+    private int InwardDetailId;
 
-    private String MarkoName;
+    private int Stock;
 
-    private String InwardNo;
+    private int RawId;
 
-    private int Weight;
+    private int UnitId;
 
-    private String Label;
+    private int Id;
 
-    private int AccountId;
+    private int UnloadingCharges;
 
     private int ItemId;
 
     private Double RentPerUnit;
 
+    /*fields added for inward Detail Api*/
     private String OutwardDetails;
 
-    private int OutwardQuantity;
+    private int OutwardId;
 
-    private List<InwardItemLocationPoco> InwardItemLocationPoco;
-     private String Location;
+    private int AccountId;
 
-    private int InwardItemDetailId;
+    private String InwardNo;
 
-    private int OutwardWeight;
+    private String InwardedOn;
 
-    public List<InwardItemLocationPoco> getInwardItemLocationPoco() {
-        return InwardItemLocationPoco;
+    private int OutwardDetailId;
+
+    private int TotalOutwardQuantity;
+
+    private boolean IsModified;
+
+    private int Weight;
+
+    private int LoadingCharges;
+
+    private String InwardDetail;
+
+    private String OutwardQuantity;
+
+    private String OtherCharges;
+
+    private String OutwardWeight;
+
+    private String Location;
+
+    public String getOutwardDetails() {
+        return OutwardDetails;
     }
 
-    public void setInwardItemLocationPoco(List<InwardItemLocationPoco> inwardItemLocationPoco) {
-        InwardItemLocationPoco = inwardItemLocationPoco;
+    public void setOutwardDetails(String outwardDetails) {
+        OutwardDetails = outwardDetails;
+    }
+
+    public int getOutwardId() {
+        return OutwardId;
+    }
+
+    public void setOutwardId(int outwardId) {
+        OutwardId = outwardId;
+    }
+
+    public int getAccountId() {
+        return AccountId;
+    }
+
+    public void setAccountId(int accountId) {
+        AccountId = accountId;
+    }
+
+    public String getInwardNo() {
+        return InwardNo;
+    }
+
+    public void setInwardNo(String inwardNo) {
+        InwardNo = inwardNo;
+    }
+
+    public String getInwardedOn() {
+        return InwardedOn;
+    }
+
+    public void setInwardedOn(String inwardedOn) {
+        InwardedOn = inwardedOn;
+    }
+
+    public int getOutwardDetailId() {
+        return OutwardDetailId;
+    }
+
+    public void setOutwardDetailId(int outwardDetailId) {
+        OutwardDetailId = outwardDetailId;
+    }
+
+    public int getTotalOutwardQuantity() {
+        return TotalOutwardQuantity;
+    }
+
+    public void setTotalOutwardQuantity(int totalOutwardQuantity) {
+        TotalOutwardQuantity = totalOutwardQuantity;
+    }
+
+    public boolean isModified() {
+        return IsModified;
+    }
+
+    public void setModified(boolean modified) {
+        IsModified = modified;
+    }
+
+    public int getWeight() {
+        return Weight;
+    }
+
+    public void setWeight(int weight) {
+        Weight = weight;
+    }
+
+    public int getLoadingCharges() {
+        return LoadingCharges;
+    }
+
+    public void setLoadingCharges(int loadingCharges) {
+        LoadingCharges = loadingCharges;
+    }
+
+    public String getInwardDetail() {
+        return InwardDetail;
+    }
+
+    public void setInwardDetail(String inwardDetail) {
+        InwardDetail = inwardDetail;
+    }
+
+    public String getOutwardQuantity() {
+        return OutwardQuantity;
+    }
+
+    public void setOutwardQuantity(String outwardQuantity) {
+        OutwardQuantity = outwardQuantity;
+    }
+
+    public String getOtherCharges() {
+        return OtherCharges;
+    }
+
+    public void setOtherCharges(String otherCharges) {
+        OtherCharges = otherCharges;
+    }
+
+    public String getOutwardWeight() {
+        return OutwardWeight;
+    }
+
+    public void setOutwardWeight(String outwardWeight) {
+        OutwardWeight = outwardWeight;
     }
 
     public String getLocation() {
@@ -86,52 +195,28 @@ public class InwardItems implements Serializable {
         InwardItemDetailId = inwardItemDetailId;
     }
 
-    public int getOutwardWeight() {
-        return OutwardWeight;
+    public List<InwardItemLocationPoco> getInwardLocationModel() {
+        return InwardLocationModel;
     }
 
-    public void setOutwardWeight(int outwardWeight) {
-        OutwardWeight = outwardWeight;
+    public void setInwardLocationModel(List<InwardItemLocationPoco> inwardLocationModel) {
+        InwardLocationModel = inwardLocationModel;
     }
 
-    public int getOutwardId() {
-        return OutwardId;
+    public String getRackName() {
+        return RackName;
     }
 
-    public void setOutwardId(int outwardId) {
-        OutwardId = outwardId;
+    public void setRackName(String rackName) {
+        RackName = rackName;
     }
 
-    public int getInwardDetailId() {
-        return InwardDetailId;
+    public String getLabel() {
+        return Label;
     }
 
-    public void setInwardDetailId(int inwardDetailId) {
-        InwardDetailId = inwardDetailId;
-    }
-
-    public int getOtherCharges() {
-        return OtherCharges;
-    }
-
-    public void setOtherCharges(int otherCharges) {
-        OtherCharges = otherCharges;
-    }
-
-    public int getTotalOutwardQuantity() {
-        return TotalOutwardQuantity;
-    }
-
-    public void setTotalOutwardQuantity(int totalOutwardQuantity) {
-        TotalOutwardQuantity = totalOutwardQuantity;
-    }
-
-    public int getLoadingCharges() {
-        return LoadingCharges;
-    }
-
-    public void setLoadingCharges(int loadingCharges) {
-        LoadingCharges = loadingCharges;
+    public void setLabel(String label) {
+        Label = label;
     }
 
     public String getItemName() {
@@ -140,62 +225,6 @@ public class InwardItems implements Serializable {
 
     public void setItemName(String itemName) {
         ItemName = itemName;
-    }
-
-    public boolean isModified() {
-        return IsModified;
-    }
-
-    public void setModified(boolean modified) {
-        IsModified = modified;
-    }
-
-    public int getRawId() {
-        return RawId;
-    }
-
-    public void setRawId(int rawId) {
-        RawId = rawId;
-    }
-
-    public String getInwardedOn() {
-        return InwardedOn;
-    }
-
-    public void setInwardedOn(String inwardedOn) {
-        InwardedOn = inwardedOn;
-    }
-
-    public int getUnitId() {
-        return UnitId;
-    }
-
-    public void setUnitId(int unitId) {
-        UnitId = unitId;
-    }
-
-    public int getStock() {
-        return Stock;
-    }
-
-    public void setStock(int stock) {
-        Stock = stock;
-    }
-
-    public int getOutwardDetailId() {
-        return OutwardDetailId;
-    }
-
-    public void setOutwardDetailId(int outwardDetailId) {
-        OutwardDetailId = outwardDetailId;
-    }
-
-    public int getUnloadingCharges() {
-        return UnloadingCharges;
-    }
-
-    public void setUnloadingCharges(int unloadingCharges) {
-        UnloadingCharges = unloadingCharges;
     }
 
     public int getQuantity() {
@@ -214,52 +243,52 @@ public class InwardItems implements Serializable {
         UnitName = unitName;
     }
 
-    public String getInwardDetail() {
-        return InwardDetail;
+    public int getInwardDetailId() {
+        return InwardDetailId;
     }
 
-    public void setInwardDetail(String inwardDetail) {
-        InwardDetail = inwardDetail;
+    public void setInwardDetailId(int inwardDetailId) {
+        InwardDetailId = inwardDetailId;
     }
 
-    public String getMarkoName() {
-        return MarkoName;
+    public int getStock() {
+        return Stock;
     }
 
-    public void setMarkoName(String markoName) {
-        MarkoName = markoName;
+    public void setStock(int stock) {
+        Stock = stock;
     }
 
-    public String getInwardNo() {
-        return InwardNo;
+    public int getRawId() {
+        return RawId;
     }
 
-    public void setInwardNo(String inwardNo) {
-        InwardNo = inwardNo;
+    public void setRawId(int rawId) {
+        RawId = rawId;
     }
 
-    public int getWeight() {
-        return Weight;
+    public int getUnitId() {
+        return UnitId;
     }
 
-    public void setWeight(int weight) {
-        Weight = weight;
+    public void setUnitId(int unitId) {
+        UnitId = unitId;
     }
 
-    public String getLabel() {
-        return Label;
+    public int getId() {
+        return Id;
     }
 
-    public void setLabel(String label) {
-        Label = label;
+    public void setId(int id) {
+        Id = id;
     }
 
-    public int getAccountId() {
-        return AccountId;
+    public int getUnloadingCharges() {
+        return UnloadingCharges;
     }
 
-    public void setAccountId(int accountId) {
-        AccountId = accountId;
+    public void setUnloadingCharges(int unloadingCharges) {
+        UnloadingCharges = unloadingCharges;
     }
 
     public int getItemId() {
@@ -276,21 +305,5 @@ public class InwardItems implements Serializable {
 
     public void setRentPerUnit(Double rentPerUnit) {
         RentPerUnit = rentPerUnit;
-    }
-
-    public String getOutwardDetails() {
-        return OutwardDetails;
-    }
-
-    public void setOutwardDetails(String outwardDetails) {
-        OutwardDetails = outwardDetails;
-    }
-
-    public int getOutwardQuantity() {
-        return OutwardQuantity;
-    }
-
-    public void setOutwardQuantity(int outwardQuantity) {
-        OutwardQuantity = outwardQuantity;
     }
 }

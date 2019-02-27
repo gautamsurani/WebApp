@@ -11,7 +11,7 @@ import tech.fraction.webapp.R;
 
 public class AppPersistence {
     public enum keys {
-        personId, accountId, firstName, lastName, emailAddress, personType, Role_Rights,Menus
+        personId, accountId, firstName, lastName, emailAddress, personType, Role_Rights, Menus
     }
 
     private static AppPersistence mAppPersistance;

@@ -4,21 +4,20 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class InventoryDetailOutward implements Serializable {
-    private int OutwardId;
 
-    private String LastName;
+
+    private int OutwardId;
+    private String OutwardDateinDDMMYYYY;
 
     private int TotalRecords;
 
     private String AccountName;
 
-    private String Mobile1;
 
     private String OutwardOn;
 
     private ArrayList<OutwardItems> OutwardItems;
 
-    private OutwardPaidDetail OutwardPaidDetail;
 
     private String InvoiceGeneratedOn;
 
@@ -26,7 +25,6 @@ public class InventoryDetailOutward implements Serializable {
 
     private boolean IsModified;
 
-    private String Mobile2;
 
     private boolean CanDeleteOutWarDetail;
 
@@ -42,19 +40,25 @@ public class InventoryDetailOutward implements Serializable {
 
     private int AccountId;
 
-    private String FirstName;
 
     private int TotalLoadingCharges;
 
-    private Transporter Transporter;
+    private Transporter VehicleDetailModel;
 
-    private String MiddleName;
 
     private int InvoiceId;
 
     private int TotalOtherCharges;
 
     private int PaidAmount;
+
+    public String getOutwardDateinDDMMYYYY() {
+        return OutwardDateinDDMMYYYY;
+    }
+
+    public void setOutwardDateinDDMMYYYY(String outwardDateinDDMMYYYY) {
+        OutwardDateinDDMMYYYY = outwardDateinDDMMYYYY;
+    }
 
     public int getOutwardId() {
         return OutwardId;
@@ -64,13 +68,6 @@ public class InventoryDetailOutward implements Serializable {
         OutwardId = outwardId;
     }
 
-    public String getLastName() {
-        return LastName;
-    }
-
-    public void setLastName(String lastName) {
-        LastName = lastName;
-    }
 
     public int getTotalRecords() {
         return TotalRecords;
@@ -88,13 +85,6 @@ public class InventoryDetailOutward implements Serializable {
         AccountName = accountName;
     }
 
-    public String getMobile1() {
-        return Mobile1;
-    }
-
-    public void setMobile1(String mobile1) {
-        Mobile1 = mobile1;
-    }
 
     public String getOutwardOn() {
         return OutwardOn;
@@ -104,21 +94,14 @@ public class InventoryDetailOutward implements Serializable {
         OutwardOn = outwardOn;
     }
 
-    public ArrayList<tech.fraction.webapp.model.OutwardItems> getOutwardItems() {
+    public ArrayList<OutwardItems> getOutwardItems() {
         return OutwardItems;
     }
 
-    public void setOutwardItems(ArrayList<tech.fraction.webapp.model.OutwardItems> outwardItems) {
+    public void setOutwardItems(ArrayList<OutwardItems> outwardItems) {
         OutwardItems = outwardItems;
     }
 
-    public tech.fraction.webapp.model.OutwardPaidDetail getOutwardPaidDetail() {
-        return OutwardPaidDetail;
-    }
-
-    public void setOutwardPaidDetail(tech.fraction.webapp.model.OutwardPaidDetail outwardPaidDetail) {
-        OutwardPaidDetail = outwardPaidDetail;
-    }
 
     public String getInvoiceGeneratedOn() {
         return InvoiceGeneratedOn;
@@ -144,13 +127,6 @@ public class InventoryDetailOutward implements Serializable {
         IsModified = modified;
     }
 
-    public String getMobile2() {
-        return Mobile2;
-    }
-
-    public void setMobile2(String mobile2) {
-        Mobile2 = mobile2;
-    }
 
     public boolean isCanDeleteOutWarDetail() {
         return CanDeleteOutWarDetail;
@@ -208,13 +184,6 @@ public class InventoryDetailOutward implements Serializable {
         AccountId = accountId;
     }
 
-    public String getFirstName() {
-        return FirstName;
-    }
-
-    public void setFirstName(String firstName) {
-        FirstName = firstName;
-    }
 
     public int getTotalLoadingCharges() {
         return TotalLoadingCharges;
@@ -224,21 +193,14 @@ public class InventoryDetailOutward implements Serializable {
         TotalLoadingCharges = totalLoadingCharges;
     }
 
-    public tech.fraction.webapp.model.Transporter getTransporter() {
-        return Transporter;
+    public Transporter getVehicleDetailModel() {
+        return VehicleDetailModel;
     }
 
-    public void setTransporter(tech.fraction.webapp.model.Transporter transporter) {
-        Transporter = transporter;
+    public void setVehicleDetailModel(Transporter vehicleDetailModel) {
+        VehicleDetailModel = vehicleDetailModel;
     }
 
-    public String getMiddleName() {
-        return MiddleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        MiddleName = middleName;
-    }
 
     public int getInvoiceId() {
         return InvoiceId;

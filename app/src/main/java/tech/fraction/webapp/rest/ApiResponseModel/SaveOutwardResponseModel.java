@@ -6,6 +6,7 @@ import tech.fraction.webapp.model.DataSaveInward;
 import tech.fraction.webapp.model.DataSaveOutward;
 
 public class SaveOutwardResponseModel implements Serializable {
+
     private String Message;
 
     private DataSaveOutward Data;

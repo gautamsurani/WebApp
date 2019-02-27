@@ -4,13 +4,13 @@ import tech.fraction.webapp.rest.ApiRequestModel.SaveInwardRequestModel;
 
 public class DataDetailInward {
 
-private SaveInwardRequestModel InwardDetails;
+    private InwardDetailsModel Inwards;
 
-    public SaveInwardRequestModel getInwardDetails() {
-        return InwardDetails;
+    public InwardDetailsModel getInwardDetails() {
+        return Inwards;
     }
 
-    public void setInwardDetails(SaveInwardRequestModel inwardDetails) {
-        InwardDetails = inwardDetails;
+    public void setInwardDetails(InwardDetailsModel inwardDetails) {
+        Inwards = inwardDetails;
     }
 }

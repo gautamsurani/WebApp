@@ -5,16 +5,16 @@ import java.util.List;
 
 public class InwardData implements Serializable {
 
-    private List<InventoryDetail> PersonInformation;
+    private List<InventoryDetail> Inwards;
 
     private Paging Paging;
 
     public List<InventoryDetail> getInventoryDetail() {
-        return PersonInformation;
+        return Inwards;
     }
 
     public void setInventoryDetail(List<InventoryDetail> personInformation) {
-        PersonInformation = personInformation;
+        Inwards = personInformation;
     }
 
     public Paging getPaging() {

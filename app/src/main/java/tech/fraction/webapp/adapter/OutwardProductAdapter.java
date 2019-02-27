@@ -20,7 +20,9 @@ public class OutwardProductAdapter extends RecyclerView.Adapter<OutwardProductAd
 
 
     private LayoutInflater inflater;
+
     private List<OutwardItems> outwardItems = new ArrayList<>();
+
     private Context context;
 
 

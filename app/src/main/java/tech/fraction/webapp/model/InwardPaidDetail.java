@@ -3,6 +3,7 @@ package tech.fraction.webapp.model;
 import java.io.Serializable;
 
 public class InwardPaidDetail implements Serializable {
+
     private int ToatalAmount;
 
     private int TotalPaidAmount;

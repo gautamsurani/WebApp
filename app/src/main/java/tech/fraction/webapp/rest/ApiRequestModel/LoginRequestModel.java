@@ -3,8 +3,11 @@ package tech.fraction.webapp.rest.ApiRequestModel;
 import java.io.Serializable;
 
 public class LoginRequestModel implements Serializable {
+
     private String emailId;
+
     private String password;
+
     private String returnUrl;
 
     public LoginRequestModel(String emailId, String password, String returnUrl) {

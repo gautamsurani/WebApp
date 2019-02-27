@@ -7,9 +7,8 @@ import tech.fraction.webapp.SqliteDatabase.model.City;
 import tech.fraction.webapp.SqliteDatabase.model.State;
 
 public class CityResponseModel implements Serializable {
+
     private ArrayList<City> city;
-
-
 
     public ArrayList<City> getCity() {
         return city;

@@ -15,18 +15,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tech.fraction.webapp.R;
-import tech.fraction.webapp.model.InwardItems;
-import tech.fraction.webapp.model.OutwardDetailModel;
+
 import tech.fraction.webapp.model.OutwardDetails;
-import tech.fraction.webapp.model.OutwardItems;
+
 
 
 public class OutwardDetailListAdapter extends RecyclerView.Adapter<OutwardDetailListAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
+
     private List<OutwardDetails> outwardItems = new ArrayList<>();
+
     private Context context;
+
     private boolean isEditable;
+
     private OnClickListener onClickListener;
 
     public void setOnItemClickListener(OnClickListener onClickListener) {

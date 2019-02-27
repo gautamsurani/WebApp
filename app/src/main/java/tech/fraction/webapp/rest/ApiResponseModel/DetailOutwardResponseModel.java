@@ -3,6 +3,7 @@ package tech.fraction.webapp.rest.ApiResponseModel;
 import tech.fraction.webapp.model.DataDetailOutward;
 
 public class DetailOutwardResponseModel {
+
     private String Message;
 
     private DataDetailOutward Data;

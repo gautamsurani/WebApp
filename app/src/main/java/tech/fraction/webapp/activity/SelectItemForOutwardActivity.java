@@ -41,13 +41,17 @@ import static tech.fraction.webapp.util.AppConstant.NO_NETWORK_REQUEST_CODE;
 public class SelectItemForOutwardActivity extends BaseActivity {
 
     RecyclerView rvItems;
+
     Activity context;
+
     boolean IsLAstLoading = true;
 
     ProgressBar progress_circular;
+
     RelativeLayout rlMain;
 
     ImageView ivBack;
+
     TextView tvTitle, tvDone;
 
     LinearLayout linearShowToastMsg;
@@ -55,6 +59,7 @@ public class SelectItemForOutwardActivity extends BaseActivity {
     TextView txtToastCountMsg;
 
     List<OutwardDetails> outwardDetails = new ArrayList<>();
+
     List<OutwardDetails> selectedOutwardDetails = new ArrayList<>();
 
     SelectItemForOutwardAdapter selectItemForOutwardAdapter;

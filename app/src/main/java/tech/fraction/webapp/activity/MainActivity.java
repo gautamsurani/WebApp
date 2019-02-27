@@ -1333,17 +1333,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rbDefaultShortBy = findViewById(R.id.rbDefaultShortBy);
         rbDefaultSortByExpression = findViewById(R.id.rbDefaultSortByExpression);
         tvBroker = findViewById(R.id.tvBroker);
-
-
         spnOutwardedOn = findViewById(R.id.spnOutwardedOn);
         spInvoiceStatus = findViewById(R.id.spInvoiceStatus);
         spPaidStatusOut = findViewById(R.id.spPaidStatusOut);
         spPaidOnOut = findViewById(R.id.spPaidOnOut);
-
-
         tvOutwardFilterReset = findViewById(R.id.tvOutwardFilterReset);
         tvOutwardFilterApply = findViewById(R.id.tvOutwardFilterApply);
-
         tvBrokerInvoice = findViewById(R.id.tvBrokerInvoice);
         spnMon = findViewById(R.id.spnMon);
         spYear = findViewById(R.id.spYear);
@@ -1355,12 +1350,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         spPaidStatusInv = findViewById(R.id.spPaidStatusInv);
         spPaidOnInv = findViewById(R.id.spPaidOnInv);
         pbBrokerInvoice = findViewById(R.id.pbBrokerInvoice);
-
-
         tvInvoiceFilterReset = findViewById(R.id.tvInvoiceFilterReset);
         tvInvoiceFilterApply = findViewById(R.id.tvInvoiceFilterApply);
-
-
     }
 
     List<Menu> menus;

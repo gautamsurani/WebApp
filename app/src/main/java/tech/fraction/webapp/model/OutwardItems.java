@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class OutwardItems implements Serializable {
+
     private int OutwardId;
 
     private int InwardDetailId;
@@ -19,6 +20,7 @@ public class OutwardItems implements Serializable {
     private String InwardNo;
 
     private int Weight;
+
     private String MarkoName;
 
     private String Label;
@@ -34,7 +36,8 @@ public class OutwardItems implements Serializable {
     private int AccountId;
 
     private int ItemId;
-    int RawId;
+
+    private int RawId;
 
     private String ItemName;
 
