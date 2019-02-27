@@ -6,15 +6,12 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -32,7 +29,6 @@ import java.util.Random;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 import tech.fraction.webapp.R;
 import tech.fraction.webapp.adapter.InwardItemAdapter;
 import tech.fraction.webapp.base.BaseActivity;
@@ -42,7 +38,6 @@ import tech.fraction.webapp.model.InwardDetailsModel;
 import tech.fraction.webapp.model.InwardItems;
 import tech.fraction.webapp.model.InwardVehicleDetail;
 import tech.fraction.webapp.model.SearchTextViewModel;
-import tech.fraction.webapp.rest.ApiInterface.ApiInterface;
 import tech.fraction.webapp.rest.ApiRequestModel.SaveInwardRequestModel;
 import tech.fraction.webapp.rest.ApiResponseModel.AccountResponseModel;
 import tech.fraction.webapp.rest.ApiResponseModel.DetailInwardResponseModel;
@@ -152,17 +147,14 @@ public class AddEditInwardActivity extends BaseActivity implements View.OnClickL
 
         tvParty.setOnClickListener(this);
 
-
         tvDate.setOnClickListener(this);
 
         ivBack.setOnClickListener(this);
     }
 
-
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
-
             case R.id.tvAddItem:
                 Intent intent = new Intent(context, AddEditInItemActivity.class);
                 intent.putExtra("mode", "add");
@@ -382,21 +374,22 @@ public class AddEditInwardActivity extends BaseActivity implements View.OnClickL
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == AppConstant.SEARCH_ACTIVITY_REQUEST_CODE)
+        if (requestCode == AppConstant.SEARCH_ACTIVITY_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 String type = data.getStringExtra("type");
                 if (type.equals("party")) {
                     SearchTextViewModel searchTextViewModel = (SearchTextViewModel) data.getSerializableExtra("search");
                     setParty(searchTextViewModel);
                 }
-            } else if (requestCode == NO_NETWORK_REQUEST_CODE) {
-                if (resultCode == Activity.RESULT_OK) {
-                    String extraValue = data.getStringExtra("extraValue");
-                    if (extraValue.equalsIgnoreCase("CallAddInwardApi")) {
-                        CallAddInwardApi();
-                    }
+            }
+        } else if (requestCode == NO_NETWORK_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                String extraValue = data.getStringExtra("extraValue");
+                if (extraValue.equalsIgnoreCase("CallAddInwardApi")) {
+                    CallAddInwardApi();
                 }
             }
+        }
     }
 
     private void setParty(SearchTextViewModel searchTextViewModel) {
