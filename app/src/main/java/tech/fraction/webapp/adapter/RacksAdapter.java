@@ -20,7 +20,9 @@ public class RacksAdapter extends RecyclerView.Adapter<RacksAdapter.ViewHolder> 
 
 
     private LayoutInflater inflater;
+
     private List<InwardItemLocationPoco> racks = new ArrayList<>();
+
     private Context context;
 
 

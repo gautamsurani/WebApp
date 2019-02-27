@@ -4,8 +4,15 @@ import java.io.Serializable;
 
 public class Racks implements Serializable {
 
-    int id,floorId,chamberId;
-    String name,status;
+    private int id;
+
+    private int floorId;
+
+    private int chamberId;
+
+    private String name;
+
+    private String status;
 
     public int getId() {
         return id;

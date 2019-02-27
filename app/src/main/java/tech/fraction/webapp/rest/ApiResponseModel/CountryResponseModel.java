@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import tech.fraction.webapp.SqliteDatabase.model.Country;
 
 public class CountryResponseModel implements Serializable {
+
     private ArrayList<Country> country;
 
     public ArrayList<Country> getCountry() {

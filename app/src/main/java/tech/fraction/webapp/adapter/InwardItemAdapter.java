@@ -21,9 +21,13 @@ import tech.fraction.webapp.model.InwardItems;
 public class InwardItemAdapter extends RecyclerView.Adapter<InwardItemAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
+
     private List<InwardItems> inwardItems = new ArrayList<>();
+
     private Context context;
+
     private boolean isEditable;
+
     private OnClickListener onClickListener;
 
     public void setOnItemClickListener(OnClickListener onClickListener) {

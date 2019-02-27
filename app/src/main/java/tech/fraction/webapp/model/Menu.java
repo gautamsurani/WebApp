@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Menu implements Serializable {
+
     private List<Childrens> Childrens;
 
     private String DisplayName;

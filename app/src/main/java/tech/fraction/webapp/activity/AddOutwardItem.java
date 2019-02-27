@@ -16,7 +16,6 @@ public class AddOutwardItem extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_outward_item);
         ivBack = findViewById(R.id.ivBack);
-
         ivBack.setOnClickListener(this);
     }
 

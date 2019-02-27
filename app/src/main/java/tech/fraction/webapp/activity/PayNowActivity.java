@@ -29,15 +29,25 @@ public class PayNowActivity extends AppCompatActivity implements View.OnClickLis
 
 
     TextView tvTitle, tvSave, tvClose, tvRemainingAmount, tvFromDate;
+
     ImageView ivBack;
+
     int inwardId;
+
     EditText etAmount;
+
     RadioGroup rgPayment;
+
     RadioButton rbFullyPaid, rbPartiallyPaid;
+
     Activity context;
+
     Double Amount;
+
     boolean paidStatus;
+
     String date;
+
     Double remainingAmount;
 
     @Override

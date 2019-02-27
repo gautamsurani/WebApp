@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuList implements Serializable {
+
     String menuName;
     List<SubMenuList> subMenuLists = new ArrayList<>();
 

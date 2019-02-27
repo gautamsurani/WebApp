@@ -8,17 +8,19 @@ public class InwardDetailsModel {
 
     private boolean CanGenerateInvoice;
 
-    private ArrayList<InwardItems> InwardItemDetailPoco;
+    private ArrayList<InwardItems> InwardItems;
 
     private int AccountId;
 
-    private String Broker;
+    private String AccountName;
 
     private String InwardedOn;
 
     private String LastInvoiceToDate;
 
     private InwardVehicleDetail InwardVehicleDetail;
+
+    private String InwardDateinDDMMYYYY;
 
     private String Invoices;
 
@@ -57,11 +59,11 @@ public class InwardDetailsModel {
     }
 
     public ArrayList<InwardItems> getInwardItemDetailPoco() {
-        return InwardItemDetailPoco;
+        return InwardItems;
     }
 
     public void setInwardItemDetailPoco(ArrayList<InwardItems> inwardItemDetailPoco) {
-        InwardItemDetailPoco = inwardItemDetailPoco;
+        InwardItems = inwardItemDetailPoco;
     }
 
     public int getAccountId() {
@@ -72,12 +74,12 @@ public class InwardDetailsModel {
         AccountId = accountId;
     }
 
-    public String getBroker() {
-        return Broker;
+    public String getAccountName() {
+        return AccountName;
     }
 
-    public void setBroker(String broker) {
-        Broker = broker;
+    public void setAccountName(String accountName) {
+        AccountName = accountName;
     }
 
     public String getInwardedOn() {
@@ -96,11 +98,11 @@ public class InwardDetailsModel {
         LastInvoiceToDate = lastInvoiceToDate;
     }
 
-    public tech.fraction.webapp.model.InwardVehicleDetail getInwardVehicleDetail() {
+    public InwardVehicleDetail getInwardVehicleDetail() {
         return InwardVehicleDetail;
     }
 
-    public void setInwardVehicleDetail(tech.fraction.webapp.model.InwardVehicleDetail inwardVehicleDetail) {
+    public void setInwardVehicleDetail(InwardVehicleDetail inwardVehicleDetail) {
         InwardVehicleDetail = inwardVehicleDetail;
     }
 
@@ -170,6 +172,14 @@ public class InwardDetailsModel {
 
     public String getLastInvoicePaidOn() {
         return LastInvoicePaidOn;
+    }
+
+    public String getInwardDateinDDMMYYYY() {
+        return InwardDateinDDMMYYYY;
+    }
+
+    public void setInwardDateinDDMMYYYY(String inwardDateinDDMMYYYY) {
+        InwardDateinDDMMYYYY = inwardDateinDDMMYYYY;
     }
 
     public void setLastInvoicePaidOn(String lastInvoicePaidOn) {

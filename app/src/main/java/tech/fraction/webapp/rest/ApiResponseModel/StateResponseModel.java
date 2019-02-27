@@ -7,6 +7,7 @@ import tech.fraction.webapp.SqliteDatabase.model.Country;
 import tech.fraction.webapp.SqliteDatabase.model.State;
 
 public class StateResponseModel implements Serializable {
+
     private ArrayList<State> state;
 
     public ArrayList<State> getState() {

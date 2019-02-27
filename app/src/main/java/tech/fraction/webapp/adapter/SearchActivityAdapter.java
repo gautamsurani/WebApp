@@ -19,7 +19,9 @@ public class SearchActivityAdapter extends RecyclerView.Adapter<SearchActivityAd
 
 
     private LayoutInflater inflater;
+
     private List<SearchTextViewModel> outWardList = new ArrayList<>();
+
     private Context context;
 
 

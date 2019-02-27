@@ -13,6 +13,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -189,7 +191,7 @@ public class AddEditInwardActivity extends BaseActivity implements View.OnClickL
                             , tvDate.getText().toString()
                             , Utils.getPersonalInfo(context).getPersonId()
                             , inwardItems
-                            , Utils.getPersonalInfo(context).getAccountId());
+                            , 0);
                 } else {
 
                     InwardVehicleDetail inwardVehicleDetail = new InwardVehicleDetail("", etVehicleNo.getText().toString(), etTransporter.getText().toString()
@@ -202,7 +204,7 @@ public class AddEditInwardActivity extends BaseActivity implements View.OnClickL
                             tvDate.getText().toString(),
                             Utils.getPersonalInfo(context).getPersonId(),
                             inwardItems,
-                            Utils.getPersonalInfo(context).getAccountId());
+                            inwardDetailId1);
 
 
                 }
@@ -269,10 +271,10 @@ public class AddEditInwardActivity extends BaseActivity implements View.OnClickL
         tvParty.setEnabled(false);
 
         selectedAccount.setId(inwardDetailsModel.getAccountId());
-        selectedAccount.setName(inwardDetailsModel.getBroker());
+        selectedAccount.setName(inwardDetailsModel.getAccountName());
         selectedAccount.setPersonId(Utils.getPersonalInfo(context).getPersonId());
         inwardNumber = inwardDetailsModel.getNumber();
-        inwardDate = inwardDetailsModel.getInwardedOn();
+        inwardDate = inwardDetailsModel.getInwardDateinDDMMYYYY();
         inwardItems = inwardDetailsModel.getInwardItemDetailPoco();
         inwardItemAdapter.setList(inwardItems);
         inwardItemAdapter.notifyDataSetChanged();
@@ -306,7 +308,6 @@ public class AddEditInwardActivity extends BaseActivity implements View.OnClickL
                 AppConstant.canResume = true;
                 SaveInwardResponseModel saveInwardResponseModel = response.body();
                 assert response.body() != null;
-                Log.d("", "===>" + response.body().toString());
                 assert saveInwardResponseModel != null;
                 if (saveInwardResponseModel.getIsValid()) {
                     Utils.ShowSnakBar(saveInwardResponseModel.getMessage(), rl_editInward, context);

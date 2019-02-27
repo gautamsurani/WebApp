@@ -22,7 +22,9 @@ import tech.fraction.webapp.model.CustomerListModel;
 public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
+
     private List<CustomerListModel> customerList = new ArrayList<>();
+
     private Context context;
 
     public CustomerListAdapter(Context context) {

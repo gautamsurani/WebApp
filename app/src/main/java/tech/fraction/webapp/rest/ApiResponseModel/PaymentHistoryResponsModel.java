@@ -3,6 +3,7 @@ package tech.fraction.webapp.rest.ApiResponseModel;
 import tech.fraction.webapp.model.DataPaymentHistory;
 
 public class PaymentHistoryResponsModel {
+
     private String Message;
 
     private DataPaymentHistory Data;

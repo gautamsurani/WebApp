@@ -15,10 +15,11 @@ import tech.fraction.webapp.rest.ApiResponseModel.AccountResponseModel;
 import tech.fraction.webapp.rest.RetrofitInstance;
 
 public class AccountApiCall {
-    Retrofit retrofit= RetrofitInstance.getClient();
-    ApiInterface apiInterface=retrofit.create(ApiInterface.class);
-    ArrayList<Account> lstAccount=new ArrayList<Account>();
+    Retrofit retrofit = RetrofitInstance.getClient();
+    ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+    ArrayList<Account> lstAccount = new ArrayList<Account>();
     private DataInterface mListener;
+
     public AccountApiCall() {
         super();
     }
@@ -28,7 +29,6 @@ public class AccountApiCall {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
 
 
         }
@@ -42,7 +42,7 @@ public class AccountApiCall {
                 public void onResponse(Call<AccountResponseModel> call, Response<AccountResponseModel> response) {
 
 
-                    if (response!=null && response.body() != null && mListener != null) {
+                    if (response != null && response.body() != null && mListener != null) {
                         mListener.responseData(response.body());
                     }
                 }
@@ -64,14 +64,13 @@ public class AccountApiCall {
         }
     }
 
-    public void CallAccountApi()
-    {
+    public void CallAccountApi() {
 
         new AccountAsync().execute();
 
 
-
     }
+
     public void setOnDataListener(DataInterface listener) {
         mListener = listener;
     }

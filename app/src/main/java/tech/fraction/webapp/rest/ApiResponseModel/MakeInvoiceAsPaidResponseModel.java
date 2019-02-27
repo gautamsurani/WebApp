@@ -4,9 +4,10 @@ import tech.fraction.webapp.model.DataPaymentHistory;
 
 public class MakeInvoiceAsPaidResponseModel {
 
-
     private DataPaymentHistory Data;
+
     private boolean IsValid;
+
     private String Message;
 
     public DataPaymentHistory getData() {

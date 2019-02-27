@@ -49,8 +49,7 @@ public class OutwardRequestModel implements Serializable {
 
     public OutwardRequestModel(int totalRecords, String item, String inwardNo, int pageSize, String outwardedOnTo, String broker, int paidOn,
                                String outwardNo, String isInvoiceGenerated, String reportType, String jsFunction, int accountId, String sortDirection,
-                               String unit, String paidStatus,
-                               int pageIndex, String sortBy, int personId, String location,
+                               String unit, String paidStatus, int pageIndex, String sortBy, int personId, String location,
                                String outwardedOnFilter, String personType, String outwardedOnFrom) {
         this.totalRecords = totalRecords;
         this.item = item;

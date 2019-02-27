@@ -3,25 +3,45 @@ package tech.fraction.webapp.model;
 import java.io.Serializable;
 
 public class SearchField implements Serializable {
+
     private String InwardNo;
+
     private String Item;
+
     private String Unit;
+
     private String Marko;
+
     private String Broker;
+
     private int AccountId;
+
     private String Location;
+
     private String SortByField;
+
     private String SortByExpression;
+
     private String InwardedOnFilter;
+
     private int PaidOn;
+
     private int InvoiceDue;
+
     private String PaidStatus;
+
     private int InvoiceGeneratedPeriod;
+
     private String IsInvoiceGenerated;
+
     private String InwardedOnFrom;
+
     private String InwardedOnTo;
+
     private float PageIndex;
+
     private float PageSize;
+
     private String PageType;
 
 

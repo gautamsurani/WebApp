@@ -44,23 +44,39 @@ import tech.fraction.webapp.util.ValidationUtil;
 public class AddEditOutwardActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView rec_view;
+
     OutwardDetailListAdapter outwardDetailListAdapter;
+
     ImageView ivBack, tvAddItem;
+
     Activity context;
+
     ProgressBar pbParty;
+
     EditText etVehicleNo, etTransporter, etDriverName, etDriverNo, etRemark;
+
     TextView txtSave, tvTitle, tvOutwardNo, tvDate, tvParty;
+
     String vehicleNo, transporterName, driverName, driverNo, remark;
+
     RelativeLayout scrollView;
+
     SaveOutwardRequestModel saveOutwardRequestModel;
+
     int outwardId;
+
     String mode = "";
+
     Transporter transporter;
+
     DetailOutwardResponseModel detailOutwardResponseModel = new DetailOutwardResponseModel();
+
     public static ArrayList<OutwardDetails> outwardItemsList = new ArrayList<>();
 
     ArrayList<Account> lstAccount = new ArrayList<>();
+
     private static Account selectedAccount = new Account();
+
     private static String outwardNumber = "", outwardDate = "";
 
     RelativeLayout rlProgress, rlMain;

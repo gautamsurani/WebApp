@@ -25,7 +25,9 @@ import tech.fraction.webapp.model.InventoryDetail;
 public class InwordsAdapter extends RecyclerView.Adapter<InwordsAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
+
     private List<InventoryDetail> inventoryDetails = new ArrayList<>();
+
     private Context context;
 
     private OnClickListener onClickListener;
@@ -83,27 +85,31 @@ public class InwordsAdapter extends RecyclerView.Adapter<InwordsAdapter.ViewHold
         holder.tvAmount.setText(" " + context.getResources().getString(R.string.rs) + s);
         holder.tvDate.setText(inventoryDetail.getInwardDateinDDMMYYYY());
 
-        if (inventoryDetails.get(position).getInvoiceMessage()!=null)
-        {
+        if (!inventoryDetails.get(position).getInvoiceMessage().isEmpty() && !inventoryDetails.get(position).getColor().isEmpty()) {
             holder.tvInvoiceDue.setTextColor(Color.parseColor(inventoryDetails.get(position).getColor()));
             holder.tvInvoiceDue.setText(inventoryDetails.get(position).getInvoiceMessage());
-        }else
-        {
+            holder.tvInvoiceDue.setVisibility(View.VISIBLE);
+        } else {
             holder.tvInvoiceDue.setVisibility(View.GONE);
         }
-
-        boolean paidStatus = inventoryDetail.isInvoicePaid();
-        if (paidStatus) {
+        /*TO  DO change paynow  button according to paid status*/
+        String paidStatus = inventoryDetail.getPaidStatus();
+        if (paidStatus.equalsIgnoreCase("f")) {
             holder.tvPayNow.setText("View Pay History");
-        } else {
+            holder.tvPayNow.setVisibility(View.VISIBLE);
+        } else if (paidStatus.equalsIgnoreCase("p") || paidStatus.equalsIgnoreCase("z")) {
             holder.tvPayNow.setText("Pay Now");
+            holder.tvPayNow.setVisibility(View.VISIBLE);
+
+        } else {
+            holder.tvPayNow.setVisibility(View.GONE);
         }
 
         holder.tvPayNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, PaymentHistoryActivity.class);
-                intent.putExtra("inwardId",inventoryDetail.getInwardDetailId());
+                Intent intent = new Intent(context, PaymentHistoryActivity.class);
+                intent.putExtra("inwardId", inventoryDetail.getInwardDetailId());
                 context.startActivity(intent);
             }
         });
@@ -129,7 +135,7 @@ public class InwordsAdapter extends RecyclerView.Adapter<InwordsAdapter.ViewHold
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvName, tvInwardNo, tvDate, tvAmount, tvPayNow,tvInvoiceDue;
+        TextView tvName, tvInwardNo, tvDate, tvAmount, tvPayNow, tvInvoiceDue;
         RelativeLayout rlMain;
         RecyclerView rvProduct;
 

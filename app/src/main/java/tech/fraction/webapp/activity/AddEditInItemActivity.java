@@ -50,6 +50,7 @@ public class AddEditInItemActivity extends BaseActivity implements View.OnClickL
     RacksAdapter racksAdapter;
 
     TextView tvHeading, spnItem, spnUnit, spnLocation, tvUpdate, tvCancel;
+
     ImageView ivBack;
 
     RelativeLayout rlProgress, rlMain;
@@ -120,7 +121,7 @@ public class AddEditInItemActivity extends BaseActivity implements View.OnClickL
             // selectedItems.setId(item.getItemId());
             selectedItems.setName(item.getItemName());
             spnItem.setText(item.getItemName());
-
+            etMarko.setText(item.getLabel());
             spnUnit.setText(item.getUnitName());
             etRent.setText(item.getRentPerUnit() + "");
             selectedItemRent.setUnit(item.getUnitName());
@@ -201,10 +202,12 @@ public class AddEditInItemActivity extends BaseActivity implements View.OnClickL
                 break;
 
             case R.id.tvCancel:
+                Utils.hideKeyboard(context);
                 onBackPressed();
                 break;
 
             case R.id.tvUpdate:
+                Utils.hideKeyboard(context);
                 quantity = etQuantity.getText().toString();
                 marko = etMarko.getText().toString();
                 unloadingCharge = etUnloadingCharge.getText().toString();
@@ -253,7 +256,7 @@ public class AddEditInItemActivity extends BaseActivity implements View.OnClickL
                     inwardItem.setUnloadingCharges(Integer.parseInt(unloadingCharge));
                     inwardItem.setInwardLocationModel(selectedRacksList);
                     inwardItem.setUnitId(selectedItemRent.getUnitId());
-                    inwardItem.setLabel(selectedItems.getName());
+                    inwardItem.setLabel(marko);
 
 
                     inwardItem.setInwardDetailId(0);
@@ -261,7 +264,6 @@ public class AddEditInItemActivity extends BaseActivity implements View.OnClickL
 
                     inwardItem.setStock(0);
 
-                    inwardItem.setLabel("aashu");
 
                     AddEditInwardActivity.inwardItems.add(inwardItem);
                 } else {
@@ -271,6 +273,7 @@ public class AddEditInItemActivity extends BaseActivity implements View.OnClickL
                     AddEditInwardActivity.inwardItems.get(selectedPosition).setUnitName(selectedItemRent.getUnit());
                     AddEditInwardActivity.inwardItems.get(selectedPosition).setRentPerUnit(Double.parseDouble(rentPerUnit));
                     AddEditInwardActivity.inwardItems.get(selectedPosition).setQuantity(Integer.parseInt(quantity));
+                    AddEditInwardActivity.inwardItems.get(selectedPosition).setLabel(marko);
 
 
                     AddEditInwardActivity.inwardItems.get(selectedPosition).setUnloadingCharges(Integer.parseInt(unloadingCharge));

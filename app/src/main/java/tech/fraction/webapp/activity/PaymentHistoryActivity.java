@@ -39,13 +39,21 @@ public class PaymentHistoryActivity extends BaseActivity implements View.OnClick
 
 
     TextView tvPartyName, tvInvNo, tvAmount, tvRemainingAmount, tvTotalAmount, tvPayNow, tvTitle, tvNoRecord;
+
     RecyclerView rvPaymentHistory;
+
     ImageView ivBack;
+
     Activity context;
+
     ArrayList<PastPaymentDetail> lstPaymentHistory = new ArrayList<>();
+
     int inwardId;
+
     PaymentHistoryResponsModel paymentHistoryResponsModel;
+
     LinearLayout ll_bottom;
+
     RelativeLayout rlMain;
 
     PaymentHistoryAdapter paymentHistoryAdapter;
@@ -70,8 +78,6 @@ public class PaymentHistoryActivity extends BaseActivity implements View.OnClick
             @Override
             public void onClick(int position, int witch) {
                 callMarkAsUnpaidApi(position);
-
-
             }
         });
     }
@@ -116,7 +122,8 @@ public class PaymentHistoryActivity extends BaseActivity implements View.OnClick
 
                     tvAmount.setText(makeInvoiceAsPaidResponseModel.getData().getPaidAmountDetail().getPaidAmount() + " " + context.getResources().getString(R.string.rs));
                     tvTotalAmount.setText(makeInvoiceAsPaidResponseModel.getData().getPaidAmountDetail().getAmount() + " " + context.getResources().getString(R.string.rs));
-                    tvRemainingAmount.setText("Remaining Amt: " + makeInvoiceAsPaidResponseModel.getData().getPaidAmountDetail().getRemainingAmount() + " " + context.getResources().getString(R.string.rs));
+                    tvRemainingAmount.setText("Remaining Amt: " + makeInvoiceAsPaidResponseModel.getData().getPaidAmountDetail()
+                            .getRemainingAmount() + " " + context.getResources().getString(R.string.rs));
 
 
                 }
@@ -227,8 +234,6 @@ public class PaymentHistoryActivity extends BaseActivity implements View.OnClick
             return;
         }
         CallPaymentHistoryApi();
-
-
     }
 
 

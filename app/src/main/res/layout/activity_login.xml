@@ -29,33 +29,33 @@
 
             <LinearLayout
                 android:id="@+id/llEmail"
-                android:layout_marginTop="50dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/img_logo"
+                android:layout_marginTop="50dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_gravity="bottom"
                     android:layout_width="20dp"
-                    android:layout_marginBottom="7dp"
                     android:layout_height="20dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="7dp"
                     android:src="@drawable/new_email" />
 
                 <View
                     android:layout_width="@dimen/view"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="8dp"
-                   android:layout_marginRight="5dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="8dp"
                     android:background="#C7C7C7" />
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/txt_input_layout_one"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:textColorHint="@color/hint_color">
 
                     <tech.fraction.webapp.ui.MyEditText
@@ -83,33 +83,33 @@
                 android:background="#C7C7C7" />
 
             <LinearLayout
-                android:layout_marginTop="10dp"
                 android:id="@+id/llPwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/llEmail"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_gravity="bottom"
                     android:layout_width="20dp"
-                    android:layout_marginBottom="7dp"
                     android:layout_height="20dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="7dp"
                     android:src="@drawable/password" />
 
                 <View
                     android:layout_width="@dimen/view"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginRight="5dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="8dp"
                     android:background="#C7C7C7" />
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:textColorHint="@color/hint_color">
 
                     <tech.fraction.webapp.ui.MyEditText
@@ -118,8 +118,8 @@
                         android:layout_height="35dp"
                         android:background="#00FFFFFF"
                         android:hint="@string/password"
-                        android:lines="1"
                         android:inputType="textPassword"
+                        android:lines="1"
                         android:paddingLeft="5dp"
                         android:textColor="@color/white"
                         android:textColorHint="@color/hint_color"
@@ -129,38 +129,52 @@
 
             </LinearLayout>
 
-                <View
-                    android:id="@+id/view_two"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/view"
-                    android:layout_below="@+id/llPwd"
-                    android:layout_marginTop="3dp"
-                    android:background="#C7C7C7" />
+            <View
+                android:id="@+id/view_two"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view"
+                android:layout_below="@+id/llPwd"
+                android:layout_marginTop="3dp"
+                android:background="#C7C7C7" />
+
+
+            <com.balysv.materialripple.MaterialRippleLayout
+                android:id="@+id/ripbtnSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view_two"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/btn_login_bg"
+                app:mrl_rippleColor="@color/ripple_btn"
+                app:mrl_rippleDimension="25dp"
+                app:mrl_rippleDuration="500"
+                app:mrl_rippleFadeDuration="75"
+                app:mrl_rippleOverlay="true"
+                app:mrl_rippleRoundedCorners="25dp">
+
+                <tech.fraction.webapp.ui.MyTextView
+                    android:id="@+id/btn_login"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/btn_login_bg"
+                    android:gravity="center"
+                    android:text="@string/Login"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+            </com.balysv.materialripple.MaterialRippleLayout>
 
             <tech.fraction.webapp.ui.MyTextView
                 android:id="@+id/txt_forgot_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/btn_login"
+                android:layout_below="@+id/ripbtnSubmit"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:text="@string/forgot_password"
                 android:textColor="#C7C7C7"
                 android:textSize="16sp" />
-
-
-            <tech.fraction.webapp.ui.MyTextView
-                android:id="@+id/btn_login"
-                android:layout_width="200dp"
-                android:layout_height="50dp"
-                android:layout_below="@+id/view_two"
-                android:layout_marginTop="25dp"
-                android:background="@drawable/btn_login_bg"
-                android:gravity="center"
-                android:layout_centerHorizontal="true"
-                android:text="@string/Login"
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
 
         </RelativeLayout>
     </ScrollView>

@@ -36,7 +36,7 @@ public interface ApiInterface {
     @POST("master/login")
     Call<LoginResponseModel> doLogin(@Query("Email") String email, @Query("Password") String password);
 
-    @POST("master/InwradsWithPaging")
+    @POST("master/inwards")
     Call<InwardResponseModel> getInward(@Body InwardRequestModel inwardRequestModel);
 
     @POST("inwradswithpaging")
@@ -66,10 +66,10 @@ public interface ApiInterface {
     @GET("master/GetRacks")
     Call<RackResponseModel> getAllRacks();
 
-    @POST("master/OutwardsWithPaging")
+    @POST("master/outwards")
     Call<OutwardResponseModel> getAllOutward(@Body OutwardRequestModel outwardRequestModel);
 
-    @POST("master/SaveInwardDetail")
+    @POST("master/saveinwards")
     Call<SaveInwardResponseModel> saveInward(@Body SaveInwardRequestModel saveInwardRequestModel);
 
     @POST("master/invoiceswithpaging")
@@ -78,7 +78,7 @@ public interface ApiInterface {
     @POST("master/loadoutwarditemdetails")
     Call<OutwardItemRespondModel> getOutwardItem(@Query("accountId") int accountId);
 
-    @POST("master/editinwards")
+    @POST("master/inwarddetail")
     Call<DetailInwardResponseModel> getInwardItemDetail(@Query("inwardDetailId") int inwardDetailId, @Query("accountId") int accountId);
 
     @POST("master/editoutwarddetail")

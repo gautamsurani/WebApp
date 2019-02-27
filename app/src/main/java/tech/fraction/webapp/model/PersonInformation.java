@@ -3,6 +3,7 @@ package tech.fraction.webapp.model;
 import java.io.Serializable;
 
 public class PersonInformation implements Serializable {
+
     private int AccountId;
 
     private String FirstName;

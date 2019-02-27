@@ -20,8 +20,11 @@ import tech.fraction.webapp.model.InventoryDetailOutward;
 public class OutwardListAdapter extends RecyclerView.Adapter<OutwardListAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
+
     private List<InventoryDetailOutward> outWardList = new ArrayList<>();
+
     private Context context;
+
     private OutwardProductAdapter outwardProductAdapter;
 
     public OutwardListAdapter(Context context) {
@@ -58,14 +61,8 @@ public class OutwardListAdapter extends RecyclerView.Adapter<OutwardListAdapter.
         viewHolder.tvName.setText(outWardList.get(position).getAccountName());
         viewHolder.tvOutNo.setText("OUT" + outWardList.get(position).getOutwardNo());
 
-        String s = outWardList.get(position).getOutwardOn();
-        String date;
-        if (s.contains("T")) {
-            date = s.substring(0, s.indexOf("T"));
-        } else {
-            date = s;
-        }
-        viewHolder.tv0utDate.setText(date);
+
+        viewHolder.tv0utDate.setText(outWardList.get(position).getOutwardDateinDDMMYYYY());
         viewHolder.cardRowOutword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

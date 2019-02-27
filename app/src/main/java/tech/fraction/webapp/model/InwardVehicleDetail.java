@@ -3,6 +3,7 @@ package tech.fraction.webapp.model;
 import java.io.Serializable;
 
 public class InwardVehicleDetail implements Serializable {
+
     private String InwardDetail;
 
     private String VehicleNo;

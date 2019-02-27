@@ -26,13 +26,21 @@ import tech.fraction.webapp.util.AppConstant;
 public class SelectedOutwardActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView rvSelectedOutward;
+
     FloatingActionButton btnFloatAddItem;
+
     TextView tvSave, tvClose, tvTitle, tvLstEmpty;
+
     ArrayList<OutwardDetails> outwardDetails = new ArrayList<>();
+
     SelectedOutwardAdapter selectedOutwardAdapter;
+
     Context context;
+
     String mode = "";
+
     int accountId = -1;
+
     ImageView ivBack;
 
     @Override

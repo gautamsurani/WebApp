@@ -13,7 +13,7 @@ public class SaveInwardRequestModel implements Serializable {
     private String Number;
     private int AccountId;
     private InwardVehicleDetail VehicleDetailModel;
-    private String InwardDateinDDMMYYYY;
+    private String inwardDateinDDMMYYYY;
     private int AddedBy;
     private List<InwardItems> InwardItemDetailModel;
     private int Id;
@@ -25,7 +25,7 @@ public class SaveInwardRequestModel implements Serializable {
         Number = number;
         AccountId = accountId;
         VehicleDetailModel = vehicleDetailModel;
-        InwardDateinDDMMYYYY = inwardDateinDDMMYYYY;
+        this.inwardDateinDDMMYYYY = inwardDateinDDMMYYYY;
         AddedBy = addedBy;
         InwardItemDetailModel = inwardItemDetailModel;
         Id = id;
@@ -56,11 +56,11 @@ public class SaveInwardRequestModel implements Serializable {
     }
 
     public String getInwardDateinDDMMYYYY() {
-        return InwardDateinDDMMYYYY;
+        return inwardDateinDDMMYYYY;
     }
 
     public void setInwardDateinDDMMYYYY(String inwardDateinDDMMYYYY) {
-        InwardDateinDDMMYYYY = inwardDateinDDMMYYYY;
+        inwardDateinDDMMYYYY = inwardDateinDDMMYYYY;
     }
 
     public int getAddedBy() {

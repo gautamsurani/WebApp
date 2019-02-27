@@ -23,7 +23,9 @@ import tech.fraction.webapp.model.SubMenuList;
 public class SubMenuAdapter extends RecyclerView.Adapter<SubMenuAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
+
     private List<Childrens> menuLists = new ArrayList<>();
+
     private Context context;
 
     private OnClickListener onClickListener;

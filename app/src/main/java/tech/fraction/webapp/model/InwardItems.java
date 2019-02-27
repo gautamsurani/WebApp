@@ -5,37 +5,66 @@ import java.util.List;
 
 
 public class InwardItems implements Serializable {
+
     private int InwardItemDetailId;
+
     private List<InwardItemLocationPoco> InwardLocationModel;
+
     private String RackName;
+
     private String Label;
+
     private String ItemName;
+
     private int Quantity;
+
     private String UnitName;
+
     private int InwardDetailId;
+
     private int Stock;
+
     private int RawId;
+
     private int UnitId;
+
     private int Id;
+
     private int UnloadingCharges;
+
     private int ItemId;
+
     private Double RentPerUnit;
 
     /*fields added for inward Detail Api*/
     private String OutwardDetails;
+
     private int OutwardId;
+
     private int AccountId;
+
     private String InwardNo;
+
     private String InwardedOn;
+
     private int OutwardDetailId;
+
     private int TotalOutwardQuantity;
+
     private boolean IsModified;
+
     private int Weight;
+
     private int LoadingCharges;
+
     private String InwardDetail;
+
     private String OutwardQuantity;
+
     private String OtherCharges;
+
     private String OutwardWeight;
+
     private String Location;
 
     public String getOutwardDetails() {

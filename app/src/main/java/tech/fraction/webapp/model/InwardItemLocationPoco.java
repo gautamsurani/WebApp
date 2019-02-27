@@ -9,10 +9,6 @@ public class InwardItemLocationPoco implements Serializable {
     private int InwardItemDetailId;
     private int  RawId;
     private int Id;
-
-    /*Field added for inward Detail Api*/
-
-
     private int RackId;
     private String Rack;
     private String InwardItemDetail;

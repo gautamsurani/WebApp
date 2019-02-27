@@ -10,13 +10,11 @@ import tech.fraction.webapp.model.Paging;
 
 public class InwardResponseModel implements Serializable {
 
-
     private String Message;
 
     private InwardData Data;
 
     private boolean IsValid;
-
 
     public String getMessage() {
         return Message;

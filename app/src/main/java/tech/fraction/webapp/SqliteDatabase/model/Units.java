@@ -4,8 +4,13 @@ import java.io.Serializable;
 
 public class Units implements Serializable {
 
-    int id;
-    String name,weight,weightUnit;
+    private int id;
+
+    private String name;
+
+    private String weight;
+
+    private String weightUnit;
 
     public int getId() {
         return id;

@@ -28,10 +28,15 @@ import static tech.fraction.webapp.util.AppConstant.NO_NETWORK_REQUEST_CODE;
 public class LoginActivity extends BaseActivity {
 
     TextView txtForgotPassword;
+
     TextView btnLogin;
+
     Activity context;
+
     EditText edtEmail, edtPassword;
+
     RelativeLayout rlLogin;
+
     String emailId, password;
 
     @Override

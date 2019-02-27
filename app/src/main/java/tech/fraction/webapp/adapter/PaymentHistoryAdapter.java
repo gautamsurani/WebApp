@@ -22,7 +22,9 @@ public class PaymentHistoryAdapter extends RecyclerView.Adapter<PaymentHistoryAd
 
 
     private LayoutInflater inflater;
+
     private ArrayList<PastPaymentDetail> paymentHistory = new ArrayList<>();
+
     private Context context;
 
 

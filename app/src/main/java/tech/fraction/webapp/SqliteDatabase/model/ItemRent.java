@@ -3,6 +3,7 @@ package tech.fraction.webapp.SqliteDatabase.model;
 import java.io.Serializable;
 
 public class ItemRent implements Serializable {
+
     private int itemId;
 
     private String unit;

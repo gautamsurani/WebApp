@@ -22,7 +22,9 @@ import tech.fraction.webapp.model.ProductList;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
+
     private List<InwardItems> inwardItems = new ArrayList<>();
+
     private Context context;
 
     private OnClickListener onClickListener;

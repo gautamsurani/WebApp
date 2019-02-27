@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rlMain"
     android:layout_width="match_parent"
@@ -52,15 +53,28 @@
         android:layout_centerInParent="true"
         android:visibility="gone" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btnAddInward"
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/ripbtnSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="25dp"
         android:layout_marginBottom="25dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:src="@drawable/plus_icon" />
+        android:background="@drawable/btn_login_bg"
+        app:mrl_rippleColor="@color/ripple_btn"
+        app:mrl_rippleDimension="25dp"
+        app:mrl_rippleDuration="700"
+        app:mrl_rippleOverlay="true"
+        app:mrl_rippleRoundedCorners="25dp">
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btnAddInward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            android:src="@drawable/plus_icon" />
+    </com.balysv.materialripple.MaterialRippleLayout>
 
 </RelativeLayout>

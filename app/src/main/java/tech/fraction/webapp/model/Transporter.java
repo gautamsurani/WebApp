@@ -3,6 +3,7 @@ package tech.fraction.webapp.model;
 import java.io.Serializable;
 
 public class Transporter implements Serializable {
+
     private String VehicleNo;
 
     private int InwardDetailId;
@@ -18,7 +19,10 @@ public class Transporter implements Serializable {
     private int Id;
 
     private int outwardId;
+
     private String outward;
+
+    private String Remarks;
 
     public int getOutwardId() {
         return outwardId;
@@ -35,8 +39,6 @@ public class Transporter implements Serializable {
     public void setOutward(String outward) {
         this.outward = outward;
     }
-
-    private String Remarks;
 
     public String getVehicleNo() {
         return VehicleNo;

@@ -21,7 +21,7 @@ import tech.fraction.webapp.adapter.SearchActivityAdapter;
 import tech.fraction.webapp.model.SearchTextViewModel;
 import tech.fraction.webapp.util.Utils;
 
-public class   SearchTextViewActivity extends AppCompatActivity {
+public class SearchTextViewActivity extends AppCompatActivity {
 
     EditText edtSearch;
     Intent intent;
